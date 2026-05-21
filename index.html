@@ -6,17 +6,31 @@
 <title>Kovax Academy — Fòmasyon Enfòmatik & Anglè Anliy</title>
 <meta name="description" content="Kovax Academy ofri fòmasyon pwofesyonèl nan Enfòmatik, Rezo &amp; Sekirite, ak Anglè Teknik. 100% Online, sètifika ofisyèl. Enskri jodi a!">
 <meta name="robots" content="index, follow">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- Favicon & Apple Touch Icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="apple-touch-icon.png">
+
+<!-- Open Graph (WhatsApp, Facebook, Telegram, iMessage) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kovax Academy Avni Aprantisaj AI ak Teknoloji 🌍">
-<meta property="og:description" content="Aprann Enfòmatik, Rezo &amp; Sekirite, ak Anglè Teknik. 100% Online. Sètifika Ofisyèl.">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kovax Academy Avni Aprantisaj AI ak Teknoloji 🌍">
-<meta name="twitter:description" content="Aprann Enfòmatik, Rezo & Sekirite, ak Anglè Teknik. 100% Online. Sètifika Ofisyèl.">
-<meta name="twitter:image" content="https://kovax-academy.vercel.app/og-image.png">
-<meta property="og:image" content="https://kovax-academy.vercel.app/og-image.png">
+<meta property="og:site_name" content="Kovax Academy">
 <meta property="og:url" content="https://kovax-academy.vercel.app/">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="Kovax Academy — Fòmasyon Teknoloji #1 Ann Ayiti">
+<meta property="og:description" content="Aprann Enfòmatik, Rezo &amp; Sekirite, ak Anglè Teknik. 100% Online. Sètifika Ofisyèl.">
+<meta property="og:image" content="https://kovax-academy.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kovax Academy — Fòmasyon Teknoloji">
+<meta property="og:locale" content="ht_HT">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@KovaxAcademy">
+<meta name="twitter:title" content="Kovax Academy — Fòmasyon Teknoloji #1 Ann Ayiti">
+<meta name="twitter:description" content="Aprann Enfòmatik, Rezo &amp; Sekirite, ak Anglè Teknik. 100% Online. Sètifika Ofisyèl.">
+<meta name="twitter:image" content="https://kovax-academy.vercel.app/og-image.jpg">
+<meta name="twitter:image:alt" content="Kovax Academy Logo">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -839,6 +853,15 @@ box-shadow:0 14px 45px rgba(43,184,240,.20);
 @media(min-width:769px) and (max-width:1100px){#temoignaj .temo-grid{grid-template-columns:1fr 1fr!important;}}
 /* ===== FIN ADDITIONS ===== */
 
+
+/* KOVAX LOGO PRO ANIMATION */
+.nav-logo-img img, .nav-logo img, .footer-logo img, .chat-avatar-img, img[src*="logo"], img[src*="Kovax"]{
+  animation: kovaxLogoFloat 3.8s ease-in-out infinite, kovaxLogoGlow 2.8s ease-in-out infinite alternate;
+  transform-origin:center;
+}
+@keyframes kovaxLogoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.025)}}
+@keyframes kovaxLogoGlow{0%{filter:drop-shadow(0 0 6px rgba(43,184,240,.45))}100%{filter:drop-shadow(0 0 18px rgba(139,60,247,.75)) drop-shadow(0 0 28px rgba(43,184,240,.35))}}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
@@ -854,6 +877,13 @@ box-shadow:0 14px 45px rgba(43,184,240,.20);
 .kovax-loader-box strong{letter-spacing:.08em}.kovax-loader-box span{display:block;margin-top:6px;color:rgba(255,255,255,.58);font-size:13px}
 @keyframes kovaxSpin{to{transform:rotate(360deg)}}
 </style>
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:image" content="https://kovax-academy.vercel.app/og-image.png">
+<meta name="twitter:image" content="https://kovax-academy.vercel.app/og-image.png">
+
 </head>
 <body>
 <div id="kovaxLoader"><div class="kovax-loader-box"><div class="kovax-spinner"></div><strong>KOVAX ACADEMY</strong><span>Chargement...</span></div></div>
