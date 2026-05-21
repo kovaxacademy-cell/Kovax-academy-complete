@@ -399,8 +399,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
 <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="orb orb4"></div></div>
 <nav>
   <a href="index.html" class="nav-logo">KOVAX <span>ACADEMY</span></a>
-  <ul class="nav-links"><li><a href="index.html">← Akèy</a></li><li><a href="enskripsyon.html">Kou</a></li></ul>
-  <a href="enskripsyon.html" class="nav-cta">Enskri →</a>
+  <ul class="nav-links"><li><a href="index.html">Akèy</a></li><li><a href="enskripsyon.html">Kou</a></li></ul>
+  <a href="enskripsyon.html" class="nav-cta">Enskri</a>
 </nav>
 <section id="main-section">
   <div class="form-page-wrap">
@@ -668,7 +668,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
         </div>
       </div>
 
-      <button class="btn-form" type="submit" id="submitBtn">Voye Enskripsyon →</button>
+      <button class="btn-form" type="submit" id="submitBtn">Voye Enskripsyon</button>
     </form>
   </div>
 </section>
@@ -705,7 +705,7 @@ function resetEmailVerify(){
   btnVerifyEmailOtp.disabled = true;
   const btn = document.getElementById("btnSendEmailCode");
   btn.disabled = false;
-  btn.textContent = "Voye Kòd Email →";
+  btn.textContent = "Voye Kòd Email";
 }
 
 document.getElementById("email").addEventListener("input", function(){
@@ -766,7 +766,7 @@ document.getElementById("btnSendEmailCode").addEventListener("click", async () =
 
   }catch(e){
     btn.disabled = false;
-    btn.textContent = "Voye Kòd Email →";
+    btn.textContent = "Voye Kòd Email";
     setEmailStatus("error", "❌ " + (e.message || "Kòd la pa voye. Verifye RESEND_API_KEY sou Vercel."));
     console.error(e);
   }
@@ -922,7 +922,7 @@ const info = {
 const sel = info[kou] || info.informatique;
 
 document.getElementById("courseName").textContent = sel.name;
-document.getElementById("coursePrice").textContent = sel.price + " — " + sel.detail;
+document.getElementById("coursePrice").textContent = sel.price + " • " + sel.detail;
 document.getElementById("hiddenCourse").value = sel.name;
 document.getElementById("hiddenPrice").value = sel.price;
 document.getElementById("hiddenDetail").value = sel.detail;
@@ -1556,7 +1556,7 @@ document.getElementById("studentForm").addEventListener("submit",async function(
   }catch(sendErr){
     console.error("[KOVAX Resend submit]", sendErr);
     alert("Fòmilè a pa voye: " + (sendErr.message || "Verifye RESEND_API_KEY sou Vercel."));
-    btn.disabled=false; btn.textContent="Voye Enskripsyon →";
+    btn.disabled=false; btn.textContent="Voye Enskripsyon";
     return;
   }
 
