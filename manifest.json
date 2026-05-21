@@ -1,0 +1,22 @@
+{
+  "name": "Kovax Academy",
+  "short_name": "Kovax",
+  "description": "Fòmasyon Enfòmatik, Rezo & Sekirite, ak Anglè Teknik anliy.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06091A",
+  "theme_color": "#06091A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ]
+}

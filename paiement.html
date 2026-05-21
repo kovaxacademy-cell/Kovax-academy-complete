@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peman — Kovax Academy</title>
+<meta name="description" content="Peye pou kou Kovax Academy ou chwazi a via PayPal oswa Zelle. Sekirize epi rapid.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#06091A;--navy2:#0E1E6E;--blue:#1A3FAA;--cyan:#29ABE2;--purple:#7B2D8B;
+  --green:#22c55e;--red:#ef4444;
+  --white:#FFFFFF;--muted:rgba(255,255,255,0.55);
+  --border:rgba(255,255,255,0.08);--glass:rgba(255,255,255,0.04);--glass2:rgba(255,255,255,0.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+
+/* ORBS */
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.6;animation:orbFloat 12s ease-in-out infinite alternate;}
+.orb1{width:500px;height:500px;background:rgba(14,30,110,.7);top:-150px;left:-100px;}
+.orb2{width:400px;height:400px;background:rgba(41,171,226,.25);top:100px;right:-80px;animation-delay:-3s;}
+.orb3{width:350px;height:350px;background:rgba(123,45,139,.35);bottom:200px;left:20%;animation-delay:-6s;}
+.orb4{width:300px;height:300px;background:rgba(26,63,170,.3);bottom:-100px;right:15%;animation-delay:-9s;}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1);}100%{transform:translate(30px,40px) scale(1.08);}}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:70px;background:rgba(6,9,26,.7);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-size:20px;font-weight:800;letter-spacing:.08em;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--cyan);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);border:none;border-radius:10px;padding:10px 22px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity .2s,transform .2s;box-shadow:0 0 20px rgba(41,171,226,.25);}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px);}
+
+/* SECTION */
+section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:140px 5% 80px;}
+
+/* PAY BOX */
+.pay-box{width:min(700px,100%);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:44px 36px;backdrop-filter:blur(22px);text-align:center;position:relative;animation:boxReveal .7s cubic-bezier(.22,1,.36,1) both;}
+.pay-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(41,171,226,.5),rgba(123,45,139,.4),transparent);border-radius:28px 28px 0 0;}
+@keyframes boxReveal{from{opacity:0;transform:translateY(32px) scale(.97);}to{opacity:1;transform:none;}}
+
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;margin-bottom:12px;}
+.section-title{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;}
+.big-amount{font-size:58px;font-weight:900;color:var(--cyan);letter-spacing:-.03em;margin:10px 0 4px;transition:all .4s cubic-bezier(.22,1,.36,1);animation:amountPop .5s cubic-bezier(.22,1,.36,1) .3s both;}
+@keyframes amountPop{from{opacity:0;transform:scale(.85);}to{opacity:1;transform:scale(1);}}
+
+/* SUMMARY */
+.pay-summary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:18px 20px;margin:18px 0;text-align:left;}
+.pay-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:rgba(255,255,255,.7);}
+.pay-row:last-child{border-bottom:none;}
+.pay-row strong{color:var(--white);font-weight:700;}
+.pay-row.total-row{font-size:16px;font-weight:800;padding-top:12px;}
+.pay-row.total-row strong{color:var(--cyan);font-size:18px;}
+
+/* TABS */
+.pay-tabs{display:flex;gap:6px;margin:24px 0 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:5px;position:relative;}
+.pay-tab{flex:1;padding:11px 6px;border-radius:10px;border:none;background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .3s cubic-bezier(.22,1,.36,1);display:flex;align-items:center;justify-content:center;gap:6px;position:relative;z-index:1;}
+.pay-tab svg{flex-shrink:0;transition:transform .3s;}
+.pay-tab:hover svg{transform:scale(1.2);}
+.pay-tab.active{background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);box-shadow:0 0 22px rgba(41,171,226,.3);transform:translateY(-1px);}
+.pay-tab:not(.active):hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);}
+.tab-content{display:none;animation:fadeIn .25s ease;}
+.tab-content.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+/* STATUS BOX */
+.status-box{font-size:13px;margin-top:10px;padding:11px 14px;border-radius:10px;text-align:center;display:none;line-height:1.55;}
+.status-box.show{display:block;}
+.status-box.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#86efac;}
+.status-box.err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#fca5a5;}
+.status-box.info{background:rgba(41,171,226,.1);border:1px solid rgba(41,171,226,.25);color:#93c5fd;}
+
+/* LOADER */
+.pp-loader{text-align:center;padding:28px 0;color:var(--muted);font-size:14px;}
+.pp-spinner{width:32px;height:32px;border:3px solid rgba(41,171,226,.2);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* PAYPAL */
+#paypal-button-area{max-width:480px;margin:0 auto;min-height:44px;}
+.pp-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6;}
+
+/* KAT KREDI — Hosted Fields */
+.card-wrap{max-width:480px;margin:0 auto;text-align:left;}
+.cf-label{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.07em;text-transform:uppercase;margin:14px 0 6px;}
+.cf-label:first-child{margin-top:0;}
+.cf-field{height:46px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:0 14px;transition:border-color .2s,background .2s;}
+.cf-field.braintree-hosted-fields-focused{border-color:rgba(41,171,226,.6);background:rgba(41,171,226,.07);}
+.cf-field.braintree-hosted-fields-invalid{border-color:rgba(239,68,68,.55);}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cf-btn{width:100%;margin-top:18px;padding:15px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);border:none;border-radius:12px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 0 28px rgba(41,171,226,.3);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.cf-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 0 40px rgba(41,171,226,.45);}
+.cf-btn:disabled{opacity:.5;cursor:not-allowed;}
+.secure-note{display:flex;align-items:center;justify-content:center;gap:5px;font-size:11px;color:rgba(255,255,255,.3);margin-top:10px;}
+.cf-info{font-size:13px;color:rgba(255,255,255,.6);padding:14px;background:rgba(41,171,226,.07);border:1px solid rgba(41,171,226,.18);border-radius:10px;line-height:1.6;}
+
+/* ZELLE */
+.zelle-wrap{max-width:480px;margin:0 auto;text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:22px;}
+.zelle-num{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:800;color:var(--cyan);letter-spacing:.06em;margin:8px 0 16px;}
+.zelle-steps{display:flex;flex-direction:column;gap:10px;}
+.zs{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:rgba(255,255,255,.75);line-height:1.55;}
+.zs-n{width:24px;height:24px;min-width:24px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
+.btn-zelle{width:100%;margin-top:20px;padding:14px;background:linear-gradient(135deg,#5b21b6,#2563eb);color:var(--white);border:none;border-radius:12px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-zelle:hover{transform:translateY(-2px);opacity:.9;}
+
+.back-link{display:inline-block;margin-top:24px;color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s;}
+.back-link:hover{color:var(--white);}
+
+@media(max-width:640px){
+  .pay-box{padding:24px 16px;}
+  .big-amount{font-size:44px;}
+  .nav-links{display:none;}
+  .cf-row{grid-template-columns:1fr;}
+}
+
+/* ══ KOVAX — TOGGLE ABONNMAN USA ══ */
+.usa-pay-switch{
+  display:none;
+  margin:22px 0 20px;
+  padding:20px 20px 18px;
+  background:rgba(41,171,226,.05);
+  border:1px solid rgba(41,171,226,.18);
+  border-radius:20px;
+  text-align:left;
+  position:relative;
+  overflow:hidden;
+  animation:switchIn .4s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes switchIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.usa-pay-switch::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(41,171,226,.55),transparent);
+}
+.usa-pay-switch.show{display:block;}
+
+/* Header row */
+.usa-toggle-header{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-bottom:14px;
+}
+.usa-toggle-label-group{flex:1;}
+.usa-toggle-title{
+  font-size:13px;font-weight:800;color:var(--white);
+  display:flex;align-items:center;gap:7px;margin-bottom:3px;
+}
+.usa-toggle-subtitle{font-size:11.5px;color:rgba(255,255,255,.5);line-height:1.5;}
+
+/* THE TOGGLE PILL */
+.kovax-toggle{
+  position:relative;width:56px;height:30px;flex-shrink:0;cursor:pointer;
+}
+.kovax-toggle input{opacity:0;width:0;height:0;position:absolute;}
+.kovax-track{
+  position:absolute;inset:0;border-radius:999px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);
+  transition:background .35s,border-color .35s,box-shadow .35s;
+}
+.kovax-track::after{
+  content:'';position:absolute;top:3px;left:3px;
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(255,255,255,.5);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .35s;
+}
+.kovax-toggle input:checked ~ .kovax-track{
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  border-color:transparent;
+  box-shadow:0 0 22px rgba(41,171,226,.55);
+}
+.kovax-toggle input:checked ~ .kovax-track::after{
+  transform:translateX(26px);
+  background:#ffffff;
+}
+/* Pulse ring when active */
+.kovax-toggle input:checked ~ .kovax-ring{
+  position:absolute;inset:-4px;border-radius:999px;
+  border:2px solid rgba(41,171,226,.45);
+  animation:toggleRing 1.8s ease-out infinite;
+}
+.kovax-ring{position:absolute;inset:-4px;border-radius:999px;pointer-events:none;}
+@keyframes toggleRing{
+  0%{opacity:1;transform:scale(1);}
+  70%{opacity:0;transform:scale(1.25);}
+  100%{opacity:0;transform:scale(1.25);}
+}
+
+/* Price comparison cards */
+.usa-price-cards{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  margin-top:2px;
+}
+.usa-pcard{
+  border-radius:14px;padding:13px 14px;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);transition:all .35s ease;position:relative;overflow:hidden;
+}
+.usa-pcard.active-card{
+  border-color:rgba(41,171,226,.5);
+  background:rgba(41,171,226,.08);
+  box-shadow:0 0 28px rgba(41,171,226,.18);
+}
+.usa-pcard-icon{font-size:18px;margin-bottom:6px;}
+.usa-pcard-name{font-size:11px;font-weight:700;color:rgba(255,255,255,.55);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.usa-pcard-price{
+  font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:800;
+  color:var(--white);line-height:1;margin-bottom:4px;
+}
+.usa-pcard-price span{font-size:12px;color:rgba(255,255,255,.5);}
+.usa-pcard-detail{font-size:11px;color:rgba(255,255,255,.45);line-height:1.45;}
+.usa-pcard-badge{
+  display:inline-flex;margin-top:7px;
+  background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);
+  color:#86efac;border-radius:999px;padding:2px 8px;font-size:10px;font-weight:700;
+}
+/* Sweep shine on active card */
+.usa-pcard.active-card::after{
+  content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+  animation:cardShine 2.4s ease-in-out infinite;
+}
+@keyframes cardShine{0%{left:-100%;}60%{left:150%;}100%{left:150%;}}
+
+/* Animated info banner below cards */
+.usa-info-banner{
+  margin-top:12px;padding:10px 13px;border-radius:11px;
+  font-size:12px;line-height:1.6;
+  transition:background .4s,border-color .4s,color .4s;
+}
+.usa-info-banner.normal-info{
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  color:rgba(255,255,255,.55);
+}
+.usa-info-banner.sub-info{
+  background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.22);
+  color:rgba(134,239,172,.9);
+}
+
+@media(max-width:480px){.usa-price-cards{grid-template-columns:1fr;}}
+
+
+/* ── MODERN PAY ENHANCEMENTS ── */
+
+/* Floating badge above card */
+.pay-float-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(41,171,226,.1);border:1px solid rgba(41,171,226,.28);
+  color:var(--cyan);border-radius:999px;padding:7px 18px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:22px;
+  animation:fadeUp .6s ease both;
+}
+.pay-float-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+/* Amount shimmer */
+.big-amount{position:relative;overflow:hidden;display:inline-block;}
+.big-amount::after{
+  content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  animation:amountShimmer 3s ease-in-out infinite 1.2s;
+}
+@keyframes amountShimmer{0%{left:-100%;}50%{left:150%;}100%{left:150%;}}
+
+/* PayPal area glow pulse when loaded */
+#paypal-button-area.loaded{
+  border-radius:12px;
+  box-shadow:0 0 0 0 rgba(41,171,226,.4);
+  animation:ppGlow 2.5s ease-in-out 3;
+}
+@keyframes ppGlow{
+  0%{box-shadow:0 0 0 0 rgba(41,171,226,.35);}
+  50%{box-shadow:0 0 0 10px rgba(41,171,226,0);}
+  100%{box-shadow:0 0 0 0 rgba(41,171,226,0);}
+}
+
+/* Summary rows animated on load */
+.pay-row{animation:rowSlide .4s ease both;}
+.pay-row:nth-child(1){animation-delay:.05s;}
+.pay-row:nth-child(2){animation-delay:.1s;}
+.pay-row:nth-child(3){animation-delay:.15s;}
+.pay-row:nth-child(4){animation-delay:.2s;}
+.pay-row:nth-child(5){animation-delay:.25s;}
+@keyframes rowSlide{from{opacity:0;transform:translateX(-8px);}to{opacity:1;transform:none;}}
+
+/* Zelle button pulse */
+.btn-zelle{
+  background:linear-gradient(135deg,#5b21b6,#2563eb);
+  color:var(--white);border:none;border-radius:12px;
+  font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  width:100%;margin-top:20px;padding:14px;
+  position:relative;overflow:hidden;
+}
+.btn-zelle::before{
+  content:'';position:absolute;inset:0;border-radius:12px;
+  background:linear-gradient(135deg,#7c3aed,#3b82f6);
+  opacity:0;transition:opacity .25s;
+}
+.btn-zelle:hover::before{opacity:1;}
+.btn-zelle:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(91,33,182,.5);}
+.btn-zelle span{position:relative;z-index:1;}
+
+/* Modern note style */
+.pp-note{
+  font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6;
+  background:rgba(255,255,255,.03);border-radius:10px;
+  padding:10px 14px;border:1px solid rgba(255,255,255,.06);
+  text-align:left;
+}
+
+/* Secure badge */
+.secure-banner{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-top:18px;padding:10px 16px;
+  background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.15);
+  border-radius:12px;font-size:12px;color:rgba(255,255,255,.45);
+}
+.secure-banner svg{color:rgba(34,197,94,.7);}
+
+/* Stagger tabs entry */
+.pay-tab:nth-child(1){animation:tabIn .5s ease .15s both;}
+.pay-tab:nth-child(2){animation:tabIn .5s ease .25s both;}
+.pay-tab:nth-child(3){animation:tabIn .5s ease .35s both;}
+@keyframes tabIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+
+</style>
+
+<meta name="theme-color" content="#06091A">
+<link rel="manifest" href="manifest.json">
+<script defer src="analytics.js"></script>
+
+<style id="kovax-loading-style">
+#kovaxLoader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#06091A;transition:opacity .45s ease,visibility .45s ease}
+#kovaxLoader.hide{opacity:0;visibility:hidden}
+.kovax-loader-box{text-align:center;color:white;font-family:Outfit,Arial,sans-serif}
+.kovax-spinner{width:58px;height:58px;border-radius:50%;border:4px solid rgba(255,255,255,.12);border-top-color:#29ABE2;margin:0 auto 16px;animation:kovaxSpin .8s linear infinite}
+.kovax-loader-box strong{letter-spacing:.08em}.kovax-loader-box span{display:block;margin-top:6px;color:rgba(255,255,255,.58);font-size:13px}
+@keyframes kovaxSpin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="kovaxLoader"><div class="kovax-loader-box"><div class="kovax-spinner"></div><strong>KOVAX ACADEMY</strong><span>Chargement...</span></div></div>
+<script>window.addEventListener('load',()=>setTimeout(()=>document.getElementById('kovaxLoader')?.classList.add('hide'),350));</script>
+
+
+<div class="orbs">
+  <div class="orb orb1"></div><div class="orb orb2"></div>
+  <div class="orb orb3"></div><div class="orb orb4"></div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">KOVAX <span>ACADEMY</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">← Akèy</a></li>
+    <li><a href="enskripsyon.html">Kou</a></li>
+  </ul>
+  <a href="enskripsyon.html" class="nav-cta">Enskri →</a>
+</nav>
+
+<section>
+  <div class="pay-box">
+    <div class="pay-float-badge"><span class="pay-float-dot"></span>Etap 3 — Peman Sekirize</div>
+    <p class="section-label">// Kovax Academy</p>
+    <h1 class="section-title">Finalize Peman Ou</h1>
+    <p id="studentGreet" style="color:var(--muted);font-size:15px;margin-bottom:2px;"></p>
+
+    <!-- REZIME -->
+    <div class="pay-summary">
+      <div class="pay-row"><span>📚 Kou</span><strong id="sumKou">—</strong></div>
+      <div class="pay-row"><span>💵 Pri kou</span><strong id="sumPri">—</strong></div>
+      <div class="pay-row" id="freRow"><span>📋 Frè enskripsyon</span><strong id="sumFre">$5.00</strong></div>
+      <div class="pay-row" id="taxRow" style="display:none;"><span>🇺🇸 Tax USA</span><strong id="sumTax">$2.99</strong></div>
+      <div class="pay-row total-row"><span>💳 TOTAL</span><strong id="sumTotal">—</strong></div>
+    </div>
+
+    <div class="big-amount" id="bigAmount">—</div>
+    <p id="payDetail" style="color:var(--muted);font-size:13px;margin-bottom:0;"></p>
+
+    <div class="usa-pay-switch" id="usaPaySwitch">
+
+      <!-- Header: label + toggle -->
+      <div class="usa-toggle-header">
+        <div class="usa-toggle-label-group">
+          <div class="usa-toggle-title">&#127482;&#127480; Opsyon peman USA</div>
+          <div class="usa-toggle-subtitle" id="toggleSubtitle">Peye yon sel fwa &mdash; <strong style="color:var(--cyan)">$57.99</strong></div>
+        </div>
+        <label class="kovax-toggle" title="Aktive / Dezaktive Abonman">
+          <input type="checkbox" id="subToggle" onchange="onToggleChange(this.checked)">
+          <span class="kovax-track"></span>
+          <span class="kovax-ring"></span>
+        </label>
+      </div>
+
+      <!-- Price cards -->
+      <div class="usa-price-cards">
+        <div class="usa-pcard active-card" id="pcardNormal">
+          <div class="usa-pcard-icon">&#128179;</div>
+          <div class="usa-pcard-name">Peman nòmal</div>
+          <div class="usa-pcard-price">$57.99<span> /fwa</span></div>
+          <div class="usa-pcard-detail">$50 kou + $5 frè + $2.99 tax USA. Peye yon sel fwa, pa gen lot chaj.</div>
+        </div>
+        <div class="usa-pcard" id="pcardSub">
+          <div class="usa-pcard-icon">&#128260;</div>
+          <div class="usa-pcard-name">Abonman otomatik</div>
+          <div class="usa-pcard-price">$50<span> /mwa</span></div>
+          <div class="usa-pcard-detail">San tax. PayPal retire $50 sou kont ou chak mwa otomatikman.</div>
+          <span class="usa-pcard-badge">Ekonomize $2.99/mwa</span>
+        </div>
+      </div>
+
+      <!-- Info banner -->
+      <div class="usa-info-banner normal-info" id="usaInfoBanner">
+        &#128161; <strong>Peman nòmal aktif.</strong> Ou ap peye $57.99 yon sel fwa ($50 kou + $5 frè + $2.99 tax USA). Pa gen lot chaj apre sa.
+      </div>
+
+    </div>
+
+
+    <!-- TABS -->
+    <div class="pay-tabs">
+      <button class="pay-tab active" id="tabPaypal" onclick="switchTab('Paypal')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        PayPal
+      </button>
+      <button class="pay-tab" id="tabCard" onclick="switchTab('Card')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="7" cy="15" r="2"/><path d="M13 15h4"/></svg>
+        Kat Kredi
+      </button>
+      <button class="pay-tab" id="tabZelle" onclick="switchTab('Zelle')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Zelle
+      </button>
+    </div>
+
+    <!-- ONGLET PAYPAL -->
+    <div class="tab-content active" id="tabContentPaypal">
+      <div class="pp-loader" id="ppLoader"><div class="pp-spinner"></div>Ap chaje PayPal…</div>
+      <div id="paypal-button-area"></div>
+      <div class="status-box" id="ppStatus"></div>
+      <p class="pp-note" id="ppNote"></p>
+    </div>
+
+    <!-- ONGLET KAT KREDI -->
+    <div class="tab-content" id="tabContentCard">
+      <div class="pp-loader" id="cardLoader"><div class="pp-spinner"></div>Ap prepare fòm kat la…</div>
+      <div class="card-wrap" id="cardInner" style="display:none;">
+        <label class="cf-label">Nimewo Kat</label>
+        <div id="card-number" class="cf-field"></div>
+        <div class="cf-row">
+          <div>
+            <label class="cf-label">Dat Ekspirasyon</label>
+            <div id="expiration-date" class="cf-field"></div>
+          </div>
+          <div>
+            <label class="cf-label">CVV</label>
+            <div id="cvv" class="cf-field"></div>
+          </div>
+        </div>
+        <button class="cf-btn" id="cardPayBtn" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span id="cardBtnTxt">Peye — <span id="cardBtnAmt">—</span></span>
+        </button>
+        <div class="status-box" id="cardStatus"></div>
+        <div class="secure-note">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Peman sekirize 256-bit SSL — PayPal Hosted Fields
+        </div>
+      </div>
+      <div class="cf-info" id="cardInfo" style="display:none;"></div>
+    </div>
+
+    <!-- ONGLET ZELLE -->
+    <div class="tab-content" id="tabContentZelle">
+      <div class="zelle-wrap">
+        <p style="font-size:13px;color:var(--muted);">Voye peman ou sou nimewo sa a:</p>
+        <div class="zelle-num">+1 (641) 244-1865</div>
+        <div class="zelle-steps">
+          <div class="zs"><div class="zs-n">1</div><span>Ouvri aplikasyon bank ou oswa Zelle dirèkteman</span></div>
+          <div class="zs"><div class="zs-n">2</div><span>Voye <strong id="zelleAmt" style="color:var(--cyan);">—</strong> sou <strong>+1 (641) 244-1865</strong></span></div>
+          <div class="zs"><div class="zs-n">3</div><span>Nan nòt la ekri: <em id="zelleNote" style="color:var(--cyan);">Kovax – Kou</em></span></div>
+          <div class="zs"><div class="zs-n">4</div><span>Klike bouton anba a apre ou fin voye peman an</span></div>
+        </div>
+        <button class="btn-zelle" id="zelleBtn"><span>&#9989; Mwen Voye Peman Zelle &rarr;</span></button>
+      </div>
+    </div>
+
+    <div class="secure-banner">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Peman sekirize 256-bit SSL &mdash; PayPal &mdash; Zelle
+    </div>
+    <a href="enskripsyon.html" class="back-link">&#8592; Chwazi lòt kou</a>
+  </div>
+</section>
+
+<script>
+"use strict";
+
+/* ══════════════════════════════════════
+   1. KALKILASYON
+   ══════════════════════════════════════ */
+const _K = (function(){
+  const p = new URLSearchParams(window.location.search);
+
+  const rawKou  = (p.get("kou") || localStorage.getItem("kovax_course") || "informatique").toLowerCase();
+  const isAng   = rawKou.includes("ang");
+
+  const rawPeyiOriginal = p.get("peyi") || localStorage.getItem("kovax_country") || "";
+  const rawPeyi = rawPeyiOriginal
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"");
+
+  // Cherche peyi nan URL, localStorage, oswa kovax_last_student
+  const studentData = JSON.parse(localStorage.getItem("kovax_last_student") || "{}");
+  const peyiFromStudent = (studentData.peyi || studentData.country || "").toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  const peyiCheck = rawPeyi || peyiFromStudent;
+
+  const isUSA =
+    peyiCheck.includes("etazini") ||
+    peyiCheck.includes("usa") ||
+    peyiCheck.includes("united states") ||
+    peyiCheck.includes("america") ||
+    peyiCheck.includes("etats-unis") ||
+    peyiCheck.includes("u.s");
+
+  const data = {
+    isAng,
+    isUSA,
+    rawKou,
+    rawPeyi: rawPeyiOriginal,
+    kouName: isAng ? "Anglè" : "Enfòmatik",
+    student: studentData,
+    payMode: "normal",
+    // Enfòmatik: $200 kou + $5 frè = $205, USA: +$2.99 = $207.99
+    informatiquePrice: 200,
+    informatiqueFee:   5,
+    informatiqueTaxUSA: 2.99,
+    // Anglè: $50 kou + $5 frè = $55, USA nòmal: +$2.99 = $57.99
+    // Abonman USA: $50/mwa sèlman (san frè, san tax)
+    anglaisBase:        50,
+    anglaisFee:         5,
+    anglaisTaxUSA:      2.99,
+    subscriptionMonthly: 50,
+    money(v){ return "$" + Number(v).toFixed(2); },
+    getTax(){
+      if(this.isAng && this.isUSA && this.payMode === "normal") return this.anglaisTaxUSA;
+      if(!this.isAng && this.isUSA) return this.informatiqueTaxUSA;
+      return 0;
+    },
+    getTotal(){
+      if(this.isAng){
+        if(this.isUSA && this.payMode === "subscription") return this.subscriptionMonthly;
+        // nòmal: $50 + $5 frè + tax si USA
+        return this.anglaisBase + this.anglaisFee + this.getTax();
+      }
+      return this.informatiquePrice + this.informatiqueFee + this.getTax();
+    },
+    getDetail(){
+      if(this.isAng && this.isUSA && this.payMode === "subscription"){
+        return "Abònman otomatik: $50/mwa — PayPal ap retire kòb la sou kont ou chak mwa.";
+      }
+      if(this.isAng && this.isUSA){
+        return "Peman nòmal USA: $57.99 ($50 kou + $5 frè + $2.99 tax USA).";
+      }
+      if(this.isAng){
+        return "Peman Anglè: $55 ($50 kou + $5 frè enskripsyon).";
+      }
+      return "Peman yon sèl fwa — 4 mwa aksè konplè.";
+    }
+  };
+
+  Object.defineProperty(data, "total", { get(){ return this.getTotal(); } });
+  return data;
+})();
+
+window.KOVAX = _K;
+
+/* ── Afiche rezime ── */
+function updateSummary(){
+  const $ = id => document.getElementById(id);
+
+  $("sumKou").textContent = _K.kouName;
+
+  if(_K.isAng){
+    // Prix de base toujours $50, frè $5
+    $("sumPri").textContent = "$50.00";
+    $("sumFre").textContent = (_K.isUSA && _K.payMode === "subscription") ? "Gratis (abonman)" : "$5.00";
+    $("sumTax").textContent = _K.money(_K.getTax());
+
+    const totalTxt = (_K.isUSA && _K.payMode === "subscription")
+      ? "$50.00 / mwa"
+      : _K.money(_K.getTotal());
+
+    $("sumTotal").textContent = totalTxt;
+    $("bigAmount").textContent = (_K.isUSA && _K.payMode === "subscription") ? "$50/mwa" : _K.money(_K.getTotal());
+    $("cardBtnAmt").textContent = _K.money(_K.getTotal());
+    $("zelleAmt").textContent = _K.money(_K.getTotal());
+
+    // Toujou afiche frè row pou Anglè (kache pou abonman)
+    if($("freRow")) $("freRow").style.display = (_K.isUSA && _K.payMode === "subscription") ? "none" : "flex";
+    if($("taxRow")) $("taxRow").style.display = (_K.isUSA && _K.payMode === "normal") ? "flex" : "none";
+    if($("usaPaySwitch")) {
+      $("usaPaySwitch").classList.toggle("show", _K.isUSA);
+      const chk = document.getElementById("subToggle");
+      if(chk) chk.checked = (_K.payMode === "subscription");
+    }
+  } else {
+    $("sumPri").textContent = "$200.00";
+    $("sumFre").textContent = _K.money(_K.informatiqueFee);
+    $("sumTax").textContent = _K.money(_K.getTax());
+    $("sumTotal").textContent = _K.money(_K.getTotal());
+    $("bigAmount").textContent = _K.money(_K.getTotal());
+    $("cardBtnAmt").textContent = _K.money(_K.getTotal());
+    $("zelleAmt").textContent = _K.money(_K.getTotal());
+
+    if($("freRow")) $("freRow").style.display = "flex";
+    if($("taxRow")) $("taxRow").style.display = _K.isUSA ? "flex" : "none";
+    if($("usaPaySwitch")) $("usaPaySwitch").classList.remove("show");
+  }
+
+  $("payDetail").textContent = _K.getDetail();
+  $("zelleNote").textContent = "Kovax — " + _K.kouName;
+
+  if(_K.student.prenom){
+    $("studentGreet").textContent =
+      "Bonjou " + _K.student.prenom + " " + (_K.student.nom || "") +
+      " — verifye detay peman ou yo anba a.";
+  }
+}
+
+
+
+const CLIENT_ID    = "ARiYig3MbS4i-7aSQuzo95SczdsKj0VI-ymy0GQBVCGGmgk5Ey_C2v1cvatHaQ9GyL0K99us6WsuyBVw";
+const CLIENT_ID_SUB = "AYHMI8sH7vnVlOa8WDRSyH85V31GK_z7x8_NjjW7Dt2umkAgu2MSSGgLap1KEVcdil3-roUfIqVhctrZ";
+const ANGLAIS_PLAN  = "P-5L754590UM143343GNIESSCQ";
+
+/* ══════════════════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════════════════ */
+function setStatus(elId, type, msg){
+  const el = document.getElementById(elId);
+  if(!el) return;
+  el.className = "status-box show " + type;
+  el.innerHTML = msg;
+}
+function hideStatus(elId){
+  const el = document.getElementById(elId);
+  if(!el) return;
+  el.className = "status-box";
+  el.textContent = "";
+}
+
+function buildMerciURL(extra){
+  const u = new URLSearchParams({
+    kou:    _K.rawKou,
+    peyi:   _K.rawPeyi,
+    prenom: _K.student.prenom || "",
+    nom:    _K.student.nom    || "",
+    email:  _K.student.email  || "",
+    amount: _K.getTotal().toFixed(2),
+    type:   (_K.isAng && _K.isUSA && _K.payMode === "subscription") ? "subscription" : "one-time",
+    mode:   (extra && extra.mode) ? extra.mode : "paypal",
+    ref:    (extra && extra.ref)  ? extra.ref  : ""
+  });
+  return "merci-peman.html?" + u.toString();
+}
+
+/* ══════════════════════════════════════════════════════
+   SDK LOADER  — chaje yon sèl SDK a la fwa, nan menm paj
+══════════════════════════════════════════════════════ */
+let _sdkLoading = false;
+let _sdkLoaded  = null; // "normal" | "sub"
+
+function _unloadSDK(){
+  document.querySelectorAll('script[data-pp-sdk]').forEach(s => s.remove());
+  try{ delete window.paypal; }catch(e){ window.paypal = undefined; }
+  _sdkLoaded  = null;
+}
+
+function _loadSDK(type){
+  return new Promise((res, rej) => {
+    if(_sdkLoaded === type && window.paypal){ res(); return; }
+    _unloadSDK();
+    const src = type === "sub"
+      ? "https://www.paypal.com/sdk/js?client-id=" + CLIENT_ID_SUB
+        + "&vault=true&intent=subscription&components=buttons"
+      : "https://www.paypal.com/sdk/js?client-id=" + CLIENT_ID
+        + "&currency=USD&components=buttons"
+        + "&enable-funding=card,venmo&disable-funding=paylater";
+    const s = document.createElement("script");
+    s.src = src;
+    s.setAttribute("data-pp-sdk", type);
+    s.onload  = () => { _sdkLoaded = type; res(); };
+    s.onerror = () => rej(new Error(
+      type === "sub"
+        ? "SDK abonman pa ka chaje. Dezaktive AdBlock/VPN epi eseye ankò."
+        : "SDK PayPal pa ka chaje. Dezaktive AdBlock/VPN epi eseye ankò."
+    ));
+    document.body.appendChild(s);
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   TABS
+══════════════════════════════════════════════════════ */
+function switchTab(name){
+  ["Paypal","Card","Zelle"].forEach(t => {
+    document.getElementById("tabContent" + t).classList.toggle("active", t === name);
+    document.getElementById("tab" + t).classList.toggle("active", t === name);
+  });
+  if(name === "Card" && !window._cardReady && !window._cardLoading){
+    initHostedFields();
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   TOGGLE USA ABONMAN
+══════════════════════════════════════════════════════ */
+function onToggleChange(isOn){
+  if(!_K.isAng || !_K.isUSA) return;
+  _K.payMode = isOn ? "subscription" : "normal";
+
+  document.getElementById("pcardNormal").classList.toggle("active-card", !isOn);
+  document.getElementById("pcardSub").classList.toggle("active-card",  isOn);
+
+  const sub = document.getElementById("toggleSubtitle");
+  if(isOn){
+    sub.innerHTML = 'Abonman otomatik &mdash; <strong style="color:#86efac">$50/mwa</strong>';
+  } else {
+    sub.innerHTML = 'Peye yon sel fwa &mdash; <strong style="color:var(--cyan)">$57.99</strong>';
+  }
+
+  const banner = document.getElementById("usaInfoBanner");
+  if(isOn){
+    banner.className = "usa-info-banner sub-info";
+    banner.innerHTML = "&#128260; <strong>Abonman aktif.</strong> PayPal ap retire <strong>$50/mwa</strong> sou kont ou otomatikman — san tax. Ou ka kansele nenpot ki le nan PayPal.";
+  } else {
+    banner.className = "usa-info-banner normal-info";
+    banner.innerHTML = "&#128161; <strong>Peman nòmal aktif.</strong> Ou ap peye $57.99 yon sel fwa. Pa gen lot chaj apre sa.";
+  }
+
+  updateSummary();
+  initPayPal();
+}
+function setPayMode(mode){ onToggleChange(mode === "subscription"); }
+
+/* ══════════════════════════════════════════════════════
+   KAT KREDI — redirijye sou PayPal
+══════════════════════════════════════════════════════ */
+window._cardReady   = false;
+window._cardLoading = false;
+
+async function initHostedFields(){
+  window._cardLoading = true;
+  const loader = document.getElementById("cardLoader");
+  const inner  = document.getElementById("cardInner");
+  const cfInfo = document.getElementById("cardInfo");
+
+  if(loader) loader.style.display = "none";
+  if(inner)  inner.style.display  = "none";
+  if(cfInfo) cfInfo.style.display = "block";
+
+  if(_K.isAng){
+    cfInfo.innerHTML = _K.isUSA
+      ? "&#128161; <strong>Pou Anglè USA :</strong> ale sou onglet <strong>PayPal</strong> pou chwazi peman nòmal $57.99 oswa abonman $50/mwa."
+      : "&#128161; <strong>Pou Anglè :</strong> ale sou onglet <strong>PayPal</strong> pou peye $55.";
+  } else {
+    cfInfo.innerHTML = "&#128161; <strong>Pou peye ak kat :</strong> ale sou onglet <strong>PayPal</strong>. Nan popup PayPal la, chwazi <em>&ldquo;Pay with a card&rdquo;</em> &mdash; ou <strong>pa bezwen kont PayPal</strong>.";
+  }
+
+  const switchBtn = document.createElement("button");
+  switchBtn.className = "cf-btn";
+  switchBtn.style.marginTop = "14px";
+  switchBtn.innerHTML = "&#128179; Ale sou PayPal pou peye &rarr;";
+  switchBtn.onclick = function(){ switchTab("Paypal"); };
+  cfInfo.appendChild(switchBtn);
+  window._cardLoading = false;
+}
+
+/* ══════════════════════════════════════════════════════
+   ZELLE
+══════════════════════════════════════════════════════ */
+document.getElementById("zelleBtn").addEventListener("click", function(){
+  window.location.href = buildMerciURL({ mode:"zelle" });
+});
+
+/* ══════════════════════════════════════════════════════
+   INIT PAYPAL  — tout bagay rete nan menm paj (popup)
+══════════════════════════════════════════════════════ */
+async function initPayPal(){
+  // Reset guard — each call is intentional (toggle change resets it)
+  _sdkLoading = false;
+  _sdkLoading = true;
+
+  const loader = document.getElementById("ppLoader");
+  const note   = document.getElementById("ppNote");
+  const area   = document.getElementById("paypal-button-area");
+
+  // Reset UI
+  if(area)   area.innerHTML   = "";
+  if(note)   note.innerHTML   = "";
+  hideStatus("ppStatus");
+  if(loader){ loader.style.display = "block"; loader.innerHTML = "<div class='pp-spinner'></div>Ap chaje PayPal\u2026"; }
+
+  const isSub = _K.isAng && _K.isUSA && _K.payMode === "subscription";
+
+  /* ─────────────────────────────────────
+     ABONMAN $50/mwa
+  ───────────────────────────────────── */
+  if(isSub){
+    if(note) note.innerHTML =
+      "&#128260; <strong>Abonman $50/mwa :</strong> PayPal ap debite $50 sou kont ou chak mwa — san tax. "
+      + "Ranje tout bagay nan popup PayPal la — ou <strong>pa kite sit sa a</strong>.";
+
+    try{
+      await _loadSDK("sub");
+      if(loader) loader.style.display = "none";
+
+      const btn = paypal.Buttons({
+        style:{ shape:"rect", color:"gold", layout:"vertical", label:"subscribe", height:50 },
+
+        createSubscription(data, actions){
+          return actions.subscription.create({ plan_id: ANGLAIS_PLAN });
+        },
+
+        onApprove(data){
+          _sdkLoading = false;
+          setStatus("ppStatus","ok","&#9989; Abonman aktive! Ap redirijye\u2026");
+          localStorage.setItem("kovaxPaymentId",   data.subscriptionID || "");
+          localStorage.setItem("kovaxPaymentType", "paypal-subscription");
+          setTimeout(() => {
+            window.location.href = buildMerciURL({ mode:"paypal-subscription", ref: data.subscriptionID||"" });
+          }, 1200);
+        },
+
+        onCancel(){
+          _sdkLoading = false;
+          setStatus("ppStatus","info","&#8505; Ou kansele. Dezaktive toggle pou eseye peman nòmal $57.99.");
+        },
+
+        onError(err){
+          _sdkLoading = false;
+          console.error("[KOVAX Sub]", err);
+          const m = (err && err.message) ? err.message : "";
+          _subFallback(m);
+        }
+      });
+
+      // isEligible check — si bouton pa ka rann nan navigatè sa a
+      if(typeof btn.isEligible === "function" && !btn.isEligible()){
+        _sdkLoading = false;
+        _subFallback("Bouton pa eligible nan navigatè sa a");
+        return;
+      }
+
+      await btn.render("#paypal-button-area");
+      _sdkLoading = false;
+
+      if(area){ area.classList.add("loaded"); setTimeout(()=>area.classList.remove("loaded"),8000); }
+
+    }catch(err){
+      _sdkLoading = false;
+      console.error("[KOVAX Sub Load]", err);
+      _subFallback(err && err.message ? err.message : "Erè enkoni");
+    }
+    return;
+  }
+
+  /* ─────────────────────────────────────
+     PEMAN NÒMAL yon sèl fwa
+  ───────────────────────────────────── */
+  if(note) note.innerHTML =
+    _K.isAng && _K.isUSA
+      ? "&#128179; <strong>Peman nòmal $57.99 :</strong> $50 kou + $5 frè + $2.99 tax USA. "
+        + "Ranje tout bagay nan popup PayPal la — ou <strong>pa kite sit sa a</strong>."
+      : "&#128179; Peye ak kont PayPal ou oswa kat kredi/debi. "
+        + "Ranje tout bagay nan popup — ou <strong>pa kite sit sa a</strong>.";
+
+  try{
+    await _loadSDK("normal");
+    if(loader) loader.style.display = "none";
+
+    const desc = _K.isAng
+      ? (_K.isUSA ? "Kovax Academy \u2014 Anglis USA" : "Kovax Academy \u2014 Anglis")
+      : "Kovax Academy \u2014 Enfòmatik (4 mwa)";
+
+    paypal.Buttons({
+      style:{ shape:"rect", color:"gold", layout:"vertical", label:"pay", height:50 },
+
+      createOrder(data, actions){
+        return actions.order.create({
+          intent: "CAPTURE",
+          purchase_units:[{
+            description: desc,
+            amount:{ value: _K.getTotal().toFixed(2), currency_code:"USD" }
+          }],
+          application_context:{
+            shipping_preference: "NO_SHIPPING",
+            user_action:         "PAY_NOW",
+            brand_name:          "Kovax Academy"
+          }
+        });
+      },
+
+      onApprove(data, actions){
+        setStatus("ppStatus","info","&#9203; Ap konfime peman\u2026");
+        return actions.order.capture().then(details => {
+          _sdkLoading = false;
+          const orderId = details.id || data.orderID || "";
+          localStorage.setItem("kovaxPaymentId",   orderId);
+          localStorage.setItem("kovaxPaymentType", "paypal");
+          setStatus("ppStatus","ok","&#9989; Peman konfime! Ap redirijye\u2026");
+          setTimeout(() => {
+            window.location.href = buildMerciURL({
+              mode: _K.isAng ? "paypal-anglais-normal" : "paypal",
+              ref:  orderId
+            });
+          }, 1200);
+        }).catch(captureErr => {
+          _sdkLoading = false;
+          console.error("[KOVAX Capture]", captureErr);
+          setStatus("ppStatus","err",
+            "&#10060; Peman an pase men konfirmasyon echwe. Voye screenshot a nou \u2014 ou p ap chaje de fwa.");
+        });
+      },
+
+      onCancel(){
+        _sdkLoading = false;
+        setStatus("ppStatus","info","&#8505; Ou kansele peman an. Ou ka eseye ankò oswa itilize Zelle.");
+      },
+
+      onError(err){
+        _sdkLoading = false;
+        console.error("[KOVAX PayPal Error]", err);
+        const m = (err && err.message) ? err.message.toUpperCase() : "";
+        if(m.includes("INSTRUMENT_DECLINED") || m.includes("DECLINED")){
+          setStatus("ppStatus","err","&#10060; Kat ou refize. Tanpri itilize yon lòt kat oswa Zelle.");
+        } else if(m.includes("WINDOW_CLOSED") || m.includes("POPUP")){
+          setStatus("ppStatus","err","&#10060; Pop-up bloke. Pèmèt pop-ups pou sit sa a epi eseye ankò.");
+        } else {
+          setStatus("ppStatus","err","&#10060; Yon erè fèt. Eseye ankò oswa itilize Zelle.");
+        }
+      }
+    }).render("#paypal-button-area").then(()=>{
+      _sdkLoading = false;
+      if(area){ area.classList.add("loaded"); setTimeout(()=>area.classList.remove("loaded"),8000); }
+    }).catch(renderErr=>{
+      _sdkLoading = false;
+      console.error("[KOVAX Render]", renderErr);
+      setStatus("ppStatus","err","&#10060; Bouton pa ka rann. Refreshi paj la oswa itilize Zelle.");
+    });
+
+  }catch(err){
+    _sdkLoading = false;
+    console.error("[KOVAX PayPal Load]", err);
+    if(loader) loader.style.display = "none";
+    if(area) area.innerHTML =
+      "<div style='background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:12px;"
+      + "padding:14px 16px;text-align:left;'>"
+      + "<p style='color:#fca5a5;font-size:14px;font-weight:700;margin-bottom:6px;'>&#10060; PayPal pa ka chaje</p>"
+      + "<p style='color:rgba(252,165,165,.75);font-size:12px;line-height:1.6;margin-bottom:10px;'>"
+      + (err && err.message ? err.message.substring(0,150) : "Erè enkoni") + "</p>"
+      + "<button onclick=\"switchTab('Zelle')\" style='background:linear-gradient(135deg,#5b21b6,#2563eb);"
+      + "color:white;border:none;border-radius:10px;padding:11px 18px;"
+      + "font-family:Outfit,sans-serif;font-size:13px;font-weight:700;cursor:pointer;width:100%;'>"
+      + "&#9889; Ale sou Zelle pito</button></div>";
+  }
+}
+
+/* ── Fallback abonman ── */
+function _subFallback(reason){
+  if(document.getElementById("ppLoader")) document.getElementById("ppLoader").style.display = "none";
+  const a = document.getElementById("paypal-button-area");
+  const detail = reason ? "<br><small style='opacity:.6;font-size:11px;'>(" + reason.substring(0,120) + ")</small>" : "";
+  if(a) a.innerHTML =
+    "<div style='background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.3);"
+    + "border-radius:14px;padding:16px;text-align:left;'>"
+    + "<p style='color:#fca5a5;font-size:14px;font-weight:700;margin-bottom:8px;'>"
+    + "&#9888; Abonman PayPal pa disponib kounye a" + detail + "</p>"
+    + "<p style='color:rgba(252,165,165,.8);font-size:13px;line-height:1.6;margin-bottom:14px;'>"
+    + "Chwazi <strong>Peman nòmal $57.99</strong> oswa voye sou <strong>Zelle</strong>.</p>"
+    + "<button onclick=\"onToggleChange(false)\" style='background:linear-gradient(135deg,#1A3FAA,#29ABE2);"
+    + "color:white;border:none;border-radius:10px;padding:12px 20px;"
+    + "font-family:Outfit,sans-serif;font-size:14px;font-weight:700;cursor:pointer;width:100%;margin-bottom:8px;'>"
+    + "&#128179; Peman Nòmal $57.99</button>"
+    + "<button onclick=\"switchTab('Zelle')\" style='background:rgba(255,255,255,.07);"
+    + "color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.15);border-radius:10px;"
+    + "padding:11px 20px;font-family:Outfit,sans-serif;font-size:14px;font-weight:600;"
+    + "cursor:pointer;width:100%;'>&#9889; Ale sou Zelle</button></div>";
+}
+
+/* ══ DEMARE ══ */
+(function _boot(){
+  // Guard kont double-call
+  if(window._kovaxBooted) return;
+  window._kovaxBooted = true;
+  updateSummary();
+  initPayPal();
+})();
+</script>
+
+
+</body>
+</html>

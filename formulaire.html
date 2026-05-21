@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fòmilè Enskripsyon — Kovax Academy</title>
+<meta name="description" content="Ranpli fòmilè enskripsyon Kovax Academy. Etap senp pou kòmanse fòmasyon ou an ligne.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#06091A;--navy2:#0E1E6E;--blue:#1A3FAA;--cyan:#29ABE2;--purple:#7B2D8B;--green:#22c55e;--red:#ef4444;--white:#FFFFFF;--muted:rgba(255,255,255,0.55);--border:rgba(255,255,255,0.08);--glass:rgba(255,255,255,0.04);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.6;animation:orbFloat 12s ease-in-out infinite alternate;}
+.orb1{width:500px;height:500px;background:rgba(14,30,110,0.7);top:-150px;left:-100px;}
+.orb2{width:400px;height:400px;background:rgba(41,171,226,0.25);top:100px;right:-80px;animation-delay:-3s;}
+.orb3{width:350px;height:350px;background:rgba(123,45,139,0.35);bottom:200px;left:20%;animation-delay:-6s;}
+.orb4{width:300px;height:300px;background:rgba(26,63,170,0.3);bottom:-100px;right:15%;animation-delay:-9s;}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,40px) scale(1.08)}}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:70px;background:rgba(6,9,26,0.7);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-size:20px;font-weight:800;letter-spacing:0.08em;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--cyan);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);border:none;border-radius:10px;padding:10px 22px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:0 0 20px rgba(41,171,226,0.25);transition:opacity .2s,transform .2s;}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px);}
+section{position:relative;z-index:1;padding:100px 5%;}
+#main-section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:120px;padding-bottom:60px;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;color:var(--cyan);text-transform:uppercase;margin-bottom:12px;}
+.section-title{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px;}
+.section-desc{color:var(--muted);font-size:16px;font-weight:300;line-height:1.7;}
+.form-page-wrap{max-width:720px;width:100%;margin:0 auto;background:var(--glass);border:1px solid var(--border);border-radius:26px;padding:40px;backdrop-filter:blur(22px);position:relative;}
+.form-page-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(41,171,226,0.4),rgba(123,45,139,0.3),transparent);border-radius:26px 26px 0 0;}
+.summary-box{background:rgba(41,171,226,.08);border:1px solid rgba(41,171,226,.24);border-radius:18px;padding:20px;margin-bottom:30px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;position:relative;}
+.form-label{font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.form-input,.form-select{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:13px 16px;color:var(--white);font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color .2s,background .2s;appearance:none;width:100%;}
+.form-input::placeholder{color:rgba(255,255,255,0.3);}
+.form-input:focus,.form-select:focus{border-color:rgba(41,171,226,0.5);background:rgba(41,171,226,0.06);}
+.form-select option{background:#0E1E6E;color:white;}
+/* PHONE PICKER */
+.phone-wrap{display:flex;border:1px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);transition:border-color .2s;overflow:visible;}
+.phone-wrap:focus-within{border-color:rgba(41,171,226,0.5);background:rgba(41,171,226,0.04);}
+.phone-wrap.valid{border-color:rgba(34,197,94,0.6)!important;}
+.flag-btn{position:relative;display:flex;align-items:center;gap:6px;padding:0 12px;cursor:pointer;background:none;border:none;border-right:1px solid rgba(255,255,255,0.08);color:var(--white);font-family:'Outfit',sans-serif;white-space:nowrap;flex-shrink:0;user-select:none;}
+.flag-emoji{font-size:20px;line-height:1;}
+.dial-code{font-weight:700;font-size:13px;color:var(--cyan);}
+.caret{font-size:9px;color:var(--muted);}
+.country-drop{position:absolute;top:calc(100% + 8px);left:0;width:300px;background:#0b1640;border:1px solid rgba(41,171,226,0.35);border-radius:14px;z-index:9999;display:none;box-shadow:0 16px 48px rgba(0,0,0,0.75);overflow:hidden;flex-direction:column;}
+.country-drop.open{display:flex;}
+.country-search{padding:10px 14px;background:rgba(255,255,255,0.05);border:none;border-bottom:1px solid rgba(255,255,255,0.07);color:var(--white);font-family:'Outfit',sans-serif;font-size:13px;outline:none;width:100%;}
+.country-search::placeholder{color:var(--muted);}
+.country-list{max-height:220px;overflow-y:auto;}
+.country-list::-webkit-scrollbar{width:4px;}
+.country-list::-webkit-scrollbar-thumb{background:rgba(41,171,226,0.3);border-radius:4px;}
+.country-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;font-size:13px;color:rgba(255,255,255,0.85);border-bottom:1px solid rgba(255,255,255,0.04);transition:background .15s;}
+.country-item:hover,.country-item.sel{background:rgba(41,171,226,0.18);color:#fff;}
+.country-item .cfi{font-size:18px;}
+.country-item .cname{flex:1;}
+.country-item .cdial{color:var(--cyan);font-weight:700;font-size:12px;}
+.phone-num-input{background:transparent;border:none;outline:none;color:var(--white);font-family:'Outfit',sans-serif;font-size:14px;padding:13px 14px;flex:1;min-width:0;}
+.phone-num-input::placeholder{color:rgba(255,255,255,0.3);}
+/* VERIFY */
+.verify-strip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px;}
+.ch-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;}
+.ch-btn.active{background:rgba(41,171,226,0.15);border-color:rgba(41,171,226,0.4);color:var(--white);}
+.ch-btn:hover{background:rgba(255,255,255,0.08);color:var(--white);}
+.ch-btn svg{width:14px;height:14px;}
+.btn-send{background:rgba(41,171,226,0.15);border:1px solid rgba(41,171,226,0.35);color:var(--cyan);border-radius:8px;padding:7px 16px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.04em;}
+.btn-send:hover{background:rgba(41,171,226,0.28);}
+.btn-send:disabled{opacity:.45;cursor:not-allowed;}
+.v-status{font-size:12px;font-family:'JetBrains Mono',monospace;padding:4px 10px;border-radius:20px;display:none;}
+.v-status.pending{display:inline-block;background:rgba(41,171,226,0.12);color:var(--cyan);border:1px solid rgba(41,171,226,0.3);}
+.v-status.verified{display:inline-block;background:rgba(34,197,94,0.12);color:var(--green);border:1px solid rgba(34,197,94,0.3);}
+.v-status.error{display:inline-block;background:rgba(239,68,68,0.12);color:var(--red);border:1px solid rgba(239,68,68,0.3);}
+/* ADDRESS AC */
+.ac-wrapper{position:relative;z-index:50;}
+.ac-list{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;background:#0b1640;border:1px solid rgba(41,171,226,0.4);border-radius:14px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.7);z-index:9999;}
+.ac-list.show{display:block;}
+.ac-item{padding:12px 16px;font-size:13px;color:rgba(255,255,255,.85);cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.5;transition:background .15s;}
+.ac-item:last-child{border-bottom:none;}
+.ac-item:hover,.ac-item.hi{background:rgba(41,171,226,0.2);color:#fff;}
+.ac-main{font-weight:700;color:#fff;}
+.ac-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.ac-msg{padding:14px 16px;font-size:13px;color:var(--muted);text-align:center;}
+.divider{margin:28px 0 18px;padding-top:22px;border-top:1px solid var(--border);}
+.btn-form{width:100%;padding:15px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--white);border:none;border-radius:12px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.02em;box-shadow:0 0 28px rgba(41,171,226,0.3);transition:all .2s;margin-top:6px;}
+.btn-form:hover{box-shadow:0 0 42px rgba(41,171,226,0.5);transform:translateY(-2px);}
+.btn-form:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32px 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(6,9,26,0.5);backdrop-filter:blur(20px);}
+.footer-logo{font-size:16px;font-weight:800;letter-spacing:.06em;}
+.footer-logo span{color:var(--cyan);}
+.footer-copy{font-size:13px;color:var(--muted);}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:13px;transition:color .2s;}
+.footer-links a:hover{color:var(--white);}
+@media(max-width:768px){nav{padding:0 4%;}.nav-links{display:none;}section{padding:70px 4%;}.form-row{grid-template-columns:1fr;}.form-page-wrap{padding:26px;}.otp-box{width:38px;height:46px;font-size:18px;}footer{flex-direction:column;gap:16px;text-align:center;}}
+
+.verified-badge{display:none;}
+.verified-badge.show{display:inline-flex;}
+
+/* MODERN EMAIL VERIFICATION — KOVAX STYLE */
+.email-verify-inline{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  animation:slideDown .25s ease;
+}
+@keyframes slideDown{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+.evi-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.modern-otp{
+  display:flex;
+  gap:7px;
+  justify-content:flex-start;
+  margin-bottom:14px;
+}
+
+.email-otp-box{
+  width:38px;
+  height:42px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  color:white;
+  text-align:center;
+  font-size:16px;
+  font-weight:700;
+  font-family:'JetBrains Mono',monospace;
+  outline:none;
+  transition:.2s;
+  letter-spacing:0;
+}
+
+.email-otp-box:focus{
+  border-color:#29ABE2;
+  box-shadow:0 0 10px rgba(41,171,226,.25);
+  background:rgba(41,171,226,.07);
+}
+
+.email-otp-box.filled{
+  border-color:rgba(41,171,226,.5);
+  background:rgba(41,171,226,.06);
+}
+
+.email-otp-box.ok{
+  border-color:rgba(34,197,94,.6);
+  background:rgba(34,197,94,.07);
+}
+
+.email-otp-box.fail{
+  border-color:rgba(239,68,68,.6);
+  background:rgba(239,68,68,.07);
+}
+
+.otp-actions{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+#btnVerifyEmailOtp{
+  display:none;
+}
+
+.otp-actions a{
+  color:var(--cyan);
+  font-size:13px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.otp-actions a:hover{
+  text-decoration:underline;
+}
+
+@media(max-width:768px){
+  .modern-otp{
+    gap:6px;
+  }
+
+  .email-otp-box{
+    width:34px;
+    height:38px;
+    font-size:14px;
+    border-radius:8px;
+  }
+}
+
+/* FIX PHONE DROPDOWN */
+.form-page-wrap,
+.form-group,
+.phone-wrap,
+.flag-btn{
+  overflow:visible!important;
+}
+.phone-wrap{
+  position:relative;
+  z-index:1000;
+}
+.flag-btn{
+  position:relative;
+}
+.country-drop{
+  z-index:99999!important;
+}
+
+
+/* PHONE COUNTRY / AREA CODE FIX */
+.form-page-wrap,
+.form-group,
+.phone-wrap,
+.flag-btn{
+  overflow:visible!important;
+}
+.phone-wrap{
+  position:relative!important;
+  z-index:5000!important;
+}
+.flag-btn{
+  position:relative!important;
+  cursor:pointer!important;
+}
+.country-drop{
+  position:absolute!important;
+  top:calc(100% + 8px)!important;
+  left:0!important;
+  width:320px!important;
+  max-width:92vw!important;
+  display:none!important;
+  flex-direction:column!important;
+  background:#0b1640!important;
+  border:1px solid rgba(41,171,226,.35)!important;
+  border-radius:14px!important;
+  z-index:999999!important;
+  overflow:hidden!important;
+  box-shadow:0 18px 50px rgba(0,0,0,.75)!important;
+}
+.country-drop.open{
+  display:flex!important;
+}
+.country-list{
+  max-height:260px!important;
+  overflow-y:auto!important;
+}
+.country-item{
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  padding:11px 14px!important;
+  cursor:pointer!important;
+}
+.country-item:hover{
+  background:rgba(41,171,226,.18)!important;
+}
+
+
+/* ANIMATED PLACEHOLDER for adresse2 */
+#adresse2::placeholder { color: rgba(255,255,255,0); transition: color .3s; }
+#adresse2:not(:focus):not([data-typed="true"])::placeholder { color: rgba(255,255,255,0); }
+.adresse2-anim-placeholder {
+  position:absolute;
+  top:50%;transform:translateY(-50%);
+  left:16px;
+  pointer-events:none;
+  font-size:14px;
+  color:rgba(255,255,255,0.3);
+  white-space:nowrap;
+  overflow:hidden;
+}
+.adresse2-wrap { position:relative; }
+
+.birthdate-row{
+  grid-template-columns:1fr!important;
+}
+.phone-wrap.phone-invalid{
+  border-color:rgba(239,68,68,0.7)!important;
+  background:rgba(239,68,68,0.06)!important;
+}
+/* FIELD ERROR + INLINE MESSAGE */
+.field-error{
+  border-color:rgba(239,68,68,0.7)!important;
+  background:rgba(239,68,68,0.07)!important;
+  animation:errPulse .35s ease;
+}
+.group-error > select,
+.group-error > input{
+  border-color:rgba(239,68,68,0.7)!important;
+  background:rgba(239,68,68,0.07)!important;
+  animation:errPulse .35s ease;
+}
+@keyframes errPulse{
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-5px);}
+  75%{transform:translateX(5px);}
+}
+.inline-err{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  font-size:12px;
+  color:#f87171;
+  margin-top:5px;
+  padding:6px 12px;
+  background:rgba(239,68,68,0.09);
+  border:1px solid rgba(239,68,68,0.22);
+  border-radius:8px;
+  animation:slideDown .2s ease;
+}
+@keyframes btnShake{
+  0%,100%{transform:translateX(0);}
+  20%{transform:translateX(-7px);}
+  40%{transform:translateX(7px);}
+  60%{transform:translateX(-5px);}
+  80%{transform:translateX(5px);}
+}
+.btn-shake{animation:btnShake .55s ease!important;}
+
+/* ── MODERN DATE PICKER ─────────────────────────────────────────── */
+.dob-wrap{display:flex;gap:10px;align-items:flex-end;}
+.dob-col{display:flex;flex-direction:column;flex:1;gap:5px;}
+.dob-sublabel{font-size:10px;font-weight:700;color:rgba(41,171,226,0.75);letter-spacing:0.14em;text-transform:uppercase;}
+.dob-select-wrap{position:relative;}
+.dob-select{
+  width:100%;appearance:none;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:10px;
+  padding:12px 34px 12px 14px;
+  color:var(--white);
+  font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;
+  outline:none;cursor:pointer;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+}
+.dob-select:focus{
+  border-color:rgba(41,171,226,0.6);
+  background:rgba(41,171,226,0.07);
+  box-shadow:0 0 0 3px rgba(41,171,226,0.1);
+}
+.dob-select option{background:#0E1E6E;color:white;}
+.dob-select.dob-filled{border-color:rgba(41,171,226,0.4);background:rgba(41,171,226,0.05);}
+.dob-select.dob-error{border-color:rgba(239,68,68,0.65)!important;background:rgba(239,68,68,0.07)!important;}
+.dob-select-wrap::after{
+  content:'';position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  width:0;height:0;
+  border-left:4px solid transparent;border-right:4px solid transparent;
+  border-top:5px solid rgba(41,171,226,0.65);
+  pointer-events:none;
+}
+.dob-preview{
+  display:flex;align-items:center;gap:10px;
+  margin-top:10px;
+  background:rgba(34,197,94,0.07);
+  border:1px solid rgba(34,197,94,0.22);
+  border-radius:10px;padding:9px 14px;
+  font-size:13px;color:rgba(255,255,255,0.75);
+  animation:slideDown .2s ease;
+}
+.dob-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.dob-age{
+  margin-left:auto;font-size:11px;font-weight:700;color:var(--green);
+  background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);
+  border-radius:99px;padding:3px 10px;white-space:nowrap;
+}
+@media(max-width:480px){.dob-wrap{flex-direction:column;}.dob-col{flex:unset!important;width:100%;}}
+
+
+</style>
+
+<meta name="theme-color" content="#06091A">
+<link rel="manifest" href="manifest.json">
+<script defer src="analytics.js"></script>
+
+<style id="kovax-loading-style">
+#kovaxLoader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#06091A;transition:opacity .45s ease,visibility .45s ease}
+#kovaxLoader.hide{opacity:0;visibility:hidden}
+.kovax-loader-box{text-align:center;color:white;font-family:Outfit,Arial,sans-serif}
+.kovax-spinner{width:58px;height:58px;border-radius:50%;border:4px solid rgba(255,255,255,.12);border-top-color:#29ABE2;margin:0 auto 16px;animation:kovaxSpin .8s linear infinite}
+.kovax-loader-box strong{letter-spacing:.08em}.kovax-loader-box span{display:block;margin-top:6px;color:rgba(255,255,255,.58);font-size:13px}
+@keyframes kovaxSpin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="kovaxLoader"><div class="kovax-loader-box"><div class="kovax-spinner"></div><strong>KOVAX ACADEMY</strong><span>Chargement...</span></div></div>
+<script>window.addEventListener('load',()=>setTimeout(()=>document.getElementById('kovaxLoader')?.classList.add('hide'),350));</script>
+
+<div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="orb orb4"></div></div>
+<nav>
+  <a href="index.html" class="nav-logo">KOVAX <span>ACADEMY</span></a>
+  <ul class="nav-links"><li><a href="index.html">← Akèy</a></li><li><a href="enskripsyon.html">Kou</a></li></ul>
+  <a href="enskripsyon.html" class="nav-cta">Enskri →</a>
+</nav>
+<section id="main-section">
+  <div class="form-page-wrap">
+    <p class="section-label">// Etap 2</p>
+    <h1 class="section-title">Ranpli Enfòmasyon w yo</h1>
+    <p class="section-desc" style="margin-bottom:24px;">Aprè ou fin ranpli fòm sa a, paj pèman an ap ouvri otomatikman.</p>
+    <div class="summary-box">
+      <strong> Kou w la chwazi:</strong>
+      <div id="courseName" style="font-size:22px;font-weight:800;margin-top:6px;color:var(--cyan);">...</div>
+      <div id="coursePrice" style="color:var(--muted);margin-top:4px;">...</div>
+    </div>
+    <form id="studentForm" action="#" method="POST">
+      <input type="hidden" name="_subject" value="Nouvo Enskripsyon — Kovax Academy">
+      <input type="hidden" name="Kou" id="hiddenCourse">
+      <input type="hidden" name="Prix" id="hiddenPrice">
+      <input type="hidden" name="Detail" id="hiddenDetail">
+      <input type="hidden" name="Telephone_Complet" id="hiddenPhone">
+      <input type="hidden" name="Email_Verifye" id="hiddenEmailVerified" value="Non">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Prenon *</label>
+          <input class="form-input" id="prenom" name="Prenon" autocomplete="given-name" required placeholder="Ex: Jean">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sinyati *</label>
+          <input class="form-input" id="nom" name="Nom" autocomplete="family-name" required placeholder="Ex: Pierre">
+        </div>
+      </div>
+
+
+      <!-- DAT NESANS MODÈN — 3 Dropdown -->
+      <div class="form-group" id="dobGroup">
+        <label class="form-label">Dat Nesans *</label>
+        <div class="dob-wrap">
+          <div class="dob-col">
+            <span class="dob-sublabel">Jou</span>
+            <div class="dob-select-wrap">
+              <select id="dobDay" name="_dob_day" class="dob-select" onchange="kovaxDobChange()">
+                <option value="">Jou</option>
+              </select>
+            </div>
+          </div>
+          <div class="dob-col" style="flex:1.7;">
+            <span class="dob-sublabel">Mwa</span>
+            <div class="dob-select-wrap">
+              <select id="dobMonth" name="_dob_month" class="dob-select" onchange="kovaxDobChange()">
+                <option value="">Mwa</option>
+                <option value="01">Janvye</option>
+                <option value="02">Fevriye</option>
+                <option value="03">Mas</option>
+                <option value="04">Avril</option>
+                <option value="05">Me</option>
+                <option value="06">Jen</option>
+                <option value="07">Jiyè</option>
+                <option value="08">Out</option>
+                <option value="09">Septanm</option>
+                <option value="10">Oktòb</option>
+                <option value="11">Novanm</option>
+                <option value="12">Desanm</option>
+              </select>
+            </div>
+          </div>
+          <div class="dob-col" style="flex:1.3;">
+            <span class="dob-sublabel">Ane</span>
+            <div class="dob-select-wrap">
+              <select id="dobYear" name="_dob_year" class="dob-select" onchange="kovaxDobChange()">
+                <option value="">Ane</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- Hidden field ki voye valè final la -->
+        <input type="hidden" id="birthdate" name="Dat_Nesans">
+        <!-- Preview dat + laj -->
+        <div class="dob-preview" id="dobPreview" style="display:none;">
+          <span class="dob-dot"></span>
+          <span id="dobPreviewText">—</span>
+          <span class="dob-age" id="dobAge"></span>
+        </div>
+        <!-- Erè -->
+        <span id="birthdateError" style="display:none;align-items:center;gap:6px;font-size:12px;color:#f87171;margin-top:6px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:7px 12px;"></span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email *</label>
+        <input class="form-input" id="email" name="email" type="email" required placeholder="ou@email.com">
+      </div>
+
+      <!-- TELEPHONE SIMPLE -->
+      <div class="form-group">
+        <label class="form-label">Nimewo Telefòn*</label>
+        <div class="phone-wrap" id="phoneWrap">
+          <button type="button" class="flag-btn" id="flagBtn">
+            <span class="flag-emoji" id="flagEmoji">🇺🇸</span>
+            <span class="dial-code" id="dialCode">+1</span>
+            <span class="caret">▼</span>
+            <div class="country-drop" id="countryDrop">
+              <input class="country-search" id="countrySearch" placeholder="🔍  Chèche peyi…" type="text" autocomplete="off">
+              <div class="country-list" id="countryList"></div>
+            </div>
+          </button>
+          <input type="tel" class="phone-num-input" id="phoneNum" name="Telephone" placeholder="(000) 000-0000" autocomplete="off" inputmode="tel" required>
+        </div>
+      </div>
+
+      <!-- VERIFIKASYON EMAIL -->
+      <div class="form-group" id="emailVerifyGroup" style="display:none;">
+        <div class="email-verify-inline">
+          <div class="evi-row">
+            <button type="button" class="btn-send" id="btnSendEmailCode">Voye kòd</button>
+            <span class="v-status" id="emailVStatus"></span>
+            <span class="verified-badge" id="emailVerifiedBadge">✔ Verifye</span>
+          </div>
+          <div class="otp-section" id="emailOtpSection">
+            <div class="modern-otp" id="emailOtpBoxes">
+              <input class="email-otp-box" maxlength="1" inputmode="numeric">
+              <input class="email-otp-box" maxlength="1" inputmode="numeric">
+              <input class="email-otp-box" maxlength="1" inputmode="numeric">
+              <input class="email-otp-box" maxlength="1" inputmode="numeric">
+              <input class="email-otp-box" maxlength="1" inputmode="numeric">
+              <input class="email-otp-box" maxlength="1" inputmode="numeric">
+            </div>
+            <div class="otp-actions">
+              <button type="button" class="btn-verify-otp" id="btnVerifyEmailOtp" disabled>Verifye</button>
+              <a href="#" id="resendEmailLink">Voye ankò</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PEYI + SEKS ak drapo -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Peyi *</label>
+          <select class="form-select" id="peyi" name="Peyi" required>
+            <option value="">🌐 Chwazi peyi w</option>
+            <!-- ── Peyi pi itilize ── -->
+            <!-- A -->
+<option>🇩🇪 Almay</option>
+<option>🇿🇦 Afrik di Sid</option>
+<option>🇦🇷 Ajantin</option>
+<option>🇦🇺 Ostrali</option>
+
+<!-- B -->
+<option>🇧🇪 Bèljik</option>
+<option>🇧🇷 Brezil</option>
+
+<!-- C -->
+<option>🇨🇦 Kanada</option>
+<option>🇨🇱 Chili</option>
+<option>🇨🇳 Lachin</option>
+<option>🇨🇴 Kolonbi</option>
+<option>🇨🇺 Kiba</option>
+<option>🇨🇭 Swis</option>
+
+<!-- E -->
+<option>🇪🇸 Espay</option>
+<option>🇺🇸 Etazini</option>
+<option>🇮🇳 End</option>
+
+<!-- F -->
+<option>🇫🇷 Frans</option>
+
+<!-- G -->
+<option>🇬🇭 Gana</option>
+
+<!-- H -->
+<option>🇭🇹 Ayiti</option>
+
+<!-- I -->
+<option>🇮🇹 Itali</option>
+
+<!-- J -->
+<option>🇯🇲 Jamayik</option>
+<option>🇯🇵 Japon</option>
+
+<!-- K -->
+<option>🇨🇲 Kamewoun</option>
+<option>🇨🇺 Kiba</option>
+<option>🇨🇴 Kolonbi</option>
+<option>🇨🇭 Swis</option>
+<option>🇨🇮 Kòt d'Ivwà</option>
+
+<!-- L -->
+<option>🇷🇺 Larisi</option>
+<option>🇨🇳 Lachin</option>
+
+<!-- M -->
+<option>🇲🇦 Mawòk</option>
+<option>🇲🇽 Meksik</option>
+
+<!-- N -->
+<option>🇳🇬 Nijerya</option>
+<option>🇳🇱 Peyiba</option>
+<option>🇳🇴 Nòvèj</option>
+
+<!-- O -->
+<option>🇦🇺 Ostrali</option>
+
+<!-- P -->
+<option>🇵🇹 Pòtigal</option>
+
+<!-- R -->
+<option>🇩🇴 Repiblik Dominikèn</option>
+
+<!-- S -->
+<option>🇸🇳 Senegal</option>
+<option>🇸🇪 Syèd</option>
+<option>🇨🇭 Swis</option>
+
+<!-- T -->
+<option>🇹🇷 Tikri</option>
+
+<!-- V -->
+<option>🇻🇪 Venezyela</option>
+
+<!-- W -->
+<option>🇬🇧 Wayòm Ini</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sèks *</label>
+          <select class="form-select" id="sex" name="Sex" required>
+            <option value="">Chwazi</option><option>Fanm</option><option>Gason</option><option>Lòt</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ADRES -->
+      <div class="divider">
+        <p class="section-label" style="margin-bottom:4px;">// Adrès</p>
+        <p style="font-size:13px;color:var(--muted);">Tape Adrès 1 — sijesyon ap parèt otomatikman ✨</p>
+      </div>
+      <div class="form-group ac-wrapper">
+        <label class="form-label">Adrès 1 *</label>
+        <input class="form-input" id="adresse1" name="Adresse_1" required placeholder="Ex: 123 Main Street…" autocomplete="off">
+        <div class="ac-list" id="acList"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Adrès 2 <span style="color:var(--muted);font-weight:400;">(Opsyonèl)</span></label>
+        <div class="adresse2-wrap">
+          <input class="form-input" id="adresse2" name="Adresse_2" placeholder="" autocomplete="off">
+          <span class="adresse2-anim-placeholder" id="adresse2Placeholder"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Vil *</label>
+          <input class="form-input" id="vil" name="Vil" required placeholder="Ex: Miami">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Eta / Pwovens *</label>
+          <input class="form-input" id="eta" name="Eta_Pwovens" required placeholder="Ex: Florida">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">ZIP / Kòd Postal *</label>
+          <input class="form-input" id="zip" name="Kod_Postal" required placeholder="Ex: 33101">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peyi (Adrès)</label>
+          <input class="form-input" id="pays_adresse" name="Pays_Adresse" placeholder="Ex: United States">
+        </div>
+      </div>
+
+      <button class="btn-form" type="submit" id="submitBtn">Voye Enskripsyon →</button>
+    </form>
+  </div>
+</section>
+
+<script>
+/* ── KOVAX RESEND API (Vercel Serverless Functions) ───────────────────────── */
+
+/* ── EMAIL OTP ─────────────────────────────────────────────────── */
+let emailOtp = "";
+let emailVerified = false;
+let emailResendT = null;
+
+const emailOtpBoxes = Array.from(document.querySelectorAll(".email-otp-box"));
+const btnVerifyEmailOtp = document.getElementById("btnVerifyEmailOtp");
+const emailVStatus = document.getElementById("emailVStatus");
+
+function setEmailStatus(type, msg){
+  emailVStatus.className = "v-status " + type;
+  emailVStatus.textContent = msg;
+}
+
+function gen6(){
+  return String(Math.floor(100000 + Math.random() * 900000));
+}
+
+function resetEmailVerify(){
+  emailVerified = false;
+  emailOtp = "";
+  document.getElementById("hiddenEmailVerified").value = "Non";
+  document.getElementById("emailOtpSection").style.display = "none";
+  document.getElementById("emailVerifiedBadge").classList.remove("show");
+  emailOtpBoxes.forEach(b => { b.value = ""; b.className = "email-otp-box"; });
+  emailVStatus.className = "v-status";
+  btnVerifyEmailOtp.disabled = true;
+  const btn = document.getElementById("btnSendEmailCode");
+  btn.disabled = false;
+  btn.textContent = "Voye Kòd Email →";
+}
+
+document.getElementById("email").addEventListener("input", function(){
+  const val = this.value.trim();
+  const grp = document.getElementById("emailVerifyGroup");
+  const valid = val.includes("@") && val.includes(".");
+  if(valid){
+    grp.style.display = "";
+  } else {
+    grp.style.display = "none";
+  }
+  resetEmailVerify();
+});
+
+document.getElementById("btnSendEmailCode").addEventListener("click", async () => {
+  const email = document.getElementById("email").value.trim();
+  const prenon = document.getElementById("prenom").value.trim() || "Etidyan";
+
+  if(!email || !email.includes("@")){
+    setEmailStatus("error", "⚠ Mete yon email valid avan");
+    return;
+  }
+
+  const btn = document.getElementById("btnSendEmailCode");
+  btn.disabled = true;
+  btn.textContent = "Ap voye...";
+  setEmailStatus("pending", "⏳ Ap voye kòd sou email ou...");
+  document.getElementById("emailOtpSection").style.display = "block";
+
+  emailOtp = gen6();
+
+  try{
+    const resp = await fetch("/api/send-code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: prenon,
+        email: email,
+        code: emailOtp,
+        course: sel.name,
+        price: sel.price,
+        detail: sel.detail
+      })
+    });
+    const data = await resp.json().catch(() => ({}));
+    if(!resp.ok || !data.success){
+      throw new Error(data.error || "Kòd la pa voye. Verifye RESEND_API_KEY sou Vercel.");
+    }
+    console.info("[KOVAX EMAIL OTP] ready", data.warnings || []);
+    if(data.emailSent){
+      setEmailStatus("pending", "📧 Kòd verifikasyon an voye nan email ou. Antre kòd la anba a.");
+    }else{
+      setEmailStatus("pending", "📧 Kòd la voye bay administrasyon Kovax Academy. Tanpri verifye email admin lan pou kòd la.");
+    }
+    document.getElementById("emailOtpSection").style.display = "block";
+    emailOtpBoxes[0].focus();
+    startEmailTimer(60);
+
+  }catch(e){
+    btn.disabled = false;
+    btn.textContent = "Voye Kòd Email →";
+    setEmailStatus("error", "❌ " + (e.message || "Kòd la pa voye. Verifye RESEND_API_KEY sou Vercel."));
+    console.error(e);
+  }
+});
+
+function startEmailTimer(s){
+  clearInterval(emailResendT);
+  const rl = document.getElementById("resendEmailLink");
+  rl.style.pointerEvents = "none";
+  rl.style.color = "var(--muted)";
+  emailResendT = setInterval(() => {
+    rl.textContent = s > 0 ? `Voye ankò (${s}s)` : "Voye ankò";
+    if(s <= 0){
+      clearInterval(emailResendT);
+      rl.style.pointerEvents = "";
+      rl.style.color = "var(--cyan)";
+    }
+    s--;
+  }, 1000);
+}
+
+document.getElementById("resendEmailLink").addEventListener("click", e => {
+  e.preventDefault();
+  resetEmailVerify();
+  document.getElementById("btnSendEmailCode").click();
+});
+
+emailOtpBoxes.forEach((b, i) => {
+  b.addEventListener("input", () => {
+    b.value = b.value.replace(/\D/g, "").slice(-1);
+    b.classList.toggle("filled", !!b.value);
+    if(b.value && i < 5) emailOtpBoxes[i + 1].focus();
+    btnVerifyEmailOtp.disabled = emailOtpBoxes.some(x => !x.value);
+    if(!btnVerifyEmailOtp.disabled) verifyEmailOtpAuto();
+  });
+
+  b.addEventListener("keydown", e => {
+    if(e.key === "Backspace" && !b.value && i > 0) emailOtpBoxes[i - 1].focus();
+    if(e.key === "ArrowLeft" && i > 0) emailOtpBoxes[i - 1].focus();
+    if(e.key === "ArrowRight" && i < 5) emailOtpBoxes[i + 1].focus();
+  });
+
+  b.addEventListener("paste", e => {
+    e.preventDefault();
+    const p = (e.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "");
+    p.slice(0,6).split("").forEach((c,j) => {
+      if(emailOtpBoxes[j]){ emailOtpBoxes[j].value = c; emailOtpBoxes[j].classList.add("filled"); }
+    });
+    btnVerifyEmailOtp.disabled = emailOtpBoxes.some(x => !x.value);
+    if(!btnVerifyEmailOtp.disabled) verifyEmailOtpAuto();
+    emailOtpBoxes[Math.min(p.length,5)].focus();
+  });
+});
+
+
+function verifyEmailOtpAuto(){
+  const entered = emailOtpBoxes.map(b => b.value).join("");
+
+  if(entered.length !== 6) return;
+
+  if(entered === emailOtp){
+    emailOtpBoxes.forEach(b => {
+      b.classList.remove("fail");
+      b.classList.add("ok");
+    });
+
+    setEmailStatus("verified", "✔ Email verifye!");
+    document.getElementById("emailVerifiedBadge").classList.add("show");
+    document.getElementById("hiddenEmailVerified").value = "Wi";
+    emailVerified = true;
+
+    btnVerifyEmailOtp.disabled = true;
+    document.getElementById("btnSendEmailCode").disabled = true;
+    document.getElementById("btnSendEmailCode").textContent = "✔ Email verifye";
+
+    setTimeout(() => {
+      document.getElementById("emailOtpSection").style.display = "none";
+    }, 700);
+
+  }else{
+    emailOtpBoxes.forEach(b => b.classList.add("fail"));
+    setEmailStatus("error", "❌ Kòd pa bon — eseye ankò");
+
+    setTimeout(() => {
+      emailOtpBoxes.forEach(b => {
+        b.value = "";
+        b.classList.remove("filled","fail","ok");
+      });
+      emailOtpBoxes[0].focus();
+      btnVerifyEmailOtp.disabled = true;
+    }, 700);
+  }
+}
+
+btnVerifyEmailOtp.addEventListener("click", () => {
+  const entered = emailOtpBoxes.map(b => b.value).join("");
+
+  if(entered === emailOtp){
+    emailOtpBoxes.forEach(b => b.classList.add("ok"));
+    setEmailStatus("verified", "✔ Email verifye!");
+    document.getElementById("emailVerifiedBadge").classList.add("show");
+    document.getElementById("hiddenEmailVerified").value = "Wi";
+    emailVerified = true;
+    btnVerifyEmailOtp.disabled = true;
+    document.getElementById("btnSendEmailCode").textContent = "✔ Email verifye";
+  }else{
+    emailOtpBoxes.forEach(b => b.classList.add("fail"));
+    setEmailStatus("error", "❌ Kòd pa bon — eseye ankò");
+    setTimeout(() => emailOtpBoxes.forEach(b => b.classList.remove("fail")), 600);
+    emailOtpBoxes.forEach(b => b.value = "");
+    emailOtpBoxes[0].focus();
+    btnVerifyEmailOtp.disabled = true;
+  }
+});
+
+/* KOU */
+const urlP = new URLSearchParams(window.location.search);
+
+function normalizeKou(v){
+  return (v || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[éèê]/g,"e")
+    .replace(/[àâ]/g,"a")
+    .replace(/[ïî]/g,"i");
+}
+
+let kou = normalizeKou(
+  urlP.get("kou") ||
+  urlP.get("course") ||
+  urlP.get("cours") ||
+  localStorage.getItem("kovax_course") ||
+  sessionStorage.getItem("kovax_course") ||
+  "informatique"
+);
+
+if(kou.includes("ang")) kou = "anglais";
+else kou = "informatique";
+
+const info = {
+  informatique:{
+    name:"Enfòmatik",
+    price:"$200",
+    detail:"Pèman yon sèl fwa pou 4 mwa"
+  },
+  anglais:{
+    name:"Anglè",
+    price:"$50 / mwa",
+    detail:"Pèman chak mwa pandan 6 mwa"
+  }
+};
+
+const sel = info[kou] || info.informatique;
+
+document.getElementById("courseName").textContent = sel.name;
+document.getElementById("coursePrice").textContent = sel.price + " — " + sel.detail;
+document.getElementById("hiddenCourse").value = sel.name;
+document.getElementById("hiddenPrice").value = sel.price;
+document.getElementById("hiddenDetail").value = sel.detail;
+
+
+
+/* ── COUNTRIES pou phone picker ── */
+const COUNTRIES = [
+  {code:"VE",flag:"🇻🇪",name:"Venezyela",dial:"+58"},
+  {code:"TT",flag:"🇹🇹",name:"Trinidad ak Tobago",dial:"+1-868"},
+  {code:"TR",flag:"🇹🇷",name:"Tikri",dial:"+90"},
+  {code:"TN",flag:"🇹🇳",name:"Tinizi",dial:"+216"},
+  {code:"CH",flag:"🇨🇭",name:"Swis",dial:"+41"},
+  {code:"SE",flag:"🇸🇪",name:"Syèd",dial:"+46"},
+  {code:"SN",flag:"🇸🇳",name:"Senegal",dial:"+221"},
+  {code:"DO3",flag:"🇩🇴",name:"Repiblik Dominikèn",dial:"+1-849"},
+  {code:"DO2",flag:"🇩🇴",name:"Repiblik Dominikèn",dial:"+1-829"},
+  {code:"DO",flag:"🇩🇴",name:"Repiblik Dominikèn",dial:"+1-809"},
+  {code:"CD",flag:"🇨🇩",name:"Repiblik Demokratik Kongo",dial:"+243"},
+  {code:"PR",flag:"🇵🇷",name:"Pòtoriko",dial:"+1-787"},
+  {code:"PT",flag:"🇵🇹",name:"Pòtigal",dial:"+351"},
+  {code:"PE",flag:"🇵🇪",name:"Pewou",dial:"+51"},
+  {code:"NL",flag:"🇳🇱",name:"Peyiba",dial:"+31"},
+  {code:"NO",flag:"🇳🇴",name:"Nòvèj",dial:"+47"},
+  {code:"NG",flag:"🇳🇬",name:"Nijerya",dial:"+234"},
+  {code:"MX",flag:"🇲🇽",name:"Meksik",dial:"+52"},
+  {code:"MQ",flag:"🇲🇶",name:"Matinik",dial:"+596"},
+  {code:"MA",flag:"🇲🇦",name:"Mawòk",dial:"+212"},
+  {code:"CN",flag:"🇨🇳",name:"Lachin",dial:"+86"},
+  {code:"RU",flag:"🇷🇺",name:"Larisi",dial:"+7"},
+  {code:"CI",flag:"🇨🇮",name:"Kòt d'Ivwà",dial:"+225"},
+  {code:"KR",flag:"🇰🇷",name:"Kore di Sid",dial:"+82"},
+  {code:"CO",flag:"🇨🇴",name:"Kolonbi",dial:"+57"},
+  {code:"CU",flag:"🇨🇺",name:"Kiba",dial:"+53"},
+  {code:"CL",flag:"🇨🇱",name:"Chili",dial:"+56"},
+  {code:"CM",flag:"🇨🇲",name:"Kamewoun",dial:"+237"},
+  {code:"CA",flag:"🇨🇦",name:"Kanada",dial:"+1"},
+  {code:"JP",flag:"🇯🇵",name:"Japon",dial:"+81"},
+  {code:"JM",flag:"🇯🇲",name:"Jamayik",dial:"+1-876"},
+  {code:"IT",flag:"🇮🇹",name:"Itali",dial:"+39"},
+  {code:"GY",flag:"🇬🇾",name:"Giyàn",dial:"+592"},
+  {code:"GP",flag:"🇬🇵",name:"Gwadloup",dial:"+590"},
+  {code:"GH",flag:"🇬🇭",name:"Gana",dial:"+233"},
+  {code:"FR",flag:"🇫🇷",name:"Frans",dial:"+33"},
+  {code:"ES",flag:"🇪🇸",name:"Espay",dial:"+34"},
+  {code:"US",flag:"🇺🇸",name:"Etazini",dial:"+1"},
+  {code:"EC",flag:"🇪🇨",name:"Ekwatè",dial:"+593"},
+  {code:"IN",flag:"🇮🇳",name:"End",dial:"+91"},
+  {code:"BR",flag:"🇧🇷",name:"Brezil",dial:"+55"},
+  {code:"BE",flag:"🇧🇪",name:"Bèljik",dial:"+32"},
+  {code:"HT",flag:"🇭🇹",name:"Ayiti",dial:"+509"},
+  {code:"AU",flag:"🇦🇺",name:"Ostrali",dial:"+61"},
+  {code:"AR",flag:"🇦🇷",name:"Ajantin",dial:"+54"},
+  {code:"ZA",flag:"🇿🇦",name:"Afrik di Sid",dial:"+27"},
+  {code:"DZ",flag:"🇩🇿",name:"Aljeri",dial:"+213"},
+  {code:"DE",flag:"🇩🇪",name:"Almay",dial:"+49"},
+  {code:"GB",flag:"🇬🇧",name:"Wayòm Ini",dial:"+44"}
+];
+
+let curC = COUNTRIES.find(c => c.code === "US") || COUNTRIES[0];
+
+function buildList(q=""){
+  const el = document.getElementById("countryList");
+  if(!el) return;
+  el.innerHTML = "";
+
+  COUNTRIES
+    .filter(c => !q || c.name.toLowerCase().includes(q.toLowerCase()) || c.dial.includes(q))
+    .forEach(c => {
+      const d = document.createElement("div");
+      d.className = "country-item" + (c.dial === curC.dial ? " sel" : "");
+      d.innerHTML = `<span class="cfi">${c.flag}</span><span class="cname">${c.name}</span><span class="cdial">${c.dial}</span>`;
+      d.addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        pickC(c);
+      });
+      el.appendChild(d);
+    });
+}
+
+function pickC(c){
+  curC = c;
+  document.getElementById("flagEmoji").textContent = c.flag;
+  document.getElementById("dialCode").textContent = c.dial;
+  closeDrop();
+  document.getElementById("phoneNum").focus();
+}
+
+function openDrop(){
+  const d = document.getElementById("countryDrop");
+  if(!d) return;
+  d.classList.add("open");
+  buildList();
+  setTimeout(() => {
+    const s = document.getElementById("countrySearch");
+    if(s) s.focus();
+  }, 50);
+}
+
+function closeDrop(){
+  const d = document.getElementById("countryDrop");
+  if(d) d.classList.remove("open");
+}
+
+const flagBtn = document.getElementById("flagBtn");
+const countryDrop = document.getElementById("countryDrop");
+const countrySearch = document.getElementById("countrySearch");
+
+if(flagBtn){
+  flagBtn.addEventListener("click", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    const d = document.getElementById("countryDrop");
+    if(d && d.classList.contains("open")) closeDrop();
+    else openDrop();
+  });
+}
+
+if(countryDrop){
+  countryDrop.addEventListener("click", function(e){
+    e.stopPropagation();
+  });
+}
+
+if(countrySearch){
+  countrySearch.addEventListener("input", function(){
+    buildList(this.value);
+  });
+}
+
+document.addEventListener("click", function(e){
+  if(!e.target.closest("#flagBtn") && !e.target.closest("#countryDrop")){
+    closeDrop();
+  }
+});
+
+pickC(curC);
+buildList();
+
+/* ── AUTO-DETEKTE PEYI VIA IP ── */
+(async function autoDetectCountry(){
+
+  // Fonksyon ki aplike kòd peyi a sou fòm lan
+  function applyCountry(cc){
+    if(!cc || cc.length !== 2) return;
+    cc = cc.toUpperCase();
+
+    // 1. Telefòn picker — flag + dial code
+    const found = COUNTRIES.find(c => c.code === cc);
+    if(found) pickC(found);
+
+    // 2. Select#peyi — jwenn option ki koresponn via emoji flag
+    const sel = document.getElementById("peyi");
+    if(!sel) return;
+    const flagFor = code => String.fromCodePoint(
+      0x1F1E6 - 65 + code.charCodeAt(0),
+      0x1F1E6 - 65 + code.charCodeAt(1)
+    );
+    const targetFlag = flagFor(cc);
+    const match = Array.from(sel.options).find(o => o.text.startsWith(targetFlag));
+    if(match){
+      sel.value = match.value || match.text;
+      sel.dispatchEvent(new Event("change"));
+    }
+  }
+
+  // Eseye 3 API HTTPS gratis youn apre lòt
+  const APIS = [
+    async () => {
+      const r = await fetch("https://ipapi.co/json/", {headers:{"Accept":"application/json"}});
+      const d = await r.json(); return d.country_code;
+    },
+    async () => {
+      const r = await fetch("https://api.country.is/");
+      const d = await r.json(); return d.country;
+    },
+    async () => {
+      const r = await fetch("https://freeipapi.com/api/json");
+      const d = await r.json(); return d.countryCode;
+    }
+  ];
+
+  for(const api of APIS){
+    try{
+      const cc = await api();
+      if(cc && cc.length === 2){
+        applyCountry(cc);
+        return; // Siksè — sispann eseye
+      }
+    }catch(e){
+      continue; // Eseye pwochen API a
+    }
+  }
+
+  console.info("[KOVAX GEO] Tout API echwe — moun ap chwazi manyèlman");
+})();
+
+/* ── VALIDASYON NIMEWO TELEFÒN ── */
+(function(){
+  // Longè chif (san kòd peyi) selon peyi
+  const PHONE_LENGTHS = {
+    "US":10,"CA":10,"HT":8,"DO":10,"DO2":10,"DO3":10,
+    "PR":10,"JM":10,"TT":10,"FR":9,"BE":9,"CH":9,"DE":10,
+    "GB":10,"ES":9,"IT":10,"PT":9,"NL":9,"NO":8,"SE":9,
+    "BR":11,"MX":10,"AR":10,"CO":10,"CL":9,"VE":10,"PE":9,
+    "EC":9,"GH":9,"NG":10,"SN":9,"CM":9,"CI":10,"MA":9,
+    "DZ":9,"ZA":9,"CD":9,"AU":9,"JP":10,"CN":11,"IN":10,
+    "KR":10,"RU":10,"TR":10,"MQ":9,"GP":9,"GY":7,"PR":10,
+    "TN":8,"CU":8,"GY":7
+  };
+
+  const phoneInp = document.getElementById("phoneNum");
+  const phoneWrap = document.getElementById("phoneWrap");
+  if(!phoneInp || !phoneWrap) return;
+
+  // Jwenn ou kreye mesaj erè anba phone group
+  function getPhoneGroup(){
+    return phoneWrap.closest(".form-group") || phoneWrap.parentElement;
+  }
+
+  function showPhoneErr(msg){
+    const grp = getPhoneGroup();
+    if(!grp) return;
+    let tip = grp.querySelector(".phone-inline-err");
+    if(!tip){
+      tip = document.createElement("span");
+      tip.className = "inline-err phone-inline-err";
+      grp.appendChild(tip);
+    }
+    tip.textContent = "⚠ " + msg;
+    phoneWrap.classList.add("phone-invalid");
+    phoneWrap.classList.remove("valid");
+  }
+
+  function clearPhoneErr(){
+    const grp = getPhoneGroup();
+    if(grp){
+      const tip = grp.querySelector(".phone-inline-err");
+      if(tip) tip.remove();
+    }
+    phoneWrap.classList.remove("phone-invalid");
+  }
+
+  function validatePhone(live){
+    const digits = phoneInp.value.replace(/\D/g,"");
+    const code   = curC ? curC.code : "US";
+    const expected = PHONE_LENGTHS[code];
+
+    if(!digits){
+      if(!live) showPhoneErr("Nimewo Telefòn obligatwa");
+      else clearPhoneErr();
+      return false;
+    }
+    if(expected && digits.length < expected){
+      const manke = expected - digits.length;
+      showPhoneErr("Nimewo a twò kout — ou bezwen " + manke + " chif ankò (" + expected + " chif total)");
+      return false;
+    }
+    if(expected && digits.length > expected + 1){
+      showPhoneErr("Nimewo a twò long — maksimòm " + expected + " chif pou peyi sa a");
+      return false;
+    }
+    if(digits.length < 6){
+      showPhoneErr("Nimewo Telefòn pa valid");
+      return false;
+    }
+    clearPhoneErr();
+    phoneWrap.classList.add("valid");
+    return true;
+  }
+
+  // Valide an tan reyèl pandan moun ap tape
+  phoneInp.addEventListener("input", function(){
+    // Retire tout ki pa chif / espas / tiré / parentèz
+    const clean = this.value.replace(/[^\d\s\-\(\)]/g,"");
+    if(clean !== this.value) this.value = clean;
+    validatePhone(true);
+  });
+
+  phoneInp.addEventListener("blur", function(){
+    validatePhone(false);
+  });
+
+  // Re-valide si moun chanje peyi
+  const origPickC = window.pickC || pickC;
+  // Patch pickC pou revalide apre chwa peyi
+  const _origPickC = pickC;
+  window.__kovaxPickC = function(c){
+    _origPickC(c);
+    if(phoneInp.value.trim()) setTimeout(()=>validatePhone(true), 50);
+  };
+
+  // Expose validatePhone pou submit handler
+  window.__validatePhone = validatePhone;
+})();
+
+
+
+const ainp=document.getElementById("adresse1"),alist=document.getElementById("acList");
+let aT=null,aHits=[],aHi=-1;
+function aHide(){alist.classList.remove("show");alist.innerHTML="";aHi=-1;}
+function aRender(items){
+  if(!items.length){alist.innerHTML='<div class="ac-msg">Pa jwenn — eseye pi plis detay</div>';alist.classList.add("show");return;}
+  alist.innerHTML="";
+  items.forEach(it=>{
+    const d=document.createElement("div");d.className="ac-item";
+    const a=it.address||{};
+    const main=((a.house_number||"")+" "+(a.road||a.pedestrian||"")).trim()||it.display_name.split(",")[0];
+    const sub=it.display_name.split(", ").slice(2,5).join(", ");
+    d.innerHTML=`<div class="ac-main">${main}</div>${sub?`<div class="ac-sub">${sub}</div>`:""}`;
+    d.addEventListener("mousedown",e=>{e.preventDefault();aPick(it);});alist.appendChild(d);
+  });
+  alist.classList.add("show");
+}
+function aPick(it){
+  const a=it.address||{};
+  ainp.value=((a.house_number||"")+" "+(a.road||a.pedestrian||a.footway||"")).trim()||it.display_name.split(",")[0];
+  document.getElementById("vil").value=a.city||a.town||a.village||"";
+  document.getElementById("eta").value=a.state||a.region||a.county||"";
+  document.getElementById("zip").value=a.postcode||"";
+  document.getElementById("pays_adresse").value=a.country||"";aHide();
+}
+async function aSearch(q){
+  alist.innerHTML='<div class="ac-msg">🔍 Ap chèche...</div>';alist.classList.add("show");
+  try{
+    const r=await fetch("https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=6&q="+encodeURIComponent(q),{headers:{"Accept-Language":"fr,en","User-Agent":"KovaxAcademy/1.0"}});
+    aHits=await r.json();aRender(aHits);
+  }catch{alist.innerHTML='<div class="ac-msg" style="color:#f87171;">Koneksyon echwe.</div>';}
+}
+ainp.addEventListener("input",()=>{clearTimeout(aT);const v=ainp.value.trim();if(v.length<4){aHide();return;}aT=setTimeout(()=>aSearch(v),420);});
+ainp.addEventListener("keydown",e=>{
+  const rows=alist.querySelectorAll(".ac-item");if(!rows.length)return;
+  if(e.key==="ArrowDown"){e.preventDefault();aHi=Math.min(aHi+1,rows.length-1);}
+  else if(e.key==="ArrowUp"){e.preventDefault();aHi=Math.max(aHi-1,0);}
+  else if(e.key==="Enter"&&aHi>=0){e.preventDefault();if(aHits[aHi])aPick(aHits[aHi]);return;}
+  else if(e.key==="Escape"){aHide();return;}
+  rows.forEach((r,i)=>r.classList.toggle("hi",i===aHi));
+  if(rows[aHi])rows[aHi].scrollIntoView({block:"nearest"});
+});
+document.addEventListener("click",e=>{if(!e.target.closest(".ac-wrapper"))aHide();});
+
+/* ── MODERN DOB PICKER ── */
+(function(){
+  const dayEl   = document.getElementById("dobDay");
+  const yearEl  = document.getElementById("dobYear");
+  const now     = new Date();
+
+  // Ranpli Jou 1-31
+  for(let d = 1; d <= 31; d++){
+    const o = document.createElement("option");
+    o.value = String(d).padStart(2,"0");
+    o.textContent = d;
+    dayEl.appendChild(o);
+  }
+
+  // Ranpli Ane (10 → 100 ane de sa)
+  for(let y = now.getFullYear() - 10; y >= now.getFullYear() - 100; y--){
+    const o = document.createElement("option");
+    o.value = y;
+    o.textContent = y;
+    yearEl.appendChild(o);
+  }
+})();
+
+window.kovaxDobChange = function(){
+  const d  = document.getElementById("dobDay").value;
+  const m  = document.getElementById("dobMonth").value;
+  const y  = document.getElementById("dobYear").value;
+  const preview = document.getElementById("dobPreview");
+  const prevTxt = document.getElementById("dobPreviewText");
+  const ageEl   = document.getElementById("dobAge");
+  const hidden  = document.getElementById("birthdate");
+  const errEl   = document.getElementById("birthdateError");
+
+  // Mete filled class
+  ["dobDay","dobMonth","dobYear"].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.toggle("dob-filled", !!el.value);
+    el.classList.remove("dob-error");
+  });
+
+  if(!d || !m || !y){
+    preview.style.display = "none";
+    hidden.value = "";
+    return;
+  }
+
+  const date = new Date(y, parseInt(m)-1, parseInt(d));
+  // Verifye dat valid (ex: 31 fevriye pa egziste)
+  if(date.getMonth() !== parseInt(m)-1){
+    preview.style.display = "none";
+    hidden.value = "";
+    return;
+  }
+
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  if(date >= now){
+    hidden.value = "";
+    preview.style.display = "none";
+    if(errEl){ errEl.style.display="flex"; errEl.textContent="⚠ Dat nesans pa valid — ou pa ka mete jodi a oswa nan lavni."; }
+    return;
+  }
+  if(errEl){ errEl.style.display="none"; }
+
+  // Kalkile laj
+  const mwaYo = ["Janvye","Fevriye","Mas","Avril","Me","Jen","Jiyè","Out","Septanm","Oktòb","Novanm","Desanm"];
+  const age   = now.getFullYear() - date.getFullYear() -
+    (now < new Date(now.getFullYear(), date.getMonth(), date.getDate()) ? 1 : 0);
+
+  hidden.value      = y + "-" + m + "-" + d;  // format YYYY-MM-DD pou sheet la
+  prevTxt.textContent = d + " " + mwaYo[parseInt(m)-1] + " " + y;
+  ageEl.textContent   = age + " an";
+  preview.style.display = "flex";
+};
+
+
+(function(){
+  const inp = document.getElementById("adresse2");
+  const ph  = document.getElementById("adresse2Placeholder");
+  if(!inp || !ph) return;
+
+  const hints = ["Ex: Apt 4B", "Ex: Suite 200", "Ex: Bldg C", "Ex: 2nd Floor", "Ex: Unit 12"];
+  let hIdx = 0, charIdx = 0, typing = true, timer = null, loopTimer = null;
+
+  function typeChar(){
+    const word = hints[hIdx];
+    if(typing){
+      charIdx++;
+      ph.textContent = word.slice(0, charIdx);
+      if(charIdx >= word.length){
+        typing = false;
+        timer = setTimeout(erase, 1800);
+      } else {
+        timer = setTimeout(typeChar, 72);
+      }
+    }
+  }
+
+  function erase(){
+    const word = hints[hIdx];
+    if(charIdx > 0){
+      charIdx--;
+      ph.textContent = word.slice(0, charIdx);
+      timer = setTimeout(erase, 38);
+    } else {
+      typing = true;
+      hIdx = (hIdx + 1) % hints.length;
+      timer = setTimeout(typeChar, 500);
+    }
+  }
+
+  function start(){ if(!timer) typeChar(); }
+  function stop(){
+    clearTimeout(timer); timer = null;
+    ph.textContent = "";
+  }
+
+  inp.addEventListener("focus", stop);
+  inp.addEventListener("blur",  function(){ if(!inp.value){ charIdx=0; typing=true; start(); }});
+  inp.addEventListener("input", function(){
+    inp.dataset.typed = inp.value ? "true" : "false";
+    if(inp.value) stop(); else start();
+  });
+
+  start();
+})();
+
+
+/* SUBMIT */
+document.getElementById("studentForm").addEventListener("submit",async function(e){
+  e.preventDefault();
+  const form=e.target, btn=document.getElementById("submitBtn");
+
+  /* ── VALIDASYON KONPLÈ ── */
+  const FIELDS = [
+    { id:"prenom",   label:"Prenon" },
+    { id:"nom",      label:"Sinyati" },
+    { id:"email",    label:"Email" },
+    { id:"peyi",     label:"Peyi" },
+    { id:"sex",      label:"Sèks" },
+    { id:"adresse1", label:"Adrès 1" },
+    { id:"vil",      label:"Vil" },
+    { id:"eta",      label:"Eta / Pwovens" },
+    { id:"zip",      label:"ZIP / Kòd Postal" },
+  ];
+
+  // Jwenn .form-group ki pi pre pou nenpòt chan
+  function getGroup(el){
+    let node = el;
+    while(node && node !== form){
+      if(node.classList && node.classList.contains("form-group")) return node;
+      node = node.parentElement;
+    }
+    return el.parentElement; // fallback
+  }
+
+  // Retire tout ansyen erè
+  FIELDS.forEach(f => {
+    const el = document.getElementById(f.id);
+    if(!el) return;
+    el.classList.remove("field-error");
+    const grp = getGroup(el);
+    if(grp){
+      grp.querySelectorAll(".inline-err").forEach(t => t.remove());
+      grp.classList.remove("group-error");
+    }
+  });
+  const emailGrp = document.getElementById("email") ? getGroup(document.getElementById("email")) : null;
+  if(emailGrp) emailGrp.querySelectorAll(".inline-err").forEach(t => t.remove());
+
+  let firstBad = null;
+  const errors = [];
+
+  // Valide DOB dropdown yo
+  const dobD = document.getElementById("dobDay").value;
+  const dobM = document.getElementById("dobMonth").value;
+  const dobY = document.getElementById("dobYear").value;
+  const dobHidden = document.getElementById("birthdate").value;
+  if(!dobD || !dobM || !dobY || !dobHidden){
+    ["dobDay","dobMonth","dobYear"].forEach(id => {
+      const el = document.getElementById(id);
+      if(!el.value) el.classList.add("dob-error");
+    });
+    const errEl = document.getElementById("birthdateError");
+    if(errEl){ errEl.style.display = "flex"; errEl.textContent = "⚠ Tanpri ranpli dat nesans ou konplètman."; }
+    errors.push("Dat Nesans");
+    if(!firstBad) firstBad = document.getElementById("dobDay");
+  }
+
+  FIELDS.forEach(f => {
+    const el = document.getElementById(f.id);
+    if(!el) return;
+    const val = el.value.trim();
+    let bad = false;
+
+    if(!val) bad = true;
+
+    if(bad){
+      errors.push(f.label);
+      el.classList.add("field-error");
+      const grp = getGroup(el);
+      if(grp){
+        grp.classList.add("group-error");
+        if(!grp.querySelector(".inline-err")){
+          const tip = document.createElement("span");
+          tip.className = "inline-err";
+          tip.textContent = "⚠ " + f.label + " obligatwa";
+          grp.appendChild(tip);
+        }
+      }
+      if(!firstBad) firstBad = el;
+    }
+  });
+
+  // Telefòn — valide longè
+  if(window.__validatePhone && !window.__validatePhone(false)){
+    const el = document.getElementById("phoneNum");
+    if(!firstBad) firstBad = el;
+    errors.push("Nimewo Telefòn");
+  }
+
+  // Email verifye?
+  if(!emailVerified){
+    errors.push("Verifikasyon Email");
+    const el = document.getElementById("email");
+    if(el){
+      el.classList.add("field-error");
+      const grp = getGroup(el);
+      if(grp && !grp.querySelector(".inline-err")){
+        const tip = document.createElement("span");
+        tip.className = "inline-err";
+        tip.textContent = "⚠ Tanpri verifye email ou avan ou kontinye";
+        grp.appendChild(tip);
+      }
+      if(!firstBad) firstBad = el;
+    }
+  }
+
+  if(errors.length > 0){
+    if(firstBad){
+      firstBad.scrollIntoView({ behavior:"smooth", block:"center" });
+      setTimeout(() => { try{ firstBad.focus(); }catch(ex){} }, 400);
+    }
+    btn.classList.add("btn-shake");
+    setTimeout(() => btn.classList.remove("btn-shake"), 600);
+    return;
+  }
+
+  /* ── TOUT BON — voye ── */
+  document.getElementById("hiddenPhone").value = curC.dial + document.getElementById("phoneNum").value.replace(/\D/g,"");
+  btn.disabled=true; btn.textContent="Ap voye...";
+
+  const tp={
+    to_email:document.getElementById("email").value.trim(),
+    birthdate:document.getElementById("birthdate") ? document.getElementById("birthdate").value : "",
+    to_name:document.getElementById("prenom").value.trim(),
+    nom:document.getElementById("nom").value.trim(),
+    prenon:document.getElementById("prenom").value.trim(),
+    telephone:curC.dial+document.getElementById("phoneNum").value.replace(/\D/g,""),
+    email:document.getElementById("email").value.trim(),
+    pays:document.getElementById("peyi").value, peyi:document.getElementById("peyi").value,
+    sex:document.getElementById("sex").value,
+    adresse1:document.getElementById("adresse1").value.trim(),
+    adresse2:document.getElementById("adresse2").value.trim(),
+    vil:document.getElementById("vil").value.trim(),
+    eta:document.getElementById("eta").value.trim(),
+    zip:document.getElementById("zip").value.trim(),
+    cours:sel.name, kou:sel.name, prix:sel.price, detail:sel.detail
+  };
+  const peyi_val = document.getElementById("peyi").value;
+
+  // ── RESEND — voye fòmilè bay ADMIN + konfimasyon bay ETIDYAN ──
+  try{
+    const resp = await fetch("/api/send-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...tp,
+        name: (tp.prenon + " " + tp.nom).trim(),
+        email_verified: "Wi",
+        pays_adresse: document.getElementById("pays_adresse").value.trim()
+      })
+    });
+    const data = await resp.json().catch(() => ({}));
+    if(!resp.ok || !data.success){
+      throw new Error(data.error || "Fòmilè a pa voye. Verifye RESEND_API_KEY sou Vercel.");
+    }
+    if(data.warnings && data.warnings.length){ console.warn("[KOVAX Resend warnings]", data.warnings); }
+  }catch(sendErr){
+    console.error("[KOVAX Resend submit]", sendErr);
+    alert("Fòmilè a pa voye: " + (sendErr.message || "Verifye RESEND_API_KEY sou Vercel."));
+    btn.disabled=false; btn.textContent="Voye Enskripsyon →";
+    return;
+  }
+
+  // ── Sove done etidyan nan localStorage ──
+  localStorage.setItem("kovax_last_student", JSON.stringify({
+    prenom: document.getElementById("prenom").value.trim(),
+    nom:    document.getElementById("nom").value.trim(),
+    email:  document.getElementById("email").value.trim(),
+    telephone: curC.dial+document.getElementById("phoneNum").value.replace(/\D/g,""),
+    pays: document.getElementById("peyi").value
+  }));
+  localStorage.setItem("studentEmail", document.getElementById("email").value.trim());
+  localStorage.setItem("studentName", (document.getElementById("prenom").value.trim()+" "+document.getElementById("nom").value.trim()).trim());
+  localStorage.setItem("kovax_course",  kou);
+  localStorage.setItem("kovax_country", peyi_val);
+
+  // ── Redirijye sou merci.html ──
+  window.location.href="merci.html?kou="+encodeURIComponent(kou)+"&peyi="+encodeURIComponent(peyi_val);
+});
+
+// Retire erè depi moun kòmanse tape / chwazi
+(function(){
+  function getGroup(el){
+    let node = el;
+    const form = document.getElementById("studentForm");
+    while(node && node !== form){
+      if(node.classList && node.classList.contains("form-group")) return node;
+      node = node.parentElement;
+    }
+    return el.parentElement;
+  }
+  ["prenom","nom","email","phoneNum","peyi","sex","adresse1","vil","eta","zip","dobDay","dobMonth","dobYear"].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    const ev = (el.tagName==="SELECT") ? "change" : "input";
+    el.addEventListener(ev, function(){
+      this.classList.remove("field-error");
+      const grp = getGroup(this);
+      if(grp){
+        grp.classList.remove("group-error");
+        grp.querySelectorAll(".inline-err").forEach(t => t.remove());
+      }
+    });
+  });
+})();
+
+/* ── CAPITALIZE — premye lèt chak mo an majiskil ── */
+(function(){
+  function toTitleCase(str){
+    return str.replace(/\S+/g, w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+  }
+  ["prenom","nom"].forEach(function(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener("input", function(){
+      const pos = this.selectionStart;
+      this.value = toTitleCase(this.value);
+      try{ this.setSelectionRange(pos, pos); }catch(e){}
+    });
+    el.addEventListener("blur", function(){
+      this.value = toTitleCase(this.value.trim());
+    });
+  });
+})();
+
+</script>
+<footer>
+  <div class="footer-logo">KOVAX <span>ACADEMY</span></div>
+  <div class="footer-copy">© 2026 Kovax Academy. Tout Dwa Rezève.</div>
+  <div class="footer-links"><a href="index.html">Akèy</a><a href="enskripsyon.html">Enskri</a></div>
+</footer>
+
+
+</body>
+</html>

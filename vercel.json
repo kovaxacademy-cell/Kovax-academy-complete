@@ -1,0 +1,64 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/enskri",
+      "destination": "/enskripsyon.html"
+    },
+    {
+      "source": "/formulaire",
+      "destination": "/formulaire.html"
+    },
+    {
+      "source": "/paiement",
+      "destination": "/paiement.html"
+    },
+    {
+      "source": "/merci",
+      "destination": "/merci.html"
+    },
+    {
+      "source": "/merci-peman",
+      "destination": "/merci-peman.html"
+    },
+    {
+      "source": "/api/chat",
+      "destination": "/api/chat.js"
+    },
+    {
+      "source": "/api/image",
+      "destination": "/api/image.js"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/merci(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ]
+}
