@@ -286,7 +286,7 @@ const email    = params.get("email")  || student.email  ||
                  localStorage.getItem("kovax_email") || "";
 const fullName = (prenom + " " + nom).trim() || "Etidyan";
 
-/* Metòd ak referans peman */
+/* Metòd ak referans pèman */
 const mode = params.get("mode") || localStorage.getItem("kovaxPaymentType") || "PayPal";
 const ref  = params.get("ref")  || localStorage.getItem("kovaxPaymentId")   || "—";
 
@@ -347,7 +347,7 @@ async function sendConfirmEmail(){
 
   if(!email){
     statusBox.className    = "email-status sent";
-    statusText.textContent = "✅ Peman konfime! Yon konseye ap kontakte ou nan 24h.";
+    statusText.textContent = "✅ Pèman konfime! Yon konseye ap kontakte ou nan 24h.";
     return;
   }
 
@@ -374,16 +374,16 @@ async function sendConfirmEmail(){
     });
     const data = await resp.json().catch(() => ({}));
     if(!resp.ok || !data.success){
-      throw new Error(data.error || "Email peman an pa voye. Verifye RESEND_API_KEY sou Vercel.");
+      throw new Error(data.error || "Email pèman an pa voye. Verifye RESEND_API_KEY sou Vercel.");
     }
     if(data.warnings && data.warnings.length){ console.warn("[KOVAX payment warnings]", data.warnings); }
     markSent();
     statusBox.className    = "email-status sent";
-    statusText.textContent = "✅ Email konfirmasyon voye sou " + email + " epi admin resevwa kopi peman an.";
+    statusText.textContent = "✅ Email konfirmasyon voye sou " + email + " epi admin resevwa kopi pèman an.";
   }catch(err){
     console.error("[KOVAX payment email]", err);
     statusBox.className    = "email-status error";
-    statusText.textContent = "❌ Email peman an pa voye: " + (err.message || "Verifye RESEND_API_KEY sou Vercel.");
+    statusText.textContent = "❌ Email pèman an pa voye: " + (err.message || "Verifye RESEND_API_KEY sou Vercel.");
   }
 }
 
