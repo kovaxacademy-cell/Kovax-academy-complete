@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Peman — Kovax Academy</title>
+<title>Pèman — Kovax Academy</title>
 <meta name="description" content="Peye pou kou Kovax Academy ou chwazi a via PayPal oswa Zelle. Sekirize epi rapid.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -367,9 +367,9 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
 
 <section>
   <div class="pay-box">
-    <div class="pay-float-badge"><span class="pay-float-dot"></span>Etap 3 — Peman Sekirize</div>
+    <div class="pay-float-badge"><span class="pay-float-dot"></span>Etap 3 Pèman Sekirize</div>
     <p class="section-label">// Kovax Academy</p>
-    <h1 class="section-title">Finalize Peman Ou</h1>
+    <h1 class="section-title">Finalize Pèman Ou</h1>
     <p id="studentGreet" style="color:var(--muted);font-size:15px;margin-bottom:2px;"></p>
 
     <!-- REZIME -->
@@ -403,13 +403,13 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
       <div class="usa-price-cards">
         <div class="usa-pcard active-card" id="pcardNormal">
           <div class="usa-pcard-icon">&#128179;</div>
-          <div class="usa-pcard-name">Peman nòmal</div>
+          <div class="usa-pcard-name">Pèman nòmal</div>
           <div class="usa-pcard-price">$57.99<span> /fwa</span></div>
           <div class="usa-pcard-detail">$50 kou + $5 frè + $2.99 tax USA. Peye yon sel fwa, pa gen lot chaj.</div>
         </div>
         <div class="usa-pcard" id="pcardSub">
           <div class="usa-pcard-icon">&#128260;</div>
-          <div class="usa-pcard-name">Abonman otomatik</div>
+          <div class="usa-pcard-name">Abònman otomatik</div>
           <div class="usa-pcard-price">$50<span> /mwa</span></div>
           <div class="usa-pcard-detail">San tax. PayPal retire $50 sou kont ou chak mwa otomatikman.</div>
           <span class="usa-pcard-badge">Ekonomize $2.99/mwa</span>
@@ -418,7 +418,7 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
 
       <!-- Info banner -->
       <div class="usa-info-banner normal-info" id="usaInfoBanner">
-        &#128161; <strong>Peman nòmal aktif.</strong> Ou ap peye $57.99 yon sel fwa ($50 kou + $5 frè + $2.99 tax USA). Pa gen lot chaj apre sa.
+        &#128161; <strong>Pèman nòmal aktif.</strong> Ou ap peye $57.99 yon sel fwa ($50 kou + $5 frè + $2.99 tax USA). Pa gen lot chaj apre sa.
       </div>
 
     </div>
@@ -471,7 +471,7 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
         <div class="status-box" id="cardStatus"></div>
         <div class="secure-note">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Peman sekirize 256-bit SSL — PayPal Hosted Fields
+          Pèman sekirize 256-bit SSL PayPal Hosted Fields
         </div>
       </div>
       <div class="cf-info" id="cardInfo" style="display:none;"></div>
@@ -480,15 +480,15 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
     <!-- ONGLET ZELLE -->
     <div class="tab-content" id="tabContentZelle">
       <div class="zelle-wrap">
-        <p style="font-size:13px;color:var(--muted);">Voye peman ou sou nimewo sa a:</p>
+        <p style="font-size:13px;color:var(--muted);">Voye pèman ou sou nimewo sa a:</p>
         <div class="zelle-num">+1 (641) 244-1865</div>
         <div class="zelle-steps">
           <div class="zs"><div class="zs-n">1</div><span>Ouvri aplikasyon bank ou oswa Zelle dirèkteman</span></div>
           <div class="zs"><div class="zs-n">2</div><span>Voye <strong id="zelleAmt" style="color:var(--cyan);">—</strong> sou <strong>+1 (641) 244-1865</strong></span></div>
           <div class="zs"><div class="zs-n">3</div><span>Nan nòt la ekri: <em id="zelleNote" style="color:var(--cyan);">Kovax – Kou</em></span></div>
-          <div class="zs"><div class="zs-n">4</div><span>Klike bouton anba a apre ou fin voye peman an</span></div>
+          <div class="zs"><div class="zs-n">4</div><span>Klike sou bouton ki anba a aprè ou fin voye pèman an</span></div>
         </div>
-        <button class="btn-zelle" id="zelleBtn"><span>&#9989; Mwen Voye Peman Zelle &rarr;</span></button>
+        <button class="btn-zelle" id="zelleBtn"><span>&#9989; Mwen Voye Pèman pa Zelle &rarr;</span></button>
       </div>
     </div>
 
@@ -574,7 +574,7 @@ const _K = (function(){
       if(this.isAng){
         return "Peman Anglè: $55 ($50 kou + $5 frè enskripsyon).";
       }
-      return "Peman yon sèl fwa — 4 mwa aksè konplè.";
+      return "Pèman yon sèl fwa 4 mwa aksè konplè.";
     }
   };
 
@@ -819,7 +819,7 @@ async function initPayPal(){
   if(isSub){
     if(note) note.innerHTML =
       "&#128260; <strong>Abonman $50/mwa :</strong> PayPal ap debite $50 sou kont ou chak mwa — san tax. "
-      + "Ranje tout bagay nan popup PayPal la — ou <strong>pa kite sit sa a</strong>.";
+      + "Ranje tout bagay nan popup PayPal la <strong>pa kite sit sa a</strong>.";
 
     try{
       await _loadSDK("sub");
