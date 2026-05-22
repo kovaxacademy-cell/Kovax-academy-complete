@@ -389,7 +389,7 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
       <!-- Header: label + toggle -->
       <div class="usa-toggle-header">
         <div class="usa-toggle-label-group">
-          <div class="usa-toggle-title">&#127482;&#127480; Opsyon peman USA</div>
+          <div class="usa-toggle-title">&#127482;&#127480; Opsyon pèman USA</div>
           <div class="usa-toggle-subtitle" id="toggleSubtitle">Peye yon sel fwa &mdash; <strong style="color:var(--cyan)">$57.99</strong></div>
         </div>
         <label class="kovax-toggle" title="Aktive / Dezaktive Abonman">
@@ -494,7 +494,7 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
 
     <div class="secure-banner">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Peman sekirize 256-bit SSL &mdash; PayPal &mdash; Zelle
+      Pèman sekirize 256-bit SSL &mdash; PayPal &mdash; Zelle
     </div>
     <a href="enskripsyon.html" class="back-link">&#8592; Chwazi lòt kou</a>
   </div>
@@ -569,10 +569,10 @@ const _K = (function(){
         return "Abònman otomatik: $50/mwa — PayPal ap retire kòb la sou kont ou chak mwa.";
       }
       if(this.isAng && this.isUSA){
-        return "Peman nòmal USA: $57.99 ($50 kou + $5 frè + $2.99 tax USA).";
+        return "Pèman nòmal USA: $57.99 ($50 kou + $5 frè + $2.99 tax USA).";
       }
       if(this.isAng){
-        return "Peman Anglè: $55 ($50 kou + $5 frè enskripsyon).";
+        return "Pèman Anglè: $55 ($50 kou + $5 frè enskripsyon).";
       }
       return "Pèman yon sèl fwa 4 mwa aksè konplè.";
     }
@@ -633,7 +633,7 @@ function updateSummary(){
   if(_K.student.prenom){
     $("studentGreet").textContent =
       "Bonjou " + _K.student.prenom + " " + (_K.student.nom || "") +
-      " — verifye detay peman ou yo anba a.";
+      " — verifye detay pèman ou yo anba a.";
   }
 }
 
@@ -745,7 +745,7 @@ function onToggleChange(isOn){
     banner.innerHTML = "&#128260; <strong>Abonman aktif.</strong> PayPal ap retire <strong>$50/mwa</strong> sou kont ou otomatikman — san tax. Ou ka kansele nenpot ki le nan PayPal.";
   } else {
     banner.className = "usa-info-banner normal-info";
-    banner.innerHTML = "&#128161; <strong>Peman nòmal aktif.</strong> Ou ap peye $57.99 yon sel fwa. Pa gen lot chaj apre sa.";
+    banner.innerHTML = "&#128161; <strong>Pèman nòmal aktif.</strong> Ou ap peye $57.99 yon sel fwa. Pa gen lot chaj apre sa.";
   }
 
   updateSummary();
@@ -771,7 +771,7 @@ async function initHostedFields(){
 
   if(_K.isAng){
     cfInfo.innerHTML = _K.isUSA
-      ? "&#128161; <strong>Pou Anglè USA :</strong> ale sou onglet <strong>PayPal</strong> pou chwazi peman nòmal $57.99 oswa abonman $50/mwa."
+      ? "&#128161; <strong>Pou Anglè USA :</strong> ale sou onglet <strong>PayPal</strong> pou chwazi pèman nòmal $57.99 oswa abonman $50/mwa."
       : "&#128161; <strong>Pou Anglè :</strong> ale sou onglet <strong>PayPal</strong> pou peye $55.";
   } else {
     cfInfo.innerHTML = "&#128161; <strong>Pou peye ak kat :</strong> ale sou onglet <strong>PayPal</strong>. Nan popup PayPal la, chwazi <em>&ldquo;Pay with a card&rdquo;</em> &mdash; ou <strong>pa bezwen kont PayPal</strong>.";
@@ -844,7 +844,7 @@ async function initPayPal(){
 
         onCancel(){
           _sdkLoading = false;
-          setStatus("ppStatus","info","&#8505; Ou kansele. Dezaktive toggle pou eseye peman nòmal $57.99.");
+          setStatus("ppStatus","info","&#8505; Ou kansele. Dezaktive toggle pou eseye pman nòmal $57.99.");
         },
 
         onError(err){
@@ -876,11 +876,11 @@ async function initPayPal(){
   }
 
   /* ─────────────────────────────────────
-     PEMAN NÒMAL yon sèl fwa
+     PÈMAN NÒMAL yon sèl fwa
   ───────────────────────────────────── */
   if(note) note.innerHTML =
     _K.isAng && _K.isUSA
-      ? "&#128179; <strong>Peman nòmal $57.99 :</strong> $50 kou + $5 frè + $2.99 tax USA. "
+      ? "&#128179; <strong>Pèman nòmal $57.99 :</strong> $50 kou + $5 frè + $2.99 tax USA. "
         + "Ranje tout bagay nan popup PayPal la — ou <strong>pa kite sit sa a</strong>."
       : "&#128179; Peye ak kont PayPal ou oswa kat kredi/debi. "
         + "Ranje tout bagay nan popup — ou <strong>pa kite sit sa a</strong>.";
@@ -918,7 +918,7 @@ async function initPayPal(){
           const orderId = details.id || data.orderID || "";
           localStorage.setItem("kovaxPaymentId",   orderId);
           localStorage.setItem("kovaxPaymentType", "paypal");
-          setStatus("ppStatus","ok","&#9989; Peman konfime! Ap redirijye\u2026");
+          setStatus("ppStatus","ok","&#9989; Pèman konfime! Ap redirijye\u2026");
           setTimeout(() => {
             window.location.href = buildMerciURL({
               mode: _K.isAng ? "paypal-anglais-normal" : "paypal",
@@ -929,13 +929,13 @@ async function initPayPal(){
           _sdkLoading = false;
           console.error("[KOVAX Capture]", captureErr);
           setStatus("ppStatus","err",
-            "&#10060; Peman an pase men konfirmasyon echwe. Voye screenshot a nou \u2014 ou p ap chaje de fwa.");
+            "&#10060; Pèman an pase men konfirmasyon echwe. Voye screenshot a nou \u2014 ou p ap chaje de fwa.");
         });
       },
 
       onCancel(){
         _sdkLoading = false;
-        setStatus("ppStatus","info","&#8505; Ou kansele peman an. Ou ka eseye ankò oswa itilize Zelle.");
+        setStatus("ppStatus","info","&#8505; Ou kansele pèman an. Ou ka eseye ankò oswa itilize Zelle.");
       },
 
       onError(err){
@@ -987,11 +987,11 @@ function _subFallback(reason){
     + "<p style='color:#fca5a5;font-size:14px;font-weight:700;margin-bottom:8px;'>"
     + "&#9888; Abonman PayPal pa disponib kounye a" + detail + "</p>"
     + "<p style='color:rgba(252,165,165,.8);font-size:13px;line-height:1.6;margin-bottom:14px;'>"
-    + "Chwazi <strong>Peman nòmal $57.99</strong> oswa voye sou <strong>Zelle</strong>.</p>"
+    + "Chwazi <strong>Pèman nòmal $57.99</strong> oswa voye sou <strong>Zelle</strong>.</p>"
     + "<button onclick=\"onToggleChange(false)\" style='background:linear-gradient(135deg,#1A3FAA,#29ABE2);"
     + "color:white;border:none;border-radius:10px;padding:12px 20px;"
     + "font-family:Outfit,sans-serif;font-size:14px;font-weight:700;cursor:pointer;width:100%;margin-bottom:8px;'>"
-    + "&#128179; Peman Nòmal $57.99</button>"
+    + "&#128179; Pèman Nòmal $57.99</button>"
     + "<button onclick=\"switchTab('Zelle')\" style='background:rgba(255,255,255,.07);"
     + "color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.15);border-radius:10px;"
     + "padding:11px 20px;font-family:Outfit,sans-serif;font-size:14px;font-weight:600;"
