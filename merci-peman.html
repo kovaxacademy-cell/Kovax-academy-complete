@@ -377,6 +377,29 @@ async function sendConfirmEmail(){
       throw new Error(data.error || "Email pèman an pa voye. Verifye RESEND_API_KEY sou Vercel.");
     }
     if(data.warnings && data.warnings.length){ console.warn("[KOVAX payment warnings]", data.warnings); }
+
+    // ── WHATSAPP ADMIN — notifikasyon pèman pou ou sèlman
+    // Etidyan an pa resevwa WhatsApp. Email ki deja la rete menm jan.
+    fetch("/api/whatsapp-notify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        kind: "payment",
+        data: {
+          fullName,
+          email,
+          course: kouName,
+          amount: money(total),
+          paymentType: mode,
+          paymentId: ref,
+          date: datStr,
+          country: rawPeyi || "—"
+        }
+      })
+    }).then(r => r.json().catch(() => ({})))
+      .then(w => { if(!w.success) console.warn("[KOVAX WhatsApp payment]", w); })
+      .catch(err => console.warn("[KOVAX WhatsApp payment]", err));
+
     markSent();
     statusBox.className    = "email-status sent";
     statusText.textContent = "✅ Email konfirmasyon voye sou " + email + " epi admin resevwa kopi pèman an.";
