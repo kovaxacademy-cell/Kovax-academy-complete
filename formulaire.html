@@ -1553,6 +1553,25 @@ document.getElementById("studentForm").addEventListener("submit",async function(
       throw new Error(data.error || "Fòmilè a pa voye. Verifye RESEND_API_KEY sou Vercel.");
     }
     if(data.warnings && data.warnings.length){ console.warn("[KOVAX Resend warnings]", data.warnings); }
+
+    // ── WHATSAPP ADMIN — notifikasyon enskripsyon pou ou sèlman
+    // Sa pa touche email yo. Si WhatsApp gen pwoblèm, fòm/email la kontinye mache.
+    fetch("/api/whatsapp-notify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        kind: "registration",
+        data: {
+          ...tp,
+          name: (tp.prenon + " " + tp.nom).trim(),
+          course: sel.name,
+          price: sel.price,
+          pays_adresse: document.getElementById("pays_adresse").value.trim()
+        }
+      })
+    }).then(r => r.json().catch(() => ({})))
+      .then(w => { if(!w.success) console.warn("[KOVAX WhatsApp registration]", w); })
+      .catch(err => console.warn("[KOVAX WhatsApp registration]", err));
   }catch(sendErr){
     console.error("[KOVAX Resend submit]", sendErr);
     alert("Fòmilè a pa voye: " + (sendErr.message || "Verifye RESEND_API_KEY sou Vercel."));
