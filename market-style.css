@@ -341,3 +341,17 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
 .mw-google{background:#fff!important;color:#202124!important;gap:3px;}
 .mw-google b{font-family:Arial,sans-serif;color:#4285f4;font-size:16px;}
 @media(max-width:560px){.market-wallet-row{grid-template-columns:repeat(2,1fr);}}
+
+
+/* ===== PAYPAL WALLET BUTTONS FIX ===== */
+.market-wallet-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0 12px;position:relative;z-index:5;}
+.market-wallet-row button{min-height:40px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font:900 13px Outfit,system-ui,sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:.2s;pointer-events:auto;}
+.market-wallet-row button:hover{transform:translateY(-1px);border-color:rgba(39,200,255,.65);box-shadow:0 0 18px rgba(39,200,255,.18);}
+.market-wallet-row button.active{outline:2px solid rgba(39,200,255,.55);box-shadow:0 0 18px rgba(39,200,255,.20);}
+.wallet-message{min-height:18px;text-align:center;margin:4px 0 8px;color:rgba(225,232,255,.72);}
+.mw-paypal{color:#8ecbff!important;background:rgba(0,112,224,.15)!important;border-color:rgba(41,171,226,.32)!important;}
+.mw-card{background:rgba(255,255,255,.08)!important;}
+.mw-apple{background:#050505!important;color:#fff!important;}
+.mw-google{background:#fff!important;color:#202124!important;gap:3px;}
+.mw-google b{font-family:Arial,sans-serif;color:#4285f4;font-size:16px;}
+#paypal-button-container{position:relative;z-index:4;min-height:48px;}
