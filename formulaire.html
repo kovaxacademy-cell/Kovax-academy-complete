@@ -705,7 +705,7 @@ function resetEmailVerify(){
   btnVerifyEmailOtp.disabled = true;
   const btn = document.getElementById("btnSendEmailCode");
   btn.disabled = false;
-  btn.textContent = "Voye Kòd Email + WhatsApp";
+  btn.textContent = "Voye Kòd Email";
 }
 
 document.getElementById("email").addEventListener("input", function(){
@@ -732,7 +732,7 @@ document.getElementById("btnSendEmailCode").addEventListener("click", async () =
   const btn = document.getElementById("btnSendEmailCode");
   btn.disabled = true;
   btn.textContent = "Ap voye...";
-  setEmailStatus("pending", "⏳ Ap voye menm kòd la sou Email + WhatsApp...");
+  setEmailStatus("pending", "⏳ Ap voye kòd sou email ou...");
   document.getElementById("emailOtpSection").style.display = "block";
 
   emailOtp = gen6();
@@ -744,7 +744,6 @@ document.getElementById("btnSendEmailCode").addEventListener("click", async () =
       body: JSON.stringify({
         name: prenon,
         email: email,
-        phone: (curC ? curC.dial : "") + document.getElementById("phoneNum").value.replace(/\D/g,""),
         code: emailOtp,
         course: sel.name,
         price: sel.price,
@@ -755,11 +754,11 @@ document.getElementById("btnSendEmailCode").addEventListener("click", async () =
     if(!resp.ok || !data.success){
       throw new Error(data.error || "Kòd la pa voye. Verifye RESEND_API_KEY sou Vercel.");
     }
-    console.info("[KOVAX EMAIL + WHATSAPP OTP] ready", data.warnings || []);
+    console.info("[KOVAX EMAIL OTP] ready", data.warnings || []);
     if(data.emailSent){
-      setEmailStatus("pending", data.whatsappSent ? "📧💬 Kòd la voye sou email + WhatsApp. Antre kòd la anba a." : "📧 Kòd la voye sou email. WhatsApp pa ale; antre kòd email la anba a.");
+      setEmailStatus("pending", "📧 Kòd verifikasyon an voye nan email ou. Antre kòd la anba a.");
     }else{
-      setEmailStatus("pending", data.whatsappSent ? "💬 Kòd la voye sou WhatsApp. Si email pa rive, itilize WhatsApp." : "📧 Kòd la voye bay administrasyon Kovax Academy. Tanpri verifye email admin lan pou kòd la.");
+      setEmailStatus("pending", "📧 Kòd la voye bay administrasyon Kovax Academy. Tanpri verifye email admin lan pou kòd la.");
     }
     document.getElementById("emailOtpSection").style.display = "block";
     emailOtpBoxes[0].focus();
@@ -767,7 +766,7 @@ document.getElementById("btnSendEmailCode").addEventListener("click", async () =
 
   }catch(e){
     btn.disabled = false;
-    btn.textContent = "Voye Kòd Email + WhatsApp";
+    btn.textContent = "Voye Kòd Email";
     setEmailStatus("error", "❌ " + (e.message || "Kòd la pa voye. Verifye RESEND_API_KEY sou Vercel."));
     console.error(e);
   }
