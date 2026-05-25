@@ -144,8 +144,11 @@ function updateWalletUI(){
 function selectWallet(type){
   selectedWallet=type||'paypal';
   updateWalletUI();
+  const box=document.getElementById('paypal-button-container');
+  if(box) box.innerHTML='';
   paypalRendered=false;
-  renderPaypal();
+  if(window.paypal){renderPaypal();}
+  else{loadPaypal();}
 }
 
 let currentUser=null;
@@ -255,7 +258,7 @@ function loadPaypal(){
   }
   box.innerHTML='<p class="small">PayPal ap chaje...</p>';
   const s=document.createElement('script');
-  s.src=`https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&intent=capture&components=buttons,marks,funding-eligibility&enable-funding=venmo,paylater,card,applepay,googlepay&disable-funding=credit`;
+  s.src=`https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&intent=capture&components=buttons,marks,funding-eligibility&enable-funding=venmo,paylater,card&disable-funding=credit`;
   s.onload=()=>{paypalRendered=false;renderPaypal();};
   s.onerror=()=>box.innerHTML='<p class="small">PayPal pa ka chaje kounya. Verifye internet oswa Client ID.</p>';
   document.body.appendChild(s);
@@ -305,31 +308,33 @@ function renderPaypal(){
     });
   }
 
-  if(!chosen){
-    const note=`${labelMap[selectedWallet]||'Metòd sa a'} pa disponib nan PayPal SDK sou navigatè sa a. M ap montre PayPal nòmal la.`;
+  // Google Pay ak Apple Pay pa suporte nan SDK standard — redirijè sou PayPal
+  if(selectedWallet==='google'||selectedWallet==='apple'){
+    const note=(selectedWallet==='google')
+      ? '⚠️ Google Pay pa disponib nan peyi w. Nou ap itilize PayPal — ou ka peye ak kat debi/kredi ladan l.'
+      : '⚠️ Apple Pay disponib sèlman sou Safari/iPhone. Nou ap itilize PayPal — ou ka peye ak kat debi/kredi ladan l.';
     renderDefaultPayPal(note);
+    return;
+  }
+
+  if(!chosen){
+    renderDefaultPayPal('Metòd sa a pa disponib. Nou ap itilize PayPal nòmal la.');
     return;
   }
 
   try{
     const btn=window.paypal.Buttons({...baseConfig, fundingSource:chosen});
     if(typeof btn.isEligible==='function' && !btn.isEligible()){
-      const note=(selectedWallet==='apple')
-        ? 'Apple Pay mache sou Safari/iPhone/Mac ak Wallet aktive. M ap montre PayPal nòmal la.'
-        : (selectedWallet==='google')
-          ? 'Google Pay mache sou Chrome ak Google Pay aktive. M ap montre PayPal nòmal la.'
-          : `${labelMap[selectedWallet]} pa eligible sou navigatè sa a. M ap montre PayPal nòmal la.`;
+      const note=(selectedWallet==='card')
+        ? 'Kat la pa eligible sou navigatè sa a. M ap montre PayPal nòmal la.'
+        : `${labelMap[selectedWallet]} pa eligible. M ap montre PayPal nòmal la.`;
       renderDefaultPayPal(note);
       return;
     }
     if(msg){
-      msg.textContent=(selectedWallet==='apple')
-        ? 'Apple Pay ap parèt si Safari + Wallet aktive.'
-        : (selectedWallet==='google')
-          ? 'Google Pay ap parèt si Chrome + Google Pay aktive.'
-          : (selectedWallet==='card')
-            ? 'Peze bouton kat la pou peye ak debit/credit card.'
-            : 'Peze bouton PayPal la pou kontinye.';
+      msg.textContent=(selectedWallet==='card')
+        ? '💳 Peze bouton kat la pou peye ak debit/credit card.'
+        : '✅ Peze bouton PayPal la pou kontinye.';
     }
     btn.render('#paypal-button-container').then(()=>{paypalRendered=true;}).catch(e=>{
       console.error('[Kovax Wallet render]',e);
