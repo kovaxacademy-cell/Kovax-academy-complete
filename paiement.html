@@ -339,6 +339,9 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
 @keyframes tabIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
 
 
+
+.wallet-row button.wallet-pill{cursor:pointer;pointer-events:auto;font-family:Outfit,sans-serif;}
+.wallet-row button.wallet-pill.active{outline:2px solid rgba(41,171,226,.6);box-shadow:0 0 18px rgba(41,171,226,.25);}
 </style>
 
 <meta name="theme-color" content="#06091A">
@@ -352,6 +355,9 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
 .kovax-spinner{width:58px;height:58px;border-radius:50%;border:4px solid rgba(255,255,255,.12);border-top-color:#29ABE2;margin:0 auto 16px;animation:kovaxSpin .8s linear infinite}
 .kovax-loader-box strong{letter-spacing:.08em}.kovax-loader-box span{display:block;margin-top:6px;color:rgba(255,255,255,.58);font-size:13px}
 @keyframes kovaxSpin{to{transform:rotate(360deg)}}
+
+.wallet-row button.wallet-pill{cursor:pointer;pointer-events:auto;font-family:Outfit,sans-serif;}
+.wallet-row button.wallet-pill.active{outline:2px solid rgba(41,171,226,.6);box-shadow:0 0 18px rgba(41,171,226,.25);}
 </style>
 </head>
 <body>
@@ -451,10 +457,10 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
     <!-- ONGLET PAYPAL -->
     <div class="tab-content active" id="tabContentPaypal">
       <div class="wallet-row" aria-label="Metòd pèman disponib">
-        <span class="wallet-pill paypal-pill">PayPal</span>
-        <span class="wallet-pill card-pill">💳 Card</span>
-        <span class="wallet-pill apple-pill"> Pay</span>
-        <span class="wallet-pill google-pill"><b>G</b><span>Pay</span></span>
+        <button type="button" class="wallet-pill paypal-pill active" data-pay-wallet="paypal" onclick="selectPayWallet('paypal')">PayPal</button>
+        <button type="button" class="wallet-pill card-pill" data-pay-wallet="card" onclick="selectPayWallet('card')">💳 Card</button>
+        <button type="button" class="wallet-pill apple-pill" data-pay-wallet="apple" onclick="selectPayWallet('apple')"> Pay</button>
+        <button type="button" class="wallet-pill google-pill" data-pay-wallet="google" onclick="selectPayWallet('google')"><b>G</b><span>Pay</span></button>
       </div>
       <div class="pp-loader" id="ppLoader"><div class="pp-spinner"></div>Ap chaje PayPal…</div>
       <div id="paypal-button-area"></div>
@@ -693,6 +699,16 @@ function buildMerciURL(extra){
 ══════════════════════════════════════════════════════ */
 let _sdkLoading = false;
 let _sdkLoaded  = null; // "normal" | "sub"
+let selectedPayWallet = "paypal";
+function updatePayWalletUI(){
+  document.querySelectorAll("[data-pay-wallet]").forEach(b=>b.classList.toggle("active", b.getAttribute("data-pay-wallet")===selectedPayWallet));
+}
+function selectPayWallet(type){
+  selectedPayWallet = type || "paypal";
+  updatePayWalletUI();
+  switchTab("Paypal");
+  initPayPal();
+}
 
 function _unloadSDK(){
   document.querySelectorAll('script[data-pp-sdk]').forEach(s => s.remove());
@@ -818,6 +834,7 @@ async function initPayPal(){
   const loader = document.getElementById("ppLoader");
   const note   = document.getElementById("ppNote");
   const area   = document.getElementById("paypal-button-area");
+  updatePayWalletUI();
 
   // Reset UI
   if(area)   area.innerHTML   = "";
@@ -906,7 +923,15 @@ async function initPayPal(){
       ? (_K.isUSA ? "Kovax Academy \u2014 Anglis USA" : "Kovax Academy \u2014 Anglis")
       : "Kovax Academy \u2014 Enfòmatik (4 mwa)";
 
-    paypal.Buttons({
+    const fundingMap = {
+      paypal: paypal.FUNDING && paypal.FUNDING.PAYPAL,
+      card:   paypal.FUNDING && paypal.FUNDING.CARD,
+      apple:  paypal.FUNDING && paypal.FUNDING.APPLEPAY,
+      google: paypal.FUNDING && paypal.FUNDING.GOOGLEPAY
+    };
+    const chosenFunding = fundingMap[selectedPayWallet];
+    const walletNames = {paypal:"PayPal",card:"Debit/Credit Card",apple:"Apple Pay",google:"Google Pay"};
+    const buttonConfig = {
       style:{ shape:"rect", color:"gold", layout:"vertical", label:"pay", height:50 },
 
       createOrder(data, actions){
@@ -963,7 +988,17 @@ async function initPayPal(){
           setStatus("ppStatus","err","&#10060; Yon erè fèt. Eseye ankò oswa itilize Zelle.");
         }
       }
-    }).render("#paypal-button-area").then(()=>{
+    };
+
+    if(chosenFunding) buttonConfig.fundingSource = chosenFunding;
+    const btn = paypal.Buttons(buttonConfig);
+    if(typeof btn.isEligible === "function" && !btn.isEligible()){
+      setStatus("ppStatus","info", "&#8505; " + (walletNames[selectedPayWallet]||"Metòd sa a") + " pa eligible sou navigatè sa a. M ap montre bouton PayPal nòmal la.");
+      selectedPayWallet = "paypal";
+      delete buttonConfig.fundingSource;
+      updatePayWalletUI();
+    }
+    await paypal.Buttons(selectedPayWallet === "paypal" ? buttonConfig : {...buttonConfig, fundingSource: chosenFunding}).render("#paypal-button-area").then(()=>{
       _sdkLoading = false;
       if(area){ area.classList.add("loaded"); setTimeout(()=>area.classList.remove("loaded"),8000); }
     }).catch(renderErr=>{
