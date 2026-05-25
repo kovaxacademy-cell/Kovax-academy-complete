@@ -87,6 +87,14 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
 /* PAYPAL */
 #paypal-button-area{max-width:480px;margin:0 auto;min-height:44px;}
 .pp-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6;}
+.wallet-row{max-width:480px;margin:0 auto 14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.wallet-pill{height:38px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.055);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;letter-spacing:.01em;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
+.paypal-pill{color:#8ecbff;background:rgba(0,112,224,.15);border-color:rgba(41,171,226,.32);}
+.card-pill{color:#fff;}
+.apple-pill{background:#050505;color:#fff;border-color:rgba(255,255,255,.25);font-size:15px;}
+.google-pill{background:#fff;color:#111;gap:3px;}
+.google-pill b{font-family:Arial,sans-serif;font-size:17px;color:#4285f4;}
+.google-pill span{font-weight:800;color:#202124;}
 
 /* KAT KREDI — Hosted Fields */
 .card-wrap{max-width:480px;margin:0 auto;text-align:left;}
@@ -442,6 +450,12 @@ section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction
 
     <!-- ONGLET PAYPAL -->
     <div class="tab-content active" id="tabContentPaypal">
+      <div class="wallet-row" aria-label="Metòd pèman disponib">
+        <span class="wallet-pill paypal-pill">PayPal</span>
+        <span class="wallet-pill card-pill">💳 Card</span>
+        <span class="wallet-pill apple-pill"> Pay</span>
+        <span class="wallet-pill google-pill"><b>G</b><span>Pay</span></span>
+      </div>
       <div class="pp-loader" id="ppLoader"><div class="pp-spinner"></div>Ap chaje PayPal…</div>
       <div id="paypal-button-area"></div>
       <div class="status-box" id="ppStatus"></div>
@@ -639,7 +653,7 @@ function updateSummary(){
 
 
 
-const CLIENT_ID    = "ARiYig3MbS4i-7aSQuzo95SczdsKj0VI-ymy0GQBVCGGmgk5Ey_C2v1cvatHaQ9GyL0K99us6WsuyBVw";
+const CLIENT_ID    = "AYHMI8sH7vnVlOa8WDRSyH85V31GK_z7x8_NjjW7Dt2umkAgu2MSSGgLap1KEVcdil3-roUfIqVhctrZ";
 const CLIENT_ID_SUB = "AYHMI8sH7vnVlOa8WDRSyH85V31GK_z7x8_NjjW7Dt2umkAgu2MSSGgLap1KEVcdil3-roUfIqVhctrZ";
 const ANGLAIS_PLAN  = "P-5L754590UM143343GNIESSCQ";
 
@@ -694,8 +708,8 @@ function _loadSDK(type){
       ? "https://www.paypal.com/sdk/js?client-id=" + CLIENT_ID_SUB
         + "&vault=true&intent=subscription&components=buttons"
       : "https://www.paypal.com/sdk/js?client-id=" + CLIENT_ID
-        + "&currency=USD&components=buttons"
-        + "&enable-funding=card,venmo&disable-funding=paylater";
+        + "&currency=USD&intent=capture&components=buttons,card-fields,marks,funding-eligibility,applepay,googlepay"
+        + "&enable-funding=venmo,paylater";
     const s = document.createElement("script");
     s.src = src;
     s.setAttribute("data-pp-sdk", type);
@@ -881,9 +895,8 @@ async function initPayPal(){
   if(note) note.innerHTML =
     _K.isAng && _K.isUSA
       ? "&#128179; <strong>Pèman nòmal $57.99 :</strong> $50 kou + $5 frè + $2.99 tax USA. "
-        + "Ranje tout bagay nan popup PayPal la — ou <strong>pa kite sit sa a</strong>."
-      : "&#128179; Peye ak kont PayPal ou oswa kat kredi/debi. "
-        + "Ranje tout bagay nan popup — ou <strong>pa kite sit sa a</strong>.";
+        + "PayPal LIVE + kat + Apple Pay/Google Pay ap parèt si aparèy kliyan an eligible."
+      : "&#128179; Peye ak PayPal, kat kredi/debi, Apple Pay oswa Google Pay si aparèy la sipòte l.";
 
   try{
     await _loadSDK("normal");
