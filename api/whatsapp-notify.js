@@ -42,10 +42,10 @@ function buildMessage(kind, data){
 async function sendWhatsAppAdmin(kind, data){
   const token = process.env.WHATSAPP_TOKEN;
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
-  const adminPhone = cleanPhone(process.env.WHATSAPP_ADMIN_PHONE);
+  const adminPhone = cleanPhone(process.env.WHATSAPP_ADMIN_PHONE || process.env.WHATSAPP_TO);
   if(!token) throw new Error("WHATSAPP_TOKEN pa mete sou Vercel.");
   if(!phoneNumberId) throw new Error("WHATSAPP_PHONE_NUMBER_ID pa mete sou Vercel.");
-  if(!adminPhone) throw new Error("WHATSAPP_ADMIN_PHONE pa mete sou Vercel.");
+  if(!adminPhone) throw new Error("WHATSAPP_ADMIN_PHONE oswa WHATSAPP_TO pa mete sou Vercel.");
   const message = buildMessage(kind, data || {});
   const metaResp = await fetch(`https://graph.facebook.com/v20.0/${phoneNumberId}/messages`, {
     method: "POST",
