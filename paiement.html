@@ -724,8 +724,8 @@ function _loadSDK(type){
       ? "https://www.paypal.com/sdk/js?client-id=" + CLIENT_ID_SUB
         + "&vault=true&intent=subscription&components=buttons"
       : "https://www.paypal.com/sdk/js?client-id=" + CLIENT_ID
-        + "&currency=USD&intent=capture&components=buttons,card-fields,marks,funding-eligibility,applepay,googlepay"
-        + "&enable-funding=venmo,paylater";
+        + "&currency=USD&intent=capture&components=buttons,marks,funding-eligibility"
+        + "&enable-funding=card&disable-funding=credit";
     const s = document.createElement("script");
     s.src = src;
     s.setAttribute("data-pp-sdk", type);
@@ -990,15 +990,39 @@ async function initPayPal(){
       }
     };
 
-    if(chosenFunding) buttonConfig.fundingSource = chosenFunding;
-    const btn = paypal.Buttons(buttonConfig);
-    if(typeof btn.isEligible === "function" && !btn.isEligible()){
-      setStatus("ppStatus","info", "&#8505; " + (walletNames[selectedPayWallet]||"Metòd sa a") + " pa eligible sou navigatè sa a. M ap montre bouton PayPal nòmal la.");
+    // Google Pay ak Apple Pay — montre PayPal nòmal avèk mesaj
+    if(selectedPayWallet === "google" || selectedPayWallet === "apple"){
+      const walletNote = selectedPayWallet === "google"
+        ? "⚠️ Google Pay pa disponib nan peyi w. Ou ka peye dirèkteman ak kat debi/kredi nan popup PayPal la."
+        : "⚠️ Apple Pay disponib sèlman sou Safari/iPhone. Ou ka peye ak kat debi/kredi nan popup PayPal la.";
+      setStatus("ppStatus","info", walletNote);
       selectedPayWallet = "paypal";
-      delete buttonConfig.fundingSource;
       updatePayWalletUI();
     }
-    await paypal.Buttons(selectedPayWallet === "paypal" ? buttonConfig : {...buttonConfig, fundingSource: chosenFunding}).render("#paypal-button-area").then(()=>{
+
+    // Koulè bouton: card => "black" (requis PayPal SDK), tout lòt => "gold"
+    // ⚠️ Si ou mete "gold" avèk fundingSource=CARD, SDK jete yon erè ki kraze tout!
+    const btnColor = selectedPayWallet === "card" ? "black" : "gold";
+    buttonConfig.style.color = btnColor;
+
+    // Ajoute fundingSource sèlman si card chwazi
+    if(selectedPayWallet === "card" && paypal.FUNDING && paypal.FUNDING.CARD){
+      buttonConfig.fundingSource = paypal.FUNDING.CARD;
+    }
+
+    const btn = paypal.Buttons(buttonConfig);
+
+    // Verifye eligibilite avan rann
+    if(typeof btn.isEligible === "function" && !btn.isEligible()){
+      setStatus("ppStatus","info", "&#8505; " + (walletNames[selectedPayWallet]||"Metòd sa a") + " pa eligible. M ap montre bouton PayPal nòmal la.");
+      delete buttonConfig.fundingSource;
+      buttonConfig.style.color = "gold";
+      selectedPayWallet = "paypal";
+      updatePayWalletUI();
+    }
+
+    // Rann bouton yon sèl fwa
+    await paypal.Buttons(buttonConfig).render("#paypal-button-area").then(()=>{
       _sdkLoading = false;
       if(area){ area.classList.add("loaded"); setTimeout(()=>area.classList.remove("loaded"),8000); }
     }).catch(renderErr=>{
