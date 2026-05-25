@@ -707,6 +707,7 @@ function selectPayWallet(type){
   selectedPayWallet = type || "paypal";
   updatePayWalletUI();
   switchTab("Paypal");
+  _sdkLoading = false; // Reset gad la pou pèmèt rechajman
   initPayPal();
 }
 
@@ -779,6 +780,7 @@ function onToggleChange(isOn){
   }
 
   updateSummary();
+  _sdkLoading = false; // Reset gad la pou pèmèt rechajman apre toggle
   initPayPal();
 }
 function setPayMode(mode){ onToggleChange(mode === "subscription"); }
@@ -827,8 +829,8 @@ document.getElementById("zelleBtn").addEventListener("click", function(){
    INIT PAYPAL  — tout bagay rete nan menm paj (popup)
 ══════════════════════════════════════════════════════ */
 async function initPayPal(){
-  // Reset guard — each call is intentional (toggle change resets it)
-  _sdkLoading = false;
+  // Guard kont double-call — si deja ap chaje, soti
+  if(_sdkLoading) return;
   _sdkLoading = true;
 
   const loader = document.getElementById("ppLoader");
@@ -1010,19 +1012,21 @@ async function initPayPal(){
       buttonConfig.fundingSource = paypal.FUNDING.CARD;
     }
 
-    const btn = paypal.Buttons(buttonConfig);
+    let btn = paypal.Buttons(buttonConfig);
 
-    // Verifye eligibilite avan rann
+    // Verifye eligibilite avan rann — itilize menm objè btn la
     if(typeof btn.isEligible === "function" && !btn.isEligible()){
       setStatus("ppStatus","info", "&#8505; " + (walletNames[selectedPayWallet]||"Metòd sa a") + " pa eligible. M ap montre bouton PayPal nòmal la.");
       delete buttonConfig.fundingSource;
       buttonConfig.style.color = "gold";
       selectedPayWallet = "paypal";
       updatePayWalletUI();
+      // Rekree btn ak konfigirasyon korije a
+      btn = paypal.Buttons(buttonConfig);
     }
 
-    // Rann bouton yon sèl fwa
-    await paypal.Buttons(buttonConfig).render("#paypal-button-area").then(()=>{
+    // Rann bouton yon sèl fwa ak menm objè btn la
+    await btn.render("#paypal-button-area").then(()=>{
       _sdkLoading = false;
       if(area){ area.classList.add("loaded"); setTimeout(()=>area.classList.remove("loaded"),8000); }
     }).catch(renderErr=>{
@@ -1069,6 +1073,25 @@ function _subFallback(reason){
     + "padding:11px 20px;font-family:Outfit,sans-serif;font-size:14px;font-weight:600;"
     + "cursor:pointer;width:100%;'>&#9889; Ale sou Zelle</button></div>";
 }
+
+/* ── Deteksyon peyi otomatik si pa gen peyi nan URL ── */
+(async function _detectCountry(){
+  // Si peyi deja konnen, pa fè demann
+  const alreadyKnown = new URLSearchParams(window.location.search).get("peyi")
+    || localStorage.getItem("kovax_country")
+    || (JSON.parse(localStorage.getItem("kovax_last_student")||"{}").peyi || "");
+  if(alreadyKnown) return;
+  try{
+    const r = await fetch("https://ipapi.co/json/",{signal:AbortSignal.timeout(4000)});
+    const d = await r.json();
+    if(d && d.country_code === "US"){
+      // Mete peyi a nan localStorage pou kalkilasyon yo ka jwenn li
+      localStorage.setItem("kovax_country","USA");
+      // Tanpri reload pou _K recalculate (sèlman si pa te gen peyi)
+      window.location.replace(window.location.href + (window.location.search?"&":"?") + "peyi=USA");
+    }
+  }catch(e){ /* Si deteksyon echwe, kontinye san tax */ }
+})();
 
 /* ══ DEMARE ══ */
 (function _boot(){
