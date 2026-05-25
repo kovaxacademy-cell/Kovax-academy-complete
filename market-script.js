@@ -135,6 +135,19 @@ function itemData(id){if(id==='bundle')return {id:'bundle',title:'Pake 2 Liv: En
 
 // BUG 3 FIX: paypalRendered flag pou evite doublaj bouton PayPal
 let paypalRendered=false;
+let selectedWallet='paypal';
+function updateWalletUI(){
+  document.querySelectorAll('.market-wallet-row [data-wallet]').forEach(b=>{
+    b.classList.toggle('active', b.getAttribute('data-wallet')===selectedWallet);
+  });
+}
+function selectWallet(type){
+  selectedWallet=type||'paypal';
+  updateWalletUI();
+  paypalRendered=false;
+  renderPaypal();
+}
+
 let currentUser=null;
 function loadUser(){}
 function saveUser(u){}
@@ -242,25 +255,90 @@ function loadPaypal(){
   }
   box.innerHTML='<p class="small">PayPal ap chaje...</p>';
   const s=document.createElement('script');
-  s.src=`https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&intent=capture&components=buttons,card-fields,marks,funding-eligibility,applepay,googlepay&enable-funding=venmo,paylater`;
+  s.src=`https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&intent=capture&components=buttons,marks,funding-eligibility&enable-funding=venmo,paylater,card,applepay,googlepay&disable-funding=credit`;
   s.onload=()=>{paypalRendered=false;renderPaypal();};
   s.onerror=()=>box.innerHTML='<p class="small">PayPal pa ka chaje kounya. Verifye internet oswa Client ID.</p>';
   document.body.appendChild(s);
 }
 
 function renderPaypal(){
-  // BUG 3 FIX: pa rann si deja rann
   if(paypalRendered)return;
   const box=document.getElementById('paypal-button-container');
+  const msg=document.getElementById('paypal-wallet-message');
+  if(!box)return;
   box.innerHTML='';
+  if(msg) msg.textContent='';
+  updateWalletUI();
   if(!window.paypal)return;
-  paypal.Buttons({
-    style:{layout:'vertical',shape:'pill',label:'pay'},
-    createOrder:(data,actions)=>actions.order.create({purchase_units:[{description:'Kovax Market Products',amount:{currency_code:'USD',value:grandTotal().toFixed(2)}}]}),
+
+  const fundingMap={
+    paypal: window.paypal.FUNDING && window.paypal.FUNDING.PAYPAL,
+    card:   window.paypal.FUNDING && window.paypal.FUNDING.CARD,
+    apple:  window.paypal.FUNDING && window.paypal.FUNDING.APPLEPAY,
+    google: window.paypal.FUNDING && window.paypal.FUNDING.GOOGLEPAY
+  };
+  const labelMap={paypal:'PayPal',card:'Debit/Credit Card',apple:'Apple Pay',google:'Google Pay'};
+  const chosen=fundingMap[selectedWallet];
+
+  const baseConfig={
+    style:{layout:'vertical',shape:'pill',label:'pay',height:45},
+    createOrder:(data,actions)=>actions.order.create({
+      intent:'CAPTURE',
+      purchase_units:[{description:'Kovax Market Products',amount:{currency_code:'USD',value:grandTotal().toFixed(2)}}],
+      application_context:{shipping_preference:'NO_SHIPPING',user_action:'PAY_NOW',brand_name:'Kovax Academy'}
+    }),
     onApprove:(data,actions)=>actions.order.capture().then(unlockDownloads),
-    onError:()=>box.innerHTML='<p class="small">Erè PayPal. Eseye ankò.</p>'
-  }).render('#paypal-button-container');
-  paypalRendered=true;
+    onCancel:()=>{ if(msg) msg.textContent='Ou kansele pèman an. Ou ka eseye ankò.'; },
+    onError:(err)=>{
+      console.error('[Kovax PayPal]',err);
+      box.innerHTML='<p class="small" style="color:#fca5a5">Erè PayPal. Refreshi paj la oubyen eseye yon lòt metòd.</p>';
+      paypalRendered=false;
+    }
+  };
+
+  function renderDefaultPayPal(note){
+    if(msg && note) msg.textContent=note;
+    const btn=window.paypal.Buttons({...baseConfig, style:{...baseConfig.style, color:'gold'}});
+    btn.render('#paypal-button-container').then(()=>{paypalRendered=true;}).catch(e=>{
+      console.error('[Kovax PayPal fallback render]',e);
+      box.innerHTML='<p class="small" style="color:#fca5a5">Bouton PayPal pa ka chaje. Verifye adblock/VPN epi refreshi paj la.</p>';
+    });
+  }
+
+  if(!chosen){
+    const note=`${labelMap[selectedWallet]||'Metòd sa a'} pa disponib nan PayPal SDK sou navigatè sa a. M ap montre PayPal nòmal la.`;
+    renderDefaultPayPal(note);
+    return;
+  }
+
+  try{
+    const btn=window.paypal.Buttons({...baseConfig, fundingSource:chosen});
+    if(typeof btn.isEligible==='function' && !btn.isEligible()){
+      const note=(selectedWallet==='apple')
+        ? 'Apple Pay mache sou Safari/iPhone/Mac ak Wallet aktive. M ap montre PayPal nòmal la.'
+        : (selectedWallet==='google')
+          ? 'Google Pay mache sou Chrome ak Google Pay aktive. M ap montre PayPal nòmal la.'
+          : `${labelMap[selectedWallet]} pa eligible sou navigatè sa a. M ap montre PayPal nòmal la.`;
+      renderDefaultPayPal(note);
+      return;
+    }
+    if(msg){
+      msg.textContent=(selectedWallet==='apple')
+        ? 'Apple Pay ap parèt si Safari + Wallet aktive.'
+        : (selectedWallet==='google')
+          ? 'Google Pay ap parèt si Chrome + Google Pay aktive.'
+          : (selectedWallet==='card')
+            ? 'Peze bouton kat la pou peye ak debit/credit card.'
+            : 'Peze bouton PayPal la pou kontinye.';
+    }
+    btn.render('#paypal-button-container').then(()=>{paypalRendered=true;}).catch(e=>{
+      console.error('[Kovax Wallet render]',e);
+      renderDefaultPayPal(`${labelMap[selectedWallet]} pa ka rann kounya. M ap montre PayPal nòmal la.`);
+    });
+  }catch(e){
+    console.error('[Kovax Wallet error]',e);
+    renderDefaultPayPal(`${labelMap[selectedWallet]} pa disponib kounya. M ap montre PayPal nòmal la.`);
+  }
 }
 
 function unlockDownloads(){
