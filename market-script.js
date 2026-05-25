@@ -1,6 +1,6 @@
 // ⚠ SEKIRITE: PAYPAL_CLIENT_ID vizib nan kòd piblik la.
 // Pou pwodwi reyèl, voye l via backend/env variable — pa hardcode l isit.
-const PAYPAL_CLIENT_ID="ARiYig3MbS4i-7aSQuzo95SczdsKj0VI-ymy0GQBVCGGmgk5Ey_C2v1cvatHaQ9GyL0K99us6WsuyBVw";
+const PAYPAL_CLIENT_ID="AYHMI8sH7vnVlOa8WDRSyH85V31GK_z7x8_NjjW7Dt2umkAgu2MSSGgLap1KEVcdil3-roUfIqVhctrZ";
 const products=[
 {id:'info',type:'book',title:'Enfòmatik',cat:'LIV PDF',price:2,img:'assets/book-real-informatique.jpg',desc:'Liv konplè ki kouvri baz enfòmatik, rezo, sekirite, ak konsèp AI. Referans esansyèl pou tout etidyan.',meta:['PDF','Enfòmatik','Telechaje'],Telechaje:'Telechaje/informatique-kovax-academy.pdf',badge:'BEST SELLER',people:false},
 {id:'english',type:'book',title:'Anglè Teknik',cat:'LIV PDF',price:2,img:'assets/book-real-english.jpg',desc:'Anglè Pwofesyonèl,Pratik pale & odyo-vizyèl, Seyans live 2h/semèn, Vokabilè, Sètifika Kovax ofisyè.',meta:['Pale','Ekri','Konprann'],Telechaje:'Telechaje/english-comic-book-kovax.pdf',badge:'NEW 2026',people:false},
@@ -242,7 +242,7 @@ function loadPaypal(){
   }
   box.innerHTML='<p class="small">PayPal ap chaje...</p>';
   const s=document.createElement('script');
-  s.src=`https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&components=buttons&enable-funding=card&disable-funding=paylater`;
+  s.src=`https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&intent=capture&components=buttons,card-fields,marks,funding-eligibility,applepay,googlepay&enable-funding=venmo,paylater`;
   s.onload=()=>{paypalRendered=false;renderPaypal();};
   s.onerror=()=>box.innerHTML='<p class="small">PayPal pa ka chaje kounya. Verifye internet oswa Client ID.</p>';
   document.body.appendChild(s);
