@@ -147,6 +147,13 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
 .rm-prompts .rm-bg{background:radial-gradient(ellipse at 50% 50%,#1a0d00,#06030d 60%),linear-gradient(135deg,#0d0800,#060412)}
 .rm-art-frame{width:100px;height:100px;border-radius:16px;border:2px solid rgba(255,209,102,.5);background:linear-gradient(135deg,rgba(255,209,102,.08),rgba(139,92,246,.12));display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 0 40px rgba(255,209,102,.25),inset 0 0 30px rgba(255,209,102,.05);animation:artGlow 3s ease-in-out infinite}
 @keyframes artGlow{0%,100%{box-shadow:0 0 40px rgba(255,209,102,.25),inset 0 0 30px rgba(255,209,102,.05)}50%{box-shadow:0 0 70px rgba(255,209,102,.5),inset 0 0 50px rgba(255,209,102,.12)}}
+.rm-prompt-grid{display:flex;gap:10px;justify-content:center;margin-bottom:4px}
+.rm-prompt-bubble{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:72px;height:72px;border-radius:14px;font-size:24px;border:1.5px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);animation:promptBubblePop 3s ease-in-out infinite}
+.rm-prompt-bubble span{font-size:10px;font-weight:700;letter-spacing:.05em;opacity:.85}
+.rm-pb-text{background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(139,92,246,.15));border-color:rgba(139,92,246,.4);color:#c4b5fd;animation-delay:0s}
+.rm-pb-img{background:linear-gradient(135deg,rgba(236,72,153,.2),rgba(251,146,60,.15));border-color:rgba(251,146,60,.4);color:#fcd34d;animation-delay:.6s}
+.rm-pb-vid{background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(34,211,238,.12));border-color:rgba(34,211,238,.4);color:#67e8f9;animation-delay:1.2s}
+@keyframes promptBubblePop{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(-5px);opacity:1}}
 .rm-sparkles{position:absolute;inset:0;z-index:1;pointer-events:none}
 .rm-sparkles i{position:absolute;font-style:normal;font-size:14px;opacity:0;animation:sparkle 2.5s ease-in-out infinite}
 .rm-sparkles i::before{content:"✦"}
@@ -644,3 +651,43 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
   }
 }
 
+
+
+/* Premium section alignment fix */
+.premium-features,
+.premium-list{
+display:flex;
+flex-direction:column;
+gap:12px;
+align-items:flex-start;
+}
+
+.premium-features div,
+.premium-list div,
+.premium-features li{
+display:flex;
+align-items:center;
+gap:10px;
+width:100%;
+padding:10px 14px;
+border-radius:14px;
+background:rgba(255,255,255,0.04);
+}
+
+.product-card img{
+object-fit:cover;
+}
+
+
+/* ===== ACCORDION MOBIL ===== */
+.acc-arrow{display:none;font-size:20px;color:var(--cyan);transition:transform .3s;flex-shrink:0;margin-left:auto;padding-left:12px}
+.acc-body{display:block}
+@media(max-width:900px){
+  .acc-head{cursor:pointer;position:relative;padding-right:36px;user-select:none;border-radius:18px;transition:background .2s}
+  .acc-head:active{background:rgba(255,255,255,.04)}
+  .acc-arrow{display:block}
+  .acc-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}
+  .acc-body.open{max-height:9999px}
+  .acc-head[aria-expanded="true"] .acc-arrow{transform:rotate(180deg)}
+  .acc-desc{display:none}
+}
