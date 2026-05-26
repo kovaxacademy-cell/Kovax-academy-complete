@@ -1106,3 +1106,173 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
 /* ============================================================
    FIN BUNDLE PATCH
    ============================================================ */
+
+
+/* ============================================================
+   KOVAX CART BTN FIX — PATCH v4
+   Pwoblèm: cart bouton kouvri logo, li mal plase
+   Solisyon: topbar flex-row pwòp, cart adwat, logo agòch
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  /* Topbar — yon sèl ranje: logo | cart */
+  .topbar {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
+    padding: 10px 14px 8px !important;
+    gap: 0 !important;
+    background: rgba(2,5,16,0.97) !important;
+    backdrop-filter: blur(24px) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.09) !important;
+  }
+
+  /* Ranje 1: brand + cart sou menm liy */
+  .topbar-row1,
+  .topbar > .brand,
+  .topbar > a.brand {
+    order: 1 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* Brand — agòch */
+  .brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    text-decoration: none !important;
+    order: 1 !important;
+    position: static !important; /* retire absolute si te gen */
+  }
+
+  .brand img {
+    width: 38px !important;
+    height: 38px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .brand b {
+    font-size: 15px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Tools — adwat, pozisyon nòmal (pa absolute!) */
+  .tools {
+    position: static !important;   /* <-- retire absolute ki te kouvri logo */
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
+    order: 2 !important;
+    margin-left: auto !important;
+  }
+
+  /* Cart bouton */
+  .cartBtn {
+    position: static !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 12px !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+    font-size: 18px !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+  }
+
+  /* Badge nimewo (0, 1, 2…) sou cart */
+  .cartBtn .badge,
+  .cartBadge,
+  [class*="cart-badge"],
+  [class*="cartCount"] {
+    position: absolute !important;
+    top: -6px !important;
+    right: -6px !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    border-radius: 999px !important;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+    padding: 0 4px !important;
+    pointer-events: none !important;
+  }
+
+  /* Asire cartBtn wrapper gen position relative */
+  .tools > *:has(.badge),
+  .tools > .cartWrap {
+    position: relative !important;
+  }
+
+  /* Search + premiumTop — kache */
+  .search,
+  .premiumTop {
+    display: none !important;
+  }
+
+  /* Ranje 2: Nav scroll horizontal */
+  .nav {
+    order: 3 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 6px !important;
+    padding: 2px 0 4px !important;
+  }
+
+  .nav::-webkit-scrollbar { display: none !important; }
+
+  .nav a {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    padding: 7px 13px !important;
+    border-radius: 999px !important;
+    border: 1.5px solid rgba(255,255,255,0.12) !important;
+    background: rgba(255,255,255,0.06) !important;
+    color: rgba(255,255,255,0.7) !important;
+    text-decoration: none !important;
+  }
+
+  .nav a.active {
+    background: linear-gradient(135deg,#2563ff,#27c8ff) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    box-shadow: 0 0 14px rgba(39,200,255,0.35) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar { padding: 8px 12px 6px !important; }
+  .brand img { width: 34px !important; height: 34px !important; }
+  .brand b { font-size: 14px !important; }
+  .cartBtn { width: 38px !important; height: 38px !important; }
+  .nav a { font-size: 11px !important; padding: 6px 10px !important; }
+}
+
+/* ============================================================
+   FIN CART FIX v4
+   ============================================================ */
