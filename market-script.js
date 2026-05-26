@@ -594,3 +594,16 @@ document.addEventListener('keydown', function(e){
     if(typeof closeMobileNav === 'function') closeMobileNav();
   }
 });
+
+
+
+// ✅ Retire loading screen market la apre paj la fin pare
+window.addEventListener('load', function(){
+  const loader = document.getElementById('kovaxLoader');
+  if(loader){
+    setTimeout(function(){
+      loader.classList.add('hide');
+      setTimeout(function(){ loader.remove(); }, 650);
+    }, 650);
+  }
+});
