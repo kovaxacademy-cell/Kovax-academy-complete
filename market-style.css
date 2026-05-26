@@ -1179,3 +1179,501 @@ object-fit:cover;
   .bundle-title{font-size:23px !important;}
   .bundle-new-price{font-size:44px !important;}
 }
+
+
+
+/* =========================
+   ✅ KOVAX FINAL MOBILE FIX
+   Pa retire okenn section: Liv, Fòmasyon, Prompts, Premium rete.
+   ========================= */
+@media(max-width:768px){
+
+  html,body{
+    max-width:100% !important;
+    overflow-x:hidden !important;
+  }
+
+  /* Header: logo + KOVAX ACADEMY pa koupe */
+  .topbar{
+    position:sticky !important;
+    top:0 !important;
+    z-index:9999 !important;
+    height:78px !important;
+    min-height:78px !important;
+    padding:0 14px !important;
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:8px !important;
+    background:rgba(3,6,17,.98) !important;
+    border-bottom:1px solid rgba(255,255,255,.08) !important;
+    overflow:visible !important;
+  }
+
+  .brand{
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    flex:1 1 auto !important;
+    min-width:0 !important;
+    max-width:calc(100vw - 136px) !important;
+    overflow:visible !important;
+  }
+
+  .brand img{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    width:38px !important;
+    height:38px !important;
+    min-width:38px !important;
+    object-fit:contain !important;
+    flex:0 0 38px !important;
+  }
+
+  .brand b{
+    display:block !important;
+    white-space:nowrap !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+    font-size:21px !important;
+    line-height:1 !important;
+    letter-spacing:.035em !important;
+    max-width:none !important;
+  }
+
+  .brand b span{
+    display:inline !important;
+  }
+
+  .tools{
+    width:auto !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    margin-left:auto !important;
+    position:relative !important;
+  }
+
+  .tools .search{
+    display:none !important;
+  }
+
+  .premiumTop{
+    display:none !important;
+  }
+
+  .cartBtn,
+  .hamburger,
+  #hamburgerBtn{
+    width:48px !important;
+    height:48px !important;
+    min-width:48px !important;
+    min-height:48px !important;
+    padding:0 !important;
+    border-radius:16px !important;
+    display:grid !important;
+    place-items:center !important;
+    flex:0 0 48px !important;
+  }
+
+  .cartBtn{
+    font-size:20px !important;
+    background:linear-gradient(135deg,var(--blue),var(--cyan)) !important;
+    border:1px solid rgba(255,255,255,.15) !important;
+  }
+
+  .cartBtn em{
+    right:-7px !important;
+    top:-8px !important;
+    min-width:21px !important;
+    height:21px !important;
+    font-size:11px !important;
+  }
+
+  .hamburger span{
+    width:24px !important;
+    height:3px !important;
+    border-radius:99px !important;
+  }
+
+  /* Menu 3 ba: section yo parèt lè ouvri */
+  .nav{
+    position:fixed !important;
+    top:78px !important;
+    left:12px !important;
+    right:12px !important;
+    z-index:9998 !important;
+    display:none !important;
+    flex-direction:column !important;
+    gap:10px !important;
+    padding:14px !important;
+    background:rgba(8,13,32,.98) !important;
+    border:1px solid rgba(255,255,255,.14) !important;
+    border-radius:22px !important;
+    box-shadow:0 22px 60px rgba(0,0,0,.55) !important;
+    backdrop-filter:blur(22px) !important;
+  }
+
+  .nav.show{
+    display:flex !important;
+  }
+
+  .nav a{
+    display:flex !important;
+    width:100% !important;
+    justify-content:flex-start !important;
+    padding:14px 16px !important;
+    font-size:16px !important;
+    border-radius:16px !important;
+    background:rgba(255,255,255,.055) !important;
+    color:#fff !important;
+    border:1px solid rgba(255,255,255,.08) !important;
+  }
+
+  .nav a.active{
+    background:linear-gradient(135deg,var(--blue),var(--cyan)) !important;
+    border-color:transparent !important;
+  }
+
+  .nav-mobile-overlay.show{
+    display:block !important;
+    position:fixed !important;
+    inset:0 !important;
+    z-index:9997 !important;
+    background:rgba(0,0,0,.35) !important;
+  }
+
+  /* Rechèch: pi ba, nòmal, pa kache logo */
+  .mobile-search-wrap{
+    display:block !important;
+    width:100% !important;
+    padding:14px 22px 20px !important;
+    margin:0 !important;
+    position:relative !important;
+    z-index:2 !important;
+  }
+
+  .mobile-search-wrap .mobile-search{
+    width:100% !important;
+    height:46px !important;
+    min-height:46px !important;
+    border-radius:16px !important;
+    border:1px solid rgba(39,200,255,.24) !important;
+    background:rgba(255,255,255,.055) !important;
+    color:#fff !important;
+    outline:none !important;
+    padding:0 16px 0 42px !important;
+    font-size:14px !important;
+    font-weight:700 !important;
+    letter-spacing:0 !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 28px rgba(0,0,0,.18) !important;
+  }
+
+  .mobile-search-wrap:before{
+    content:"🔎" !important;
+    position:absolute !important;
+    left:36px !important;
+    top:24px !important;
+    font-size:16px !important;
+    opacity:.7 !important;
+    pointer-events:none !important;
+  }
+
+  .mobile-search-wrap .mobile-search::placeholder{
+    color:rgba(225,232,255,.62) !important;
+  }
+
+  /* Hero pa twò gwo */
+  .hero{
+    min-height:auto !important;
+    display:block !important;
+    padding:20px 22px 14px !important;
+  }
+
+  .hero .tag,
+  .tag{
+    font-size:10px !important;
+    padding:7px 12px !important;
+    margin-bottom:16px !important;
+    max-width:100% !important;
+  }
+
+  h1{
+    font-size:clamp(44px,16vw,64px) !important;
+    line-height:.92 !important;
+    margin:12px 0 16px !important;
+    letter-spacing:-.06em !important;
+  }
+
+  .lead{
+    font-size:17px !important;
+    line-height:1.6 !important;
+    margin-bottom:22px !important;
+  }
+
+  .heroBtns{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+
+  .btn{
+    width:100% !important;
+    min-height:56px !important;
+    padding:14px 18px !important;
+    border-radius:18px !important;
+    font-size:16px !important;
+  }
+
+  .trust{
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+    margin-top:20px !important;
+  }
+
+  /* Tout section yo rete vizib sou mobile */
+  #products,
+  #livres,
+  #formations,
+  #prompts,
+  #premium{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+
+  .cats{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:16px !important;
+    padding:22px !important;
+  }
+
+  .catCard{
+    min-height:auto !important;
+    border-radius:24px !important;
+  }
+
+  .gridProducts,
+  .productsGrid,
+  .productGrid,
+  .cards,
+  .catalogGrid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:18px !important;
+  }
+
+  .product{
+    width:100% !important;
+    max-width:calc(100vw - 44px) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    border-radius:24px !important;
+    min-height:auto !important;
+  }
+
+  .media{
+    height:205px !important;
+    min-height:205px !important;
+    border-radius:22px 22px 0 0 !important;
+  }
+
+  .product h3{
+    font-size:22px !important;
+  }
+
+  .product p{
+    font-size:14px !important;
+  }
+
+  .body{
+    padding:18px !important;
+  }
+
+  .price{
+    font-size:29px !important;
+  }
+
+  .add{
+    padding:11px 13px !important;
+    font-size:13px !important;
+  }
+
+  /* Pake Espesyal / bundle: vrè rediksyon iPhone */
+  .bundle{
+    display:block !important;
+    width:calc(100vw - 32px) !important;
+    max-width:calc(100vw - 32px) !important;
+    margin:18px auto 24px !important;
+    padding:0 !important;
+    border-radius:24px !important;
+    overflow:hidden !important;
+    transform:none !important;
+  }
+
+  .bundle-inner{
+    width:100% !important;
+    max-width:100% !important;
+    padding:20px 14px !important;
+    border-radius:24px !important;
+  }
+
+  .bundle-badge{
+    font-size:10px !important;
+    padding:8px 14px !important;
+    margin:0 auto 18px !important;
+    display:flex !important;
+    width:max-content !important;
+    max-width:92% !important;
+  }
+
+  .bundle-main{
+    display:block !important;
+  }
+
+  .bundle-books-visual{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    flex-wrap:nowrap !important;
+    gap:6px !important;
+    margin-bottom:18px !important;
+    transform:scale(.82) !important;
+    transform-origin:center top !important;
+  }
+
+  .bk-card{
+    width:126px !important;
+    min-width:126px !important;
+    height:auto !important;
+    min-height:238px !important;
+    padding:14px 8px !important;
+    border-radius:22px !important;
+  }
+
+  .bk-card h4{
+    font-size:16px !important;
+    line-height:1.05 !important;
+  }
+
+  .bk-card .bk-emoji{
+    font-size:42px !important;
+  }
+
+  .bk-tag{
+    font-size:10px !important;
+    padding:5px 8px !important;
+  }
+
+  .bundle-plus{
+    font-size:24px !important;
+    min-width:22px !important;
+  }
+
+  .bundle-info{
+    gap:12px !important;
+    text-align:left !important;
+  }
+
+  .bundle-title{
+    font-size:27px !important;
+    line-height:1.06 !important;
+    letter-spacing:-.04em !important;
+  }
+
+  .bundle-save-badge{
+    font-size:22px !important;
+  }
+
+  .bundle-sub{
+    font-size:17px !important;
+    line-height:1.45 !important;
+  }
+
+  .bundle-old-price{
+    font-size:13px !important;
+  }
+
+  .bundle-new-price{
+    font-size:56px !important;
+    line-height:.9 !important;
+  }
+
+  .bundle-save-line{
+    font-size:14px !important;
+  }
+
+  .bundle-btn{
+    min-height:54px !important;
+    padding:14px 16px !important;
+    border-radius:18px !important;
+    font-size:16px !important;
+  }
+
+  .bundle-guarantee{
+    font-size:11px !important;
+    line-height:1.35 !important;
+  }
+
+  /* Charyo: ka fèmen ak X, overlay, oswa bouton charyo a */
+  .drawer{
+    z-index:10000 !important;
+  }
+
+  .cartPanel{
+    width:100% !important;
+    max-width:100% !important;
+    left:0 !important;
+    right:0 !important;
+    top:auto !important;
+    bottom:0 !important;
+    height:88vh !important;
+    border-radius:26px 26px 0 0 !important;
+    padding:20px !important;
+  }
+
+  .close{
+    position:sticky !important;
+    top:0 !important;
+    z-index:2 !important;
+  }
+}
+
+@media(max-width:390px){
+  .brand b{
+    font-size:19px !important;
+    letter-spacing:.02em !important;
+  }
+
+  .brand img{
+    width:34px !important;
+    height:34px !important;
+    min-width:34px !important;
+  }
+
+  .cartBtn,
+  .hamburger,
+  #hamburgerBtn{
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+  }
+
+  .mobile-search-wrap{
+    padding-left:18px !important;
+    padding-right:18px !important;
+  }
+
+  .bundle-books-visual{
+    transform:scale(.76) !important;
+  }
+
+  .bundle-title{
+    font-size:24px !important;
+  }
+}
