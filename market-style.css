@@ -873,3 +873,123 @@ object-fit:cover;
   .bundle-save-badge{font-size:23px !important;}
   .bundle-new-price{font-size:52px !important;}
 }
+
+
+
+/* ✅ Dernye ranje mobile: search pro + pwodwi pi piti sou telefòn */
+.mobile-search-wrap{display:none}
+
+@media(max-width:768px){
+  .topbar{
+    gap:10px !important;
+    padding:0 18px !important;
+  }
+
+  .tools{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+    margin-left:auto !important;
+  }
+
+  .tools .search{
+    display:none !important;
+  }
+
+  .mobile-search-wrap{
+    display:block !important;
+    position:relative !important;
+    z-index:2 !important;
+    width:100% !important;
+    padding:0 28px 18px !important;
+    margin-top:-8px !important;
+  }
+
+  .mobile-search-wrap .mobile-search{
+    width:100% !important;
+    height:56px !important;
+    border-radius:18px !important;
+    border:1px solid rgba(39,200,255,.28) !important;
+    background:rgba(255,255,255,.055) !important;
+    color:#fff !important;
+    outline:none !important;
+    padding:0 18px 0 48px !important;
+    font:800 15px Outfit,system-ui,sans-serif !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 14px 38px rgba(0,0,0,.22) !important;
+    backdrop-filter:blur(18px) !important;
+  }
+
+  .mobile-search-wrap:before{
+    content:"🔎" !important;
+    position:absolute !important;
+    left:45px !important;
+    top:13px !important;
+    font-size:20px !important;
+    opacity:.85 !important;
+    pointer-events:none !important;
+  }
+
+  .mobile-search-wrap .mobile-search::placeholder{
+    color:rgba(225,232,255,.56) !important;
+  }
+
+  .hero{
+    padding-top:38px !important;
+  }
+
+  .special-card,
+  .bundle-card,
+  .package-card,
+  .deal-card{
+    max-width:92vw !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    padding:28px 22px !important;
+    border-radius:28px !important;
+  }
+
+  .special-card h2,
+  .bundle-card h2,
+  .package-card h2,
+  .deal-card h2{
+    font-size:clamp(28px,8vw,40px) !important;
+    line-height:1.08 !important;
+  }
+
+  .special-card .price,
+  .bundle-card .price,
+  .package-card .price,
+  .deal-card .price,
+  .price-big{
+    font-size:clamp(48px,14vw,72px) !important;
+    line-height:1 !important;
+  }
+
+  .product-card,
+  .card{
+    max-width:92vw !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  .products,
+  .product-grid,
+  .grid-products{
+    grid-template-columns:1fr !important;
+    gap:18px !important;
+  }
+
+  .product-card img,
+  .card img{
+    max-height:240px !important;
+    object-fit:cover !important;
+  }
+}
+
+@media(max-width:430px){
+  .brand b{font-size:24px !important; letter-spacing:.04em !important;}
+  .brand img{width:54px !important;height:54px !important;}
+  .cartBtn{width:64px !important;height:64px !important;border-radius:18px !important;padding:0 !important;}
+  .menuBtn,.hamburger,.nav-toggle{width:64px !important;height:64px !important;border-radius:18px !important;}
+  .mobile-search-wrap{padding-left:28px !important;padding-right:28px !important;}
+}
