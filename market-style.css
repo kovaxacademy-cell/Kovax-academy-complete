@@ -357,7 +357,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
 #paypal-button-container{position:relative;z-index:4;min-height:48px;}
 
 
-/* ===== MOBILE MARKET FIX ===== */
+/* ===== AMAZON-STYLE MOBILE MARKET FIX ===== */
 @media (max-width: 768px){
 
   body{
@@ -365,25 +365,22 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
     overflow-x:hidden;
   }
 
-  /* --- TOPBAR: flex column so nav sits below brand row --- */
   .topbar{
     position:sticky;
     top:0;
     z-index:999;
     height:auto;
     min-height:auto;
-    padding:10px 12px 8px;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+    padding:10px 12px 12px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
     background:rgba(3,6,17,.97);
     border-bottom:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(26px);
   }
 
-  /* top row: logo + tools side by side */
   .brand{
-    flex-shrink:0;
+    grid-column:1 / 2;
     justify-content:flex-start;
     width:auto;
   }
@@ -399,6 +396,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
   }
 
   .tools{
+    grid-column:1 / 3;
     width:100%;
     display:flex;
     flex-direction:row;
@@ -448,46 +446,31 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
     display:none !important;
   }
 
-  /* --- NAV: horizontal pill strip that scrolls --- */
   .nav{
-    order:unset;
-    grid-column:unset;
+    grid-column:1 / 3;
+    order:3;
     width:100%;
-    display:flex !important;
-    flex-direction:row !important;
-    flex-wrap:nowrap !important;
-    gap:7px;
+    display:flex;
+    gap:8px;
     overflow-x:auto;
-    overflow-y:visible;
-    padding:2px 2px 6px;
+    padding:2px 0 0;
     scrollbar-width:none;
-    -webkit-overflow-scrolling:touch;
-    /* make sure it does NOT stretch to full column height */
-    align-items:center;
   }
 
   .nav::-webkit-scrollbar{display:none}
 
   .nav a{
-    flex:0 0 auto !important;
-    display:inline-flex !important;
-    align-items:center;
-    white-space:nowrap;
+    flex:0 0 auto;
     color:#eaf6ff;
     background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.12);
     border-radius:999px;
-    padding:7px 14px;
+    padding:8px 13px;
     font-size:13px;
     font-weight:800;
-    line-height:1;
-    width:auto !important;
-    min-width:unset !important;
-    max-width:unset !important;
   }
 
-  .nav a.active,
-  .nav a[aria-current]{
+  .nav a.active{
     background:linear-gradient(135deg,#2563ff,#27c8ff);
     color:#fff;
     border-color:transparent;
@@ -634,7 +617,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
 
 @media (max-width: 420px){
   .topbar{
-    padding:8px 10px 8px;
+    padding:8px 10px 10px;
   }
 
   .brand img{
@@ -661,70 +644,434 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
   }
 }
 
-/* ===== EXTRA MOBILE POLISH ===== */
-@media (max-width: 768px){
 
-  /* Fix chat bubbles overflowing book cards */
-  .rm-card,
-  [class*="book-card"],
-  [class*="bookCard"],
-  [class*="liv-card"]{
-    overflow:hidden !important;
-    position:relative !important;
+
+/* ===================================================
+   KOVAX MOBILE PATCH — KOREKSYON TELEFÒN PWOFESYONÈL
+   =================================================== */
+
+/* 1. gridProducts — kolòn 1 sou telefòn */
+@media (max-width: 768px) {
+  .gridProducts {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 0 !important;
   }
 
-  /* Chat bubbles inside cards stay contained */
-  [class*="chat"],
-  [class*="bubble"],
-  [class*="msg"]{
-    max-width:calc(100% - 16px) !important;
-    word-break:break-word !important;
+  /* 2. Rich media panel — pa depase */
+  .rich-media {
+    height: 200px !important;
+    min-height: 200px !important;
+    max-height: 200px !important;
+    border-radius: 16px 16px 0 0 !important;
   }
 
-  /* Bundle / pack section */
-  [class*="bundle"],
-  [class*="pack"],
-  [class*="combo"],
-  [class*="pake"]{
-    padding:20px 14px !important;
-    border-radius:20px !important;
+  /* 3. Kart pwodwi — pran tout lajè */
+  .product {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
   }
 
-  /* Price display */
-  [class*="price"],
-  [class*="pri"]{
-    font-size:clamp(28px, 8vw, 42px) !important;
+  /* 4. Premium card */
+  .premium-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
   }
 
-  /* Savings badge */
-  [class*="save"],
-  [class*="ekonomize"]{
-    font-size:14px !important;
+  /* 5. Wallet buttons — 2x2 pa 4 nan yon ranje */
+  .market-wallet-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
   }
 
-  /* Strikethrough original price */
-  s, del{
-    font-size:14px !important;
+  /* 6. Cart panel — ouvri kòm bottom sheet */
+  .cartPanel {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 24px 24px 0 0 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
   }
 
-  /* Feature list items (Telechajman, Peman, Akse) */
-  [class*="feature"],
-  [class*="benefit"],
-  [class*="list-item"]{
-    padding:14px 16px !important;
-    font-size:14px !important;
+  /* 7. Bundle — stack vertical */
+  .bundle-main {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
   }
 
-  /* Section headings */
-  h2{
-    font-size:clamp(20px, 5.5vw, 28px) !important;
-    line-height:1.2 !important;
+  .bundle-inner {
+    padding: 20px 16px !important;
+    border-radius: 24px !important;
   }
 
-  /* Make sure no horizontal scroll on the page */
-  section, .section, main, .container{
-    max-width:100vw !important;
-    overflow-x:hidden !important;
+  .bundle-new-price {
+    font-size: 48px !important;
+  }
+
+  /* 8. MobileQuickNav — toujou parèt sou mobile */
+  .mobileQuickNav {
+    display: grid !important;
+  }
+
+  /* 9. Hero section */
+  .hero {
+    padding: 28px 16px 20px !important;
+  }
+
+  /* 10. Section padding */
+  section {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* 11. Benefits row */
+  .benefits {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    padding: 0 14px !important;
+    margin: 20px 0 !important;
+  }
+
+  .benefit {
+    border-radius: 14px !important;
+    padding: 12px !important;
+    font-size: 12px !important;
+  }
+
+  /* 12. Section header */
+  .head {
+    padding: 0 0 16px !important;
+  }
+
+  .head h2 {
+    font-size: 26px !important;
+  }
+
+  /* 13. Pills nan kart */
+  .pills {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  /* 14. Price row */
+  .priceRow {
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+
+  /* 15. Body text nan kart */
+  .product .body p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  /* 16. Add to cart button */
+  .add {
+    width: 100% !important;
+    padding: 12px !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
+  }
+
+  /* 17. Konfli topbar — yon sèl règ definitif */
+  .topbar {
+    height: auto !important;
+    min-height: 60px !important;
+    padding: 10px 14px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 999 !important;
+  }
+
+  /* 18. Brand sou mobile */
+  .brand {
+    flex: 1 !important;
+  }
+
+  .brand b {
+    font-size: 15px !important;
+  }
+
+  .brand img {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  /* 19. Nav scroll horizontal */
+  .nav {
+    order: 3 !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    padding-bottom: 4px !important;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* 20. Cacher search bar — espas */
+  .search {
+    display: none !important;
   }
 }
 
+/* Tou piti — 420px ak anba */
+@media (max-width: 420px) {
+  .gridProducts {
+    grid-template-columns: 1fr !important;
+  }
+
+  .bundle-books-visual {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .bk-card {
+    width: 90% !important;
+    max-width: 280px !important;
+  }
+
+  h1 {
+    font-size: 34px !important;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+
+/* ============================================================
+   KOVAX BUNDLE MOBILE — PATCH PWOFESYONÈL v2
+   Korije: bk-card twò gwo, bundle layout, espas, proporsiyon
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  /* === BUNDLE WRAPPER === */
+  .bundle {
+    margin: 16px 0 !important;
+    padding: 0 !important;
+  }
+
+  .bundle-inner {
+    border-radius: 22px !important;
+    padding: 20px 16px 24px !important;
+    border-width: 1px !important;
+  }
+
+  .bundle-badge {
+    font-size: 10px !important;
+    padding: 6px 14px !important;
+    margin-bottom: 18px !important;
+  }
+
+  /* === STACK VERTICAL sou mobile === */
+  .bundle-main {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* === VISUAL AREA: 2 liv akote — KONPAKT === */
+  .bundle-books-visual {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  /* === BK-CARD: redwi drastikman sou mobile === */
+  .bk-card {
+    width: 130px !important;
+    max-width: 130px !important;
+    min-width: 110px !important;
+    flex-shrink: 0 !important;
+    padding: 12px 10px 10px !important;
+    border-radius: 16px !important;
+    gap: 5px !important;
+  }
+
+  .bk-card:hover {
+    transform: none !important;
+  }
+
+  /* Top tag (LIV 1 / LIV 2) */
+  .bk-top-tag {
+    font-size: 9px !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  /* Emoji icon */
+  .bk-icon {
+    font-size: 30px !important;
+    animation: none !important;
+  }
+
+  /* Titre liv */
+  .bk-title {
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Chips (Ekri, Pale...) */
+  .bk-chips {
+    gap: 3px !important;
+  }
+
+  .bk-chips span {
+    font-size: 8px !important;
+    padding: 2px 5px !important;
+  }
+
+  /* Pri */
+  .bk-price-tag {
+    font-size: 14px !important;
+    margin-top: 0 !important;
+  }
+
+  /* Speech bubbles — pi piti */
+  .bk-bubbles span {
+    font-size: 7px !important;
+    padding: 2px 5px !important;
+  }
+
+  /* Plus sign entre 2 liv */
+  .bundle-plus {
+    font-size: 22px !important;
+    align-self: center !important;
+    flex-shrink: 0 !important;
+    margin: 0 2px !important;
+  }
+
+  /* === INFO SIDE === */
+  .bundle-info {
+    gap: 12px !important;
+    text-align: left !important;
+  }
+
+  .bundle-title {
+    font-size: 22px !important;
+    line-height: 1.1 !important;
+  }
+
+  .bundle-save-badge {
+    font-size: 18px !important;
+  }
+
+  .bundle-sub {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  .bundle-price-block {
+    gap: 2px !important;
+  }
+
+  .bundle-old-price {
+    font-size: 14px !important;
+    gap: 6px !important;
+  }
+
+  .bundle-new-price {
+    font-size: 44px !important;
+    letter-spacing: -0.03em !important;
+    text-shadow: 0 0 28px rgba(39,200,255,0.35) !important;
+  }
+
+  .bundle-save-line {
+    font-size: 13px !important;
+  }
+
+  /* === BUNDLE BUTTON === */
+  .bundle-btn {
+    padding: 15px 20px !important;
+    border-radius: 14px !important;
+    font-size: 14px !important;
+    letter-spacing: 0.01em !important;
+    box-shadow: 0 8px 28px rgba(39,200,255,0.28) !important;
+  }
+
+  .bundle-guarantee {
+    font-size: 10px !important;
+  }
+}
+
+/* === EKSTRA TI EKRAN (≤420px) === */
+@media (max-width: 420px) {
+
+  .bundle-inner {
+    padding: 16px 12px 20px !important;
+    border-radius: 18px !important;
+  }
+
+  .bk-card {
+    width: 110px !important;
+    max-width: 110px !important;
+    min-width: 95px !important;
+    padding: 10px 8px 8px !important;
+    border-radius: 14px !important;
+    gap: 4px !important;
+  }
+
+  .bk-icon {
+    font-size: 26px !important;
+  }
+
+  .bk-title {
+    font-size: 10px !important;
+  }
+
+  .bk-price-tag {
+    font-size: 12px !important;
+  }
+
+  .bk-chips span {
+    font-size: 7px !important;
+    padding: 2px 4px !important;
+  }
+
+  .bundle-plus {
+    font-size: 18px !important;
+  }
+
+  .bundle-new-price {
+    font-size: 38px !important;
+  }
+
+  .bundle-title {
+    font-size: 20px !important;
+  }
+
+  .bundle-btn {
+    padding: 13px 16px !important;
+    font-size: 13px !important;
+    border-radius: 12px !important;
+  }
+}
+
+/* ============================================================
+   FIN BUNDLE MOBILE PATCH
+   ============================================================ */
