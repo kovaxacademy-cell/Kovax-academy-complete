@@ -21,6 +21,9 @@
   <nav class="nav" id="mainNav"><a href="index.html" id="nav-home">Akèy</a><a href="market.html" id="nav-market" class="active">Market</a><a href="#livres" id="nav-liv" class="nav-anchor" onclick="closeMobileNav()">Liv</a><a href="#fòmasyon" id="nav-form" class="nav-anchor" onclick="closeMobileNav()">Fòmasyon</a><a href="#prompts" id="nav-prompt" class="nav-anchor" onclick="closeMobileNav()">Prompts</a><a href="#premium" id="nav-premium" class="nav-anchor" onclick="closeMobileNav()">Premium</a></nav>
   <div class="tools"><div class="search"><span>⌕</span><input id="search" oninput="clearTimeout(this._t);this._t=setTimeout(render,180)" placeholder="Rechèch pwodwi..."></div><button class="cartBtn" onclick="openCart()">🛒<em id="cartCount">0</em></button><a class="premiumTop" href="#premium"><span class="pt-icon">♛</span><span class="pt-divider"></span><span class="pt-label"><span class="pt-sub">Aksè konplè</span><span class="pt-main">Premium</span></span></a><button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Menu"><span></span><span></span><span></span></button></div>
 </header>
+<div class="mobile-search-wrap">
+  <input class="mobile-search" id="mobileSearchInput" type="search" placeholder="Rechèch pwodwi..." oninput="syncMobileSearch(this.value)">
+</div>
 <main>
 <section class="hero" id="market">
   <div>
