@@ -357,7 +357,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
 #paypal-button-container{position:relative;z-index:4;min-height:48px;}
 
 
-/* ===== AMAZON-STYLE MOBILE MARKET FIX ===== */
+/* ===== MOBILE MARKET FIX ===== */
 @media (max-width: 768px){
 
   body{
@@ -365,22 +365,25 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
     overflow-x:hidden;
   }
 
+  /* --- TOPBAR: flex column so nav sits below brand row --- */
   .topbar{
     position:sticky;
     top:0;
     z-index:999;
     height:auto;
     min-height:auto;
-    padding:10px 12px 12px;
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:10px;
+    padding:10px 12px 8px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
     background:rgba(3,6,17,.97);
     border-bottom:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(26px);
   }
 
+  /* top row: logo + tools side by side */
   .brand{
-    grid-column:1 / 2;
+    flex-shrink:0;
     justify-content:flex-start;
     width:auto;
   }
@@ -396,7 +399,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
   }
 
   .tools{
-    grid-column:1 / 3;
     width:100%;
     display:flex;
     flex-direction:row;
@@ -446,31 +448,46 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
     display:none !important;
   }
 
+  /* --- NAV: horizontal pill strip that scrolls --- */
   .nav{
-    grid-column:1 / 3;
-    order:3;
+    order:unset;
+    grid-column:unset;
     width:100%;
-    display:flex;
-    gap:8px;
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:nowrap !important;
+    gap:7px;
     overflow-x:auto;
-    padding:2px 0 0;
+    overflow-y:visible;
+    padding:2px 2px 6px;
     scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    /* make sure it does NOT stretch to full column height */
+    align-items:center;
   }
 
   .nav::-webkit-scrollbar{display:none}
 
   .nav a{
-    flex:0 0 auto;
+    flex:0 0 auto !important;
+    display:inline-flex !important;
+    align-items:center;
+    white-space:nowrap;
     color:#eaf6ff;
     background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.13);
     border-radius:999px;
-    padding:8px 13px;
+    padding:7px 14px;
     font-size:13px;
     font-weight:800;
+    line-height:1;
+    width:auto !important;
+    min-width:unset !important;
+    max-width:unset !important;
   }
 
-  .nav a.active{
+  .nav a.active,
+  .nav a[aria-current]{
     background:linear-gradient(135deg,#2563ff,#27c8ff);
     color:#fff;
     border-color:transparent;
@@ -617,7 +634,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
 
 @media (max-width: 420px){
   .topbar{
-    padding:8px 10px 10px;
+    padding:8px 10px 8px;
   }
 
   .brand img{
@@ -644,219 +661,70 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
   }
 }
 
+/* ===== EXTRA MOBILE POLISH ===== */
+@media (max-width: 768px){
 
-
-/* ===================================================
-   KOVAX MOBILE PATCH — KOREKSYON TELEFÒN PWOFESYONÈL
-   =================================================== */
-
-/* 1. gridProducts — kolòn 1 sou telefòn */
-@media (max-width: 768px) {
-  .gridProducts {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-    padding: 0 !important;
+  /* Fix chat bubbles overflowing book cards */
+  .rm-card,
+  [class*="book-card"],
+  [class*="bookCard"],
+  [class*="liv-card"]{
+    overflow:hidden !important;
+    position:relative !important;
   }
 
-  /* 2. Rich media panel — pa depase */
-  .rich-media {
-    height: 200px !important;
-    min-height: 200px !important;
-    max-height: 200px !important;
-    border-radius: 16px 16px 0 0 !important;
+  /* Chat bubbles inside cards stay contained */
+  [class*="chat"],
+  [class*="bubble"],
+  [class*="msg"]{
+    max-width:calc(100% - 16px) !important;
+    word-break:break-word !important;
   }
 
-  /* 3. Kart pwodwi — pran tout lajè */
-  .product {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    border-radius: 20px !important;
+  /* Bundle / pack section */
+  [class*="bundle"],
+  [class*="pack"],
+  [class*="combo"],
+  [class*="pake"]{
+    padding:20px 14px !important;
+    border-radius:20px !important;
   }
 
-  /* 4. Premium card */
-  .premium-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    border-radius: 20px !important;
-    overflow: hidden !important;
+  /* Price display */
+  [class*="price"],
+  [class*="pri"]{
+    font-size:clamp(28px, 8vw, 42px) !important;
   }
 
-  /* 5. Wallet buttons — 2x2 pa 4 nan yon ranje */
-  .market-wallet-row {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 8px !important;
+  /* Savings badge */
+  [class*="save"],
+  [class*="ekonomize"]{
+    font-size:14px !important;
   }
 
-  /* 6. Cart panel — ouvri kòm bottom sheet */
-  .cartPanel {
-    width: 100% !important;
-    max-width: 100% !important;
-    border-radius: 24px 24px 0 0 !important;
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: auto !important;
-    max-height: 90vh !important;
-    overflow-y: auto !important;
+  /* Strikethrough original price */
+  s, del{
+    font-size:14px !important;
   }
 
-  /* 7. Bundle — stack vertical */
-  .bundle-main {
-    grid-template-columns: 1fr !important;
-    gap: 24px !important;
+  /* Feature list items (Telechajman, Peman, Akse) */
+  [class*="feature"],
+  [class*="benefit"],
+  [class*="list-item"]{
+    padding:14px 16px !important;
+    font-size:14px !important;
   }
 
-  .bundle-inner {
-    padding: 20px 16px !important;
-    border-radius: 24px !important;
+  /* Section headings */
+  h2{
+    font-size:clamp(20px, 5.5vw, 28px) !important;
+    line-height:1.2 !important;
   }
 
-  .bundle-new-price {
-    font-size: 48px !important;
-  }
-
-  /* 8. MobileQuickNav — toujou parèt sou mobile */
-  .mobileQuickNav {
-    display: grid !important;
-  }
-
-  /* 9. Hero section */
-  .hero {
-    padding: 28px 16px 20px !important;
-  }
-
-  /* 10. Section padding */
-  section {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-  }
-
-  /* 11. Benefits row */
-  .benefits {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-    padding: 0 14px !important;
-    margin: 20px 0 !important;
-  }
-
-  .benefit {
-    border-radius: 14px !important;
-    padding: 12px !important;
-    font-size: 12px !important;
-  }
-
-  /* 12. Section header */
-  .head {
-    padding: 0 0 16px !important;
-  }
-
-  .head h2 {
-    font-size: 26px !important;
-  }
-
-  /* 13. Pills nan kart */
-  .pills {
-    flex-wrap: wrap !important;
-    gap: 6px !important;
-  }
-
-  /* 14. Price row */
-  .priceRow {
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-  }
-
-  /* 15. Body text nan kart */
-  .product .body p {
-    font-size: 13px !important;
-    line-height: 1.5 !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 3 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-  }
-
-  /* 16. Add to cart button */
-  .add {
-    width: 100% !important;
-    padding: 12px !important;
-    border-radius: 12px !important;
-    font-size: 14px !important;
-  }
-
-  /* 17. Konfli topbar — yon sèl règ definitif */
-  .topbar {
-    height: auto !important;
-    min-height: 60px !important;
-    padding: 10px 14px !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    gap: 10px !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 999 !important;
-  }
-
-  /* 18. Brand sou mobile */
-  .brand {
-    flex: 1 !important;
-  }
-
-  .brand b {
-    font-size: 15px !important;
-  }
-
-  .brand img {
-    width: 42px !important;
-    height: 42px !important;
-  }
-
-  /* 19. Nav scroll horizontal */
-  .nav {
-    order: 3 !important;
-    width: 100% !important;
-    overflow-x: auto !important;
-    scrollbar-width: none !important;
-    padding-bottom: 4px !important;
-  }
-
-  .nav::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  /* 20. Cacher search bar — espas */
-  .search {
-    display: none !important;
-  }
-}
-
-/* Tou piti — 420px ak anba */
-@media (max-width: 420px) {
-  .gridProducts {
-    grid-template-columns: 1fr !important;
-  }
-
-  .bundle-books-visual {
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-
-  .bk-card {
-    width: 90% !important;
-    max-width: 280px !important;
-  }
-
-  h1 {
-    font-size: 34px !important;
-  }
-
-  .benefits {
-    grid-template-columns: 1fr !important;
+  /* Make sure no horizontal scroll on the page */
+  section, .section, main, .container{
+    max-width:100vw !important;
+    overflow-x:hidden !important;
   }
 }
 
