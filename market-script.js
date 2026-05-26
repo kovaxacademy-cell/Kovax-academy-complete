@@ -497,3 +497,22 @@ render();
   onScroll();
 })();
 
+
+
+
+// ✅ Sync mobile search ak rechèch prensipal la san chanje fonksyon site la
+function syncMobileSearch(value){
+  const desktopSearch = document.querySelector('.search input');
+  if(desktopSearch){
+    desktopSearch.value = value;
+    desktopSearch.dispatchEvent(new Event('input', {bubbles:true}));
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const desktopSearch = document.querySelector('.search input');
+  const mobileSearch = document.getElementById('mobileSearchInput');
+  if(desktopSearch && mobileSearch){
+    mobileSearch.value = desktopSearch.value || '';
+    desktopSearch.addEventListener('input',()=>{ mobileSearch.value = desktopSearch.value || ''; });
+  }
+});
