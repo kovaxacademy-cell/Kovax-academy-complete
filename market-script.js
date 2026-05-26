@@ -2,17 +2,21 @@
 // Pou pwodwi reyèl, voye l via backend/env variable — pa hardcode l isit.
 const PAYPAL_CLIENT_ID="AYHMI8sH7vnVlOa8WDRSyH85V31GK_z7x8_NjjW7Dt2umkAgu2MSSGgLap1KEVcdil3-roUfIqVhctrZ";
 const products=[
-{id:'enfo',type:'book',title:'Enfòmatik',cat:'LIV PDF',price:2,img:'assets/book-real-informatique.jpg',desc:'Liv konplè ki kouvri baz enfòmatik, rezo, sekirite, ak konsèp AI. Referans esansyèl pou tout etidyan.',meta:['PDF','Enfòmatik','Telechaje'],Telechaje:'Telechaje/informatique-kovax-academy.pdf',badge:'BEST SELLER',people:false},
-{id:'anglè',type:'book',title:'Anglè Teknik',cat:'LIV PDF',price:2,img:'assets/book-real-english.jpg',desc:'Anglè Pwofesyonèl,Pratik pale & odyo-vizyèl, Seyans live 2h/semèn, Vokabilè, Sètifika Kovax ofisyè.',meta:['Pale','Ekri','Konprann'],Telechaje:'Telechaje/english-comic-book-kovax.pdf',badge:'NEW 2026',people:false},
-{id:'videyo AI',type:'video',title:'Videyo AI Viral',cat:'FÒMASYON VIDEYO',price:25,img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHgyPSIxIiB5MT0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiMxZDRlZDgiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzA2YjZkNCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzhiNWNmNiIvPjwvbGluZWFyR3JhZGllbnQ+PGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNDUiLz48L2ZpbHRlcj48L2RlZnM+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzAzMDcxMiIvPjxjaXJjbGUgY3g9IjE4MCIgY3k9IjE0MCIgcj0iMjQwIiBmaWxsPSIjMDZiNmQ0IiBvcGFjaXR5PSIuMzUiIGZpbHRlcj0idXJsKCNibHVyKSIvPjxjaXJjbGUgY3g9Ijk4MCIgY3k9IjYyMCIgcj0iMjgwIiBmaWxsPSIjOGI1Y2Y2IiBvcGFjaXR5PSIuMjgiIGZpbHRlcj0idXJsKCNibHVyKSIvPgo8ZyBvcGFjaXR5PSIuMTUiIHN0cm9rZT0iI2ZmZiI+PHBhdGggZD0iTTAgMTEwSDEyMDBNMCAyMjBIMTIwME0wIDMzMEgxMjAwTTAgNDQwSDEyMDBNMCA1NTBIMTIwME0wIDY2MEgxMjAwTTEyMCAwVjgwME0yNDAgMFY4MDBNMzYwIDBWODAwTTQ4MCAwVjgwME02MDAgMFY4MDBNNzIwIDBWODAwTTg0MCAwVjgwME05NjAgMFY4MDBNMTA4MCAwVjgwMCIvPjwvZz4KPHJlY3QgeD0iOTUiIHk9Ijk1IiB3aWR0aD0iMTAxMCIgaGVpZ2h0PSI2MTAiIHJ4PSI1OCIgZmlsbD0idXJsKCNnKSIgb3BhY2l0eT0iLjE4IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsLjM1KSIvPgo8Y2lyY2xlIGN4PSIyNzUiIGN5PSIzMjUiIHI9IjExMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwuMTgpIi8+PHRleHQgeD0iMjc1IiB5PSIzNjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTE1Ij7wn46sPC90ZXh0Pgo8cmVjdCB4PSI0NzAiIHk9IjIyNSIgd2lkdGg9IjQ4MCIgaGVpZ2h0PSI0MiIgcng9IjIxIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC43MikiLz48cmVjdCB4PSI0NzAiIHk9IjMxMCIgd2lkdGg9IjM3MCIgaGVpZ2h0PSIzMCIgcng9IjE1IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC40OCkiLz48cmVjdCB4PSI0NzAiIHk9IjM3MCIgd2lkdGg9IjQzMCIgaGVpZ2h0PSIzMCIgcng9IjE1IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC4zMikiLz4KPHRleHQgeD0iMTEwIiB5PSI3MzUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI2MiIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0id2hpdGUiPkFJIFZpZGVvIFZpcmFsPC90ZXh0Pjx0ZXh0IHg9IjExMCIgeT0iNzc4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM2N2U4ZjkiPktPVkFYIEFDQURFTVkg4oCiIDIwMjY8L3RleHQ+PC9zdmc+',desc:'Aprann kreye videyo AI viral pou TikTok, YouTube ak Facebook.',meta:['Video','AI','Streaming'],badge:'PREMIUM',access:'#'},
-{id:'inshot',type:'videyo',title:'Adobe Premiere Pro, Inshot Editing',cat:'FÒMASYON VIDEYO',price:25,img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHgyPSIxIiB5MT0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiMxMTE4MjciLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzIyZDNlZSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VjNDg5OSIvPjwvbGluZWFyR3JhZGllbnQ+PGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNDUiLz48L2ZpbHRlcj48L2RlZnM+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzAzMDcxMiIvPjxjaXJjbGUgY3g9IjE4MCIgY3k9IjE0MCIgcj0iMjQwIiBmaWxsPSIjMjJkM2VlIiBvcGFjaXR5PSIuMzUiIGZpbHRlcj0idXJsKCNibHVyKSIvPjxjaXJjbGUgY3g9Ijk4MCIgY3k9IjYyMCIgcj0iMjgwIiBmaWxsPSIjZWM0ODk5IiBvcGFjaXR5PSIuMjgiIGZpbHRlcj0idXJsKCNibHVyKSIvPgo8ZyBvcGFjaXR5PSIuMTUiIHN0cm9rZT0iI2ZmZiI+PHBhdGggZD0iTTAgMTEwSDEyMDBNMCAyMjBIMTIwME0wIDMzMEgxMjAwTTAgNDQwSDEyMDBNMCA1NTBIMTIwME0wIDY2MEgxMjAwTTEyMCAwVjgwME0yNDAgMFY4MDBNMzYwIDBWODAwTTQ4MCAwVjgwME02MDAgMFY4MDBNNzIwIDBWODAwTTg0MCAwVjgwME05NjAgMFY4MDBNMTA4MCAwVjgwMCIvPjwvZz4KPHJlY3QgeD0iOTUiIHk9Ijk1IiB3aWR0aD0iMTAxMCIgaGVpZ2h0PSI2MTAiIHJ4PSI1OCIgZmlsbD0idXJsKCNnKSIgb3BhY2l0eT0iLjE4IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsLjM1KSIvPgo8Y2lyY2xlIGN4PSIyNzUiIGN5PSIzMjUiIHI9IjExMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwuMTgpIi8+PHRleHQgeD0iMjc1IiB5PSIzNjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTE1Ij7inILvuI88L3RleHQ+CjxyZWN0IHg9IjQ3MCIgeT0iMjI1IiB3aWR0aD0iNDgwIiBoZWlnaHQ9IjQyIiByeD0iMjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsLjcyKSIvPjxyZWN0IHg9IjQ3MCIgeT0iMzEwIiB3aWR0aD0iMzcwIiBoZWlnaHQ9IjMwIiByeD0iMTUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsLjQ4KSIvPjxyZWN0IHg9IjQ3MCIgeT0iMzcwIiB3aWR0aD0iNDMwIiBoZWlnaHQ9IjMwIiByeD0iMTUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsLjMyKSIvPgo8dGV4dCB4PSIxMTAiIHk9IjczNSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjYyIiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSJ3aGl0ZSI+Q2FwQ3V0IFBybzwvdGV4dD48dGV4dCB4PSIxMTAiIHk9Ijc3OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjNjdlOGY5Ij5LT1ZBWCBBQ0FERU1ZIOKAoiAyMDI2PC90ZXh0Pjwvc3ZnPg==',desc:'Montaj videyo rapid, soutit, efè, tranzisyon elatriye.',meta:['Videyo','Montaj','Mobil'],badge:'HOT',access:'#'},
-{id:'prompt',type:'prompt',title:'Pack Prompt sinematik 3D',cat:'PROMPT STORE',price:15,img:'assets/prompt-real.jpg',desc:'Prompt AI premium pou imaj, videyo sinematik, TikTok viral, Tikomik 3D.',meta:['Prompts','AI','Telechaje'],Telechaje:'Telechaje/prompt-pack-sample.txt',badge:'PROMPT'},
+{id:'info',type:'book',title:'Enfòmatik',cat:'LIV PDF',price:2,img:'assets/book-real-informatique.jpg',desc:'Liv konplè ki kouvri baz enfòmatik, rezo, sekirite, ak konsèp AI. Referans esansyèl pou tout etidyan.',meta:['PDF','Enfòmatik','Telechaje'],Telechaje:'Telechaje/informatique-kovax-academy.pdf',badge:'BEST SELLER',people:false},
+{id:'english',type:'book',title:'Anglè Teknik',cat:'LIV PDF',price:2,img:'assets/book-real-english.jpg',desc:'Anglè Pwofesyonèl,Pratik pale & odyo-vizyèl, Seyans live 2h/semèn, Vokabilè, Sètifika Kovax ofisyè.',meta:['Pale','Ekri','Konprann'],Telechaje:'Telechaje/english-comic-book-kovax.pdf',badge:'NEW 2026',people:false},
+{id:'ai-video',type:'video',title:'Videyo AI Viral',cat:'FÒMASYON VIDEYO',price:25,img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHgyPSIxIiB5MT0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiMxZDRlZDgiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzA2YjZkNCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzhiNWNmNiIvPjwvbGluZWFyR3JhZGllbnQ+PGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNDUiLz48L2ZpbHRlcj48L2RlZnM+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzAzMDcxMiIvPjxjaXJjbGUgY3g9IjE4MCIgY3k9IjE0MCIgcj0iMjQwIiBmaWxsPSIjMDZiNmQ0IiBvcGFjaXR5PSIuMzUiIGZpbHRlcj0idXJsKCNibHVyKSIvPjxjaXJjbGUgY3g9Ijk4MCIgY3k9IjYyMCIgcj0iMjgwIiBmaWxsPSIjOGI1Y2Y2IiBvcGFjaXR5PSIuMjgiIGZpbHRlcj0idXJsKCNibHVyKSIvPgo8ZyBvcGFjaXR5PSIuMTUiIHN0cm9rZT0iI2ZmZiI+PHBhdGggZD0iTTAgMTEwSDEyMDBNMCAyMjBIMTIwME0wIDMzMEgxMjAwTTAgNDQwSDEyMDBNMCA1NTBIMTIwME0wIDY2MEgxMjAwTTEyMCAwVjgwME0yNDAgMFY4MDBNMzYwIDBWODAwTTQ4MCAwVjgwME02MDAgMFY4MDBNNzIwIDBWODAwTTg0MCAwVjgwME05NjAgMFY4MDBNMTA4MCAwVjgwMCIvPjwvZz4KPHJlY3QgeD0iOTUiIHk9Ijk1IiB3aWR0aD0iMTAxMCIgaGVpZ2h0PSI2MTAiIHJ4PSI1OCIgZmlsbD0idXJsKCNnKSIgb3BhY2l0eT0iLjE4IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsLjM1KSIvPgo8Y2lyY2xlIGN4PSIyNzUiIGN5PSIzMjUiIHI9IjExMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwuMTgpIi8+PHRleHQgeD0iMjc1IiB5PSIzNjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTE1Ij7wn46sPC90ZXh0Pgo8cmVjdCB4PSI0NzAiIHk9IjIyNSIgd2lkdGg9IjQ4MCIgaGVpZ2h0PSI0MiIgcng9IjIxIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC43MikiLz48cmVjdCB4PSI0NzAiIHk9IjMxMCIgd2lkdGg9IjM3MCIgaGVpZ2h0PSIzMCIgcng9IjE1IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC40OCkiLz48cmVjdCB4PSI0NzAiIHk9IjM3MCIgd2lkdGg9IjQzMCIgaGVpZ2h0PSIzMCIgcng9IjE1IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LC4zMikiLz4KPHRleHQgeD0iMTEwIiB5PSI3MzUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI2MiIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0id2hpdGUiPkFJIFZpZGVvIFZpcmFsPC90ZXh0Pjx0ZXh0IHg9IjExMCIgeT0iNzc4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM2N2U4ZjkiPktPVkFYIEFDQURFTVkg4oCiIDIwMjY8L3RleHQ+PC9zdmc+',desc:'Aprann kreye videyo AI viral pou TikTok, YouTube ak Facebook.',meta:['Video','AI','Streaming'],badge:'PREMIUM',access:'#'},
+{id:'capcut',type:'video',title:'Adobe Premiere Pro, Inshot Editing',cat:'FÒMASYON VIDEYO',price:25,img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHgyPSIxIiB5MT0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiMxMTE4MjciLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzIyZDNlZSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VjNDg5OSIvPjwvbGluZWFyR3JhZGllbnQ+PGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNDUiLz48L2ZpbHRlcj48L2RlZnM+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzAzMDcxMiIvPjxjaXJjbGUgY3g9IjE4MCIgY3k9IjE0MCIgcj0iMjQwIiBmaWxsPSIjMjJkM2VlIiBvcGFjaXR5PSIuMzUiIGZpbHRlcj0idXJsKCNibHVyKSIvPjxjaXJjbGUgY3g9Ijk4MCIgY3k9IjYyMCIgcj0iMjgwIiBmaWxsPSIjZWM0ODk5IiBvcGFjaXR5PSIuMjgiIGZpbHRlcj0idXJsKCNibHVyKSIvPgo8ZyBvcGFjaXR5PSIuMTUiIHN0cm9rZT0iI2ZmZiI+PHBhdGggZD0iTTAgMTEwSDEyMDBNMCAyMjBIMTIwME0wIDMzMEgxMjAwTTAgNDQwSDEyMDBNMCA1NTBIMTIwME0wIDY2MEgxMjAwTTEyMCAwVjgwME0yNDAgMFY4MDBNMzYwIDBWODAwTTQ4MCAwVjgwME02MDAgMFY4MDBNNzIwIDBWODAwTTg0MCAwVjgwME05NjAgMFY4MDBNMTA4MCAwVjgwMCIvPjwvZz4KPHJlY3QgeD0iOTUiIHk9Ijk1IiB3aWR0aD0iMTAxMCIgaGVpZ2h0PSI2MTAiIHJ4PSI1OCIgZmlsbD0idXJsKCNnKSIgb3BhY2l0eT0iLjE4IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsLjM1KSIvPgo8Y2lyY2xlIGN4PSIyNzUiIGN5PSIzMjUiIHI9IjExMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwuMTgpIi8+PHRleHQgeD0iMjc1IiB5PSIzNjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTE1Ij7inILvuI88L3RleHQ+CjxyZWN0IHg9IjQ3MCIgeT0iMjI1IiB3aWR0aD0iNDgwIiBoZWlnaHQ9IjQyIiByeD0iMjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsLjcyKSIvPjxyZWN0IHg9IjQ3MCIgeT0iMzEwIiB3aWR0aD0iMzcwIiBoZWlnaHQ9IjMwIiByeD0iMTUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsLjQ4KSIvPjxyZWN0IHg9IjQ3MCIgeT0iMzcwIiB3aWR0aD0iNDMwIiBoZWlnaHQ9IjMwIiByeD0iMTUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsLjMyKSIvPgo8dGV4dCB4PSIxMTAiIHk9IjczNSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjYyIiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSJ3aGl0ZSI+Q2FwQ3V0IFBybzwvdGV4dD48dGV4dCB4PSIxMTAiIHk9Ijc3OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjNjdlOGY5Ij5LT1ZBWCBBQ0FERU1ZIOKAoiAyMDI2PC90ZXh0Pjwvc3ZnPg==',desc:'Montaj videyo rapid, soutit, efè, tranzisyon elatriye.',meta:['Videyo','Montaj','Mobil'],badge:'HOT',access:'#'},
+{id:'prompts',type:'prompt',title:'Pack Prompt sinematik 3D',cat:'PROMPT STORE',price:15,img:'assets/prompt-real.jpg',desc:'Prompt AI premium pou imaj, videyo sinematik, TikTok viral, Tikomik 3D.',meta:['Prompts','AI','Telechaje'],Telechaje:'Telechaje/prompt-pack-sample.txt',badge:'PROMPT'},
 {id:'premium',type:'premium',title:'Kovax Premium',cat:'PREMIUM',price:49,img:'assets/premium-real.jpg',desc:'Jwenn tout fòmasyon yo, jenere prompt, imaj, videyo, tèks, metrize nouvo zouti AI.',meta:['Achte','All Access','Monthly'],badge:'',access:'#'}
 ];
 let cart=(function(){try{return JSON.parse(localStorage.getItem('kovax_cart')||'[]');}catch(e){return [];}})();let filter='all';
+// FIX CHARYO: ansyen ID yo te diferan (enfo/anglè/videyo AI/inshot/prompt). Sa te ka fè pwodwi pa monte nan charyo.
+const legacyIdMap={'enfo':'info','anglè':'english','videyo AI':'ai-video','inshot':'capcut','prompt':'prompts'};
+function normalizeId(id){return legacyIdMap[id]||id;}
+cart=cart.map(i=>({id:normalizeId(i.id),qty:Number(i.qty)||1})).filter(i=>i.id&&i.qty>0);
 // BUG 2 FIX: money() toujou montre 2 desimal pou konsistans ($55.00 pa $55)
 function money(n){return '$'+Number(n).toFixed(2)}function productCard(p){
-if(p.type==='premium'){return `<article class="product premium-card" data-type="${p.type}"><div class="premium-shine"></div><div class="premium-orb orb1"></div><div class="premium-orb orb2"></div><div class="premium-orb orb3"></div><div class="premium-header"><div class="premium-crown">♛</div><div class="premium-badge-top"></div></div><div class="premium-body"><div class="premium-title-group"><div class="type" style="color:var(--gold);letter-spacing:.15em">${p.cat}</div><h3 class="premium-title">${p.title}</h3><p class="premium-desc">${p.desc}</p></div><div class="premium-perks"> Premiere Pro, Inshot<div class="perk"><span>✦</span></div><div class="perk"><span>✦</span> Tout videyo fòmasyon yo</div><div class="perk"><span>✦</span> Tout prompt pack yo</div><div class="perk"><span>✦</span> Metrize AI </div><div class="perk"><span>✦</span> Videyo AI viral</div></div><div class="premium-price-row"><div class="premium-price-block"><div class="premium-price-label"></div><div class="premium-price-amount">$40<span></span></div></div><button class="premium-buy-btn" onclick="addToCart('${p.id}')"><span class="btn-shimmer"></span>♛ Mete nan charyo</button></div></div></article>`;}
+if(p.type==='premium'){return `<article class="product premium-card" data-type="${p.type}"><div class="premium-shine"></div><div class="premium-orb orb1"></div><div class="premium-orb orb2"></div><div class="premium-orb orb3"></div><div class="premium-header"><div class="premium-crown">♛</div><div class="premium-badge-top"></div></div><div class="premium-body"><div class="premium-title-group"><div class="type" style="color:var(--gold);letter-spacing:.15em">${p.cat}</div><h3 class="premium-title">${p.title}</h3><p class="premium-desc">${p.desc}</p></div><div class="premium-perks"><div class="perk"><span>✦</span> Premiere Pro, Inshot</div><div class="perk"><span>✦</span> Tout videyo fòmasyon yo</div><div class="perk"><span>✦</span> Tout prompt pack yo</div><div class="perk"><span>✦</span> Metrize AI </div><div class="perk"><span>✦</span> Videyo AI viral</div></div><div class="premium-price-row"><div class="premium-price-block"><div class="premium-price-label"></div><div class="premium-price-amount">$40<span></span></div></div><button class="premium-buy-btn" data-add-to-cart="${p.id}"><span class="btn-shimmer"></span>♛ Mete nan charyo</button></div></div></article>`;}
 const mediaPanels={
 'info':`<div class="rich-media rm-info">
   <div class="rm-bg"></div>
@@ -53,14 +57,16 @@ const mediaPanels={
   </div>
   <div class="rm-particles"><i></i><i></i><i></i></div>
 </div>`,
-'prompt':`<div class="rich-media rm-prompts">
+'prompts':`<div class="rich-media rm-prompts">
   <div class="rm-bg"></div>
   <div class="rm-content">
-    <div class="rm-ai-art">
-      <div class="rm-art-frame"><span>✨</span></div>
+    <div class="rm-prompt-grid">
+      <div class="rm-prompt-bubble rm-pb-text">✍️<span>Tèks</span></div>
+      <div class="rm-prompt-bubble rm-pb-img">🖼️<span>Imaj</span></div>
+      <div class="rm-prompt-bubble rm-pb-vid">🎬<span>Videyo</span></div>
     </div>
-    <div class="rm-icon-big" style="font-size:36px;margin-top:6px">🎨</div>
-    <div class="rm-chips"><span>Nano Banana</span><span>3D</span><span>Pixverse</span></div>
+    <div class="rm-icon-big" style="font-size:38px;margin-top:8px">🤖</div>
+    <div class="rm-chips"><span>ChatGPT</span><span>Claude</span><span>Midjourney</span></div>
   </div>
   <div class="rm-sparkles"><i></i><i></i><i></i><i></i></div>
 </div>`};
@@ -69,7 +75,7 @@ const hasRichMedia = !!mediaPanels[p.id];
 const mediaHtml = hasRichMedia
   ? `<div style="position:relative">${mediaPanels[p.id]}<span class="label pcard-label">${p.badge}</span></div>`
   : `<div class="media"><span class="label">${p.badge}</span><img class="cover" src="${p.img}" alt="${p.title}" onerror="this.style.visibility='hidden';this.parentElement.style.minHeight='80px'"><div class="img-glow"></div></div>`;
-return `<article class="product" data-type="${p.type}">${mediaHtml}<div class="body"><div class="type">${p.cat}</div><h3>${p.title}</h3><p>${p.desc}</p><div class="pills">${p.meta.map(m=>`<span>${m}</span>`).join('')}</div><div class="priceRow"><div class="price">${money(p.price)}</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="add" onclick="addToCart('${p.id}')">🛒 Achte</button></div></div></div></article>`;}
+return `<article class="product" data-type="${p.type}">${mediaHtml}<div class="body"><div class="type">${p.cat}</div><h3>${p.title}</h3><p>${p.desc}</p><div class="pills">${p.meta.map(m=>`<span>${m}</span>`).join('')}</div><div class="priceRow"><div class="price">${money(p.price)}</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="add" data-add-to-cart="${p.id}">🛒 Achte</button></div></div></div></article>`;}
 function render(){
   const q=(document.getElementById('search')?.value||'').toLowerCase();
   // Filtre selon rechèch sèlman (pa type) pou grids yo
@@ -127,11 +133,11 @@ function grandTotal(){const sub=subtotal();return sub+taxAmount(sub)}
 function subtotal(){return cart.reduce((s,i)=>{const p=itemData(i.id);return p?s+p.price*i.qty:s;},0)}
 
 function save(){try{localStorage.setItem('kovax_cart',JSON.stringify(cart));}catch(e){}updateCartCount()}
-function updateCartCount(){document.getElementById('cartCount').textContent=cart.reduce((a,i)=>a+i.qty,0)}
-function addToCart(id){const p=products.find(x=>x.id===id);if(!p)return;const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});save();openCart()}
-function addBundle(){cart=cart.filter(i=>!['info','english','bundle'].includes(i.id));cart.push({id:'bundle',qty:1});save();openCart()}
+function updateCartCount(){const c=document.getElementById('cartCount');if(c)c.textContent=cart.reduce((a,i)=>a+(Number(i.qty)||0),0)}
+function addToCart(id){id=normalizeId(id);const p=products.find(x=>x.id===id);if(!p){console.warn('[Kovax cart] Produit pa jwenn:',id);return;}const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});save();openCart()}
+function addBundle(){cart=cart.filter(i=>!['info','english','enfo','anglè','bundle'].includes(i.id));cart.push({id:'bundle',qty:1});save();openCart()}
 // FIX: itemData retounen objè ki valid toujou — bundle pa gen download string 'bundle', li gen 2 fichye separe
-function itemData(id){if(id==='bundle')return {id:'bundle',title:'Pake 2 Liv: Enfòmatik + Anglè',price:55,img:`data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjMjU2M2ViIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjJkM2VlIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIyMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjUwJSIgeT0iNDAlIiBmb250LXNpemU9IjI4IiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UEFLRTwvdGV4dD48dGV4dCB4PSI1MCUiIHk9IjU4JSIgZm9udC1zaXplPSIxOCIgc3R5bGU9ImZpbGw6d2hpdGUiIGZvbnQtZmFtaWx5OkFyaWFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FbmbDsm1hdGlrPC90ZXh0Pjx0ZXh0IHg9IjUwJSIgeT0iNzAlIiBmb250LXNpemU9IjE4IiBzdHlsZT0iZmlsbDp3aGl0ZSBmb250LWZhbWlseTpBcmlhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+KyBBbmdsw6g8L3RleHQ+PC9zdmc+`,download:null,bundlePack:true};const p=products.find(p=>p.id===id);return p||null;}
+function itemData(id){if(id==='bundle')return {id:'bundle',title:'Pake 2 Liv: Enfòmatik + Anglè',price:55,img:`data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjMjU2M2ViIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjJkM2VlIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIyMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjUwJSIgeT0iNDAlIiBmb250LXNpemU9IjI4IiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UEFLRTwvdGV4dD48dGV4dCB4PSI1MCUiIHk9IjU4JSIgZm9udC1zaXplPSIxOCIgc3R5bGU9ImZpbGw6d2hpdGUiIGZvbnQtZmFtaWx5OkFyaWFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FbmbDsm1hdGlrPC90ZXh0Pjx0ZXh0IHg9IjUwJSIgeT0iNzAlIiBmb250LXNpemU9IjE4IiBzdHlsZT0iZmlsbDp3aGl0ZSBmb250LWZhbWlseTpBcmlhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+KyBBbmdsw6g8L3RleHQ+PC9zdmc+`,download:null,bundlePack:true};id=normalizeId(id);const p=products.find(p=>p.id===id);return p||null;}
 
 // BUG 3 FIX: paypalRendered flag pou evite doublaj bouton PayPal
 let paypalRendered=false;
@@ -160,13 +166,13 @@ function showEmailLogin(){}
 function continueEmail(){}
 function logoutUser(){}
 loadUser();
-function openCart(){document.getElementById('drawer').classList.add('show');renderCart();loadPaypal()}
-function closeCart(){document.getElementById('drawer').classList.remove('show');paypalRendered=false;}
+function openCart(){const d=document.getElementById('drawer');if(!d)return;d.classList.add('show');renderCart();loadPaypal()}
+function closeCart(){const d=document.getElementById('drawer');if(d)d.classList.remove('show');paypalRendered=false;}
 
 // BUG 1 FIX: removeItem rele renderCart() ET rechaje PayPal
 // BUG 4 FIX: qty kontròl — bouton + ak - ajoute
-function removeItem(id){cart=cart.filter(i=>i.id!==id);save();renderCart();paypalRendered=false;loadPaypal()}
-function changeQty(id,delta){const item=cart.find(i=>i.id===id);if(!item)return;item.qty+=delta;if(item.qty<=0){cart=cart.filter(i=>i.id!==id);}save();renderCart();paypalRendered=false;loadPaypal();}
+function removeItem(id){id=normalizeId(id);cart=cart.filter(i=>i.id!==id);save();renderCart();paypalRendered=false;loadPaypal()}
+function changeQty(id,delta){id=normalizeId(id);const item=cart.find(i=>i.id===id);if(!item)return;item.qty+=delta;if(item.qty<=0){cart=cart.filter(i=>i.id!==id);}save();renderCart();paypalRendered=false;loadPaypal();}
 
 
 function cartImage(p){
@@ -204,6 +210,7 @@ function renderCart(){
     // BUG 4 FIX: bouton qty + ak - pou chak pwodwi
     box.innerHTML=cart.map(i=>{
       const p=itemData(i.id);
+      if(!p) return '';
       return `<div class="cartItem">
         <img src="${cartImage(p)}" alt="${p.title}" onerror="this.onerror=null;this.src=cartImage({id:'box',title:'Kovax'});">
         <div style="flex:1">
@@ -428,6 +435,25 @@ function closeMobileNav(){
   document.getElementById('mainNav').classList.remove('mobile-open');
   document.getElementById('hamburgerBtn').classList.remove('open');
   document.getElementById('navOverlay').classList.remove('show');
+}
+
+
+// FIX: Si onclick inline pa pran sou kèk navigatè, event delegation sa a fè bouton Achte yo mache toujou.
+document.addEventListener('click',function(e){
+  const btn=e.target.closest('[data-add-to-cart]');
+  if(!btn) return;
+  e.preventDefault();
+  addToCart(btn.getAttribute('data-add-to-cart'));
+});
+Object.assign(window,{addToCart,removeItem,changeQty,openCart,closeCart,addBundle,render,setFilter,selectWallet,toggleMobileNav,closeMobileNav,toggleSection});
+
+function toggleSection(id){
+  if(window.innerWidth>900) return;
+  const body=document.getElementById('acc-'+id);
+  const head=body?.previousElementSibling;
+  if(!body) return;
+  const isOpen=body.classList.toggle('open');
+  if(head) head.setAttribute('aria-expanded', isOpen);
 }
 
 render();
