@@ -536,3 +536,61 @@ document.addEventListener('keydown', function(e){
     if(drawer && drawer.classList.contains('show')) closeCart();
   }
 });
+
+
+
+/* ✅ KOVAX final JS mobile fix */
+function syncMobileSearch(value){
+  const desktopSearch = document.querySelector('.search input');
+  if(desktopSearch){
+    desktopSearch.value = value;
+    desktopSearch.dispatchEvent(new Event('input', {bubbles:true}));
+  }
+}
+
+function goProducts(){
+  const el = document.getElementById('products') || document.getElementById('livres') || document.querySelector('.gridProducts,.product,.bundle');
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleCart(){
+  const drawer = document.getElementById('drawer');
+  if(!drawer) return;
+  if(drawer.classList.contains('show')){
+    closeCart();
+    setTimeout(goProducts,120);
+  }else{
+    openCart();
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const desktopSearch = document.querySelector('.search input');
+  const mobileSearch = document.getElementById('mobileSearchInput');
+  if(desktopSearch && mobileSearch){
+    mobileSearch.value = desktopSearch.value || '';
+    desktopSearch.addEventListener('input',()=>{ mobileSearch.value = desktopSearch.value || ''; });
+  }
+
+  document.querySelectorAll('.nav a').forEach(a=>{
+    a.addEventListener('click',()=>{
+      if(typeof closeMobileNav === 'function') closeMobileNav();
+    });
+  });
+
+  const explore = Array.from(document.querySelectorAll('a,button')).find(el => (el.textContent || '').toLowerCase().includes('eksplore market'));
+  if(explore){
+    explore.addEventListener('click', function(e){
+      e.preventDefault();
+      goProducts();
+    });
+  }
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    const drawer = document.getElementById('drawer');
+    if(drawer && drawer.classList.contains('show')) closeCart();
+    if(typeof closeMobileNav === 'function') closeMobileNav();
+  }
+});
