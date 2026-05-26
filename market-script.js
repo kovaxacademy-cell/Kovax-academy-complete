@@ -516,3 +516,23 @@ document.addEventListener('DOMContentLoaded',()=>{
     desktopSearch.addEventListener('input',()=>{ mobileSearch.value = desktopSearch.value || ''; });
   }
 });
+
+
+// ✅ Charyo: peze bouton charyo a ankò pou fèmen li epi retounen sou pwodwi yo
+function toggleCart(){
+  const drawer = document.getElementById('drawer');
+  if(drawer && drawer.classList.contains('show')){
+    closeCart();
+    const products = document.getElementById('products') || document.querySelector('.bundle') || document.querySelector('.products, .product-grid, .grid-products');
+    if(products){ setTimeout(()=>products.scrollIntoView({behavior:'smooth', block:'start'}),80); }
+  }else{
+    openCart();
+  }
+}
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    const drawer = document.getElementById('drawer');
+    if(drawer && drawer.classList.contains('show')) closeCart();
+  }
+});
