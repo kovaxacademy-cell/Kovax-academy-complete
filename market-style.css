@@ -863,186 +863,17 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
 
 
 /* ============================================================
-   KOVAX TOPBAR + NAV FIX — PATCH FINAL v3
-   Pwoblèm: logo disparèt, nav Market bouche kontni
-   Solisyon: topbar 2-ranje pwòp, nav scroll horizontale
-   ============================================================ */
-
-@media (max-width: 900px) {
-
-  /* --- TOPBAR: layout 2-ranje pwòp --- */
-  .topbar {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 9999 !important;
-    height: auto !important;
-    min-height: unset !important;
-    display: flex !important;
-    flex-direction: column !important;
-    flex-wrap: nowrap !important;
-    align-items: stretch !important;
-    padding: 10px 14px 8px !important;
-    gap: 0 !important;
-    background: rgba(2, 5, 16, 0.97) !important;
-    backdrop-filter: blur(24px) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.09) !important;
-  }
-
-  /* --- RANJE 1: logo + cart bouton --- */
-  .topbar > .brand,
-  .topbar > a.brand {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    width: 100% !important;
-    flex-shrink: 0 !important;
-    text-decoration: none !important;
-    margin-bottom: 8px !important;
-    order: 1 !important;
-  }
-
-  .brand img {
-    width: 38px !important;
-    height: 38px !important;
-    flex-shrink: 0 !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  .brand b {
-    font-size: 15px !important;
-    white-space: nowrap !important;
-    letter-spacing: 0.05em !important;
-    flex-shrink: 1 !important;
-    min-width: 0 !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-
-  /* Cart bouton — dwa an wo */
-  .tools {
-    position: absolute !important;
-    top: 10px !important;
-    right: 14px !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    order: 2 !important;
-  }
-
-  .cartBtn {
-    width: 42px !important;
-    height: 42px !important;
-    border-radius: 12px !important;
-    padding: 0 !important;
-    display: grid !important;
-    place-items: center !important;
-    font-size: 18px !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* Kache search sou mobile */
-  .search,
-  .premiumTop {
-    display: none !important;
-  }
-
-  /* --- RANJE 2: NAV scroll horizontal --- */
-  .nav {
-    order: 3 !important;
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    width: 100% !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    scrollbar-width: none !important;
-    -webkit-overflow-scrolling: touch !important;
-    gap: 6px !important;
-    padding: 2px 0 4px !important;
-    margin: 0 !important;
-    /* Pa okipe espas anba kontni */
-    position: relative !important;
-    z-index: 1 !important;
-  }
-
-  .nav::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  .nav a {
-    flex: 0 0 auto !important;
-    white-space: nowrap !important;
-    font-size: 12px !important;
-    font-weight: 800 !important;
-    padding: 7px 13px !important;
-    border-radius: 999px !important;
-    border: 1.5px solid rgba(255,255,255,0.12) !important;
-    background: rgba(255,255,255,0.06) !important;
-    color: rgba(255,255,255,0.7) !important;
-    text-decoration: none !important;
-    transition: none !important;
-  }
-
-  .nav a.active,
-  .nav a[class*="active"] {
-    background: linear-gradient(135deg, #2563ff, #27c8ff) !important;
-    color: #fff !important;
-    border-color: transparent !important;
-  }
-
-  /* Asire kontni paj pa kache dèyè topbar */
-  body {
-    padding-bottom: 80px !important;
-  }
-}
-
-/* --- EKSTRA TI EKRAN ≤480px --- */
-@media (max-width: 480px) {
-
-  .topbar {
-    padding: 8px 12px 6px !important;
-  }
-
-  .brand img {
-    width: 34px !important;
-    height: 34px !important;
-  }
-
-  .brand b {
-    font-size: 14px !important;
-  }
-
-  .tools {
-    top: 8px !important;
-    right: 12px !important;
-  }
-
-  .cartBtn {
-    width: 38px !important;
-    height: 38px !important;
-    font-size: 16px !important;
-  }
-
-  .nav a {
-    font-size: 11px !important;
-    padding: 6px 11px !important;
-  }
-}
-
-/* ============================================================
-   FIN TOPBAR + NAV PATCH v3
-   ============================================================ */
-
-
-/* ============================================================
-   KOVAX BUNDLE MOBILE — PATCH v2
+   KOVAX BUNDLE MOBILE — PATCH PWOFESYONÈL v2
+   Korije: bk-card twò gwo, bundle layout, espas, proporsiyon
    ============================================================ */
 
 @media (max-width: 768px) {
 
-  .bundle { margin: 16px 0 !important; padding: 0 !important; }
+  /* === BUNDLE WRAPPER === */
+  .bundle {
+    margin: 16px 0 !important;
+    padding: 0 !important;
+  }
 
   .bundle-inner {
     border-radius: 22px !important;
@@ -1050,10 +881,19 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
     border-width: 1px !important;
   }
 
-  .bundle-badge { font-size: 10px !important; padding: 6px 14px !important; margin-bottom: 18px !important; }
+  .bundle-badge {
+    font-size: 10px !important;
+    padding: 6px 14px !important;
+    margin-bottom: 18px !important;
+  }
 
-  .bundle-main { grid-template-columns: 1fr !important; gap: 20px !important; }
+  /* === STACK VERTICAL sou mobile === */
+  .bundle-main {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
 
+  /* === VISUAL AREA: 2 liv akote — KONPAKT === */
   .bundle-books-visual {
     display: flex !important;
     flex-direction: row !important;
@@ -1063,46 +903,175 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28
     flex-wrap: nowrap !important;
   }
 
+  /* === BK-CARD: redwi drastikman sou mobile === */
   .bk-card {
     width: 130px !important;
     max-width: 130px !important;
-    min-width: 100px !important;
+    min-width: 110px !important;
     flex-shrink: 0 !important;
     padding: 12px 10px 10px !important;
     border-radius: 16px !important;
     gap: 5px !important;
   }
 
-  .bk-card:hover { transform: none !important; }
-  .bk-top-tag { font-size: 9px !important; }
-  .bk-icon { font-size: 28px !important; animation: none !important; }
-  .bk-title { font-size: 11px !important; line-height: 1.25 !important; }
-  .bk-chips span { font-size: 8px !important; padding: 2px 5px !important; }
-  .bk-price-tag { font-size: 13px !important; margin-top: 0 !important; }
-  .bundle-plus { font-size: 20px !important; align-self: center !important; flex-shrink: 0 !important; }
+  .bk-card:hover {
+    transform: none !important;
+  }
 
-  .bundle-title { font-size: 22px !important; }
-  .bundle-new-price { font-size: 44px !important; }
-  .bundle-sub { font-size: 13px !important; }
+  /* Top tag (LIV 1 / LIV 2) */
+  .bk-top-tag {
+    font-size: 9px !important;
+    letter-spacing: 0.1em !important;
+  }
 
+  /* Emoji icon */
+  .bk-icon {
+    font-size: 30px !important;
+    animation: none !important;
+  }
+
+  /* Titre liv */
+  .bk-title {
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Chips (Ekri, Pale...) */
+  .bk-chips {
+    gap: 3px !important;
+  }
+
+  .bk-chips span {
+    font-size: 8px !important;
+    padding: 2px 5px !important;
+  }
+
+  /* Pri */
+  .bk-price-tag {
+    font-size: 14px !important;
+    margin-top: 0 !important;
+  }
+
+  /* Speech bubbles — pi piti */
+  .bk-bubbles span {
+    font-size: 7px !important;
+    padding: 2px 5px !important;
+  }
+
+  /* Plus sign entre 2 liv */
+  .bundle-plus {
+    font-size: 22px !important;
+    align-self: center !important;
+    flex-shrink: 0 !important;
+    margin: 0 2px !important;
+  }
+
+  /* === INFO SIDE === */
+  .bundle-info {
+    gap: 12px !important;
+    text-align: left !important;
+  }
+
+  .bundle-title {
+    font-size: 22px !important;
+    line-height: 1.1 !important;
+  }
+
+  .bundle-save-badge {
+    font-size: 18px !important;
+  }
+
+  .bundle-sub {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  .bundle-price-block {
+    gap: 2px !important;
+  }
+
+  .bundle-old-price {
+    font-size: 14px !important;
+    gap: 6px !important;
+  }
+
+  .bundle-new-price {
+    font-size: 44px !important;
+    letter-spacing: -0.03em !important;
+    text-shadow: 0 0 28px rgba(39,200,255,0.35) !important;
+  }
+
+  .bundle-save-line {
+    font-size: 13px !important;
+  }
+
+  /* === BUNDLE BUTTON === */
   .bundle-btn {
     padding: 15px 20px !important;
     border-radius: 14px !important;
     font-size: 14px !important;
+    letter-spacing: 0.01em !important;
+    box-shadow: 0 8px 28px rgba(39,200,255,0.28) !important;
+  }
+
+  .bundle-guarantee {
+    font-size: 10px !important;
   }
 }
 
+/* === EKSTRA TI EKRAN (≤420px) === */
 @media (max-width: 420px) {
-  .bundle-inner { padding: 16px 12px 20px !important; border-radius: 18px !important; }
-  .bk-card { width: 108px !important; max-width: 108px !important; min-width: 90px !important; padding: 10px 8px 8px !important; }
-  .bk-icon { font-size: 24px !important; }
-  .bk-title { font-size: 10px !important; }
-  .bk-price-tag { font-size: 12px !important; }
-  .bundle-new-price { font-size: 38px !important; }
-  .bundle-title { font-size: 19px !important; }
-  .bundle-btn { padding: 13px 16px !important; font-size: 13px !important; }
+
+  .bundle-inner {
+    padding: 16px 12px 20px !important;
+    border-radius: 18px !important;
+  }
+
+  .bk-card {
+    width: 110px !important;
+    max-width: 110px !important;
+    min-width: 95px !important;
+    padding: 10px 8px 8px !important;
+    border-radius: 14px !important;
+    gap: 4px !important;
+  }
+
+  .bk-icon {
+    font-size: 26px !important;
+  }
+
+  .bk-title {
+    font-size: 10px !important;
+  }
+
+  .bk-price-tag {
+    font-size: 12px !important;
+  }
+
+  .bk-chips span {
+    font-size: 7px !important;
+    padding: 2px 4px !important;
+  }
+
+  .bundle-plus {
+    font-size: 18px !important;
+  }
+
+  .bundle-new-price {
+    font-size: 38px !important;
+  }
+
+  .bundle-title {
+    font-size: 20px !important;
+  }
+
+  .bundle-btn {
+    padding: 13px 16px !important;
+    font-size: 13px !important;
+    border-radius: 12px !important;
+  }
 }
 
 /* ============================================================
-   FIN BUNDLE PATCH
+   FIN BUNDLE MOBILE PATCH
    ============================================================ */
