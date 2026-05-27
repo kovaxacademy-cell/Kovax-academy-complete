@@ -7,8 +7,6 @@
 <meta name="description" content="Kovax Market 2026: achte liv PDF, fòmasyon videyo, prompt store ak premium sou menm site la.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<meta property=\"og:image\" content=\"og-image.jpg\">
-<meta name=\"twitter:image\" content=\"og-image.jpg\">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="market-style.css">
 </head>
@@ -47,6 +45,10 @@
   <p>Achte pi bon liv PDF, fòmasyon videyo pratik, zouti AI pwofesyonèl, ak aksè VIP ak sèlman kèk klik.</p>
 </section>
 
+<div class="mobile-search-wrap">
+  <input type="text" id="mobileSearchInput" class="mobile-search" placeholder="Chache yon pwodwi..." oninput="searchProducts()">
+</div>
+
 <main class="container">
   <div class="grid" id="productsGrid">
     </div>
@@ -67,7 +69,7 @@
       <span id="cartTotal">$0.00</span>
     </div>
     
-    <div class="market-wallet-row" aria-label="Chwazi metòd pèman">
+    <div class="market-wallet-row">
       <button type="button" class="mw-paypal active" data-wallet="paypal" onclick="selectWallet('paypal')">PayPal</button>
       <button type="button" class="mw-card" data-wallet="card" onclick="selectWallet('card')">💳 Card</button>
       <button type="button" class="mw-apple" data-wallet="apple" onclick="selectWallet('apple')"> Pay</button>
@@ -79,7 +81,7 @@
     
     <div class="success" id="success">
       <b>✅ Pèman konfime!</b>
-      <p class="small">Menm bouton telechaje a ap ouvri aksè pwodwi yo.</p>
+      <p class="small">Klike sou bouton anba a pou w ka jwenn aksè ou.</p>
       <div id="downloadArea"></div>
     </div>
   </div>
