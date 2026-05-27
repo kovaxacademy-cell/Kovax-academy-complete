@@ -14,15 +14,12 @@
 </head>
 <body>
 
-<!-- ✅ Kovax Academy Loading -->
-<div id="kovaxLoader" class="kovax-loader">
-  <div class="loader-card">
-    <div class="loader-logo">
-      <img src="apple-touch-icon.png" alt="Kovax Academy">
-    </div>
-    <div class="loader-title">KOVAX <span>ACADEMY</span></div>
-    <div class="loader-ring"></div>
-    <p>Chargement...</p>
+<!-- ✅ Kovax Academy Loading menm jan ak paj akèy la -->
+<div id="kovaxLoader">
+  <div class="kovax-loader-box">
+    <div class="kovax-spinner"></div>
+    <strong>KOVAX ACADEMY</strong>
+    <span>Chargement...</span>
   </div>
 </div>
 
@@ -182,6 +179,7 @@
 <div id="paypal-button-container"></div><div class="success" id="success"><b>✅ Pèman konfime!</b><p class="small">Menm bouton telechaje a ap ouvri aksè pwodwi yo.</p><div id="downloadArea"></div></div></div></aside></div>
 <footer><div><b>Kovax Academy</b><br>Depase Tout Limit ak Teknoloji</div><div>© 2026 Kovax Market • Liv PDF • Fòmasyon Videyo • Prompt Store</div></footer>
 
+<script>window.addEventListener('load',()=>setTimeout(()=>document.getElementById('kovaxLoader')?.classList.add('hide'),350));</script>
 <script src="market-script.js" defer></script>
 </body>
 </html>
