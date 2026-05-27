@@ -57,7 +57,7 @@ const mediaPanels={
   </div>
   <div class="rm-particles"><i></i><i></i><i></i></div>
 </div>`,
-'prompt':`<div class="rich-media rm-prompts">
+'prompts':`<div class="rich-media rm-prompts">
   <div class="rm-bg"></div>
   <div class="rm-content">
     <div class="rm-prompt-grid">
