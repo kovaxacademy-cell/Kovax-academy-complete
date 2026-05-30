@@ -1985,50 +1985,294 @@ object-fit:cover;
   .add{width:100% !important;}
 }
 
+/* =====================================================
+   ✅ KOVAX FINAL MOBILE POLISH — Logo + Bundle + Product Images
+   Kenbe tout koreksyon avan yo; sa a sèlman fè mobile pi pro.
+   ===================================================== */
+@media (max-width: 768px){
+  /* Logo pi gwo sou telefòn san kraze topbar la */
+  .topbar{
+    height:72px !important;
+    padding:0 12px !important;
+    overflow:visible !important;
+  }
+  .brand img{
+    width:72px !important;
+    height:72px !important;
+    min-width:72px !important;
+    object-fit:contain !important;
+    transform:translateY(2px) !important;
+  }
+  .brand b{
+    font-size:18px !important;
+    letter-spacing:.035em !important;
+  }
 
-/* ===== VERIFIED FINAL MOBILE FIX — KATEGORI TOUJOU OUVÈ + FOTO MONTE ===== */
-@media (max-width: 900px){
-  .brand img{width:112px !important;height:112px !important;min-width:112px !important;}
-  .topbar{height:86px !important;padding-left:6px !important;padding-right:10px !important;}
-  .brand b{font-size:17px !important;}
+  /* Pake 2 liv la: plis kout, pi premium sou mobile */
+  .bundle{
+    max-width:calc(100vw - 28px) !important;
+    margin:18px auto 26px !important;
+    border-radius:24px !important;
+    overflow:hidden !important;
+  }
+  .bundle-inner{
+    max-width:100% !important;
+    width:100% !important;
+    padding:18px 14px 20px !important;
+    border-radius:24px !important;
+  }
+  .bundle-badge{
+    display:inline-flex !important;
+    justify-content:center !important;
+    width:auto !important;
+    max-width:100% !important;
+    margin:0 0 14px !important;
+    padding:7px 12px !important;
+    font-size:10px !important;
+    letter-spacing:.08em !important;
+  }
+  .bundle-main{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:14px !important;
+  }
+  .bundle-books-visual{
+    display:grid !important;
+    grid-template-columns:1fr 24px 1fr !important;
+    align-items:center !important;
+    gap:6px !important;
+    margin:0 !important;
+  }
+  .bk-card{
+    width:100% !important;
+    max-width:118px !important;
+    min-height:150px !important;
+    padding:12px 8px !important;
+    border-radius:18px !important;
+  }
+  .bk-icon{font-size:30px !important;}
+  .bk-title{font-size:13px !important; line-height:1.08 !important;}
+  .bk-chips span{font-size:8px !important; padding:4px 5px !important;}
+  .bk-price-tag{font-size:16px !important;}
+  .bundle-plus{font-size:24px !important; width:24px !important; text-align:center !important;}
+  .bundle-info{
+    text-align:left !important;
+    gap:9px !important;
+    padding:0 !important;
+  }
+  .bundle-title{
+    font-size:22px !important;
+    line-height:1.08 !important;
+    letter-spacing:-.035em !important;
+    margin:0 !important;
+  }
+  .bundle-save-badge{
+    display:inline-block !important;
+    font-size:18px !important;
+    margin-top:3px !important;
+  }
+  .bundle-sub{
+    font-size:13px !important;
+    line-height:1.35 !important;
+    margin:4px 0 6px !important;
+  }
+  .bundle-price-block{
+    display:grid !important;
+    grid-template-columns:1fr auto !important;
+    gap:8px 12px !important;
+    align-items:end !important;
+    background:rgba(255,255,255,.055) !important;
+    border:1px solid rgba(255,255,255,.09) !important;
+    border-radius:18px !important;
+    padding:12px !important;
+  }
+  .bundle-old-price{
+    font-size:11px !important;
+    line-height:1.15 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    gap:2px !important;
+    margin:0 !important;
+  }
+  .bundle-new-price{
+    font-size:38px !important;
+    line-height:.9 !important;
+    margin:0 !important;
+    text-align:right !important;
+  }
+  .bundle-save-line{
+    grid-column:1 / -1 !important;
+    font-size:12px !important;
+    line-height:1.2 !important;
+    margin:0 !important;
+  }
+  .bundle-btn{
+    height:48px !important;
+    min-height:48px !important;
+    border-radius:16px !important;
+    font-size:14px !important;
+    margin-top:8px !important;
+    padding:0 12px !important;
+  }
+  .bundle-guarantee{font-size:11px !important; margin-top:10px !important;}
 
-  #formations .acc-head,#prompts .acc-head,#premium .acc-head{pointer-events:none !important;cursor:default !important;align-items:flex-start !important;gap:8px !important;}
-  #formations .acc-arrow,#prompts .acc-arrow,#premium .acc-arrow{display:none !important;}
-  #formations .acc-body,#prompts .acc-body,#premium .acc-body,
-  #acc-formations,#acc-prompts,#acc-premium{display:block !important;max-height:999999px !important;height:auto !important;overflow:visible !important;opacity:1 !important;visibility:visible !important;}
-  #videoGrid,#promptGrid,#premiumGrid{display:grid !important;grid-template-columns:1fr !important;gap:14px !important;}
+  /* Fè 3 pwodwi yo ak imaj/visual yo monte byen sou telephone */
+  .product{
+    display:grid !important;
+    grid-template-columns:112px minmax(0,1fr) !important;
+    min-height:164px !important;
+    border-radius:20px !important;
+  }
+  .product > div:first-child,
+  .media,
+  .rich-media{
+    width:112px !important;
+    min-height:164px !important;
+    height:100% !important;
+    overflow:hidden !important;
+  }
+  .rich-media,
+  .media{
+    border-radius:0 !important;
+    display:grid !important;
+    place-items:center !important;
+  }
+  .product img,
+  .media img.cover{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:164px !important;
+    object-fit:cover !important;
+  }
+  .product .body{padding:12px 12px 11px !important;}
+  .type{font-size:8.5px !important; letter-spacing:.09em !important;}
+  .product h3{font-size:16px !important; line-height:1.12 !important;}
+  .product p{font-size:11.7px !important; line-height:1.32 !important; -webkit-line-clamp:2 !important;}
+  .pills span{font-size:9px !important; padding:4px 6px !important;}
+  .price{font-size:21px !important;}
+  .add{min-height:36px !important; font-size:11.5px !important; border-radius:11px !important;}
 
-  .product{display:grid !important;grid-template-columns:118px minmax(0,1fr) !important;gap:12px !important;min-height:0 !important;padding:10px !important;border-radius:22px !important;width:100% !important;max-width:100% !important;}
-  .product .media,.product > div:first-child{width:118px !important;height:142px !important;min-height:142px !important;border-radius:17px !important;overflow:hidden !important;display:block !important;}
-  .product .media img.cover,.product img.cover,.product .cover{display:block !important;width:100% !important;height:100% !important;min-height:142px !important;object-fit:cover !important;object-position:center !important;opacity:1 !important;visibility:visible !important;}
-  .product .body{padding:4px 2px !important;min-width:0 !important;}
-  .product h3{font-size:16px !important;line-height:1.15 !important;margin:5px 0 !important;display:block !important;}
-  .product p{font-size:11.5px !important;line-height:1.28 !important;margin:4px 0 !important;display:-webkit-box !important;-webkit-line-clamp:2 !important;-webkit-box-orient:vertical !important;overflow:hidden !important;}
-  .product .pills{gap:5px !important;margin:5px 0 !important;}
-  .product .pills span{font-size:8.5px !important;padding:3px 6px !important;}
-  .product .priceRow{margin-top:6px !important;gap:7px !important;align-items:center !important;}
-  .product .price{font-size:20px !important;line-height:1 !important;}
-  .product .add,.premium-buy-btn{min-height:36px !important;padding:8px 10px !important;font-size:11px !important;border-radius:11px !important;}
-
-  .premium-card{display:grid !important;grid-template-columns:118px minmax(0,1fr) !important;background:linear-gradient(145deg,#0a0614,#12062a 55%,#0d0a1f) !important;}
-  .premium-card .premium-body{padding:4px 2px !important;}
-  .premium-title{font-size:19px !important;line-height:1.08 !important;}
-  .premium-desc{font-size:11.5px !important;line-height:1.25 !important;-webkit-line-clamp:2 !important;display:-webkit-box !important;-webkit-box-orient:vertical !important;overflow:hidden !important;}
-  .premium-perks{display:grid !important;grid-template-columns:1fr 1fr !important;gap:5px !important;margin:6px 0 !important;}
-  .perk{font-size:8.5px !important;min-height:26px !important;padding:5px !important;}
-  .premium-price-amount{font-size:24px !important;line-height:1 !important;}
-
-  .bundle-inner{display:block !important;padding:15px !important;border-radius:24px !important;}
-  .bundle-title{font-size:22px !important;line-height:1.1 !important;}
-  .bundle-sub{font-size:12px !important;line-height:1.3 !important;}
-  .bundle-price-block{display:flex !important;align-items:center !important;gap:12px !important;flex-wrap:wrap !important;margin:10px 0 !important;}
-  .bundle-old-price{font-size:13px !important;}
-  .bundle-new-price{font-size:36px !important;line-height:1 !important;}
-  .bundle-save-line{font-size:11px !important;width:100% !important;}
+  /* Premium card tou pa dwe long twòp */
+  .premium-card{
+    display:block !important;
+    border-radius:22px !important;
+    min-height:0 !important;
+  }
+  .premium-body{padding:16px !important;}
+  .premium-title{font-size:24px !important;}
+  .premium-desc{font-size:12.5px !important;}
+  .premium-perks{grid-template-columns:1fr 1fr !important; gap:7px !important;}
+  .perk{font-size:10.5px !important; min-height:34px !important; padding:8px !important;}
+  .premium-price-amount{font-size:36px !important;}
 }
+
+@media (max-width: 390px){
+  .brand img{width:66px !important;height:66px !important;min-width:66px !important;}
+  .brand b{font-size:16px !important;}
+  .product{grid-template-columns:100px minmax(0,1fr) !important;}
+  .product > div:first-child,.media,.rich-media{width:100px !important;min-height:154px !important;}
+  .product img,.media img.cover{min-height:154px !important;}
+  .bundle-title{font-size:20px !important;}
+  .bundle-new-price{font-size:34px !important;}
+}
+
+/* ===== FINAL MOBILE: SEKSYON YO TOUJOU AFICHE + FOTO MARKET YO MONTE ===== */
+@media (max-width:900px){
+  /* STREAMING ACCESS / AI STORE / VIP ACCESS pa bezwen klike ankò */
+  #formations,
+  #prompts,
+  #premium{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+  #formations .acc-body,
+  #prompts .acc-body,
+  #premium .acc-body{
+    display:block !important;
+    max-height:none !important;
+    height:auto !important;
+    overflow:visible !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+  #formations .acc-arrow,
+  #prompts .acc-arrow,
+  #premium .acc-arrow{
+    display:none !important;
+  }
+  #formations .acc-head,
+  #prompts .acc-head,
+  #premium .acc-head{
+    cursor:default !important;
+    padding-right:0 !important;
+    margin-bottom:12px !important;
+  }
+  #formations .acc-desc,
+  #prompts .acc-desc,
+  #premium .acc-desc{
+    display:block !important;
+    font-size:12px !important;
+    line-height:1.35 !important;
+    max-width:100% !important;
+  }
+
+  /* Tout foto/visual pwodwi yo dwe monte klè sou telephone */
+  .gridProducts{
+    grid-template-columns:1fr !important;
+    gap:14px !important;
+  }
+  .product{
+    width:100% !important;
+    max-width:100% !important;
+    overflow:hidden !important;
+    align-items:stretch !important;
+  }
+  .product > div:first-child,
+  .media,
+  .rich-media{
+    display:grid !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    overflow:hidden !important;
+    flex-shrink:0 !important;
+    background-size:cover !important;
+    background-position:center !important;
+  }
+  .product img,
+  .product .cover,
+  .media img.cover,
+  .catImg img,
+  .bundleBooks img{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+  .media img.cover,
+  .product[data-type='book'] .media img.cover{
+    object-fit:cover !important;
+    object-position:center !important;
+  }
+  .rich-media .rm-content,
+  .rich-media .rm-bg,
+  .rich-media .rm-circuit,
+  .rich-media .rm-particles,
+  .rich-media .rm-bars,
+  .rich-media .rm-sparkles{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+}
+
 @media (max-width:390px){
-  .brand img{width:104px !important;height:104px !important;min-width:104px !important;}
-  .product{grid-template-columns:106px minmax(0,1fr) !important;gap:10px !important;}
-  .product .media,.product > div:first-child{width:106px !important;height:134px !important;min-height:134px !important;}
-  .product .media img.cover,.product img.cover,.product .cover{min-height:134px !important;}
+  #formations .acc-body,
+  #prompts .acc-body,
+  #premium .acc-body{
+    max-height:none !important;
+    overflow:visible !important;
+  }
 }
