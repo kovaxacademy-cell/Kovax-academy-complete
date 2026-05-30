@@ -1984,3 +1984,195 @@ object-fit:cover;
   .priceRow{flex-direction:column !important; align-items:flex-start !important;}
   .add{width:100% !important;}
 }
+
+
+/* =====================================================
+   ✅ FINAL MOBILE OVERRIDE - Kovax Market
+   Sa mete STREAMING ACCESS / AI STORE / VIP ACCESS pou yo
+   toujou parèt nòmal sou telefòn, agrandi logo mobile,
+   epi fè foto/pwodwi yo monte nèt sou mobile.
+   ===================================================== */
+@media (max-width: 768px){
+  .topbar{
+    height:74px !important;
+    padding:0 12px 0 8px !important;
+  }
+  .brand img,
+  .nav-logo-img,
+  .nav-logo-img img{
+    width:64px !important;
+    height:64px !important;
+    min-width:64px !important;
+    max-width:64px !important;
+    object-fit:contain !important;
+  }
+  .brand b{font-size:18px !important; letter-spacing:.04em !important;}
+
+  /* Pa bezwen dropdown sou telefòn: tout seksyon yo ouvè dirèk */
+  #formations .acc-head,
+  #prompts .acc-head,
+  #premium .acc-head{
+    cursor:default !important;
+    pointer-events:none !important;
+    margin-bottom:12px !important;
+  }
+  #formations .acc-arrow,
+  #prompts .acc-arrow,
+  #premium .acc-arrow{
+    display:none !important;
+  }
+  #acc-formations,
+  #acc-prompts,
+  #acc-premium,
+  .acc-body{
+    display:block !important;
+    max-height:none !important;
+    height:auto !important;
+    overflow:visible !important;
+    opacity:1 !important;
+    visibility:visible !important;
+  }
+
+  /* Fè tags yo parèt pi pwòp tankou tit seksyon, pa koupe sou mobile */
+  #formations .tag,
+  #prompts .tag,
+  #premium .tag{
+    display:inline-flex !important;
+    width:auto !important;
+    max-width:100% !important;
+    white-space:normal !important;
+    text-transform:uppercase !important;
+    letter-spacing:.12em !important;
+  }
+
+  /* Foto/pwodwi market yo monte nèt sou mobile */
+  #productGrid,#videoGrid,#promptGrid,#premiumGrid,
+  .gridProducts{
+    grid-template-columns:1fr !important;
+    padding-left:14px !important;
+    padding-right:14px !important;
+    gap:16px !important;
+  }
+  .product{
+    display:flex !important;
+    flex-direction:column !important;
+    grid-template-columns:none !important;
+    width:100% !important;
+    border-radius:24px !important;
+    overflow:hidden !important;
+  }
+  .media,
+  .rich-media{
+    width:100% !important;
+    height:230px !important;
+    min-height:230px !important;
+    max-height:none !important;
+    border-radius:0 !important;
+    display:flex !important;
+  }
+  .media img.cover,
+  .product .media img,
+  .product img.cover,
+  .rich-media img{
+    width:100% !important;
+    height:100% !important;
+    min-height:230px !important;
+    object-fit:cover !important;
+    object-position:center !important;
+    display:block !important;
+    visibility:visible !important;
+  }
+  .product[data-type='book'] .media img.cover{
+    object-fit:contain !important;
+    background:radial-gradient(circle at 50% 30%,rgba(39,200,255,.20),transparent 55%),#071026 !important;
+    padding:10px !important;
+  }
+  .body{
+    padding:16px !important;
+  }
+  .product h3{font-size:20px !important; line-height:1.12 !important;}
+  .product p{
+    display:block !important;
+    overflow:visible !important;
+    -webkit-line-clamp:unset !important;
+  }
+  .priceRow{
+    flex-direction:row !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+  }
+}
+
+@media (max-width: 430px){
+  .topbar{height:72px !important;}
+  .brand img,
+  .nav-logo-img,
+  .nav-logo-img img{
+    width:60px !important;
+    height:60px !important;
+    min-width:60px !important;
+    max-width:60px !important;
+  }
+  .media,
+  .rich-media{
+    width:100% !important;
+    height:215px !important;
+    min-height:215px !important;
+  }
+  .media img.cover,
+  .product .media img,
+  .product img.cover,
+  .rich-media img{
+    min-height:215px !important;
+  }
+  .product{grid-template-columns:none !important;}
+  .priceRow{gap:10px !important;}
+}
+
+@media (max-width: 360px){
+  .media,
+  .rich-media{
+    width:100% !important;
+    height:205px !important;
+    min-height:205px !important;
+  }
+  .media img.cover,
+  .product .media img,
+  .product img.cover,
+  .rich-media img{
+    min-height:205px !important;
+  }
+}
+
+
+/* ✅ Bundle mobile professional size */
+@media(max-width:768px){
+  .bundle-title{
+    font-size:20px !important;
+    line-height:1.18 !important;
+    letter-spacing:-.02em !important;
+  }
+
+  .bundle-save-badge{
+    font-size:15px !important;
+    margin-top:3px !important;
+  }
+
+  .bundle-sub{
+    font-size:13px !important;
+    line-height:1.4 !important;
+  }
+
+  .bundle-old-price{
+    font-size:11px !important;
+  }
+
+  .bundle-new-price{
+    font-size:34px !important;
+    line-height:1 !important;
+  }
+
+  .bundle-save-line{
+    font-size:12px !important;
+  }
+}
