@@ -2176,3 +2176,277 @@ object-fit:cover;
     font-size:12px !important;
   }
 }
+
+/* ==========================================================
+   ✅ FINAL REAL FIX — MOBILE MARKET 2026 LUXURY STYLE
+   Bundle + Product cards optimized for téléphone
+   ========================================================== */
+@media (max-width: 768px){
+  .wrap{
+    padding:30px 14px 70px !important;
+  }
+
+  .head{
+    margin:22px 0 16px !important;
+    gap:10px !important;
+  }
+  .head h2{
+    font-size:27px !important;
+    line-height:1.02 !important;
+    letter-spacing:-.04em !important;
+  }
+  .head p{
+    font-size:13px !important;
+    line-height:1.45 !important;
+  }
+
+  /* pwodwi yo: pi piti, pi premium, pi fasil pou achte */
+  .gridProducts{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:16px !important;
+  }
+  .product{
+    width:100% !important;
+    max-width:390px !important;
+    min-height:0 !important;
+    margin:0 auto !important;
+    border-radius:24px !important;
+    border:1px solid rgba(255,255,255,.14) !important;
+    background:linear-gradient(180deg,rgba(255,255,255,.105),rgba(255,255,255,.045)) !important;
+    box-shadow:0 16px 48px rgba(0,0,0,.46), 0 0 0 1px rgba(39,200,255,.04) inset !important;
+    overflow:hidden !important;
+  }
+  .product:hover{
+    transform:none !important;
+  }
+  .media,
+  .rich-media{
+    height:190px !important;
+    min-height:190px !important;
+    border-radius:0 !important;
+  }
+  .media img.cover,
+  .product .media img,
+  .product img.cover,
+  .rich-media img{
+    width:100% !important;
+    height:100% !important;
+    min-height:190px !important;
+    object-fit:cover !important;
+    object-position:center !important;
+    display:block !important;
+  }
+  .body,
+  .productBody,
+  .pbody{
+    padding:15px 15px 16px !important;
+  }
+  .product h3,
+  .product-title,
+  .body h3,
+  .pbody h3{
+    font-size:20px !important;
+    line-height:1.08 !important;
+    margin-bottom:6px !important;
+    letter-spacing:-.025em !important;
+  }
+  .product p,
+  .product-desc,
+  .body p,
+  .pbody p{
+    font-size:12.5px !important;
+    line-height:1.38 !important;
+    margin-bottom:10px !important;
+  }
+  .meta,
+  .productMeta,
+  .tags{
+    gap:6px !important;
+    margin:8px 0 10px !important;
+  }
+  .meta span,
+  .productMeta span,
+  .tags span{
+    font-size:10px !important;
+    padding:5px 8px !important;
+    border-radius:999px !important;
+  }
+  .price,
+  .product-price,
+  .priceRow strong{
+    font-size:28px !important;
+    line-height:1 !important;
+    letter-spacing:-.04em !important;
+  }
+  .priceRow{
+    margin-top:10px !important;
+    gap:10px !important;
+    align-items:center !important;
+  }
+  .add,
+  .buyBtn,
+  .product button,
+  .dl-card-btn{
+    min-height:46px !important;
+    height:46px !important;
+    border-radius:15px !important;
+    font-size:13.5px !important;
+    font-weight:900 !important;
+    padding:0 14px !important;
+    box-shadow:0 10px 28px rgba(39,200,255,.22) !important;
+  }
+
+  /* Bundle “Achte 2 liv” — petit, bel, premium */
+  .bundle{
+    width:100% !important;
+    max-width:390px !important;
+    margin:18px auto 28px !important;
+    padding:0 !important;
+    overflow:visible !important;
+  }
+  .bundle-inner{
+    width:100% !important;
+    max-width:390px !important;
+    padding:16px 14px 18px !important;
+    border-radius:24px !important;
+    border:1px solid rgba(39,200,255,.28) !important;
+    background:linear-gradient(145deg,rgba(5,13,36,.98),rgba(8,11,31,.98) 52%,rgba(4,17,30,.98)) !important;
+    box-shadow:0 18px 50px rgba(0,0,0,.52),0 0 38px rgba(39,200,255,.09) !important;
+  }
+  .bundle-badge{
+    display:inline-flex !important;
+    width:auto !important;
+    max-width:none !important;
+    font-size:9.5px !important;
+    letter-spacing:.11em !important;
+    padding:6px 10px !important;
+    margin:0 0 12px !important;
+    border-radius:999px !important;
+  }
+  .bundle-main{
+    display:block !important;
+  }
+  .bundle-books-visual{
+    display:grid !important;
+    grid-template-columns:1fr 22px 1fr !important;
+    gap:7px !important;
+    align-items:center !important;
+    margin:0 0 14px !important;
+  }
+  .bk-card,
+  .bundle-card{
+    width:100% !important;
+    max-width:118px !important;
+    min-height:160px !important;
+    padding:10px 8px !important;
+    border-radius:18px !important;
+    margin:0 auto !important;
+  }
+  .bk-card img,
+  .bundle-card img,
+  .bundle-card .book-img{
+    max-height:92px !important;
+    width:auto !important;
+    object-fit:contain !important;
+  }
+  .bk-card h4,
+  .bundle-card h4,
+  .bundle-card h3{
+    font-size:12px !important;
+    line-height:1.12 !important;
+    margin:7px 0 4px !important;
+  }
+  .bk-card p,
+  .bundle-card p,
+  .bundle-card span{
+    font-size:9px !important;
+    line-height:1.18 !important;
+  }
+  .bundle-plus{
+    font-size:20px !important;
+    width:22px !important;
+    min-width:22px !important;
+    text-align:center !important;
+    opacity:.72 !important;
+  }
+  .bundle-info{
+    gap:9px !important;
+    text-align:left !important;
+  }
+  .bundle-title{
+    font-size:18px !important;
+    line-height:1.12 !important;
+    letter-spacing:-.025em !important;
+    margin:4px 0 3px !important;
+  }
+  .bundle-save-badge{
+    display:block !important;
+    font-size:13px !important;
+    line-height:1.15 !important;
+    margin-top:3px !important;
+    letter-spacing:-.01em !important;
+  }
+  .bundle-sub{
+    font-size:12px !important;
+    line-height:1.34 !important;
+    margin:6px 0 8px !important;
+    color:rgba(225,232,255,.76) !important;
+  }
+  .bundle-price-block{
+    gap:2px !important;
+    margin:2px 0 0 !important;
+  }
+  .bundle-old-price{
+    font-size:10px !important;
+    gap:6px !important;
+    line-height:1.1 !important;
+  }
+  .bundle-old-price s{
+    font-size:18px !important;
+  }
+  .bundle-new-price{
+    font-size:31px !important;
+    line-height:.95 !important;
+    margin:2px 0 !important;
+    letter-spacing:-.045em !important;
+    text-shadow:0 0 24px rgba(39,200,255,.28) !important;
+  }
+  .bundle-save-line{
+    font-size:11px !important;
+    line-height:1.22 !important;
+    margin:5px 0 10px !important;
+  }
+  .bundle-btn{
+    width:100% !important;
+    height:44px !important;
+    min-height:44px !important;
+    border-radius:15px !important;
+    font-size:13px !important;
+    padding:0 12px !important;
+    margin-top:8px !important;
+    box-shadow:0 10px 30px rgba(39,200,255,.28) !important;
+  }
+  .bundle-guarantee{
+    font-size:10px !important;
+    line-height:1.25 !important;
+    margin-top:9px !important;
+    opacity:.78 !important;
+  }
+}
+
+@media (max-width: 390px){
+  .product,
+  .bundle,
+  .bundle-inner{max-width:354px !important;}
+  .media,
+  .rich-media{height:176px !important;min-height:176px !important;}
+  .media img.cover,
+  .product .media img,
+  .product img.cover,
+  .rich-media img{min-height:176px !important;}
+  .bundle-title{font-size:17px !important;}
+  .bundle-save-badge{font-size:12.5px !important;}
+  .bundle-new-price{font-size:29px !important;}
+  .bk-card,.bundle-card{max-width:108px !important;min-height:152px !important;}
+}
