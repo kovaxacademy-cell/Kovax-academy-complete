@@ -2455,7 +2455,7 @@ object-fit:cover;
 }
 
 
-/* ✅ MOBILE FINAL: recherche monte + video anime achat/charyo */
+/* ✅ MOBILE FINAL: recherche monte + Kovax Academy clean (video retire) */
 .mobile-shop-video{display:none}
 @media(max-width:768px){
   /* Recherche la monte pi pre header la, san li pa bouche logo */
@@ -2486,103 +2486,8 @@ object-fit:cover;
     opacity:.82 !important;
   }
 
-  /* Banner video anime: sèlman sou telephone */
-  .mobile-shop-video{
-    display:block !important;
-    width:calc(100vw - 32px) !important;
-    margin:4px auto 18px !important;
-    padding:13px 13px 15px !important;
-    border-radius:28px !important;
-    background:
-      radial-gradient(circle at 18% 15%,rgba(39,200,255,.28),transparent 34%),
-      radial-gradient(circle at 88% 70%,rgba(139,92,246,.30),transparent 36%),
-      linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.035)) !important;
-    border:1px solid rgba(255,255,255,.14) !important;
-    box-shadow:0 22px 62px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.12) !important;
-    backdrop-filter:blur(22px) !important;
-    overflow:hidden !important;
-    position:relative !important;
-  }
-  .mobile-shop-video:before{
-    content:"";
-    position:absolute;inset:-80px -45px auto auto;
-    width:150px;height:150px;border-radius:999px;
-    background:rgba(39,200,255,.20);
-    filter:blur(18px);
-    animation:kovaxVideoGlow 4s ease-in-out infinite alternate;
-  }
-  .mobile-video-phone{
-    position:relative !important;
-    height:188px !important;
-    border-radius:24px !important;
-    background:linear-gradient(160deg,#050918,#0b1744 55%,#120b31) !important;
-    border:1px solid rgba(39,200,255,.24) !important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 16px 44px rgba(0,0,0,.36) !important;
-    overflow:hidden !important;
-  }
-  .mobile-video-phone:before{
-    content:"";
-    position:absolute;inset:0;
-    background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.10) 40%,transparent 62%);
-    transform:translateX(-100%);
-    animation:kovaxShine 3.8s ease-in-out infinite;
-  }
-  .video-status{
-    position:absolute;top:12px;left:12px;
-    padding:6px 10px;border-radius:999px;
-    background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.42);
-    color:#b8ffd1;font:900 9px Outfit,system-ui,sans-serif;letter-spacing:.16em;
-  }
-  .video-logo{
-    position:absolute;top:48px;left:14px;
-    color:#fff;font:900 18px Outfit,system-ui,sans-serif;letter-spacing:.05em;
-    text-shadow:0 0 20px rgba(39,200,255,.45);
-  }
-  .video-logo span{color:var(--cyan)}
-  .video-product-card{
-    position:absolute;left:14px;right:14px;bottom:18px;
-    min-height:74px;border-radius:20px;
-    display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:10px;
-    padding:10px;
-    background:rgba(255,255,255,.10);
-    border:1px solid rgba(255,255,255,.14);
-    box-shadow:0 10px 30px rgba(0,0,0,.20);
-    animation:kovaxProductFloat 3.4s ease-in-out infinite;
-  }
-  .video-product-img{
-    width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:29px;
-    background:linear-gradient(135deg,rgba(39,200,255,.22),rgba(139,92,246,.22));
-    border:1px solid rgba(255,255,255,.12);
-  }
-  .video-product-info strong{display:block;font-size:13px;line-height:1.05;color:white;font-weight:900}
-  .video-product-info small{display:block;margin-top:4px;font-size:10px;color:rgba(225,232,255,.68);font-weight:700}
-  .video-price{font-size:18px;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));padding:7px 9px;border-radius:13px}
-  .video-hand{
-    position:absolute;right:68px;top:76px;font-size:26px;z-index:3;
-    filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));
-    animation:kovaxTap 2.5s ease-in-out infinite;
-  }
-  .video-cart{
-    position:absolute;right:15px;top:67px;width:48px;height:48px;border-radius:17px;
-    display:grid;place-items:center;font-size:24px;
-    background:linear-gradient(135deg,var(--blue),var(--cyan));
-    border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 14px 34px rgba(39,200,255,.28);
-    animation:kovaxCartPop 2.5s ease-in-out infinite;
-  }
-  .video-cart span{
-    position:absolute;right:-6px;top:-8px;min-width:24px;height:24px;border-radius:99px;
-    display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--pink));
-    color:#fff;font:900 11px Outfit,system-ui,sans-serif;
-    animation:kovaxBadgePop 2.5s ease-in-out infinite;
-  }
-  .video-progress{position:absolute;left:14px;right:14px;bottom:7px;height:4px;border-radius:999px;background:rgba(255,255,255,.10);overflow:hidden}
-  .video-progress i{display:block;height:100%;width:38%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--purple));animation:kovaxProgress 3.2s linear infinite}
-  .mobile-video-text{padding:12px 4px 0;text-align:left}
-  .mobile-video-text span{display:block;color:var(--cyan);font:900 10px 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;margin-bottom:5px}
-  .mobile-video-text b{display:block;color:#fff;font-size:15px;line-height:1.25;letter-spacing:-.01em}
-
-  .hero{padding-top:10px !important;}
+  /* Video anime retire sou demann: pa afiche okenn banner video sou mobile. */
+  .mobile-shop-video{display:none !important;}
 }
 @media(min-width:769px){.mobile-shop-video{display:none !important}}
 @media(max-width:390px){
@@ -2601,3 +2506,8 @@ object-fit:cover;
 @keyframes kovaxCartPop{0%,48%,100%{transform:scale(1)}58%{transform:scale(1.12)}68%{transform:scale(1)}}
 @keyframes kovaxBadgePop{0%,52%,100%{opacity:.75;transform:scale(.85)}60%,72%{opacity:1;transform:scale(1.12)}}
 @keyframes kovaxProgress{0%{transform:translateX(-120%);width:35%}100%{transform:translateX(320%);width:45%}}
+
+
+/* ✅ FINAL FIX: video anime retire nèt; sèlman recherche + Kovax Academy rete sou mobile */
+.mobile-shop-video,.mobile-video-phone,.mobile-video-text{display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important;border:0 !important;}
+@media(max-width:768px){.mobile-search-wrap{display:block !important;margin-top:0 !important;padding-top:8px !important;}.brand b{font-size:18px !important;line-height:1.05 !important;}.brand img{width:72px !important;height:72px !important;}}
