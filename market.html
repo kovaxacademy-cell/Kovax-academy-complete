@@ -169,6 +169,11 @@
 </div>
 </main> 
 
+<!-- ✅ Menm bouton rapid monte ki deja sou paj akèy la -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retounen anwo">
+  <svg viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
 <div class="drawer" id="drawer"><div class="shade" onclick="closeCart()"></div><aside class="cartPanel"><button class="close" onclick="closeCart()">×</button><h2>🛒 Charyo Kovax</h2><p class="small">Ajoute pwodwi w vle. Aprè pèman, bouton telechajman an ap parèt.</p><div id="cartItems"></div><div class="checkoutBox" id="checkoutBox"><div class="total"><span>Total</span><span id="cartTotal">$0.00</span></div><div class="market-wallet-row" aria-label="Chwazi metòd pèman">
   <button type="button" class="mw-paypal active" data-wallet="paypal" onclick="selectWallet('paypal')">PayPal</button>
   <button type="button" class="mw-card" data-wallet="card" onclick="selectWallet('card')">💳 Card</button>
@@ -180,6 +185,16 @@
 <footer><div><b>Kovax Academy</b><br>Depase Tout Limit ak Teknoloji</div><div>© 2026 Kovax Market • Liv PDF • Fòmasyon Videyo • Prompt Store</div></footer>
 
 <script>window.addEventListener('load',()=>setTimeout(()=>document.getElementById('kovaxLoader')?.classList.add('hide'),350));</script>
+
+<script>
+(function(){
+  var b=document.getElementById('backTop');
+  if(!b) return;
+  function toggleBackTop(){ b.classList.toggle('show', window.scrollY > 400); }
+  window.addEventListener('scroll', toggleBackTop, {passive:true});
+  toggleBackTop();
+})();
+</script>
 <script src="market-script.js" defer></script>
 </body>
 </html>
