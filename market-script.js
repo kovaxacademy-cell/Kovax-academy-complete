@@ -16,15 +16,7 @@ function normalizeId(id){return legacyIdMap[id]||id;}
 cart=cart.map(i=>({id:normalizeId(i.id),qty:Number(i.qty)||1})).filter(i=>i.id&&i.qty>0);
 // BUG 2 FIX: money() toujou montre 2 desimal pou konsistans ($55.00 pa $55)
 function money(n){return '$'+Number(n).toFixed(2)}function productCard(p){
-if(p.type==='premium'){
-return `<article class="product premium-card" data-type="${p.type}">
-  <div class="media premium-photo-wrap"><span class="label">VIP ACCESS</span><img class="cover" src="${p.img}" alt="${p.title}" onerror="this.style.visibility='hidden'"></div>
-  <div class="premium-body">
-    <div class="premium-title-group"><div class="type" style="color:var(--gold);letter-spacing:.15em">PREMIUM</div><h3 class="premium-title">${p.title}</h3><p class="premium-desc">${p.desc}</p></div>
-    <div class="premium-perks"><div class="perk"><span>✦</span> Premiere Pro, Inshot</div><div class="perk"><span>✦</span> Tout videyo fòmasyon yo</div><div class="perk"><span>✦</span> Tout prompt pack yo</div><div class="perk"><span>✦</span> Metrize AI</div></div>
-    <div class="premium-price-row"><div class="premium-price-block"><div class="premium-price-amount">$40<span></span></div></div><button class="premium-buy-btn" data-add-to-cart="${p.id}"><span class="btn-shimmer"></span>♛ Mete nan charyo</button></div>
-  </div>
-</article>`;}
+if(p.type==='premium'){return `<article class="product premium-card" data-type="${p.type}"><div class="premium-shine"></div><div class="premium-orb orb1"></div><div class="premium-orb orb2"></div><div class="premium-orb orb3"></div><div class="premium-header"><div class="premium-crown">♛</div><div class="premium-badge-top"></div></div><div class="premium-body"><div class="premium-title-group"><div class="type" style="color:var(--gold);letter-spacing:.15em">${p.cat}</div><h3 class="premium-title">${p.title}</h3><p class="premium-desc">${p.desc}</p></div><div class="premium-perks"><div class="perk"><span>✦</span> Premiere Pro, Inshot</div><div class="perk"><span>✦</span> Tout videyo fòmasyon yo</div><div class="perk"><span>✦</span> Tout prompt pack yo</div><div class="perk"><span>✦</span> Metrize AI </div><div class="perk"><span>✦</span>TITO AI</div></div><div class="premium-price-row"><div class="premium-price-block"><div class="premium-price-label"></div><div class="premium-price-amount">$40<span></span></div></div><button class="premium-buy-btn" data-add-to-cart="${p.id}"><span class="btn-shimmer"></span>♛ Mete nan charyo</button></div></div></article>`;}
 const mediaPanels={
 'info':`<div class="rich-media rm-info">
   <div class="rm-bg"></div>
@@ -79,7 +71,7 @@ const mediaPanels={
   <div class="rm-sparkles"><i></i><i></i><i></i><i></i></div>
 </div>`};
 // Bug 1: badge pa dwe parèt 2 fwa — si rich media panel la egziste, mete badge anndan yon wrapper relatif; sinon sèlman anndan .media
-const hasRichMedia = false;
+const hasRichMedia = !!mediaPanels[p.id];
 const mediaHtml = hasRichMedia
   ? `<div style="position:relative">${mediaPanels[p.id]}<span class="label pcard-label">${p.badge}</span></div>`
   : `<div class="media"><span class="label">${p.badge}</span><img class="cover" src="${p.img}" alt="${p.title}" onerror="this.style.visibility='hidden';this.parentElement.style.minHeight='80px'"><div class="img-glow"></div></div>`;
@@ -110,7 +102,6 @@ function setFilter(f,el){
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
   render();
-['formations','prompts','premium'].forEach(toggleSection);
 updateAuthUI();
   // Scroll sou premye seksyon ki vizib
   var target = f==='all' ? 'livres' : (f==='book'?'livres':f==='video'?'formations':f==='prompt'?'prompts':'premium');
