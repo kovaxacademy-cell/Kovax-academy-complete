@@ -2511,3 +2511,108 @@ object-fit:cover;
 /* ✅ FINAL FIX: video anime retire nèt; sèlman recherche + Kovax Academy rete sou mobile */
 .mobile-shop-video,.mobile-video-phone,.mobile-video-text{display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important;border:0 !important;}
 @media(max-width:768px){.mobile-search-wrap{display:block !important;margin-top:0 !important;padding-top:8px !important;}.brand b{font-size:18px !important;line-height:1.05 !important;}.brand img{width:72px !important;height:72px !important;}}
+
+/* ✅ FIX FINAL HEADER MOBILE: retire espas vid anba header/recherche */
+@media (max-width:768px){
+  .topbar{
+    min-height:82px !important;
+    height:82px !important;
+    padding:8px 14px !important;
+    display:grid !important;
+    grid-template-columns:1fr auto auto !important;
+    align-items:center !important;
+    gap:8px !important;
+    margin:0 !important;
+  }
+
+  .brand{
+    grid-column:1 !important;
+    align-items:center !important;
+    gap:9px !important;
+    min-width:0 !important;
+  }
+
+  .brand img{
+    width:50px !important;
+    height:50px !important;
+    flex:0 0 50px !important;
+  }
+
+  .brand b{
+    font-size:24px !important;
+    line-height:1.02 !important;
+    letter-spacing:.045em !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+
+  .tools{
+    grid-column:2 / 4 !important;
+    margin-left:0 !important;
+    gap:8px !important;
+    justify-self:end !important;
+  }
+
+  .cartBtn,
+  .hamburger,
+  .menuBtn,
+  .nav-toggle{
+    width:54px !important;
+    height:54px !important;
+    min-width:54px !important;
+    min-height:54px !important;
+    border-radius:16px !important;
+    padding:0 !important;
+  }
+
+  .cartBtn{font-size:20px !important;}
+  .cartBtn em{right:-6px !important;top:-8px !important;min-width:22px !important;height:22px !important;font-size:12px !important;}
+
+  .mobile-search-wrap{
+    display:block !important;
+    width:100% !important;
+    padding:12px 18px 8px !important;
+    margin:0 !important;
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+    position:relative !important;
+    z-index:3 !important;
+  }
+
+  .mobile-search-wrap .mobile-search{
+    height:48px !important;
+    min-height:48px !important;
+    border-radius:18px !important;
+    font-size:15px !important;
+    padding-left:46px !important;
+    background:rgba(255,255,255,.055) !important;
+    border:1px solid rgba(39,200,255,.30) !important;
+    box-shadow:0 10px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.08) !important;
+  }
+
+  .mobile-search-wrap:before{
+    left:34px !important;
+    top:24px !important;
+    font-size:18px !important;
+  }
+
+  .hero{
+    padding:8px 18px 26px !important;
+    margin-top:0 !important;
+    min-height:auto !important;
+  }
+
+  .hero .tag{margin-top:0 !important;}
+  .hero h1{margin-top:12px !important;}
+}
+
+@media (max-width:430px){
+  .topbar{height:80px !important;min-height:80px !important;padding:7px 12px !important;}
+  .brand img{width:48px !important;height:48px !important;}
+  .brand b{font-size:22px !important;letter-spacing:.04em !important;}
+  .cartBtn,.hamburger,.menuBtn,.nav-toggle{width:50px !important;height:50px !important;min-width:50px !important;min-height:50px !important;}
+  .mobile-search-wrap{padding:10px 16px 6px !important;}
+  .hero{padding-top:6px !important;}
+}
