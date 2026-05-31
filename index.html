@@ -1253,7 +1253,7 @@ body {
   </div>
   <div style="margin-top:20px;" class="glass-card video-card rv">
     <div style="display:grid;grid-template-columns:1.2fr 1fr;">
-      <div class="video-thumb" style="padding-bottom:0;height:100%;min-height:220px;background:#04060F;">
+      <div class="video-thumb" style="padding-bottom:0;height:100%;min-height:220px;background:#04060F;position:relative;">
         <video id="kvVid2" autoplay loop playsinline muted preload="auto"
           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
           <source src="photo-1555949963-ff9fe0c870eb.mp4" type="video/mp4">
@@ -1264,6 +1264,11 @@ body {
             <div class="live-dot" style="background:#c080d8;"></div>
             <span style="color:#c080d8;">APÈSI KOU</span>
           </div>
+        </div>
+        <!-- BOUTON ENVIZIB — tout sipèfisi video a, klike pou aktive son -->
+        <div id="kvVid2Overlay"
+          style="position:absolute;inset:0;z-index:4;cursor:pointer;"
+          onclick="kvToggleVid2Sound()">
         </div>
       </div>
       <div class="video-info" style="padding:28px;">
@@ -1912,16 +1917,39 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
 
   }); // end DOMContentLoaded
 })();
-// ── Mute toggle for video 1 ──
+// ── Son Video 2 — klike sou video aktive/koupe son ──
+window.kvToggleVid2Sound = function(){
+  var vid2   = document.getElementById('kvVid2');
+  var timer  = window._kvVid2Timer || null;
+  if(!vid2) return;
+
+  if(vid2.muted){
+    // Aktive son
+    vid2.muted  = false;
+    vid2.volume = 1;
+    // Koupe apre 8 sèkond
+    if(timer) clearTimeout(timer);
+    window._kvVid2Timer = setTimeout(function(){
+      vid2.muted = true;
+    }, 8000);
+  } else {
+    // Koupe son imedyatman
+    vid2.muted = true;
+    if(timer) clearTimeout(timer);
+    window._kvVid2Timer = null;
+  }
+};
+
+// ── Mute toggle Video 1 — kontwole sèlman kvVid1a ak kvVid1b ──
 window.kvToggleMute = function(btn) {
   var vidA = document.getElementById('kvVid1a');
   var vidB = document.getElementById('kvVid1b');
   var icon = document.getElementById('kvMuteIcon');
-  if (!vidA) return;
+  if(!vidA) return;
   var nowMuted = !vidA.muted;
   vidA.muted = nowMuted;
   if(vidB) vidB.muted = nowMuted;
-  if (nowMuted) {
+  if(nowMuted){
     icon.innerHTML = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
     btn.classList.remove('kv-sound-on');
     btn.setAttribute('aria-label','Aktive son');
@@ -1937,49 +1965,7 @@ window.kvToggleMute = function(btn) {
 
 
 
-<script>
-(function(){
-  document.addEventListener('DOMContentLoaded', function(){
-    var vid2 = document.getElementById('kvVid2');
-    if(!vid2) return;
 
-    var timer8 = null;
-
-    function activateSound(){
-      vid2.muted  = false;
-      vid2.volume = 1;
-      // Konte 8 sèkond depi SON AN kòmanse vrèman
-      if(timer8) clearTimeout(timer8);
-      timer8 = setTimeout(function(){ vid2.muted = true; }, 8000);
-    }
-
-    // Eseye ak son dirèkteman
-    vid2.muted = false;
-    vid2.volume = 1;
-    var p = vid2.play();
-    if(p && p.then){
-      p.then(function(){
-        // Autoplay ak son mache — kòmanse minutri a
-        if(timer8) clearTimeout(timer8);
-        timer8 = setTimeout(function(){ vid2.muted = true; }, 8000);
-      }).catch(function(){
-        // Browser bloke son — kòmanse muted, tann premye interaksyon
-        vid2.muted = true;
-        vid2.play().catch(function(){});
-        function onInteract(){
-          activateSound();
-        }
-        document.addEventListener('click',      onInteract, {once:true});
-        document.addEventListener('touchstart', onInteract, {once:true});
-      });
-    } else {
-      // Vye browser — kòmanse minutri a
-      if(timer8) clearTimeout(timer8);
-      timer8 = setTimeout(function(){ vid2.muted = true; }, 8000);
-    }
-  });
-})();
-</script>
 
 </body>
 </html>
