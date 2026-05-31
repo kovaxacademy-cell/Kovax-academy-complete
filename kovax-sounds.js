@@ -210,22 +210,6 @@
 
     /* ── Navigation ── */
 
-    /* Scroll down — airy descending breath */
-    scrollDown: function() {
-      silk(0.038, 0.22, 1800, 0.50);
-      tone(880, 'sine', 0.020, 0, 0.012, 0.22);
-      setTimeout(function(){ tone(740, 'sine', 0.014, 0, 0.010, 0.20); }, 55);
-      setTimeout(function(){ tone(622, 'sine', 0.009, 0, 0.010, 0.18); }, 110);
-    },
-
-    /* Scroll up — gentle ascending shimmer */
-    scrollUp: function() {
-      silk(0.035, 0.20, 1600, 0.52);
-      tone(622, 'sine', 0.018, 0, 0.012, 0.20);
-      setTimeout(function(){ tone(740, 'sine', 0.013, 0, 0.010, 0.18); }, 55);
-      setTimeout(function(){ tone(880, 'sine', 0.008, 0, 0.010, 0.16); }, 110);
-    },
-
     /* Section reveal woosh — soft landing */
     woosh: function() {
       silk(0.040, 0.16, 1500, 0.55);
@@ -472,32 +456,7 @@
       q('.sec-title,.section-title').forEach(function(el){ io.observe(el); });
     }
 
-    /* ── Scroll sound — descending & ascending ── */
-    (function(){
-      var lastY      = window.scrollY;
-      var lastSound  = 0;
-      var COOLDOWN   = 520;   /* ms between sounds — not too frequent */
-      var THRESHOLD  = 55;    /* px moved before triggering */
-      var ticking    = false;
 
-      window.addEventListener('scroll', function(){
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(function(){
-          ticking = false;
-          var now  = Date.now();
-          var curY = window.scrollY;
-          var diff = curY - lastY;
-
-          if (Math.abs(diff) >= THRESHOLD && (now - lastSound) >= COOLDOWN) {
-            lastSound = now;
-            if (diff > 0) S.scrollDown();
-            else          S.scrollUp();
-          }
-          lastY = curY;
-        });
-      }, { passive: true });
-    })();
   }
 
   function wirePage() {
