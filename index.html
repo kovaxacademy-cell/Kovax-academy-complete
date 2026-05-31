@@ -43,7 +43,7 @@ html{scroll-behavior:smooth;}
 }
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;line-height:1.7;}
 .orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);will-change:transform;}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);}
 .orb1{width:700px;height:700px;background:rgba(14,30,110,0.6);top:-200px;left:-200px;animation:oa 16s ease-in-out infinite alternate;}
 .orb2{width:500px;height:500px;background:rgba(41,171,226,0.18);top:0;right:-150px;animation:ob 19s ease-in-out infinite alternate;}
 .orb3{width:450px;height:450px;background:rgba(123,45,139,0.25);bottom:100px;left:20%;animation:oc 22s ease-in-out infinite alternate;}
@@ -1024,7 +1024,7 @@ html { scroll-padding-top: 80px; }
 <nav>
   <a href="#hero" class="nav-logo-wrap">
     <div class="nav-logo-img">
-      <img loading="lazy" src="img-hero-1.png" alt="Kovax Academy Logo" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-weight:900;color:#29ABE2;font-size:20px;\'>K</span>'">
+      <img loading="lazy" decoding="async" src="asset-1.png" alt="Kovax Academy Logo" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-weight:900;color:#29ABE2;font-size:20px;\'>K</span>'">
     </div>
     <span class="nav-logo-text">KOVAX <span>ACADEMY</span></span>
   </a>
@@ -1171,16 +1171,16 @@ body {
     <div class="glass-card video-card rv">
       <div class="video-thumb" id="kvVidThumb1" style="padding-bottom:56.25%;background:#04060F;">
 
-        <video id="kvVid1a" autoplay playsinline muted preload="auto"
+        <video id="kvVid1a" autoplay playsinline muted preload="metadata"
           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity 1.2s ease-in-out;z-index:2;">
-          <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/quicktime">
-          <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/mp4">
+          <source src="photo-1531482615713-2afd69097998_2_.mp4" type="video/mp4">
+          <source src="photo-1531482615713-2afd69097998_2_.mp4" type="video/mp4">
         </video>
 
-        <video id="kvVid1b" playsinline muted preload="auto"
+        <video id="kvVid1b" playsinline muted preload="metadata"
           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease-in-out;z-index:1;">
-          <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/quicktime">
-          <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/mp4">
+          <source src="photo-1531482615713-2afd69097998_2_.mp4" type="video/mp4">
+          <source src="photo-1531482615713-2afd69097998_2_.mp4" type="video/mp4">
         </video>
 
         <div style="position:absolute;top:14px;left:14px;z-index:5;">
@@ -1233,16 +1233,16 @@ body {
     </script>
     <div class="rv">
       <div class="photos-grid">
-        <div class="photo-item"><img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Klas Online"><div class="photo-overlay"><span class="photo-label">Seyans Live sou Google Meet 2h Pratik</span></div></div>
-        <div class="photo-item"><img loading="lazy" src="https://images.unsplash.com/photo-1593720219276-0b1eacd0aef4?w=600&q=80" alt="Lab"><div class="photo-overlay"><span class="photo-label">Lab Rezo &amp; Sekirite</span></div></div>
-        <div class="photo-item"><img loading="lazy" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="AI"><div class="photo-overlay"><span class="photo-label">Klas AI</span></div></div>
+        <div class="photo-item"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Klas Online"><div class="photo-overlay"><span class="photo-label">Seyans Live sou Google Meet 2h Pratik</span></div></div>
+        <div class="photo-item"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1593720219276-0b1eacd0aef4?w=600&q=80" alt="Lab"><div class="photo-overlay"><span class="photo-label">Lab Rezo &amp; Sekirite</span></div></div>
+        <div class="photo-item"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="AI"><div class="photo-overlay"><span class="photo-label">Klas AI</span></div></div>
       </div>
     </div>
   </div>
   <div style="margin-top:20px;" class="glass-card video-card rv">
     <div style="display:grid;grid-template-columns:1.2fr 1fr;">
       <div class="video-thumb" style="padding-bottom:0;height:100%;min-height:220px;background:#04060F;position:relative;">
-        <video id="kvVid2" autoplay loop playsinline muted preload="auto"
+        <video id="kvVid2" autoplay loop playsinline muted preload="metadata"
           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
           <source src="photo-1555949963-ff9fe0c870eb.mp4" type="video/mp4">
           <source src="photo-1555949963-ff9fe0c870eb.MP4" type="video/mp4">
@@ -1381,7 +1381,7 @@ body {
           <div class="code-line w3"></div>
           
 <div class="visual-photo">
-  <img loading="lazy" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=900&auto=format&fit=crop" alt="Klas teknoloji Kovax Academy">
+  <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=900&auto=format&fit=crop" alt="Klas teknoloji Kovax Academy">
 </div>
 
         </div>
@@ -1484,7 +1484,7 @@ body {
 </button>
 <div class="chat-window" id="chatWin">
   <div class="chat-header">
-    <div class="chat-avatar" style="padding:0;overflow:hidden;border:2px solid rgba(41,171,226,0.6);box-shadow:0 0 12px rgba(41,171,226,0.4);"><img loading="lazy" src="img-hero-2.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;border-radius:50%;" alt="Shama"></div>
+    <div class="chat-avatar" style="padding:0;overflow:hidden;border:2px solid rgba(41,171,226,0.6);box-shadow:0 0 12px rgba(41,171,226,0.4);"><img loading="lazy" decoding="async" src="asset-2.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;border-radius:50%;" alt="Shama"></div>
     <div class="chat-head-info"><div class="name">Shama ✨</div><div class="status"><div class="status-dot"></div>Asistan Entèlijan • Online 24/7</div></div>
     <button class="chat-close" onclick="toggleChat()">✕</button>
   </div>
@@ -1713,6 +1713,6 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
 
 
 
-<script src="kovax-sounds.js" defer></script>
+<script src="kovax-sounds.js"></script>
 </body>
 </html>
