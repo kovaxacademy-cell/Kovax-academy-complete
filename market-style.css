@@ -2783,26 +2783,3 @@ object-fit:cover;
   .mobile-search-wrap:before{left:30px !important;top:18px !important;}
   .hero{padding-top:10px !important;}
 }
-
-
-
-/* ✅ FIX FINAL: menu mobile dwe anlè overlay la pou klik Fòmasyon mache */
-@media (max-width:900px){
-  #mainNav.nav.mobile-open{
-    z-index:10050 !important;
-    pointer-events:auto !important;
-  }
-  #mainNav.nav.mobile-open a{
-    pointer-events:auto !important;
-    cursor:pointer !important;
-    touch-action:manipulation !important;
-  }
-  #navOverlay.nav-mobile-overlay.show{
-    z-index:10040 !important;
-    pointer-events:auto !important;
-  }
-  #hamburgerBtn{
-    position:relative !important;
-    z-index:10060 !important;
-  }
-}
