@@ -2783,3 +2783,50 @@ object-fit:cover;
   .mobile-search-wrap:before{left:30px !important;top:18px !important;}
   .hero{padding-top:10px !important;}
 }
+
+
+
+/* MOBILE FIX FORMATION CLICK */
+@media (max-width:768px){
+
+.products,
+.cards,
+.grid,
+.product-grid{
+  position:relative;
+  z-index:5;
+}
+
+.card,
+.product-card,
+.course-card{
+  position:relative;
+  z-index:6;
+}
+
+.card a,
+.card button,
+.product-card a,
+.product-card button,
+.btn,
+.buy-btn{
+  position:relative;
+  z-index:20;
+  pointer-events:auto;
+}
+
+.visual,
+.hero,
+.bg{
+  pointer-events:none;
+}
+
+.visual *{
+  pointer-events:none;
+}
+
+.nav-mobile-overlay{
+  display:none;
+}
+
+}
