@@ -438,6 +438,41 @@ function closeMobileNav(){
 }
 
 
+// ✅ FIX MENU MOBILE: lyen Fòmasyon/Liv/Prompt/Premium yo filtre + scroll kòrèk
+function goMarketSection(type, sectionId, navId){
+  closeMobileNav();
+
+  if(type){
+    filter = type;
+    document.querySelectorAll('.chip').forEach(function(c){
+      c.classList.remove('active');
+    });
+
+    var chipIndex = {all:1, book:2, video:3, prompt:4, premium:5}[type] || 1;
+    var chip = document.querySelector('.chip:nth-child(' + chipIndex + ')');
+    if(chip) chip.classList.add('active');
+
+    render();
+  }
+
+  document.querySelectorAll('.nav a').forEach(function(a){
+    a.classList.remove('active');
+  });
+  var nav = document.getElementById(navId);
+  if(nav) nav.classList.add('active');
+
+  var sec = document.getElementById(sectionId);
+  if(sec){
+    sec.style.display = '';
+    var acc = document.getElementById('acc-' + sectionId);
+    if(acc) acc.classList.add('open');
+    setTimeout(function(){
+      sec.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 80);
+  }
+}
+
+
 // FIX: Si onclick inline pa pran sou kèk navigatè, event delegation sa a fè bouton Achte yo mache toujou.
 document.addEventListener('click',function(e){
   const btn=e.target.closest('[data-add-to-cart]');
@@ -445,7 +480,7 @@ document.addEventListener('click',function(e){
   e.preventDefault();
   addToCart(btn.getAttribute('data-add-to-cart'));
 });
-Object.assign(window,{addToCart,removeItem,changeQty,openCart,closeCart,addBundle,render,setFilter,selectWallet,toggleMobileNav,closeMobileNav,toggleSection});
+Object.assign(window,{addToCart,removeItem,changeQty,openCart,closeCart,addBundle,render,setFilter,selectWallet,toggleMobileNav,closeMobileNav,goMarketSection,toggleSection});
 
 function toggleSection(id){
   if(window.innerWidth>900) return;
