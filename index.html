@@ -1871,5 +1871,49 @@ window.kvToggleMute = function(btn) {
 </script>
 
 
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+
+const videos=document.querySelectorAll("video");
+
+if(videos.length > 0){
+
+  // PREMIER VIDEO PROFESSIONAL SMOOTH LOOP
+  const firstVideo = videos[0];
+
+  firstVideo.style.transition = "opacity .6s ease-in-out";
+
+  firstVideo.addEventListener("timeupdate",()=>{
+      if(firstVideo.duration - firstVideo.currentTime < 0.25){
+          firstVideo.style.opacity = "0.82";
+      }else{
+          firstVideo.style.opacity = "1";
+      }
+  });
+}
+
+if(videos.length > 1){
+
+  // 2EME VIDEO
+  const secondVideo = videos[1];
+
+  secondVideo.muted = false;
+  secondVideo.volume = 1;
+
+  // apre 8 sec son an koupe otomatik
+  setTimeout(()=>{
+      secondVideo.muted = true;
+  },8000);
+
+  // video kontinye autoplay san son
+  secondVideo.setAttribute("autoplay","true");
+  secondVideo.setAttribute("playsinline","true");
+  secondVideo.play().catch(()=>{});
+}
+
+});
+</script>
+
 </body>
 </html>
