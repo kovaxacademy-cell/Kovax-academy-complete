@@ -860,6 +860,116 @@ box-shadow:0 14px 45px rgba(43,184,240,.20);
 @keyframes kovaxLogoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.025)}}
 @keyframes kovaxLogoGlow{0%{filter:drop-shadow(0 0 6px rgba(43,184,240,.45))}100%{filter:drop-shadow(0 0 18px rgba(139,60,247,.75)) drop-shadow(0 0 28px rgba(43,184,240,.35))}}
 
+
+/* ════════════════════════════════════════
+   KOVAX CLICK / INTERACTION EFFECTS
+   ════════════════════════════════════════ */
+
+/* 1. RIPPLE on every clickable element */
+.kv-ripple-host { position: relative; overflow: hidden; }
+.kv-ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: kvRipple 0.55s cubic-bezier(0,.5,.5,1) forwards;
+  pointer-events: none;
+  z-index: 100;
+}
+@keyframes kvRipple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* 2. Button press scale */
+.kv-pressable:active { transform: scale(0.95) !important; transition: transform 0.08s !important; }
+
+/* 3. GLOW PULSE on btn-glow after click */
+@keyframes kvGlowPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(41,171,226,0.7); }
+  70%  { box-shadow: 0 0 0 18px rgba(41,171,226,0); }
+  100% { box-shadow: 0 0 0 0 rgba(41,171,226,0); }
+}
+.kv-glow-pulse { animation: kvGlowPulse 0.55s ease-out; }
+
+/* 4. FAQ open: slide smooth + icon spin */
+.faq-a {
+  transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1),
+              padding 0.3s ease,
+              opacity 0.35s ease !important;
+  opacity: 0;
+}
+.faq-item.open .faq-a { opacity: 1; }
+.faq-icon { transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), background 0.2s, border-color 0.2s !important; }
+
+/* 5. Nav link underline slide */
+.nav-links a { position: relative; }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 0; height: 2px;
+  background: var(--cyan);
+  border-radius: 2px;
+  transition: width 0.28s ease;
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* 6. Card lift on click */
+.glass-card:active {
+  transform: translateY(-2px) scale(0.995) !important;
+  transition: transform 0.08s !important;
+}
+
+/* 7. CTA section shimmer click flash */
+@keyframes kvShimmer {
+  0%   { opacity: 0; transform: translateX(-120%) rotate(20deg); }
+  50%  { opacity: 0.18; }
+  100% { opacity: 0; transform: translateX(120%) rotate(20deg); }
+}
+.kv-shimmer-flash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.35) 50%, transparent 80%);
+  animation: kvShimmer 0.55s ease-out 1;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+/* 8. Social icon pop */
+@keyframes kvIconPop {
+  0%   { transform: translateY(-2px) scale(1.35); }
+  60%  { transform: translateY(-4px) scale(1.2); }
+  100% { transform: translateY(-2px) scale(1); }
+}
+.social-icon.kv-pop { animation: kvIconPop 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+
+/* 9. Hamburger menu: slide-in with easing */
+.mobile-menu { transition: transform 0.38s cubic-bezier(0.22,1,0.36,1) !important; }
+
+/* 10. FAQ: subtle bg flash on open */
+.faq-item.open {
+  background: rgba(41,171,226,0.04) !important;
+  transition: background 0.3s !important;
+}
+
+/* 11. Video autoplay: smooth fade in */
+.kv-vid { opacity: 0; transition: opacity 0.6s ease; }
+.kv-vid.kv-loaded { opacity: 1; }
+
+/* 12. Scroll-to anchor smooth + offset for sticky nav */
+html { scroll-padding-top: 80px; }
+
+/* ── MOBILE specific ── */
+@media (max-width: 768px) {
+  .kv-ripple { animation-duration: 0.45s; }
+  .faq-a { transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1), padding 0.25s ease, opacity 0.28s ease !important; }
+}
+
+/* Mute toggle button */
+#kvMuteBtn:hover { background: rgba(41,171,226,0.35) !important; transform: scale(1.12); }
+#kvMuteBtn.kv-sound-on { border-color: var(--cyan) !important; box-shadow: 0 0 10px rgba(41,171,226,0.4); }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
@@ -1046,10 +1156,18 @@ body {
   <p class="sec-desc rv">Seyans live, pratik, ak entèraktif. Wè jan etidyan yo aprann chak jou.</p>
   <div class="klas-grid">
     <div class="glass-card video-card rv">
-      <div class="video-thumb">
-        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" alt="Klas Kovax">
-        <div class="play-btn"><div class="play-icon"></div></div>
-        <div style="position:absolute;top:14px;left:14px;"><div class="live-badge"><div class="live-dot"></div><span>APÈSI KOU</span></div></div>
+      <div class="video-thumb" style="padding-bottom:56.25%;background:#04060F;">
+        <video class="kv-vid kv-vid-1" id="kvVid1" autoplay loop playsinline muted style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
+        <source data-src="photo-1531482615713-2afd69097998.mov" type="video/mp4">
+        <div style="position:absolute;top:14px;left:14px;z-index:3;"><div class="live-badge"><div class="live-dot"></div><span>APÈSI KOU</span></div></div>
+        <button id="kvMuteBtn" onclick="kvToggleMute(this)" aria-label="Aktive son" style="position:absolute;bottom:12px;right:12px;z-index:5;width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.55);background:rgba(4,6,15,0.55);backdrop-filter:blur(10px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s,transform 0.15s;padding:0;">
+          <svg id="kvMuteIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- muted icon: speaker + X -->
+            <polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+        </button>
       </div>
       <div class="video-info">
         <div class="video-tag">// Enfòmatik</div>
@@ -1067,10 +1185,10 @@ body {
   </div>
   <div style="margin-top:20px;" class="glass-card video-card rv">
     <div style="display:grid;grid-template-columns:1.2fr 1fr;">
-      <div class="video-thumb" style="padding-bottom:0;height:100%;min-height:220px;">
-        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80" alt="AI" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-        <div class="play-btn"><div class="play-icon"></div></div>
-        <div style="position:absolute;top:14px;left:14px;"><div class="live-badge" style="background:rgba(123,45,139,0.15);border-color:rgba(123,45,139,0.4);"><div class="live-dot" style="background:#c080d8;"></div><span style="color:#c080d8;">APÈSI KOU</span></div></div>
+      <div class="video-thumb" style="padding-bottom:0;height:100%;min-height:220px;background:#04060F;">
+        <video class="kv-vid" autoplay loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
+        <source data-src="photo-1555949963-ff9fe0c870eb.MP4" type="video/mp4">
+        <div style="position:absolute;top:14px;left:14px;z-index:3;"><div class="live-badge" style="background:rgba(123,45,139,0.15);border-color:rgba(123,45,139,0.4);"><div class="live-dot" style="background:#c080d8;"></div><span style="color:#c080d8;">APÈSI KOU</span></div></div>
       </div>
       <div class="video-info" style="padding:28px;">
         <div class="video-tag" style="color:#c080d8;">// ENTÈLIJANS ATIFISYÈL</div>
@@ -1523,6 +1641,233 @@ function closeMobileMenu(){var m=document.getElementById('mobileMenu'),h=documen
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileMenu();});
 // ── FAQ ──
 function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq-item').forEach(function(i){if(i!==item)i.classList.remove('open');});item.classList.toggle('open');}
+
+// ════════════════════════════════════════
+//  KOVAX CLICK / INTERACTION EFFECTS + SOUNDS
+// ════════════════════════════════════════
+
+(function() {
+  // ── AudioContext sound engine (Web Audio API — zero files needed) ──
+  var AC = null;
+  function getAC() {
+    if (!AC) {
+      try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+    }
+    return AC;
+  }
+
+  // Generic tone generator
+  function playTone(freq, type, duration, vol, attack, decay) {
+    var ac = getAC(); if (!ac) return;
+    try {
+      var osc = ac.createOscillator();
+      var gain = ac.createGain();
+      osc.connect(gain); gain.connect(ac.destination);
+      osc.type = type || 'sine';
+      osc.frequency.setValueAtTime(freq, ac.currentTime);
+      gain.gain.setValueAtTime(0, ac.currentTime);
+      gain.gain.linearRampToValueAtTime(vol || 0.12, ac.currentTime + (attack || 0.01));
+      gain.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + (duration || 0.18) + (decay || 0.05));
+      osc.start(ac.currentTime);
+      osc.stop(ac.currentTime + (duration || 0.18) + (decay || 0.05) + 0.05);
+    } catch(e) {}
+  }
+
+  // Click: soft tick
+  function sndClick() { playTone(880, 'sine', 0.07, 0.10, 0.005, 0.04); }
+  // Button glow: rising chime
+  function sndGlow() {
+    playTone(523, 'sine', 0.10, 0.08, 0.01);
+    setTimeout(function() { playTone(659, 'sine', 0.10, 0.07, 0.01); }, 60);
+    setTimeout(function() { playTone(784, 'sine', 0.14, 0.09, 0.01); }, 120);
+  }
+  // Nav link: subtle click
+  function sndNav() { playTone(660, 'triangle', 0.06, 0.07, 0.005, 0.03); }
+  // FAQ open: soft pop
+  function sndFaqOpen()  { playTone(440, 'sine', 0.08, 0.09, 0.008); playTone(550, 'sine', 0.09, 0.06, 0.008); }
+  function sndFaqClose() { playTone(550, 'sine', 0.07, 0.07, 0.008); playTone(440, 'sine', 0.08, 0.05, 0.008); }
+  // Social icon: bright pop
+  function sndSocial() { playTone(1047, 'sine', 0.08, 0.11, 0.005, 0.05); }
+  // Hamburger open/close
+  function sndMenu(open) {
+    if (open) { playTone(440, 'sine', 0.06, 0.07); setTimeout(function(){playTone(523,'sine',0.06,0.06);},50); }
+    else       { playTone(523, 'sine', 0.06, 0.07); setTimeout(function(){playTone(440,'sine',0.06,0.06);},50); }
+  }
+
+  // ── RIPPLE helper ──
+  function addRipple(el, e, colorStr) {
+    var rect = el.getBoundingClientRect();
+    var x = (e.clientX || e.touches && e.touches[0].clientX || rect.left + rect.width/2) - rect.left;
+    var y = (e.clientY || e.touches && e.touches[0].clientY || rect.top + rect.height/2) - rect.top;
+    var size = Math.max(rect.width, rect.height) * 2.2;
+    var ripple = document.createElement('span');
+    ripple.className = 'kv-ripple';
+    ripple.style.cssText = [
+      'width:' + size + 'px',
+      'height:' + size + 'px',
+      'left:' + (x - size/2) + 'px',
+      'top:' + (y - size/2) + 'px',
+      'background:' + (colorStr || 'rgba(41,171,226,0.22)')
+    ].join(';');
+    el.style.position = el.style.position || 'relative';
+    el.style.overflow = 'hidden';
+    el.appendChild(ripple);
+    setTimeout(function() { ripple.remove(); }, 700);
+  }
+
+  // ── Patch global toggleFaq to add sound + ripple ──
+  var origToggleFaq = window.toggleFaq;
+  window.toggleFaq = function(el) {
+    var item = el.parentElement;
+    var wasOpen = item.classList.contains('open');
+    if (wasOpen) sndFaqClose(); else sndFaqOpen();
+    addRipple(el, {clientX: el.getBoundingClientRect().left + el.getBoundingClientRect().width/2,
+                   clientY: el.getBoundingClientRect().top + el.getBoundingClientRect().height/2},
+              'rgba(41,171,226,0.12)');
+    if (origToggleFaq) origToggleFaq(el);
+  };
+
+  // ── Patch toggleMobileMenu to add sound ──
+  var _menuOpen = false;
+  var origToggleMobileMenu = window.toggleMobileMenu;
+  window.toggleMobileMenu = function() {
+    _menuOpen = !_menuOpen;
+    sndMenu(_menuOpen);
+    if (origToggleMobileMenu) origToggleMobileMenu();
+  };
+  var origCloseMobileMenu = window.closeMobileMenu;
+  window.closeMobileMenu = function() {
+    if (_menuOpen) { _menuOpen = false; sndMenu(false); }
+    if (origCloseMobileMenu) origCloseMobileMenu();
+  };
+
+  // ── DOMContentLoaded wiring ──
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // ── Video autoplay: load src from data-src sibling ──
+    document.querySelectorAll('.kv-vid').forEach(function(vid) {
+      var src = vid.nextElementSibling;
+      if (src && src.tagName === 'SOURCE') {
+        vid.src = src.getAttribute('data-src');
+        vid.load();
+        vid.addEventListener('canplaythrough', function() {
+          vid.classList.add('kv-loaded');
+        });
+        // Autoplay may need user interaction on mobile; show after first touch
+        document.addEventListener('touchstart', function tryPlay() {
+          vid.play().catch(function(){});
+          document.removeEventListener('touchstart', tryPlay);
+        }, {once: true, passive: true});
+        vid.play().catch(function(){});
+      }
+    });
+
+    // ── btn-glow & btn-liv: ripple + glow sound ──
+    document.querySelectorAll('.btn-glow, .btn-liv, .btn-pri-m').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        addRipple(btn, e, 'rgba(41,171,226,0.28)');
+        sndGlow();
+        btn.classList.remove('kv-glow-pulse');
+        void btn.offsetWidth;
+        btn.classList.add('kv-glow-pulse');
+        btn.addEventListener('animationend', function() { btn.classList.remove('kv-glow-pulse'); }, {once:true});
+      });
+    });
+
+    // ── btn-ghost & btn-pri-g: ripple + soft click ──
+    document.querySelectorAll('.btn-ghost, .btn-pri-g, .nav-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        addRipple(btn, e, 'rgba(255,255,255,0.15)');
+        sndClick();
+      });
+    });
+
+    // ── Nav links: sound + ripple ──
+    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        sndNav();
+        addRipple(a, e, 'rgba(41,171,226,0.15)');
+      });
+    });
+
+    // ── Social icons: pop + sound ──
+    document.querySelectorAll('.social-icon').forEach(function(icon) {
+      icon.addEventListener('click', function(e) {
+        sndSocial();
+        icon.classList.remove('kv-pop');
+        void icon.offsetWidth;
+        icon.classList.add('kv-pop');
+        icon.addEventListener('animationend', function() { icon.classList.remove('kv-pop'); }, {once:true});
+      });
+    });
+
+    // ── glass-card: ripple on click ──
+    document.querySelectorAll('.glass-card').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        // only if clicking directly on card, not a button inside it
+        if (e.target === card || e.target.closest('.glass-card') === card && !e.target.closest('button, a')) {
+          addRipple(card, e, 'rgba(41,171,226,0.10)');
+          sndClick();
+        }
+      });
+    });
+
+    // ── CTA inner: shimmer on click ──
+    var ctaInner = document.querySelector('.cta-inner');
+    if (ctaInner) {
+      ctaInner.addEventListener('click', function(e) {
+        ctaInner.classList.remove('kv-shimmer-flash');
+        void ctaInner.offsetWidth;
+        ctaInner.classList.add('kv-shimmer-flash');
+        ctaInner.addEventListener('animationend', function() {
+          ctaInner.classList.remove('kv-shimmer-flash');
+        }, {once:true});
+      });
+    }
+
+    // ── back-to-top: sound ──
+    var backTop = document.getElementById('backTop');
+    if (backTop) {
+      backTop.addEventListener('click', function(e) {
+        addRipple(backTop, e, 'rgba(41,171,226,0.25)');
+        sndGlow();
+      });
+    }
+
+  }); // end DOMContentLoaded
+})();
+// ── Mute toggle for video 1 ──
+window.kvToggleMute = function(btn) {
+  var vid = document.getElementById('kvVid1');
+  var icon = document.getElementById('kvMuteIcon');
+  if (!vid) return;
+  vid.muted = !vid.muted;
+  // Update icon
+  if (vid.muted) {
+    // muted icon: speaker + X
+    icon.innerHTML = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+    btn.classList.remove('kv-sound-on');
+    btn.setAttribute('aria-label','Aktive son');
+  } else {
+    // sound on icon: speaker with waves
+    icon.innerHTML = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/><path d="M15.54,8.46a5,5,0,0,1,0,7.07" stroke="white" stroke-width="2" fill="none"/><path d="M19.07,4.93a10,10,0,0,1,0,14.14" stroke="white" stroke-width="2" fill="none"/>';
+    btn.classList.add('kv-sound-on');
+    btn.setAttribute('aria-label','Koupe son');
+    // play sound feedback
+    try {
+      var ac2 = new (window.AudioContext||window.webkitAudioContext)();
+      var o=ac2.createOscillator(), g=ac2.createGain();
+      o.connect(g); g.connect(ac2.destination);
+      o.type='sine'; o.frequency.setValueAtTime(880,ac2.currentTime);
+      g.gain.setValueAtTime(0,ac2.currentTime);
+      g.gain.linearRampToValueAtTime(0.09,ac2.currentTime+0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001,ac2.currentTime+0.18);
+      o.start(ac2.currentTime); o.stop(ac2.currentTime+0.25);
+    } catch(e){}
+  }
+};
+// ════ END KOVAX EFFECTS ════
+
 </script>
 
 
