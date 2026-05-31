@@ -847,7 +847,21 @@ box-shadow:0 14px 45px rgba(43,184,240,.20);
 .back-top.show{opacity:1;pointer-events:all;}
 .back-top:hover{background:rgba(41,171,226,.15);border-color:rgba(41,171,226,.4);transform:translateY(-3px);}
 .back-top svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
-@media(max-width:768px){.hamburger{display:flex!important;}#temoignaj .temo-grid{grid-template-columns:1fr!important;}}
+@media(max-width:768px){
+  .hamburger{display:flex!important;}
+  #temoignaj .temo-grid{grid-template-columns:1fr!important;}
+
+  /* VIDEO CARD 1 — MOBIL */
+  #klas .klas-grid{grid-template-columns:1fr!important;}
+  .video-thumb{padding-bottom:62%!important;}
+  #kvVidThumb1{border-radius:0!important;}
+  #kvVid1a,#kvVid1b{object-fit:cover!important;}
+  .video-info{padding:16px 18px 18px!important;}
+  .video-tag{font-size:10px!important;}
+  .video-title{font-size:15px!important;}
+  .video-desc{font-size:13px!important;line-height:1.65!important;}
+  #kvMuteBtn{width:34px!important;height:34px!important;bottom:10px!important;right:10px!important;}
+}
 @media(min-width:769px) and (max-width:1100px){#temoignaj .temo-grid{grid-template-columns:1fr 1fr!important;}}
 /* ===== FIN ADDITIONS ===== */
 
@@ -1156,13 +1170,21 @@ body {
   <p class="sec-desc rv">Seyans live, pratik, ak entèraktif. Wè jan etidyan yo aprann chak jou.</p>
   <div class="klas-grid">
     <div class="glass-card video-card rv">
-      <div class="video-thumb" style="padding-bottom:56.25%;background:#04060F;">
-        <video class="kv-vid kv-vid-1" id="kvVid1" autoplay loop playsinline muted style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
-        <source data-src="photo-1531482615713-2afd69097998.mov" type="video/mp4">
-        <div style="position:absolute;top:14px;left:14px;z-index:3;"><div class="live-badge"><div class="live-dot"></div><span>APÈSI KOU</span></div></div>
-        <button id="kvMuteBtn" onclick="kvToggleMute(this)" aria-label="Aktive son" style="position:absolute;bottom:12px;right:12px;z-index:5;width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.55);background:rgba(4,6,15,0.55);backdrop-filter:blur(10px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s,transform 0.15s;padding:0;">
+      <div class="video-thumb" id="kvVidThumb1" style="padding-bottom:56.25%;background:#04060F;">
+        <video id="kvVid1" autoplay loop playsinline muted preload="auto"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.9s ease;">
+          <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/quicktime">
+          <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/mp4">
+        </video>
+        <div style="position:absolute;top:14px;left:14px;z-index:3;">
+          <div class="live-badge"><div class="live-dot"></div><span>APÈSI KOU</span></div>
+        </div>
+        <button id="kvMuteBtn" onclick="kvToggleMute(this)" aria-label="Aktive son"
+          style="position:absolute;bottom:12px;right:12px;z-index:5;width:38px;height:38px;border-radius:50%;
+          border:1.5px solid rgba(255,255,255,0.55);background:rgba(4,6,15,0.55);
+          backdrop-filter:blur(10px);cursor:pointer;display:flex;align-items:center;justify-content:center;
+          transition:background 0.2s,transform 0.15s;padding:0;">
           <svg id="kvMuteIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <!-- muted icon: speaker + X -->
             <polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/>
             <line x1="23" y1="9" x2="17" y2="15"/>
             <line x1="17" y1="9" x2="23" y2="15"/>
@@ -1175,6 +1197,21 @@ body {
         <div class="video-desc">Apèsi sou sa ou pral aprann nan 4 mwa yo. Pwofesè eksplike objektif, zouti, ak pwojè final la.</div>
       </div>
     </div>
+
+    <script>
+    (function(){
+      var v = document.getElementById('kvVid1');
+      if(!v) return;
+      v.addEventListener('timeupdate', function(){
+        if(v.duration && v.duration - v.currentTime < 0.8){
+          v.style.opacity = '0';
+        } else {
+          v.style.opacity = '1';
+        }
+      });
+      v.play().catch(function(){ v.muted = true; v.play(); });
+    })();
+    </script>
     <div class="rv">
       <div class="photos-grid">
         <div class="photo-item"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Klas Online"><div class="photo-overlay"><span class="photo-label">Seyans Live sou Google Meet 2h Pratik</span></div></div>
@@ -1186,9 +1223,16 @@ body {
   <div style="margin-top:20px;" class="glass-card video-card rv">
     <div style="display:grid;grid-template-columns:1.2fr 1fr;">
       <div class="video-thumb" style="padding-bottom:0;height:100%;min-height:220px;background:#04060F;">
-        <video class="kv-vid" autoplay loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
-        <source data-src="photo-1555949963-ff9fe0c870eb.MP4" type="video/mp4">
-        <div style="position:absolute;top:14px;left:14px;z-index:3;"><div class="live-badge" style="background:rgba(123,45,139,0.15);border-color:rgba(123,45,139,0.4);"><div class="live-dot" style="background:#c080d8;"></div><span style="color:#c080d8;">APÈSI KOU</span></div></div>
+        <video id="kvVid2" autoplay loop playsinline muted preload="auto"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          <source src="photo-1555949963-ff9fe0c870eb.MP4" type="video/mp4">
+        </video>
+        <div style="position:absolute;top:14px;left:14px;z-index:3;">
+          <div class="live-badge" style="background:rgba(123,45,139,0.15);border-color:rgba(123,45,139,0.4);">
+            <div class="live-dot" style="background:#c080d8;"></div>
+            <span style="color:#c080d8;">APÈSI KOU</span>
+          </div>
+        </div>
       </div>
       <div class="video-info" style="padding:28px;">
         <div class="video-tag" style="color:#c080d8;">// ENTÈLIJANS ATIFISYÈL</div>
