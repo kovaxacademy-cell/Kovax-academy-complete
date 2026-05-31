@@ -1171,12 +1171,20 @@ body {
   <div class="klas-grid">
     <div class="glass-card video-card rv">
       <div class="video-thumb" id="kvVidThumb1" style="padding-bottom:56.25%;background:#04060F;">
-        <video id="kvVid1" autoplay loop playsinline muted preload="auto"
-          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.9s ease;">
+
+        <video id="kvVid1a" autoplay playsinline muted preload="auto"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity 1.2s ease-in-out;z-index:2;">
           <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/quicktime">
           <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/mp4">
         </video>
-        <div style="position:absolute;top:14px;left:14px;z-index:3;">
+
+        <video id="kvVid1b" playsinline muted preload="auto"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease-in-out;z-index:1;">
+          <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/quicktime">
+          <source src="photo-1531482615713-2afd69097998_2_.mov" type="video/mp4">
+        </video>
+
+        <div style="position:absolute;top:14px;left:14px;z-index:5;">
           <div class="live-badge"><div class="live-dot"></div><span>APÈSI KOU</span></div>
         </div>
         <button id="kvMuteBtn" onclick="kvToggleMute(this)" aria-label="Aktive son"
@@ -1191,6 +1199,7 @@ body {
           </svg>
         </button>
       </div>
+
       <div class="video-info">
         <div class="video-tag">// Enfòmatik</div>
         <div class="video-title">Entwodiksyon Pista 1</div>
@@ -1200,16 +1209,38 @@ body {
 
     <script>
     (function(){
-      var v = document.getElementById('kvVid1');
-      if(!v) return;
-      v.addEventListener('timeupdate', function(){
-        if(v.duration && v.duration - v.currentTime < 0.8){
-          v.style.opacity = '0';
-        } else {
-          v.style.opacity = '1';
-        }
+      var a  = document.getElementById('kvVid1a');
+      var b  = document.getElementById('kvVid1b');
+      if(!a || !b) return;
+
+      var busy = false;
+
+      function swap(from, to){
+        if(busy) return;
+        busy = true;
+        /* lanse 'to' depi kòmansman epi monte l */
+        to.currentTime = 0;
+        to.play();
+        to.style.zIndex   = '2';
+        to.style.opacity  = '1';
+        from.style.zIndex = '1';
+        from.style.opacity= '0';
+        /* apre tranzisyon an fini, kanpe 'from' */
+        setTimeout(function(){
+          from.pause();
+          from.currentTime = 0;
+          busy = false;
+        }, 1300);
+      }
+
+      a.addEventListener('timeupdate', function(){
+        if(!busy && a.duration && (a.duration - a.currentTime) <= 1.1) swap(a, b);
       });
-      v.play().catch(function(){ v.muted = true; v.play(); });
+      b.addEventListener('timeupdate', function(){
+        if(!busy && b.duration && (b.duration - b.currentTime) <= 1.1) swap(b, a);
+      });
+
+      a.play().catch(function(){ a.muted = true; a.play(); });
     })();
     </script>
     <div class="rv">
@@ -1225,6 +1256,7 @@ body {
       <div class="video-thumb" style="padding-bottom:0;height:100%;min-height:220px;background:#04060F;">
         <video id="kvVid2" autoplay loop playsinline muted preload="auto"
           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          <source src="photo-1555949963-ff9fe0c870eb.mp4" type="video/mp4">
           <source src="photo-1555949963-ff9fe0c870eb.MP4" type="video/mp4">
         </video>
         <div style="position:absolute;top:14px;left:14px;z-index:3;">
@@ -1882,32 +1914,21 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
 })();
 // ── Mute toggle for video 1 ──
 window.kvToggleMute = function(btn) {
-  var vid = document.getElementById('kvVid1');
+  var vidA = document.getElementById('kvVid1a');
+  var vidB = document.getElementById('kvVid1b');
   var icon = document.getElementById('kvMuteIcon');
-  if (!vid) return;
-  vid.muted = !vid.muted;
-  // Update icon
-  if (vid.muted) {
-    // muted icon: speaker + X
+  if (!vidA) return;
+  var nowMuted = !vidA.muted;
+  vidA.muted = nowMuted;
+  if(vidB) vidB.muted = nowMuted;
+  if (nowMuted) {
     icon.innerHTML = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
     btn.classList.remove('kv-sound-on');
     btn.setAttribute('aria-label','Aktive son');
   } else {
-    // sound on icon: speaker with waves
     icon.innerHTML = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/><path d="M15.54,8.46a5,5,0,0,1,0,7.07" stroke="white" stroke-width="2" fill="none"/><path d="M19.07,4.93a10,10,0,0,1,0,14.14" stroke="white" stroke-width="2" fill="none"/>';
     btn.classList.add('kv-sound-on');
     btn.setAttribute('aria-label','Koupe son');
-    // play sound feedback
-    try {
-      var ac2 = new (window.AudioContext||window.webkitAudioContext)();
-      var o=ac2.createOscillator(), g=ac2.createGain();
-      o.connect(g); g.connect(ac2.destination);
-      o.type='sine'; o.frequency.setValueAtTime(880,ac2.currentTime);
-      g.gain.setValueAtTime(0,ac2.currentTime);
-      g.gain.linearRampToValueAtTime(0.09,ac2.currentTime+0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001,ac2.currentTime+0.18);
-      o.start(ac2.currentTime); o.stop(ac2.currentTime+0.25);
-    } catch(e){}
   }
 };
 // ════ END KOVAX EFFECTS ════
@@ -1917,46 +1938,47 @@ window.kvToggleMute = function(btn) {
 
 
 <script>
-document.addEventListener("DOMContentLoaded",()=>{
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var vid2 = document.getElementById('kvVid2');
+    if(!vid2) return;
 
-const videos=document.querySelectorAll("video");
+    var timer8 = null;
 
-if(videos.length > 0){
+    function activateSound(){
+      vid2.muted  = false;
+      vid2.volume = 1;
+      // Konte 8 sèkond depi SON AN kòmanse vrèman
+      if(timer8) clearTimeout(timer8);
+      timer8 = setTimeout(function(){ vid2.muted = true; }, 8000);
+    }
 
-  // PREMIER VIDEO PROFESSIONAL SMOOTH LOOP
-  const firstVideo = videos[0];
-
-  firstVideo.style.transition = "opacity .6s ease-in-out";
-
-  firstVideo.addEventListener("timeupdate",()=>{
-      if(firstVideo.duration - firstVideo.currentTime < 0.25){
-          firstVideo.style.opacity = "0.82";
-      }else{
-          firstVideo.style.opacity = "1";
-      }
+    // Eseye ak son dirèkteman
+    vid2.muted = false;
+    vid2.volume = 1;
+    var p = vid2.play();
+    if(p && p.then){
+      p.then(function(){
+        // Autoplay ak son mache — kòmanse minutri a
+        if(timer8) clearTimeout(timer8);
+        timer8 = setTimeout(function(){ vid2.muted = true; }, 8000);
+      }).catch(function(){
+        // Browser bloke son — kòmanse muted, tann premye interaksyon
+        vid2.muted = true;
+        vid2.play().catch(function(){});
+        function onInteract(){
+          activateSound();
+        }
+        document.addEventListener('click',      onInteract, {once:true});
+        document.addEventListener('touchstart', onInteract, {once:true});
+      });
+    } else {
+      // Vye browser — kòmanse minutri a
+      if(timer8) clearTimeout(timer8);
+      timer8 = setTimeout(function(){ vid2.muted = true; }, 8000);
+    }
   });
-}
-
-if(videos.length > 1){
-
-  // 2EME VIDEO
-  const secondVideo = videos[1];
-
-  secondVideo.muted = false;
-  secondVideo.volume = 1;
-
-  // apre 8 sec son an koupe otomatik
-  setTimeout(()=>{
-      secondVideo.muted = true;
-  },8000);
-
-  // video kontinye autoplay san son
-  secondVideo.setAttribute("autoplay","true");
-  secondVideo.setAttribute("playsinline","true");
-  secondVideo.play().catch(()=>{});
-}
-
-});
+})();
 </script>
 
 </body>
