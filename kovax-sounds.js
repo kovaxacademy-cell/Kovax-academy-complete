@@ -367,6 +367,7 @@
   var PAGE = (function() {
     var p = (window.location.pathname.split('/').pop() || '').replace(/\?.*/, '');
     if (!p || p === 'index.html')          return 'index';
+    if (p.indexOf('market')      !== -1)   return 'market';
     if (p.indexOf('enskripsyon') !== -1)   return 'enskripsyon';
     if (p.indexOf('formulaire')  !== -1)   return 'formulaire';
     if (p.indexOf('paiement')    !== -1)   return 'paiement';
@@ -392,76 +393,55 @@
   }
 
   function wireCommon() {
-    /* Primary buttons */
-    tap('.btn-glow,.btn-pri,.btn-pri-m,.nav-btn,.choice-btn,.primary', S.btnPrimary);
-    on ('.btn-glow,.btn-pri,.btn-pri-m,.nav-btn,.choice-btn,.primary', 'mouseenter', S.hover);
+    /* CLEAN ESSENTIAL SOUND MODE — pa gen son sou hover / scroll / card hover */
+    var last = 0;
+    function safe(fn){
+      return function(){
+        var now = Date.now();
+        if(now - last < 180) return;
+        last = now;
+        fn.call(this);
+      };
+    }
 
-    /* Secondary */
-    tap('.btn-ghost,.btn-secondary,.btn-sec,.btn-ghost-m,.ghost', S.btnSecondary);
-    on ('.btn-ghost,.btn-secondary,.btn-sec,.btn-ghost-m,.ghost', 'mouseenter', S.hover);
+    /* Bouton prensipal sèlman */
+    tap('.btn-glow,.btn-pri,.btn-pri-m,.nav-btn,.primary,.btn,.buyNow,.checkoutBtn,[data-buy],.premiumTop', safe(S.btnPrimary));
 
-    /* Nav */
-    on('.nav-links a,.footer-links a', 'mouseenter', S.hover);
-    tap('.nav-links a', S.btnSecondary);
+    /* Add to cart / panier */
+    tap('.addCart,.add-cart,.cartBtn,.cart-add,.btnCart,[data-add-cart],[onclick*="addToCart"],[onclick*="addCart"]', safe(S.addCart));
 
-    /* Mobile menu */
-    on('#hamburger,.hamburger', 'click', function() {
-      var m = document.getElementById('mobileMenu');
+    /* Menu mobile */
+    on('#hamburger,.hamburger,.navToggle,.menuBtn', 'click', function() {
+      var m = document.getElementById('mobileMenu') || document.getElementById('mobileNav') || document.querySelector('.mobile-menu,.mobileNav,.nav-mobile');
       (m && m.classList.contains('open')) ? S.menuClose() : S.menuOpen();
     });
 
-    /* Cards */
-    on('.glass-card,.choice-card,.plan-card,.liv-card,.prod-card', 'mouseenter', S.cardHover);
-    tap('.choice-card,.plan-card', S.cardSelect);
-
-    /* FAQ */
-    tap('.faq-q', function() {
+    /* FAQ sèlman lè ouvri/fèmen */
+    tap('.faq-q,.faq-question', function() {
       var item = this.parentElement || (this.closest && this.closest('.faq-item'));
       (item && item.classList.contains('open')) ? S.faqClose() : S.faqOpen();
     });
 
-    /* Back to top */
-    tap('#backTop,.back-top', S.backTop);
-
-    /* Copy */
-    tap('[data-copy],[class*="copy-btn"]', S.copy);
-
-    /* Chat */
+    /* Chat: ouvri/fèmen + voye mesaj */
     on('.chat-btn', 'click', function() {
       var w = document.querySelector('.chat-window');
       (w && w.classList.contains('open')) ? S.chatClose() : S.chatOpen();
     });
-    tap('.chat-send', S.msgSend);
-    var ci = document.getElementById('chatInput');
-    if (ci) ci.addEventListener('keydown', function(e){ if (e.key==='Enter') S.msgSend(); });
+    tap('.chat-send', safe(S.msgSend));
 
-    var cm = document.getElementById('chatMsgs');
-    if (cm && window.MutationObserver) {
-      new MutationObserver(function(muts){
-        muts.forEach(function(m){
-          m.addedNodes.forEach(function(n){
-            if (n.classList && n.classList.contains('bot')) S.msgRecv();
-          });
-        });
-      }).observe(cm, { childList: true });
-    }
-
-    /* Section title woosh */
-    if (window.IntersectionObserver) {
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if (e.isIntersecting && !e.target._ws){ e.target._ws = true; S.woosh(); }
-        });
-      }, { threshold: 0.35 });
-      q('.sec-title,.section-title').forEach(function(el){ io.observe(el); });
-    }
-
-
+    /* Copy / notification */
+    tap('[data-copy],[class*="copy-btn"],[onclick*="copy"]', safe(function(){ S.copy(); setTimeout(S.notify, 120); }));
   }
 
   function wirePage() {
     if (PAGE === 'index') {
       setTimeout(S.welcome, 600);
+    }
+
+    else if (PAGE === 'market') {
+      setTimeout(S.shopBell, 550);
+      tap('.cartBtn,.addCart,.add-cart,[data-add-cart],[onclick*="addToCart"],[onclick*="addCart"]', S.addCart);
+      tap('.checkoutBtn,.buyNow,.primary,.btn', S.btnPrimary);
     }
 
     else if (PAGE === 'enskripsyon') {
