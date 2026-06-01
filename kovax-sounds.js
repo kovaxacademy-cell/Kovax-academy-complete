@@ -12,7 +12,7 @@
   ═══════════════════════════════════ */
   var _ac  = null;
   var _on  = true;
-  var _vol = 0.20;   /* master — ultra doux premium */
+  var _vol = 0.055;   /* master — ultra doux premium */
 
   function ctx() {
     if (!_ac) try { _ac = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}
@@ -48,8 +48,8 @@
             d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.8);
         }
         rev.buffer = buf;
-        var wet = c.createGain(); wet.gain.value = 0.12;
-        var dry = c.createGain(); dry.gain.value = 0.88;
+        var wet = c.createGain(); wet.gain.value = 0.035;
+        var dry = c.createGain(); dry.gain.value = 0.965;
         comp.connect(dry);  dry.connect(c.destination);
         comp.connect(rev);  rev.connect(wet); wet.connect(c.destination);
         _bus = comp;
@@ -155,8 +155,7 @@
 
     /* Hover — ti glass breath, prèske pa tande */
     hover: function() {
-      silk(0.0035, 0.045, 4200, 0.9);
-      tone(1760, 'sine', 0.0025, 0, 0.004, 0.045);
+      silk(0.0012, 0.035, 4200, 0.9);
     },
 
     /* Card hover — premium air, trè lejè */
@@ -173,9 +172,9 @@
 
     /* Primary button — elegant AI chime */
     btnPrimary: function() {
-      silk(0.007, 0.050, 4400, 1.0);
-      tone(587, 'sine', 0.014, 0, 0.007, 0.12);
-      tone(880, 'sine', 0.008, 0, 0.006, 0.10, 0.055);
+      silk(0.0022, 0.040, 4600, 1.0);
+      tone(740, 'sine', 0.0035, 0, 0.007, 0.08);
+      tone(1175, 'sine', 0.0020, 0, 0.006, 0.07, 0.045);
     },
 
     /* Secondary / ghost button — light glass tap */
@@ -273,10 +272,9 @@
 
     /* Welcome — soft AI startup, dous anpil */
     welcome: function() {
-      silk(0.007, 0.110, 2800, 0.55);
-      tone(392, 'sine', 0.009, 0, 0.014, 0.18, 0.03);
-      tone(587, 'sine', 0.007, 0, 0.012, 0.16, 0.16);
-      tone(784, 'sine', 0.005, 0, 0.012, 0.18, 0.30);
+      silk(0.0020, 0.080, 2800, 0.55);
+      tone(523, 'sine', 0.0028, 0, 0.014, 0.12, 0.03);
+      tone(880, 'sine', 0.0018, 0, 0.012, 0.12, 0.16);
     },
 
     welcomeChoice: function() {
@@ -319,16 +317,15 @@
 
     /* Market welcome — elegant shop tone, pa fò */
     shopBell: function() {
-      silk(0.006, 0.065, 3600, 0.75);
-      tone(740, 'sine', 0.009, 0, 0.006, 0.10);
-      tone(1110, 'sine', 0.005, 0, 0.005, 0.085, 0.055);
+      silk(0.0018, 0.050, 3600, 0.75);
+      tone(880, 'sine', 0.0025, 0, 0.006, 0.07);
     },
 
     /* Add cart — premium tech click, sèl ti son ki pi prezan */
     addCart: function() {
-      silk(0.007, 0.050, 5000, 1.1);
-      tone(587, 'sine', 0.012, 0, 0.004, 0.075);
-      tone(988, 'sine', 0.007, 0, 0.004, 0.065, 0.040);
+      silk(0.0025, 0.040, 5000, 1.1);
+      tone(740, 'sine', 0.0038, 0, 0.004, 0.060);
+      tone(1175, 'sine', 0.0022, 0, 0.004, 0.050, 0.035);
     },
 
     notify: function() {
@@ -428,8 +425,7 @@
 
     else if (PAGE === 'market') {
       setTimeout(S.shopBell, 550);
-      tap('.cartBtn,.addCart,.add-cart,[data-add-cart],[onclick*="addToCart"],[onclick*="addCart"]', S.addCart);
-      tap('.checkoutBtn,.buyNow,.primary,.btn', S.btnPrimary);
+      /* market duplicate sound binding removed to avoid loud double sound */
     }
 
     else if (PAGE === 'enskripsyon') {
