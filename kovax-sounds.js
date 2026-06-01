@@ -1,6 +1,6 @@
 /**
  * ╔══════════════════════════════════════════════════════════════╗
- * ║       KOVAX ACADEMY — SOUND ENGINE v4  · Silk & Elegant     ║
+ * ║       KOVAX ACADEMY — SOUND ENGINE v5  · Premium Tech Soft     ║
  * ║       Pure Web Audio · No Button · No Dependencies          ║
  * ╚══════════════════════════════════════════════════════════════╝
  */
@@ -149,215 +149,189 @@
   ═══════════════════════════════════ */
   var S = {
 
-    /* ── UI micro-interactions ── */
+    /* ═══ PREMIUM TECH SOFT MODE ═══
+       Son yo dous, kout, futuristik, pa spam.
+    */
 
-    /* Hover — imperceptible breath */
+    /* Hover — glass tech whisper, prèske pa tande */
     hover: function() {
-      tone(1480, 'sine', 0.022, 0, 0.006, 0.09);
+      silk(0.012, 0.055, 3600, 0.9);
+      tone(1760, 'sine', 0.010, 0, 0.004, 0.055);
     },
 
-    /* Card hover — low warm hum */
+    /* Card hover — mini luxury air */
     cardHover: function() {
-      bell(220, 3.5, 0.6, 0.022, 0.22);
+      silk(0.014, 0.07, 2400, 0.7);
     },
 
-    /* Card select */
+    /* Card select — soft digital lock */
     cardSelect: function() {
-      bell(523, 2, 1.0, 0.09, 0.32);
-      tone(784, 'sine', 0.055, 0, 0.008, 0.20, 0.07);
+      tone(523, 'sine', 0.030, 0, 0.008, 0.12);
+      tone(784, 'sine', 0.020, 0, 0.006, 0.10, 0.045);
     },
 
-    /* Primary button — elegant double chime */
+    /* Primary button — Apple-style AI chime */
     btnPrimary: function() {
-      bell(440, 2.5, 1.2, 0.10, 0.30);
-      tone(659, 'sine', 0.055, 0, 0.008, 0.18, 0.06);
+      silk(0.018, 0.06, 4200, 1.0);
+      tone(587, 'sine', 0.038, 0, 0.007, 0.15);
+      tone(880, 'sine', 0.024, 0, 0.006, 0.13, 0.065);
     },
 
-    /* Secondary / ghost button */
+    /* Secondary / ghost button — light glass tap */
     btnSecondary: function() {
-      tone(370, 'triangle', 0.075, 0, 0.008, 0.16);
+      tone(440, 'triangle', 0.024, 0, 0.006, 0.11);
     },
 
-    /* ── Forms ── */
-
-    /* Input focus — gentle tone */
     inputFocus: function() {
-      tone(830, 'sine', 0.045, 0, 0.008, 0.14);
+      tone(988, 'sine', 0.020, 0, 0.006, 0.11);
     },
 
-    /* Keystroke — barely-there click */
     keystroke: function() {
-      tone(1050 + Math.random() * 250, 'sine', 0.008, 0, 0.003, 0.028);
+      tone(1250 + Math.random() * 180, 'sine', 0.004, 0, 0.002, 0.020);
     },
 
-    /* Field validated */
     fieldOK: function() {
-      tone(659, 'sine', 0.048, 0, 0.006, 0.14);
-      tone(880, 'sine', 0.030, 0, 0.005, 0.12, 0.06);
+      tone(659, 'sine', 0.024, 0, 0.006, 0.11);
+      tone(988, 'sine', 0.014, 0, 0.005, 0.09, 0.045);
     },
 
-    /* Step forward */
     step: function() {
-      silk(0.042, 0.10, 1300, 0.7);
-      tone(523, 'sine', 0.055, 0, 0.008, 0.16, 0.02);
+      silk(0.020, 0.08, 2200, 0.75);
+      tone(659, 'sine', 0.020, 0, 0.007, 0.12, 0.02);
     },
 
-    /* Error */
     error: function() {
-      tone(196, 'sine', 0.075, 0.04, 0.008, 0.20);
-      tone(165, 'sine', 0.055, 0.03, 0.008, 0.18, 0.14);
+      tone(220, 'triangle', 0.030, 0.025, 0.006, 0.14);
+      tone(196, 'triangle', 0.020, 0.020, 0.006, 0.12, 0.10);
     },
 
-    /* ── Navigation ── */
-
-    /* Section reveal woosh — soft landing */
     woosh: function() {
-      silk(0.040, 0.16, 1500, 0.55);
-      tone(523, 'sine', 0.018, 0, 0.010, 0.18);
+      silk(0.018, 0.11, 1800, 0.55);
     },
 
-    /* FAQ expand */
     faqOpen: function() {
-      tone(440, 'sine', 0.058, 0, 0.007, 0.14);
-      tone(554, 'sine', 0.038, 0, 0.006, 0.13, 0.07);
+      tone(523, 'sine', 0.026, 0, 0.006, 0.11);
+      tone(659, 'sine', 0.016, 0, 0.005, 0.09, 0.05);
     },
 
-    /* FAQ collapse */
     faqClose: function() {
-      tone(494, 'triangle', 0.055, 0, 0.007, 0.14);
-      tone(370, 'triangle', 0.035, 0, 0.006, 0.12, 0.07);
+      tone(440, 'triangle', 0.022, 0, 0.006, 0.11);
     },
 
-    /* Menu open */
     menuOpen: function() {
-      tone(440, 'sine', 0.055, 0, 0.007, 0.13);
-      tone(523, 'sine', 0.038, 0, 0.006, 0.12, 0.06);
+      silk(0.018, 0.08, 2600, 0.8);
+      tone(587, 'sine', 0.025, 0, 0.006, 0.11);
+      tone(740, 'sine', 0.014, 0, 0.005, 0.09, 0.045);
     },
 
-    /* Menu close */
     menuClose: function() {
-      tone(494, 'triangle', 0.055, 0, 0.007, 0.13);
-      tone(415, 'triangle', 0.038, 0, 0.006, 0.12, 0.06);
+      tone(494, 'triangle', 0.022, 0, 0.006, 0.10);
+      tone(392, 'triangle', 0.014, 0, 0.005, 0.08, 0.045);
     },
 
-    /* Back to top */
     backTop: function() {
-      silk(0.040, 0.12, 1400, 0.6);
-      tone(659, 'sine', 0.055, 0, 0.007, 0.14, 0.02);
+      silk(0.018, 0.09, 2400, 0.65);
+      tone(784, 'sine', 0.022, 0, 0.006, 0.11, 0.02);
     },
 
-    /* Copy clipboard */
     copy: function() {
-      tone(880,  'sine', 0.065, 0, 0.006, 0.11);
-      tone(1108, 'sine', 0.042, 0, 0.005, 0.09, 0.05);
+      tone(1047, 'sine', 0.025, 0, 0.005, 0.09);
+      tone(1318, 'sine', 0.015, 0, 0.004, 0.075, 0.04);
     },
 
-    /* Toggle ON */
     toggleOn: function() {
-      tone(494, 'sine', 0.075, 0, 0.007, 0.14);
-      tone(622, 'sine', 0.050, 0, 0.006, 0.13, 0.07);
+      silk(0.016, 0.06, 3200, 0.9);
+      tone(622, 'sine', 0.030, 0, 0.006, 0.12);
+      tone(932, 'sine', 0.017, 0, 0.005, 0.10, 0.05);
     },
 
-    /* Toggle OFF */
     toggleOff: function() {
-      tone(415, 'triangle', 0.068, 0, 0.007, 0.13);
-      tone(330, 'triangle', 0.045, 0, 0.006, 0.12, 0.07);
+      tone(392, 'triangle', 0.024, 0, 0.006, 0.11);
+      silk(0.010, 0.045, 1800, 0.6);
     },
-
-    /* ── Chat ── */
 
     chatOpen: function() {
-      bell(330, 2, 0.9, 0.08, 0.32);
-      tone(494, 'sine', 0.050, 0, 0.008, 0.16, 0.10);
+      silk(0.018, 0.07, 3400, 0.85);
+      tone(523, 'sine', 0.026, 0, 0.006, 0.12);
+      tone(784, 'sine', 0.015, 0, 0.005, 0.10, 0.05);
     },
 
     chatClose: function() {
-      tone(415, 'triangle', 0.068, 0, 0.007, 0.14);
-      tone(330, 'triangle', 0.045, 0, 0.006, 0.12, 0.07);
+      tone(415, 'triangle', 0.020, 0, 0.006, 0.10);
     },
 
     msgSend: function() {
-      tone(740,  'sine', 0.075, 0, 0.006, 0.12);
-      tone(988,  'sine', 0.048, 0, 0.005, 0.10, 0.06);
-      silk(0.030, 0.06, 3200, 0.8);
+      tone(880, 'sine', 0.024, 0, 0.005, 0.09);
+      silk(0.012, 0.045, 4200, 0.8);
     },
 
     msgRecv: function() {
-      bell(523, 2, 0.7, 0.07, 0.28);
-      tone(659, 'sine', 0.042, 0, 0.006, 0.13, 0.07);
+      tone(659, 'sine', 0.022, 0, 0.006, 0.11);
+      tone(988, 'sine', 0.012, 0, 0.005, 0.085, 0.045);
     },
 
-    /* ── Page welcome chimes ── */
-
-    /* Index — warm 4-note arrival */
+    /* Welcome — soft AI startup */
     welcome: function() {
-      bellSeq([261, 329, 392, 523], 2.5, 0.8, 0.075, 0.45, 105);
+      silk(0.020, 0.14, 2800, 0.55);
+      tone(392, 'sine', 0.028, 0, 0.014, 0.22, 0.03);
+      tone(587, 'sine', 0.022, 0, 0.012, 0.20, 0.18);
+      tone(784, 'sine', 0.016, 0, 0.012, 0.24, 0.34);
     },
 
-    /* Enskripsyon — lighter 3-note */
     welcomeChoice: function() {
-      bellSeq([329, 415, 523], 2, 0.7, 0.070, 0.38, 100);
+      silk(0.018, 0.12, 3000, 0.65);
+      tone(440, 'sine', 0.024, 0, 0.012, 0.20, 0.03);
+      tone(659, 'sine', 0.018, 0, 0.012, 0.18, 0.18);
+      tone(880, 'sine', 0.012, 0, 0.010, 0.20, 0.32);
     },
 
-    /* Formulaire — soft 2-note breath */
     welcomeForm: function() {
-      tone(392, 'sine', 0.058, 0, 0.012, 0.26);
-      tone(494, 'sine', 0.040, 0, 0.012, 0.24, 0.12);
+      tone(440, 'sine', 0.022, 0, 0.012, 0.18);
+      tone(587, 'sine', 0.014, 0, 0.012, 0.16, 0.12);
     },
 
-    /* Paiement — secure, calm, ceremonial */
     welcomePayment: function() {
-      bell(293, 2, 1.5, 0.068, 0.55);
-      tone(440, 'sine', 0.048, 0, 0.012, 0.28, 0.22);
+      silk(0.016, 0.11, 2200, 0.55);
+      tone(330, 'sine', 0.022, 0, 0.014, 0.24);
+      tone(494, 'sine', 0.014, 0, 0.012, 0.20, 0.18);
     },
 
-    /* ── Success / payment ── */
-
-    /* Validation success */
     success: function() {
-      bellSeq([523, 659, 784, 1047], 2, 0.9, 0.085, 0.40, 90);
-      silk(0.038, 0.14, 2400, 0.6);
+      silk(0.022, 0.12, 3600, 0.65);
+      tone(523, 'sine', 0.028, 0, 0.008, 0.14);
+      tone(784, 'sine', 0.020, 0, 0.007, 0.13, 0.08);
+      tone(1047, 'sine', 0.014, 0, 0.006, 0.16, 0.16);
     },
 
-    /* Payment submit — solemn, confident */
     payment: function() {
-      bell(220, 2, 2.5, 0.09, 0.60);
-      bell(330, 1.5, 1.8, 0.075, 0.50, 0.16);
-      setTimeout(function(){
-        bellSeq([440, 554, 659, 880], 2, 0.8, 0.075, 0.38, 85);
-      }, 300);
+      silk(0.018, 0.12, 2600, 0.55);
+      tone(392, 'sine', 0.025, 0, 0.010, 0.20);
+      tone(587, 'sine', 0.018, 0, 0.010, 0.18, 0.14);
     },
 
-    /* Triumph — merci-peman — grand, elegant */
     triumph: function() {
-      /* Wave 1 */
-      bellSeq([523, 659, 784], 2, 1.0, 0.09, 0.45, 80);
-      /* Wave 2 */
-      setTimeout(function(){
-        bellSeq([784, 988, 1047], 2, 0.8, 0.075, 0.50, 80);
-      }, 280);
-      /* Crown bell */
-      setTimeout(function(){
-        bell(1047, 2.5, 1.5, 0.08, 0.80);
-        silk(0.045, 0.20, 2800, 0.5);
-      }, 580);
+      silk(0.024, 0.16, 3900, 0.55);
+      tone(523, 'sine', 0.030, 0, 0.010, 0.20);
+      tone(784, 'sine', 0.021, 0, 0.010, 0.20, 0.16);
+      tone(1047, 'sine', 0.015, 0, 0.010, 0.28, 0.34);
     },
-
-    /* ── Market ── */
 
     shopBell: function() {
-      bell(880, 3, 1.4, 0.085, 0.65);
-      bell(1108, 3, 1.0, 0.055, 0.50, 0.14);
+      silk(0.018, 0.08, 3600, 0.75);
+      tone(740, 'sine', 0.026, 0, 0.006, 0.13);
+      tone(1110, 'sine', 0.015, 0, 0.005, 0.11, 0.06);
     },
 
+    /* Add cart — premium tech click */
     addCart: function() {
-      seq([523, 659, 784], 'sine', 0.075, 70, 0.015, 0.008, 0.18);
-      silk(0.030, 0.10, 2000, 0.7);
+      silk(0.020, 0.06, 5000, 1.1);
+      tone(587, 'sine', 0.030, 0, 0.004, 0.09);
+      tone(988, 'sine', 0.016, 0, 0.004, 0.08, 0.045);
     },
 
     notify: function() {
-      bell(740,  2, 0.9, 0.07, 0.30);
-      bell(988,  2, 0.8, 0.05, 0.25, 0.13);
+      tone(740, 'sine', 0.024, 0, 0.006, 0.11);
+      tone(988, 'sine', 0.014, 0, 0.005, 0.09, 0.05);
     }
   };
 
@@ -393,7 +367,7 @@
   }
 
   function wireCommon() {
-    /* CLEAN ESSENTIAL SOUND MODE — pa gen son sou hover / scroll / card hover */
+    /* PREMIUM TECH SOFT MODE — son esansyèl + hover trè dous */
     var last = 0;
     function safe(fn){
       return function(){
@@ -403,6 +377,18 @@
         fn.call(this);
       };
     }
+
+    /* Hover trè dous, ak gwo cooldown pou pa fè bri */
+    var hoverLast = 0;
+    function softHover(fn){
+      return function(){
+        var now = Date.now();
+        if(now - hoverLast < 650) return;
+        hoverLast = now;
+        fn.call(this);
+      };
+    }
+    on('.btn-glow,.btn-ghost,.btn-pri,.primary,.ghost,.product,.card,.glass-card,.item,.premiumTop,.cartBtn', 'mouseenter', softHover(S.hover));
 
     /* Bouton prensipal sèlman */
     tap('.btn-glow,.btn-pri,.btn-pri-m,.nav-btn,.primary,.btn,.buyNow,.checkoutBtn,[data-buy],.premiumTop', safe(S.btnPrimary));
