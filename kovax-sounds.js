@@ -1,6 +1,6 @@
 /**
  * ╔══════════════════════════════════════════════════════════════╗
- * ║       KOVAX ACADEMY — SOUND ENGINE v5  · Premium Tech Soft     ║
+ * ║       KOVAX ACADEMY — SOUND ENGINE v6  · Ultra Soft Premium     ║
  * ║       Pure Web Audio · No Button · No Dependencies          ║
  * ╚══════════════════════════════════════════════════════════════╝
  */
@@ -12,7 +12,7 @@
   ═══════════════════════════════════ */
   var _ac  = null;
   var _on  = true;
-  var _vol = 0.68;   /* master — doux mais présent */
+  var _vol = 0.20;   /* master — ultra doux premium */
 
   function ctx() {
     if (!_ac) try { _ac = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}
@@ -149,189 +149,191 @@
   ═══════════════════════════════════ */
   var S = {
 
-    /* ═══ PREMIUM TECH SOFT MODE ═══
-       Son yo dous, kout, futuristik, pa spam.
+    /* ═══ ULTRA SOFT PREMIUM TECH MODE ═══
+       Son yo trè dous, pro, teknoloji, san bri fò.
     */
 
-    /* Hover — glass tech whisper, prèske pa tande */
+    /* Hover — ti glass breath, prèske pa tande */
     hover: function() {
-      silk(0.012, 0.055, 3600, 0.9);
-      tone(1760, 'sine', 0.010, 0, 0.004, 0.055);
+      silk(0.0035, 0.045, 4200, 0.9);
+      tone(1760, 'sine', 0.0025, 0, 0.004, 0.045);
     },
 
-    /* Card hover — mini luxury air */
+    /* Card hover — premium air, trè lejè */
     cardHover: function() {
-      silk(0.014, 0.07, 2400, 0.7);
+      silk(0.0045, 0.055, 2600, 0.7);
     },
 
     /* Card select — soft digital lock */
     cardSelect: function() {
-      tone(523, 'sine', 0.030, 0, 0.008, 0.12);
-      tone(784, 'sine', 0.020, 0, 0.006, 0.10, 0.045);
+      silk(0.006, 0.045, 3600, 0.85);
+      tone(523, 'sine', 0.010, 0, 0.008, 0.09);
+      tone(784, 'sine', 0.006, 0, 0.006, 0.08, 0.04);
     },
 
-    /* Primary button — Apple-style AI chime */
+    /* Primary button — elegant AI chime */
     btnPrimary: function() {
-      silk(0.018, 0.06, 4200, 1.0);
-      tone(587, 'sine', 0.038, 0, 0.007, 0.15);
-      tone(880, 'sine', 0.024, 0, 0.006, 0.13, 0.065);
+      silk(0.007, 0.050, 4400, 1.0);
+      tone(587, 'sine', 0.014, 0, 0.007, 0.12);
+      tone(880, 'sine', 0.008, 0, 0.006, 0.10, 0.055);
     },
 
     /* Secondary / ghost button — light glass tap */
     btnSecondary: function() {
-      tone(440, 'triangle', 0.024, 0, 0.006, 0.11);
+      tone(440, 'triangle', 0.008, 0, 0.006, 0.08);
     },
 
     inputFocus: function() {
-      tone(988, 'sine', 0.020, 0, 0.006, 0.11);
+      tone(988, 'sine', 0.006, 0, 0.006, 0.08);
     },
 
     keystroke: function() {
-      tone(1250 + Math.random() * 180, 'sine', 0.004, 0, 0.002, 0.020);
+      tone(1250 + Math.random() * 120, 'sine', 0.0015, 0, 0.002, 0.014);
     },
 
     fieldOK: function() {
-      tone(659, 'sine', 0.024, 0, 0.006, 0.11);
-      tone(988, 'sine', 0.014, 0, 0.005, 0.09, 0.045);
+      tone(659, 'sine', 0.008, 0, 0.006, 0.08);
+      tone(988, 'sine', 0.004, 0, 0.005, 0.07, 0.04);
     },
 
     step: function() {
-      silk(0.020, 0.08, 2200, 0.75);
-      tone(659, 'sine', 0.020, 0, 0.007, 0.12, 0.02);
+      silk(0.006, 0.060, 2400, 0.75);
+      tone(659, 'sine', 0.007, 0, 0.007, 0.08, 0.02);
     },
 
     error: function() {
-      tone(220, 'triangle', 0.030, 0.025, 0.006, 0.14);
-      tone(196, 'triangle', 0.020, 0.020, 0.006, 0.12, 0.10);
+      tone(220, 'triangle', 0.010, 0.020, 0.006, 0.10);
+      tone(196, 'triangle', 0.006, 0.015, 0.006, 0.08, 0.09);
     },
 
     woosh: function() {
-      silk(0.018, 0.11, 1800, 0.55);
+      silk(0.006, 0.085, 1900, 0.55);
     },
 
     faqOpen: function() {
-      tone(523, 'sine', 0.026, 0, 0.006, 0.11);
-      tone(659, 'sine', 0.016, 0, 0.005, 0.09, 0.05);
+      tone(523, 'sine', 0.009, 0, 0.006, 0.08);
+      tone(659, 'sine', 0.005, 0, 0.005, 0.07, 0.045);
     },
 
     faqClose: function() {
-      tone(440, 'triangle', 0.022, 0, 0.006, 0.11);
+      tone(440, 'triangle', 0.006, 0, 0.006, 0.075);
     },
 
     menuOpen: function() {
-      silk(0.018, 0.08, 2600, 0.8);
-      tone(587, 'sine', 0.025, 0, 0.006, 0.11);
-      tone(740, 'sine', 0.014, 0, 0.005, 0.09, 0.045);
+      silk(0.0065, 0.065, 2800, 0.8);
+      tone(587, 'sine', 0.009, 0, 0.006, 0.085);
+      tone(740, 'sine', 0.005, 0, 0.005, 0.070, 0.04);
     },
 
     menuClose: function() {
-      tone(494, 'triangle', 0.022, 0, 0.006, 0.10);
-      tone(392, 'triangle', 0.014, 0, 0.005, 0.08, 0.045);
+      tone(494, 'triangle', 0.007, 0, 0.006, 0.075);
+      tone(392, 'triangle', 0.004, 0, 0.005, 0.060, 0.04);
     },
 
     backTop: function() {
-      silk(0.018, 0.09, 2400, 0.65);
-      tone(784, 'sine', 0.022, 0, 0.006, 0.11, 0.02);
+      silk(0.006, 0.070, 2400, 0.65);
+      tone(784, 'sine', 0.007, 0, 0.006, 0.08, 0.02);
     },
 
     copy: function() {
-      tone(1047, 'sine', 0.025, 0, 0.005, 0.09);
-      tone(1318, 'sine', 0.015, 0, 0.004, 0.075, 0.04);
+      tone(1047, 'sine', 0.008, 0, 0.005, 0.070);
+      tone(1318, 'sine', 0.004, 0, 0.004, 0.060, 0.035);
     },
 
     toggleOn: function() {
-      silk(0.016, 0.06, 3200, 0.9);
-      tone(622, 'sine', 0.030, 0, 0.006, 0.12);
-      tone(932, 'sine', 0.017, 0, 0.005, 0.10, 0.05);
+      silk(0.006, 0.050, 3200, 0.9);
+      tone(622, 'sine', 0.010, 0, 0.006, 0.09);
+      tone(932, 'sine', 0.005, 0, 0.005, 0.075, 0.045);
     },
 
     toggleOff: function() {
-      tone(392, 'triangle', 0.024, 0, 0.006, 0.11);
-      silk(0.010, 0.045, 1800, 0.6);
+      tone(392, 'triangle', 0.007, 0, 0.006, 0.075);
+      silk(0.004, 0.040, 1800, 0.6);
     },
 
     chatOpen: function() {
-      silk(0.018, 0.07, 3400, 0.85);
-      tone(523, 'sine', 0.026, 0, 0.006, 0.12);
-      tone(784, 'sine', 0.015, 0, 0.005, 0.10, 0.05);
+      silk(0.006, 0.060, 3400, 0.85);
+      tone(523, 'sine', 0.009, 0, 0.006, 0.09);
+      tone(784, 'sine', 0.005, 0, 0.005, 0.075, 0.045);
     },
 
     chatClose: function() {
-      tone(415, 'triangle', 0.020, 0, 0.006, 0.10);
+      tone(415, 'triangle', 0.006, 0, 0.006, 0.075);
     },
 
     msgSend: function() {
-      tone(880, 'sine', 0.024, 0, 0.005, 0.09);
-      silk(0.012, 0.045, 4200, 0.8);
+      tone(880, 'sine', 0.008, 0, 0.005, 0.070);
+      silk(0.004, 0.040, 4200, 0.8);
     },
 
     msgRecv: function() {
-      tone(659, 'sine', 0.022, 0, 0.006, 0.11);
-      tone(988, 'sine', 0.012, 0, 0.005, 0.085, 0.045);
+      tone(659, 'sine', 0.007, 0, 0.006, 0.080);
+      tone(988, 'sine', 0.004, 0, 0.005, 0.065, 0.040);
     },
 
-    /* Welcome — soft AI startup */
+    /* Welcome — soft AI startup, dous anpil */
     welcome: function() {
-      silk(0.020, 0.14, 2800, 0.55);
-      tone(392, 'sine', 0.028, 0, 0.014, 0.22, 0.03);
-      tone(587, 'sine', 0.022, 0, 0.012, 0.20, 0.18);
-      tone(784, 'sine', 0.016, 0, 0.012, 0.24, 0.34);
+      silk(0.007, 0.110, 2800, 0.55);
+      tone(392, 'sine', 0.009, 0, 0.014, 0.18, 0.03);
+      tone(587, 'sine', 0.007, 0, 0.012, 0.16, 0.16);
+      tone(784, 'sine', 0.005, 0, 0.012, 0.18, 0.30);
     },
 
     welcomeChoice: function() {
-      silk(0.018, 0.12, 3000, 0.65);
-      tone(440, 'sine', 0.024, 0, 0.012, 0.20, 0.03);
-      tone(659, 'sine', 0.018, 0, 0.012, 0.18, 0.18);
-      tone(880, 'sine', 0.012, 0, 0.010, 0.20, 0.32);
+      silk(0.006, 0.100, 3000, 0.65);
+      tone(440, 'sine', 0.008, 0, 0.012, 0.16, 0.03);
+      tone(659, 'sine', 0.006, 0, 0.012, 0.14, 0.16);
+      tone(880, 'sine', 0.004, 0, 0.010, 0.16, 0.28);
     },
 
     welcomeForm: function() {
-      tone(440, 'sine', 0.022, 0, 0.012, 0.18);
-      tone(587, 'sine', 0.014, 0, 0.012, 0.16, 0.12);
+      tone(440, 'sine', 0.007, 0, 0.012, 0.14);
+      tone(587, 'sine', 0.004, 0, 0.012, 0.12, 0.10);
     },
 
     welcomePayment: function() {
-      silk(0.016, 0.11, 2200, 0.55);
-      tone(330, 'sine', 0.022, 0, 0.014, 0.24);
-      tone(494, 'sine', 0.014, 0, 0.012, 0.20, 0.18);
+      silk(0.005, 0.090, 2200, 0.55);
+      tone(330, 'sine', 0.007, 0, 0.014, 0.18);
+      tone(494, 'sine', 0.004, 0, 0.012, 0.15, 0.15);
     },
 
     success: function() {
-      silk(0.022, 0.12, 3600, 0.65);
-      tone(523, 'sine', 0.028, 0, 0.008, 0.14);
-      tone(784, 'sine', 0.020, 0, 0.007, 0.13, 0.08);
-      tone(1047, 'sine', 0.014, 0, 0.006, 0.16, 0.16);
+      silk(0.008, 0.100, 3600, 0.65);
+      tone(523, 'sine', 0.010, 0, 0.008, 0.10);
+      tone(784, 'sine', 0.007, 0, 0.007, 0.10, 0.07);
+      tone(1047, 'sine', 0.005, 0, 0.006, 0.12, 0.14);
     },
 
     payment: function() {
-      silk(0.018, 0.12, 2600, 0.55);
-      tone(392, 'sine', 0.025, 0, 0.010, 0.20);
-      tone(587, 'sine', 0.018, 0, 0.010, 0.18, 0.14);
+      silk(0.006, 0.100, 2600, 0.55);
+      tone(392, 'sine', 0.008, 0, 0.010, 0.16);
+      tone(587, 'sine', 0.005, 0, 0.010, 0.14, 0.12);
     },
 
     triumph: function() {
-      silk(0.024, 0.16, 3900, 0.55);
-      tone(523, 'sine', 0.030, 0, 0.010, 0.20);
-      tone(784, 'sine', 0.021, 0, 0.010, 0.20, 0.16);
-      tone(1047, 'sine', 0.015, 0, 0.010, 0.28, 0.34);
+      silk(0.008, 0.130, 3900, 0.55);
+      tone(523, 'sine', 0.010, 0, 0.010, 0.16);
+      tone(784, 'sine', 0.007, 0, 0.010, 0.16, 0.14);
+      tone(1047, 'sine', 0.005, 0, 0.010, 0.22, 0.30);
     },
 
+    /* Market welcome — elegant shop tone, pa fò */
     shopBell: function() {
-      silk(0.018, 0.08, 3600, 0.75);
-      tone(740, 'sine', 0.026, 0, 0.006, 0.13);
-      tone(1110, 'sine', 0.015, 0, 0.005, 0.11, 0.06);
+      silk(0.006, 0.065, 3600, 0.75);
+      tone(740, 'sine', 0.009, 0, 0.006, 0.10);
+      tone(1110, 'sine', 0.005, 0, 0.005, 0.085, 0.055);
     },
 
-    /* Add cart — premium tech click */
+    /* Add cart — premium tech click, sèl ti son ki pi prezan */
     addCart: function() {
-      silk(0.020, 0.06, 5000, 1.1);
-      tone(587, 'sine', 0.030, 0, 0.004, 0.09);
-      tone(988, 'sine', 0.016, 0, 0.004, 0.08, 0.045);
+      silk(0.007, 0.050, 5000, 1.1);
+      tone(587, 'sine', 0.012, 0, 0.004, 0.075);
+      tone(988, 'sine', 0.007, 0, 0.004, 0.065, 0.040);
     },
 
     notify: function() {
-      tone(740, 'sine', 0.024, 0, 0.006, 0.11);
-      tone(988, 'sine', 0.014, 0, 0.005, 0.09, 0.05);
+      tone(740, 'sine', 0.008, 0, 0.006, 0.080);
+      tone(988, 'sine', 0.004, 0, 0.005, 0.070, 0.045);
     }
   };
 
@@ -372,7 +374,7 @@
     function safe(fn){
       return function(){
         var now = Date.now();
-        if(now - last < 180) return;
+        if(now - last < 260) return;
         last = now;
         fn.call(this);
       };
@@ -383,7 +385,7 @@
     function softHover(fn){
       return function(){
         var now = Date.now();
-        if(now - hoverLast < 650) return;
+        if(now - hoverLast < 950) return;
         hoverLast = now;
         fn.call(this);
       };
