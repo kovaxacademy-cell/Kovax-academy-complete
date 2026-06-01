@@ -1728,7 +1728,7 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
       osc.type = type || 'sine';
       osc.frequency.setValueAtTime(freq, ac.currentTime);
       gain.gain.setValueAtTime(0, ac.currentTime);
-      gain.gain.linearRampToValueAtTime(vol || 0.12, ac.currentTime + (attack || 0.01));
+      gain.gain.linearRampToValueAtTime(vol || 0.006, ac.currentTime + (attack || 0.01));
       gain.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + (duration || 0.18) + (decay || 0.05));
       osc.start(ac.currentTime);
       osc.stop(ac.currentTime + (duration || 0.18) + (decay || 0.05) + 0.05);
@@ -1736,24 +1736,24 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
   }
 
   // Click: soft tick
-  function sndClick() { playTone(880, 'sine', 0.07, 0.10, 0.005, 0.04); }
+  function sndClick() { playTone(1320, 'sine', 0.045, 0.004, 0.004, 0.03); }
   // Button glow: rising chime
   function sndGlow() {
-    playTone(523, 'sine', 0.10, 0.08, 0.01);
-    setTimeout(function() { playTone(659, 'sine', 0.10, 0.07, 0.01); }, 60);
-    setTimeout(function() { playTone(784, 'sine', 0.14, 0.09, 0.01); }, 120);
+    playTone(587, 'sine', 0.08, 0.006, 0.01);
+    setTimeout(function() { playTone(880, 'sine', 0.08, 0.004, 0.01); }, 60);
+    setTimeout(function() { playTone(1175, 'sine', 0.10, 0.003, 0.01); }, 120);
   }
   // Nav link: subtle click
-  function sndNav() { playTone(660, 'triangle', 0.06, 0.07, 0.005, 0.03); }
+  function sndNav() { playTone(1040, 'triangle', 0.045, 0.0035, 0.005, 0.025); }
   // FAQ open: soft pop
-  function sndFaqOpen()  { playTone(440, 'sine', 0.08, 0.09, 0.008); playTone(550, 'sine', 0.09, 0.06, 0.008); }
-  function sndFaqClose() { playTone(550, 'sine', 0.07, 0.07, 0.008); playTone(440, 'sine', 0.08, 0.05, 0.008); }
+  function sndFaqOpen()  { playTone(660, 'sine', 0.06, 0.004, 0.008); playTone(990, 'sine', 0.07, 0.0025, 0.008); }
+  function sndFaqClose() { playTone(520, 'triangle', 0.05, 0.003, 0.008); }
   // Social icon: bright pop
-  function sndSocial() { playTone(1047, 'sine', 0.08, 0.11, 0.005, 0.05); }
+  function sndSocial() { playTone(1320, 'sine', 0.055, 0.004, 0.005, 0.04); }
   // Hamburger open/close
   function sndMenu(open) {
-    if (open) { playTone(440, 'sine', 0.06, 0.07); setTimeout(function(){playTone(523,'sine',0.06,0.06);},50); }
-    else       { playTone(523, 'sine', 0.06, 0.07); setTimeout(function(){playTone(440,'sine',0.06,0.06);},50); }
+    if (open) { playTone(660, 'sine', 0.045, 0.004); setTimeout(function(){playTone(880,'sine',0.045,0.0025);},50); }
+    else       { playTone(520, 'triangle', 0.040, 0.003); }
   }
 
   // ── RIPPLE helper ──
@@ -1937,7 +1937,7 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
       var o=c.createOscillator(),g=c.createGain();
       o.connect(g);g.connect(b);o.type=tp||'sine';
       o.frequency.setValueAtTime(fr,c.currentTime+dl);
-      var v=(vl||0.08)*0.62,a=ak||0.010,r=rl||0.28,t=c.currentTime+dl;
+      var v=(vl||0.08)*0.045,a=ak||0.010,r=rl||0.28,t=c.currentTime+dl;
       g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+a);
       g.gain.setValueAtTime(v,t+a+(hl||0));g.gain.exponentialRampToValueAtTime(0.0001,t+a+(hl||0)+r);
       o.start(t);o.stop(t+a+(hl||0)+r+0.06);
@@ -1950,7 +1950,7 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
       var mod=c.createOscillator(),modG=c.createGain(),osc=c.createOscillator(),outG=c.createGain();
       mod.frequency.value=car*mR;modG.gain.value=car*mI;
       mod.connect(modG);modG.connect(osc.frequency);osc.connect(outG);outG.connect(b);
-      var v=(vl||0.08)*0.62,t=c.currentTime+dl;
+      var v=(vl||0.08)*0.045,t=c.currentTime+dl;
       outG.gain.setValueAtTime(0,t);outG.gain.linearRampToValueAtTime(v,t+0.010);outG.gain.exponentialRampToValueAtTime(0.0001,t+(dur||0.50));
       mod.start(t);osc.start(t);mod.stop(t+(dur||0.50)+0.06);osc.stop(t+(dur||0.50)+0.06);
     }catch(e){}
@@ -1963,7 +1963,7 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
       for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,1.6);
       var src=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();
       src.buffer=buf;f.type='bandpass';f.frequency.value=fr||1800;f.Q.value=q||0.6;
-      g.gain.setValueAtTime((vl||0.05)*0.62,c.currentTime);g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+(dur||0.12));
+      g.gain.setValueAtTime((vl||0.05)*0.045,c.currentTime);g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+(dur||0.12));
       src.connect(f);f.connect(g);g.connect(b);src.start();
     }catch(e){}
   }
@@ -1972,9 +1972,9 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
   }
 
   /* ── Sons Video 1 ── */
-  function sndStart(){ silk(0.055,0.20,900,0.5);tone(220,'sine',0.06,0,0.020,0.45,0.05);setTimeout(function(){bell(440,2,0.8,0.07,0.55);},250); }
-  function sndUnmute(){ silk(0.045,0.14,1600,0.6);bellSeq([523,659,784],2,0.9,0.09,0.38,75); }
-  function sndMute(){ tone(784,'sine',0.07,0,0.008,0.18);setTimeout(function(){tone(523,'triangle',0.06,0,0.008,0.22);},80);setTimeout(function(){tone(330,'sine',0.04,0,0.010,0.28);},160); }
+  function sndStart(){ silk(0.010,0.12,1600,0.5);tone(330,'sine',0.010,0,0.020,0.20,0.05); }
+  function sndUnmute(){ silk(0.010,0.08,2600,0.6);tone(880,'sine',0.010,0,0.008,0.10); }
+  function sndMute(){ tone(520,'triangle',0.008,0,0.008,0.08); }
 
   /* ══════════════════
      VIDEO 1 — loop senp + bouton son
