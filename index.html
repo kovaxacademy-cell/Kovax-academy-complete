@@ -1939,58 +1939,280 @@ function toggleFaq(el){var item=el.parentElement;document.querySelectorAll('.faq
 
   }); // end DOMContentLoaded
 })();
-// ── Son Video 2 — klike sou video aktive/koupe son ──
-window.kvToggleVid2Sound = function(){
-  var vid2   = document.getElementById('kvVid2');
-  var timer  = window._kvVid2Timer || null;
-  if(!vid2) return;
+// ════════════════════════════════════════
+//  KOVAX VIDEO SOUND ENGINE — Konplè
+// ════════════════════════════════════════
+(function(){
+  'use strict';
 
-  if(vid2.muted){
-    // Aktive son
-    vid2.muted  = false;
-    vid2.volume = 1;
-    // Koupe apre 8 sèkond
-    if(timer) clearTimeout(timer);
-    window._kvVid2Timer = setTimeout(function(){
-      vid2.muted = true;
-    }, 8000);
-  } else {
-    // Koupe son imedyatman
-    vid2.muted = true;
-    if(timer) clearTimeout(timer);
-    window._kvVid2Timer = null;
+  /* ── AudioContext singleton ── */
+  var _ac = null;
+  function ac(){
+    if(!_ac) try{ _ac = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){}
+    return _ac;
   }
-};
+  function wake(cb){
+    var c=ac(); if(!c) return;
+    if(c.state==='suspended') c.resume().then(cb||function(){}); else if(cb) cb();
+  }
 
-// ── Mute toggle Video 1 — kontwole sèlman kvVid1a ak kvVid1b ──
-window.kvToggleMute = function(btn) {
-  var vidA = document.getElementById('kvVid1a');
-  var vidB = document.getElementById('kvVid1b');
-  var icon = document.getElementById('kvMuteIcon');
-  if(!vidA) return;
-  var nowMuted = !vidA.muted;
-  vidA.muted = nowMuted;
-  if(vidB) vidB.muted = nowMuted;
-  if(nowMuted){
-    icon.innerHTML = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
-    btn.classList.remove('kv-sound-on');
-    btn.setAttribute('aria-label','Aktive son');
-  } else {
-    icon.innerHTML = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/><path d="M15.54,8.46a5,5,0,0,1,0,7.07" stroke="white" stroke-width="2" fill="none"/><path d="M19.07,4.93a10,10,0,0,1,0,14.14" stroke="white" stroke-width="2" fill="none"/>';
-    btn.classList.add('kv-sound-on');
-    btn.setAttribute('aria-label','Koupe son');
+  /* ── Compressor bus ── */
+  var _bus=null;
+  function bus(){
+    var c=ac(); if(!c) return null;
+    if(!_bus){
+      var comp=c.createDynamicsCompressor();
+      comp.threshold.value=-18; comp.knee.value=10;
+      comp.ratio.value=4; comp.attack.value=0.004; comp.release.value=0.18;
+      try{
+        var rev=c.createConvolver();
+        var len=Math.floor(c.sampleRate*1.0);
+        var buf=c.createBuffer(2,len,c.sampleRate);
+        for(var ch=0;ch<2;ch++){var d=buf.getChannelData(ch);for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.5);}
+        rev.buffer=buf;
+        var wet=c.createGain(); wet.gain.value=0.10;
+        var dry=c.createGain(); dry.gain.value=0.90;
+        comp.connect(dry); dry.connect(c.destination);
+        comp.connect(rev); rev.connect(wet); wet.connect(c.destination);
+        _bus=comp;
+      }catch(e){ comp.connect(c.destination); _bus=comp; }
+    }
+    return _bus;
   }
-};
+
+  /* ── Tone generator ── */
+  function tone(freq,type,vol,hold,atk,rel,delay){
+    var c=ac(),b=bus(); if(!c||!b) return;
+    delay=delay||0;
+    try{
+      var o=c.createOscillator(), g=c.createGain();
+      o.connect(g); g.connect(b);
+      o.type=type||'sine';
+      o.frequency.setValueAtTime(freq, c.currentTime+delay);
+      var v=(vol||0.08)*0.45;
+      var a=atk||0.010, r=rel||0.28, t=c.currentTime+delay;
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(v, t+a);
+      g.gain.setValueAtTime(v, t+a+(hold||0));
+      g.gain.exponentialRampToValueAtTime(0.0001, t+a+(hold||0)+r);
+      o.start(t); o.stop(t+a+(hold||0)+r+0.06);
+    }catch(e){}
+  }
+
+  /* ── FM bell ── */
+  function bell(carrier,mR,mI,vol,dur,delay){
+    var c=ac(),b=bus(); if(!c||!b) return;
+    delay=delay||0;
+    try{
+      var mod=c.createOscillator(), modG=c.createGain();
+      var car=c.createOscillator(), outG=c.createGain();
+      mod.frequency.value=carrier*mR; modG.gain.value=carrier*mI;
+      mod.connect(modG); modG.connect(car.frequency);
+      car.connect(outG); outG.connect(b);
+      var v=(vol||0.08)*0.45, t=c.currentTime+delay;
+      outG.gain.setValueAtTime(0,t);
+      outG.gain.linearRampToValueAtTime(v,t+0.010);
+      outG.gain.exponentialRampToValueAtTime(0.0001,t+(dur||0.50));
+      mod.start(t); car.start(t);
+      mod.stop(t+(dur||0.50)+0.06); car.stop(t+(dur||0.50)+0.06);
+    }catch(e){}
+  }
+
+  /* ── Silk noise ── */
+  function silk(vol,dur,freq,q){
+    var c=ac(),b=bus(); if(!c||!b) return;
+    try{
+      var len=Math.floor(c.sampleRate*(dur||0.12));
+      var buf=c.createBuffer(1,len,c.sampleRate);
+      var d=buf.getChannelData(0);
+      for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,1.6);
+      var src=c.createBufferSource(); src.buffer=buf;
+      var f=c.createBiquadFilter();
+      f.type='bandpass'; f.frequency.value=freq||1800; f.Q.value=q||0.6;
+      var g=c.createGain();
+      g.gain.setValueAtTime((vol||0.05)*0.45,c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+(dur||0.12));
+      src.connect(f); f.connect(g); g.connect(b); src.start();
+    }catch(e){}
+  }
+
+  /* ── Bell sequence ── */
+  function bellSeq(notes,mR,mI,vol,dur,gap){
+    notes.forEach(function(n,i){
+      setTimeout(function(){ bell(n,mR,mI,vol,dur); }, i*(gap||90));
+    });
+  }
+
+  /* ════════════════════
+     SONS VIDEO
+  ═══════════════════ */
+
+  /* Son lè video kòmanse jwe pou premye fwa — cinematic reveal */
+  function sndVideoStart(){
+    silk(0.055, 0.22, 900, 0.5);
+    tone(220,'sine',0.06,0,0.020,0.45,0.05);
+    tone(330,'sine',0.04,0,0.015,0.38,0.18);
+    setTimeout(function(){ bell(440,2,0.8,0.07,0.55); }, 260);
+  }
+
+  /* Son lè son video aktive (unmute) — bright chime monte */
+  function sndVideoUnmute(){
+    silk(0.045, 0.14, 1600, 0.6);
+    bellSeq([523,659,784], 2, 0.9, 0.09, 0.38, 75);
+  }
+
+  /* Son lè son video koupe (mute) — descend soft */
+  function sndVideoMute(){
+    tone(784,'sine',0.07,0,0.008,0.18);
+    setTimeout(function(){ tone(523,'triangle',0.06,0,0.008,0.22); }, 80);
+    setTimeout(function(){ tone(330,'sine',0.04,0,0.010,0.28); }, 160);
+  }
+
+  /* Son lè video 2 rive nan ekran (scroll reveal) */
+  function sndVideoReveal(){
+    silk(0.040, 0.18, 1200, 0.55);
+    tone(392,'sine',0.055,0,0.012,0.30,0.05);
+    setTimeout(function(){ bell(523,2.5,1.0,0.07,0.45); }, 150);
+  }
+
+  /* Son klike sou video pou aktive son — pulse elegans */
+  function sndVideoPulse(){
+    bell(660, 2, 1.2, 0.10, 0.40);
+    tone(880,'sine',0.06,0,0.008,0.22,0.08);
+    silk(0.035, 0.12, 2000, 0.7);
+  }
+
+  /* ════════════════════
+     VIDEO 1 — MUTE TOGGLE avek SON
+  ═══════════════════ */
+  window.kvToggleMute = function(btn){
+    wake(function(){
+      var vidA = document.getElementById('kvVid1a');
+      var vidB = document.getElementById('kvVid1b');
+      var icon = document.getElementById('kvMuteIcon');
+      if(!vidA) return;
+      var nowMuted = !vidA.muted;
+      vidA.muted = nowMuted;
+      if(vidB) vidB.muted = nowMuted;
+
+      if(nowMuted){
+        sndVideoMute();
+        icon.innerHTML = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+        btn.classList.remove('kv-sound-on');
+        btn.setAttribute('aria-label','Aktive son');
+      } else {
+        sndVideoUnmute();
+        icon.innerHTML = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/><path d="M15.54,8.46a5,5,0,0,1,0,7.07" stroke="white" stroke-width="2" fill="none"/><path d="M19.07,4.93a10,10,0,0,1,0,14.14" stroke="white" stroke-width="2" fill="none"/>';
+        btn.classList.add('kv-sound-on');
+        btn.setAttribute('aria-label','Koupe son');
+      }
+    });
+  };
+
+  /* ════════════════════
+     VIDEO 2 — KLIKE POU AKTIVE SON avek SON
+  ═══════════════════ */
+  var _v2timer = null;
+  window.kvToggleVid2Sound = function(){
+    wake(function(){
+      var vid2 = document.getElementById('kvVid2');
+      if(!vid2) return;
+
+      if(vid2.muted){
+        sndVideoPulse();
+        vid2.muted  = false;
+        vid2.volume = 0;
+        /* Fade in volume dousman */
+        var vol = 0;
+        var fadeIn = setInterval(function(){
+          vol = Math.min(1, vol + 0.08);
+          vid2.volume = vol;
+          if(vol >= 1) clearInterval(fadeIn);
+        }, 40);
+        /* Koupe apre 10 sèk */
+        if(_v2timer) clearTimeout(_v2timer);
+        _v2timer = setTimeout(function(){
+          sndVideoMute();
+          var fadeOut = setInterval(function(){
+            vid2.volume = Math.max(0, vid2.volume - 0.06);
+            if(vid2.volume <= 0){ vid2.muted=true; clearInterval(fadeOut); }
+          }, 40);
+          _v2timer = null;
+        }, 10000);
+      } else {
+        sndVideoMute();
+        if(_v2timer){ clearTimeout(_v2timer); _v2timer=null; }
+        var fadeOut2 = setInterval(function(){
+          vid2.volume = Math.max(0, vid2.volume - 0.08);
+          if(vid2.volume <= 0){ vid2.muted=true; clearInterval(fadeOut2); }
+        }, 40);
+      }
+    });
+  };
+
+  /* ════════════════════
+     AUTOPLAY + SON DEMARE pou tout video
+  ═══════════════════ */
+  var _vid1Started = false;
+  var _vid2Started = false;
+
+  function initVideos(){
+    var vid1a = document.getElementById('kvVid1a');
+    var vid2  = document.getElementById('kvVid2');
+
+    /* Video 1 — son demare lè li kòmanse */
+    if(vid1a && !_vid1Started){
+      vid1a.addEventListener('playing', function onPlay1(){
+        if(_vid1Started) return;
+        _vid1Started = true;
+        sndVideoStart();
+        vid1a.removeEventListener('playing', onPlay1);
+      });
+      vid1a.play().catch(function(){ vid1a.muted=true; vid1a.play(); });
+    }
+
+    /* Video 2 — son reveal lè li antre nan ekran */
+    if(vid2 && !_vid2Started && window.IntersectionObserver){
+      var io2 = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting && !_vid2Started){
+            _vid2Started = true;
+            sndVideoReveal();
+            io2.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      io2.observe(vid2);
+    }
+  }
+
+  /* Lance apre DOM pare */
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){
+      setTimeout(initVideos, 400);
+    });
+  } else {
+    setTimeout(initVideos, 400);
+  }
+
+  /* Mobil: asire video yo jwe lè itilizatè a touche ekran */
+  document.addEventListener('touchstart', function boot(){
+    document.removeEventListener('touchstart', boot);
+    wake(function(){
+      ['kvVid1a','kvVid1b','kvVid2'].forEach(function(id){
+        var v = document.getElementById(id);
+        if(v && v.paused) v.play().catch(function(){});
+      });
+    });
+  }, {once:true, passive:true});
+
+})();
 // ════ END KOVAX EFFECTS ════
 
 </script>
 
 
 
-
-
-<!-- ── KOVAX SOUND ENGINE KONPLÈ ── -->
-<script src="kovax-sounds.js"></script>
 
 </body>
 </html>
