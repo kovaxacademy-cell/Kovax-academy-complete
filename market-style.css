@@ -2783,3 +2783,48 @@ object-fit:cover;
   .mobile-search-wrap:before{left:30px !important;top:18px !important;}
   .hero{padding-top:10px !important;}
 }
+
+/* =========================================================
+   KOVAX FINAL FIX — HERO BADGES SOU BÒ KAYE/PLIM NEG LA
+   Pa bouche figi neg la, pa bouche fanm nan, pa chanje lòt design.
+   ========================================================= */
+@media (min-width:1051px){
+  .visual .floatingIcons{
+    left:7.5% !important;
+    top:248px !important;
+    right:auto !important;
+    display:grid !important;
+    grid-template-columns:repeat(2, 94px) !important;
+    gap:12px !important;
+    z-index:8 !important;
+    pointer-events:none !important;
+  }
+
+  .visual .floatingIcons span{
+    width:94px !important;
+    height:74px !important;
+    border-radius:18px !important;
+    font-size:12px !important;
+    line-height:1.18 !important;
+    padding:8px !important;
+    background:rgba(3,6,17,.46) !important;
+    border:1px solid rgba(39,200,255,.22) !important;
+    box-shadow:0 10px 28px rgba(0,0,0,.28),0 0 18px rgba(39,200,255,.08) !important;
+    backdrop-filter:blur(14px) !important;
+  }
+}
+
+@media (min-width:1051px) and (max-width:1250px){
+  .visual .floatingIcons{
+    left:5.5% !important;
+    top:232px !important;
+    grid-template-columns:repeat(2, 86px) !important;
+    gap:10px !important;
+  }
+  .visual .floatingIcons span{
+    width:86px !important;
+    height:68px !important;
+    font-size:11px !important;
+    border-radius:16px !important;
+  }
+}
