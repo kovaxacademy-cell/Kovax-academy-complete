@@ -12,7 +12,7 @@
   ═══════════════════════════════════ */
   var _ac  = null;
   var _on  = true;
-  var _vol = 0.42;   /* master — doux mais présent */
+  var _vol = 0.68;   /* master — doux mais présent */
 
   function ctx() {
     if (!_ac) try { _ac = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}
@@ -537,6 +537,17 @@
     }, { passive: true, once: true });
   });
 
-  window.KovaxSound = { play: S, enabled: function(){ return _on; } };
+  window.KovaxSound = {
+    play: S,
+    enabled: function(){ return _on; },
+    off: function(){
+      _on = false;
+      try { if (_ac && _ac.state === 'running') _ac.suspend(); } catch(e){}
+    },
+    on: function(){
+      _on = true;
+      wake();
+    }
+  };
 
 })();
