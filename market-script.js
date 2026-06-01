@@ -642,3 +642,69 @@ window.addEventListener('load', function(){
     }, 650);
   }
 });
+
+
+/* ✅ KOVAX MARKET — menm sound effects ak paj akèy la
+   - Active apre premye klik/touch (règleman navigatè)
+   - Hover, bouton, charyo, menu, rechèch, checkout
+*/
+(function(){
+  if (window.__KOVAX_MARKET_SOUND_BRIDGE__) return;
+  window.__KOVAX_MARKET_SOUND_BRIDGE__ = true;
+
+  function KS(){ return window.KovaxSound && window.KovaxSound.play ? window.KovaxSound : null; }
+  function play(name){
+    var k = KS();
+    if (!k || !k.play || !k.play[name]) return;
+    try { k.on && k.on(); k.play[name](); } catch(e){}
+  }
+  function closest(e, sel){ return e.target && e.target.closest ? e.target.closest(sel) : null; }
+
+  var welcomed = false;
+  function welcomeOnce(){
+    if (welcomed) return;
+    welcomed = true;
+    setTimeout(function(){ play('shopBell'); }, 80);
+  }
+  ['click','touchstart','keydown'].forEach(function(ev){
+    document.addEventListener(ev, welcomeOnce, {once:true, passive:true});
+  });
+
+  document.addEventListener('click', function(e){
+    if (closest(e,'[data-add-to-cart], .add, .premium-buy-btn')) { play('addCart'); return; }
+    if (closest(e,'.cartBtn, [onclick*="openCart"], [onclick*="toggleCart"]')) { play('shopBell'); return; }
+    if (closest(e,'.close, .shade, [onclick*="closeCart"]')) { play('toggleOff'); return; }
+    if (closest(e,'.navToggle, .hamburger, [onclick*="toggleMobileNav"]')) { play('menuOpen'); return; }
+    if (closest(e,'.nav-mobile-overlay, [onclick*="closeMobileNav"]')) { play('menuClose'); return; }
+    if (closest(e,'.chip, .nav a, .filter button, [data-filter]')) { play('step'); return; }
+    if (closest(e,'.mw-paypal,.mw-card,.mw-apple,.mw-google,[data-wallet]')) { play('cardSelect'); return; }
+    if (closest(e,'#paypal-button-container button, .primary, .btn.primary')) { play('payment'); return; }
+    if (closest(e,'button, .btn, a')) { play('btnPrimary'); return; }
+    if (closest(e,'.product,.premium-card,.bundle,.visual-card')) { play('cardSelect'); return; }
+  }, true);
+
+  document.addEventListener('mouseover', function(e){
+    if (closest(e,'.product,.premium-card,.cartItem,.bundle,.glass-card')) play('cardHover');
+    else if (closest(e,'button,.btn,a,.chip')) play('hover');
+  }, true);
+
+  document.addEventListener('focusin', function(e){
+    if (closest(e,'input,select,textarea')) play('inputFocus');
+  }, true);
+
+  document.addEventListener('input', function(e){
+    if (closest(e,'input,textarea')) {
+      if (Math.random() > 0.68) play('keystroke');
+    }
+  }, true);
+
+  if (window.MutationObserver) {
+    var cartCount = document.getElementById('cartCount');
+    if (cartCount) new MutationObserver(function(){ play('notify'); }).observe(cartCount, {childList:true, characterData:true, subtree:true});
+
+    var success = document.getElementById('success');
+    if (success) new MutationObserver(function(){
+      if (success.offsetParent !== null || /confirme|konfime/i.test(success.textContent || '')) play('success');
+    }).observe(success, {attributes:true, childList:true, subtree:true, attributeFilter:['class','style']});
+  }
+})();
