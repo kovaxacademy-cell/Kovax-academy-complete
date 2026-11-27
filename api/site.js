@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     } else if (a === 'payment') {
       const amount = parseFloat(b.amount); const ref = cut(b.ref, 80) || null;
       const method = cut(b.method, 40) || 'paypal';
-      const status = /zelle/i.test(method) ? 'pending' : (b.status === 'failed' ? 'failed' : 'paid');
+      const status = (/zelle/i.test(method) || b.status === 'pending') ? 'pending' : (b.status === 'failed' ? 'failed' : 'paid');
       await db('payments?on_conflict=ref', { method: 'POST', prefer: 'resolution=ignore-duplicates', body: { method, status, amount: isNaN(amount) ? null : amount, ref, email: cut(b.email, 120), name: cut(b.name, 120), course: cut(b.course, 60), country: cut(b.country, 60) || cut(req.headers['x-vercel-ip-country'], 4) } });
     } else return res.status(400).json({ ok: false });
     return res.status(200).json({ ok: true });
