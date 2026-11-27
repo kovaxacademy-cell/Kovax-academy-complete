@@ -398,17 +398,17 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
 
 <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="orb orb4"></div></div>
 <nav>
-  <a href="index.html" class="nav-logo">KOVAX <span>ACADEMY</span></a>
-  <ul class="nav-links"><li><a href="index.html">Akèy</a></li><li><a href="enskripsyon.html">Kou</a></li></ul>
-  <a href="enskripsyon.html" class="nav-cta">Enskri</a>
+  <a href="index.html" class="nav-logo">KOVAX <span data-k="frm.3">ACADEMY</span></a>
+  <ul class="nav-links"><li><a href="index.html" data-k="frm.4">Akèy</a></li><li><a href="enskripsyon.html" data-k="frm.5">Kou</a></li></ul>
+  <a href="enskripsyon.html" class="nav-cta" data-k="frm.6">Enskri</a>
 </nav>
 <section id="main-section">
   <div class="form-page-wrap">
-    <p class="section-label">// Etap 2</p>
-    <h1 class="section-title">Ranpli Enfòmasyon w yo</h1>
-    <p class="section-desc" style="margin-bottom:24px;">Aprè ou fin ranpli fòm sa a, paj pèman an ap ouvri otomatikman.</p>
+    <p class="section-label" data-k="frm.7">// Etap 2</p>
+    <h1 class="section-title" data-k="frm.8">Ranpli Enfòmasyon w yo</h1>
+    <p class="section-desc" style="margin-bottom:24px;" data-k="frm.9">Aprè ou fin ranpli fòm sa a, paj pèman an ap ouvri otomatikman.</p>
     <div class="summary-box">
-      <strong> Kou w la chwazi:</strong>
+      <strong data-k="frm.10"> Kou w la chwazi:</strong>
       <div id="courseName" style="font-size:22px;font-weight:800;margin-top:6px;color:var(--cyan);">...</div>
       <div id="coursePrice" style="color:var(--muted);margin-top:4px;">...</div>
     </div>
@@ -422,11 +422,11 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
 
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Prenon *</label>
+          <label class="form-label" data-k="frm.11">Prenon *</label>
           <input class="form-input" id="prenom" name="Prenon" autocomplete="given-name" required placeholder="Ex: Jean">
         </div>
         <div class="form-group">
-          <label class="form-label">Sinyati *</label>
+          <label class="form-label" data-k="frm.12">Sinyati *</label>
           <input class="form-input" id="nom" name="Nom" autocomplete="family-name" required placeholder="Ex: Pierre">
         </div>
       </div>
@@ -434,10 +434,10 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
 
       <!-- DAT NESANS MODÈN — 3 Dropdown -->
       <div class="form-group" id="dobGroup">
-        <label class="form-label">Dat Nesans *</label>
+        <label class="form-label" data-k="frm.13">Dat Nesans *</label>
         <div class="dob-wrap">
           <div class="dob-col">
-            <span class="dob-sublabel">Jou</span>
+            <span class="dob-sublabel" data-k="frm.14">Jou</span>
             <div class="dob-select-wrap">
               <select id="dobDay" name="_dob_day" class="dob-select" onchange="kovaxDobChange()">
                 <option value="">Jou</option>
@@ -445,7 +445,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
             </div>
           </div>
           <div class="dob-col" style="flex:1.7;">
-            <span class="dob-sublabel">Mwa</span>
+            <span class="dob-sublabel" data-k="frm.15">Mwa</span>
             <div class="dob-select-wrap">
               <select id="dobMonth" name="_dob_month" class="dob-select" onchange="kovaxDobChange()">
                 <option value="">Mwa</option>
@@ -465,7 +465,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
             </div>
           </div>
           <div class="dob-col" style="flex:1.3;">
-            <span class="dob-sublabel">Ane</span>
+            <span class="dob-sublabel" data-k="frm.16">Ane</span>
             <div class="dob-select-wrap">
               <select id="dobYear" name="_dob_year" class="dob-select" onchange="kovaxDobChange()">
                 <option value="">Ane</option>
@@ -486,13 +486,13 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
       </div>
 
       <div class="form-group">
-        <label class="form-label">Email *</label>
+        <label class="form-label" data-k="frm.17">Email *</label>
         <input class="form-input" id="email" name="email" type="email" required placeholder="ou@email.com">
       </div>
 
       <!-- TELEPHONE SIMPLE -->
       <div class="form-group">
-        <label class="form-label">Nimewo Telefòn*</label>
+        <label class="form-label" data-k="frm.18">Nimewo Telefòn*</label>
         <div class="phone-wrap" id="phoneWrap">
           <button type="button" class="flag-btn" id="flagBtn">
             <span class="flag-emoji" id="flagEmoji">🇺🇸</span>
@@ -535,7 +535,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
       <!-- PEYI + SEKS ak drapo -->
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Peyi *</label>
+          <label class="form-label" data-k="frm.19">Peyi *</label>
           <select class="form-select" id="peyi" name="Peyi" required>
             <option value="">🌐 Chwazi peyi w</option>
             <!-- ── Peyi pi itilize ── -->
@@ -623,7 +623,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Sèks *</label>
+          <label class="form-label" data-k="frm.20">Sèks *</label>
           <select class="form-select" id="sex" name="Sex" required>
             <option value="">Chwazi</option><option>Fanm</option><option>Gason</option><option>Lòt</option>
           </select>
@@ -632,16 +632,16 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
 
       <!-- ADRES -->
       <div class="divider">
-        <p class="section-label" style="margin-bottom:4px;">// Adrès</p>
-        <p style="font-size:13px;color:var(--muted);">Tape Adrès 1 sijesyon ap parèt otomatikman ✨</p>
+        <p class="section-label" style="margin-bottom:4px;" data-k="frm.21">// Adrès</p>
+        <p style="font-size:13px;color:var(--muted);" data-k="frm.22">Tape Adrès 1 sijesyon ap parèt otomatikman ✨</p>
       </div>
       <div class="form-group ac-wrapper">
-        <label class="form-label">Adrès 1 *</label>
+        <label class="form-label" data-k="frm.23">Adrès 1 *</label>
         <input class="form-input" id="adresse1" name="Adresse_1" required placeholder="Ex: 123 Main Street…" autocomplete="off">
         <div class="ac-list" id="acList"></div>
       </div>
       <div class="form-group">
-        <label class="form-label">Adrès 2 <span style="color:var(--muted);font-weight:400;">(Opsyonèl)</span></label>
+        <label class="form-label">Adrès 2 <span style="color:var(--muted);font-weight:400;" data-k="frm.24">(Opsyonèl)</span></label>
         <div class="adresse2-wrap">
           <input class="form-input" id="adresse2" name="Adresse_2" placeholder="" autocomplete="off">
           <span class="adresse2-anim-placeholder" id="adresse2Placeholder"></span>
@@ -649,21 +649,21 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Vil *</label>
+          <label class="form-label" data-k="frm.25">Vil *</label>
           <input class="form-input" id="vil" name="Vil" required placeholder="Ex: Miami">
         </div>
         <div class="form-group">
-          <label class="form-label">Eta / Pwovens *</label>
+          <label class="form-label" data-k="frm.26">Eta / Pwovens *</label>
           <input class="form-input" id="eta" name="Eta_Pwovens" required placeholder="Ex: Florida">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">ZIP / Kòd Postal *</label>
+          <label class="form-label" data-k="frm.27">ZIP / Kòd Postal *</label>
           <input class="form-input" id="zip" name="Kod_Postal" required placeholder="Ex: 33101">
         </div>
         <div class="form-group">
-          <label class="form-label">Peyi (Adrès)</label>
+          <label class="form-label" data-k="frm.28">Peyi (Adrès)</label>
           <input class="form-input" id="pays_adresse" name="Pays_Adresse" placeholder="Ex: United States">
         </div>
       </div>
@@ -1643,9 +1643,9 @@ document.getElementById("studentForm").addEventListener("submit",async function(
 
 </script>
 <footer>
-  <div class="footer-logo">KOVAX <span>ACADEMY</span></div>
-  <div class="footer-copy">© 2026 Kovax Academy. Tout Dwa Rezève.</div>
-  <div class="footer-links"><a href="index.html">Akèy</a><a href="enskripsyon.html">Enskri</a></div>
+  <div class="footer-logo">KOVAX <span data-k="frm.29">ACADEMY</span></div>
+  <div class="footer-copy" data-k="frm.30">© 2026 Kovax Academy. Tout Dwa Rezève.</div>
+  <div class="footer-links"><a href="index.html" data-k="frm.31">Akèy</a><a href="enskripsyon.html" data-k="frm.32">Enskri</a></div>
 </footer>
 
 
