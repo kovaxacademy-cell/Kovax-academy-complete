@@ -1,4 +1,4 @@
-import { db, dbReady, uploadImage, signedUpload, mediaList, mediaDelete } from './_db.js';
+import { db, dbReady, keyInfo, uploadImage, signedUpload, mediaList, mediaDelete } from './_db.js';
 import crypto from 'node:crypto';
 import { checkLogin, makeToken, verifyToken } from './_auth.js';
 
@@ -22,13 +22,19 @@ const actions = {
       revenue: p.filter(x => x.status === 'paid').reduce((s, x) => s + (+x.amount || 0), 0),
       paid: p.filter(x => x.status === 'paid').length, pending: p.filter(x => x.status === 'pending').length, failed: p.filter(x => x.status === 'failed').length,
       series: Object.entries(perDay).map(([d, o]) => ({ d, views: o.views, visitors: o.set.size, money: o.money })),
-      topPages: top('path'), topCountries: top('country'), devices: top('device', 4), referrers: top('referrer'),
+      topPages: top('path'), topCountries: top('country', 30), devices: top('device', 4), referrers: top('referrer'),
       errors24h: (await db(`errors?select=id&resolved=eq.false&created_at=gte.${new Date(Date.now() - 864e5).toISOString()}`)).length
     };
   },
   payments: async ({ status }) => db(`payments?select=*&order=created_at.desc&limit=300${status ? `&status=eq.${enc(status)}` : ''}`),
   paymentStatus: async ({ id, status }) => db(`payments?id=eq.${+id}`, { method: 'PATCH', body: { status } }),
-  async addPayment(b) { return db('payments', { method: 'POST', body: { method: b.method || 'zelle', status: b.status || 'paid', amount: +b.amount, email: b.email, name: b.name, course: b.course, ref: b.ref || null } }); },
+  async addPayment(b) { return db('payments', { method: 'POST', body: { method: b.method || 'zelle', status: b.status || 'paid', amount: +b.amount, email: b.email, name: b.name, course: b.course, country: b.country || null, note: b.note || null, ref: b.ref || null } }); },
+  async testVisits() {      // vizit fo pou eseye drapo yo sou dashboard (make ua='kovax-test')
+    const C = ['HT', 'US', 'DO', 'CA', 'FR', 'BR', 'MX', 'GB', 'CL', 'BS'], rows = [];
+    for (let i = 0; i < 24; i++) rows.push({ path: i % 3 ? '/' : '/market', visitor_id: 'test' + (i % 9), session_id: 't' + i, referrer: i % 2 ? 'google.com' : '', country: C[i % C.length], device: i % 2 ? 'mobile' : 'desktop', ua: 'kovax-test' });
+    await db('visits', { method: 'POST', body: rows }); return { added: rows.length };
+  },
+  clearTests: async () => { await db('visits?ua=eq.kovax-test', { method: 'DELETE' }); await db('payments?ref=like.TEST-*', { method: 'DELETE' }); return { ok: true }; },
   errors: async ({ resolved = false }) => db(`errors?select=*&resolved=eq.${!!resolved}&order=created_at.desc&limit=200`),
   resolveErrors: async ({ id }) => db(id ? `errors?id=eq.${+id}` : 'errors?resolved=eq.false', { method: 'PATCH', body: { resolved: true } }),
   async getAll() {
@@ -88,6 +94,8 @@ const actions = {
     const env = (n, label, need = true) => checks.push({ name: label, ok: !!process.env[n], level: need ? 'erè' : 'avètisman', detail: process.env[n] ? 'mete' : `${n} manke sou Vercel` });
     env('SUPABASE_URL', 'Supabase URL'); env('SUPABASE_SERVICE_ROLE_KEY', 'Supabase service key'); env('ADMIN_PASSWORD', 'Modpas admin');
     env('RESEND_API_KEY', 'Resend (email)', false); env('ANTHROPIC_API_KEY', 'Chat AI', false);
+    { const ki = keyInfo(); checks.push({ name: 'Kle Supabase (ekri done)', ok: ki.ok, level: 'erè', detail: ki.detail }); }
+    for (const t of ['settings', 'content', 'pages', 'visits', 'payments', 'errors', 'messages']) { try { await db(`${t}?select=*&limit=1`); checks.push({ name: `Tab ${t}`, ok: true, detail: 'egziste' }); } catch (e) { checks.push({ name: `Tab ${t}`, ok: false, level: 'erè', detail: /PGRST205|42P01/.test(e.message) ? 'MANKE → egzekite supabase-fix.sql' : e.message.slice(0, 120) }); } }
     try { await db('settings?select=key&limit=1'); checks.push({ name: 'Baz done Supabase', ok: true, detail: 'konekte' }); } catch (e) { checks.push({ name: 'Baz done Supabase', ok: false, level: 'erè', detail: e.message.slice(0, 160) }); }
     await Promise.all(PAGES.map(async (p) => {
       try { const r = await fetch(`${origin}/${p === 'index' ? '' : p}`, { redirect: 'follow' }); checks.push({ name: `Paj /${p === 'index' ? '' : p}`, ok: r.ok, level: 'erè', detail: `HTTP ${r.status}` }); }
