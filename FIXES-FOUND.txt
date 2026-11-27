@@ -1,0 +1,13 @@
+KOVAX ACADEMY — FIXES / DIAGNOSTIC
+
+Fichye sa yo nan patch la:
+- vercel.json: ajoute rewrite /admin -> /admin.html.
+- ADMIN-SETUP.md: etap enstalasyon ki matche ak kòd aktyèl la.
+
+Erè ki te idantifye nan ZIP orijinal la:
+1. vercel.json pa t gen rewrite pou /admin.
+2. URL ki te itilize a te kovax-academy.vercel.app, men Vercel tab la te montre pwojè kovax-academy-complete. Verifye domèn ki asosye ak pwojè a; sa ka lakòz DEPLOYMENT_NOT_FOUND.
+3. Backend la mande SUPABASE_SERVICE_ROLE_KEY ak ADMIN_PASSWORD. SUPABASE_ANON_KEY pou kont li pa sifi.
+4. SQL la rele schema.sql nan rasin repository a; pa gen dosye supabase/schema.sql nan ZIP la.
+5. Admin editor la ka modifye tèks/imatj sèlman sou eleman ki make data-k/data-ki. Paj market.html pa gen okenn nan tag sa yo, kidonk li pa ka modifye tout Market la jiskaprezan.
+6. Tab peman aktyèl la pa verifye PayPal sou sèvè a; li pran done ki soti nan paj retou kliyan an. Revni an pa dwe konsidere kòm peman konfime jiskaske verifikasyon webhook PayPal fèt.
