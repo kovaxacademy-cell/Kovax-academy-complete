@@ -501,6 +501,20 @@
     }, { passive: true, once: true });
   });
 
+  /* Admin: son pèsonalize, volim, on/off (settings: sound_on, sound_vol, snd_<non>) */
+  Object.keys(S).forEach(function (k) {
+    var f = S[k]; if (typeof f !== 'function') return;
+    S[k] = function () {
+      var s = window.KOVAX_SETTINGS || {};
+      if (s.sound_on === false || s.sound_on === 'false') return;
+      var vv = (s.sound_vol == null || s.sound_vol === '') ? 50 : Math.max(0, Math.min(200, +s.sound_vol));
+      _vol = vv / 100 * 0.11;
+      var u = s['snd_' + k];
+      if (u) { try { var a = new Audio(u); a.volume = Math.min(1, vv / 100); a.play().catch(noop); } catch (e) {} return; }
+      return f.apply(this, arguments);
+    };
+  });
+
   window.KovaxSound = {
     play: S,
     enabled: function(){ return _on; },

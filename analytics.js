@@ -35,6 +35,10 @@
     document.querySelectorAll('[data-k]').forEach(function (el) { var v = C[el.getAttribute('data-k')]; if (v != null) el.textContent = v; });
     document.querySelectorAll('[data-ki]').forEach(function (el) { var v = C[el.getAttribute('data-ki')]; if (v) { el.removeAttribute('srcset'); el.src = v; } });
     window.KOVAX_SETTINGS = S;
+    try { var PK = location.pathname.replace(/^\/+|\/+$/g, '') || 'index';      // videyo: content key video:<paj>:<nimewo>
+      document.querySelectorAll('video').forEach(function (v, i) { var u = C['video:' + PK + ':' + i]; if (!u) return;
+        var auto = v.hasAttribute('autoplay'); v.querySelectorAll('source').forEach(function (x) { x.remove(); }); v.src = u; v.load(); if (auto) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } });
+    } catch (e) {}
     var K = window.KOVAX;                        // paiement.html: pri dinamik
     if (K && K.informatiquePrice !== undefined) {
       var map = { price_informatique: 'informatiquePrice', fee_informatique: 'informatiqueFee', tax_informatique_usa: 'informatiqueTaxUSA', price_anglais: 'anglaisBase', fee_anglais: 'anglaisFee', tax_anglais_usa: 'anglaisTaxUSA', price_subscription: 'subscriptionMonthly' };

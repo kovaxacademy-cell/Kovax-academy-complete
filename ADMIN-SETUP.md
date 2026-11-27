@@ -1,4 +1,3 @@
-[ADMIN-SETUP.md](https://github.com/user-attachments/files/35489867/ADMIN-SETUP.md)
 [ADMIN-SETUP.md](https://github.com/user-attachments/files/35489344/ADMIN-SETUP.md)
 # KOVAX ACADEMY — DEPLOYMENT / ADMIN SETUP
 
