@@ -41,3 +41,14 @@ export async function signedUpload(name) {       // navigatè a voye fichye a di
   const j = await r.json().catch(() => ({})); if (!r.ok || !j.url) throw new Error('Pa ka prepare upload: ' + (j.message || r.status));
   return { uploadUrl: `${url()}/storage/v1${j.url}`, publicUrl: `${url()}/storage/v1/object/public/site-media/${name}` };
 }
+
+const H = () => ({ apikey: key(), Authorization: `Bearer ${key()}`, 'Content-Type': 'application/json' });
+export async function mediaList() {
+  const r = await fetch(`${url()}/storage/v1/object/list/site-media`, { method: 'POST', headers: H(), body: JSON.stringify({ prefix: '', limit: 300, sortBy: { column: 'created_at', order: 'desc' } }) });
+  const j = await r.json().catch(() => []); if (!r.ok) throw new Error('Pa ka li medya: ' + (j.message || r.status));
+  return j.filter(f => f.name && f.id).map(f => ({ name: f.name, url: `${url()}/storage/v1/object/public/site-media/${f.name}` }));
+}
+export async function mediaDelete(name) {
+  const r = await fetch(`${url()}/storage/v1/object/site-media`, { method: 'DELETE', headers: H(), body: JSON.stringify({ prefixes: [String(name)] }) });
+  if (!r.ok) throw new Error('Pa ka efase fichye a.'); return { ok: true };
+}

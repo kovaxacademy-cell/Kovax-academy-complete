@@ -1,4 +1,4 @@
-import { db, dbReady, uploadImage, signedUpload } from './_db.js';
+import { db, dbReady, uploadImage, signedUpload, mediaList, mediaDelete } from './_db.js';
 import crypto from 'node:crypto';
 import { checkLogin, makeToken, verifyToken } from './_auth.js';
 
@@ -54,7 +54,7 @@ const actions = {
   },
   async signUpload({ filename, type }) {
     const ext = (String(filename).split('.').pop() || 'mp4').toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (!/^(mp4|webm|mov|m4v|mp3|wav|ogg|m4a)$/.test(ext)) throw new Error('Fòma pa aksepte (mp4, webm, mov, mp3, wav, ogg).');
+    if (!/^(mp4|webm|mov|m4v|mp3|wav|ogg|m4a|png|jpe?g|webp|gif|svg|pdf)$/.test(ext)) throw new Error('Fòma pa aksepte (imaj, mp4, webm, mov, mp3, wav, ogg, pdf).');
     return signedUpload(`${Date.now()}.${ext}`);
   },
   async clonePage({ from, slug, title }, req) {         // kopye yon paj sit la kòm nouvo paj ak pwòp tèks pa li
@@ -64,6 +64,17 @@ const actions = {
     const html = (await r.text()).replace(/data-(k|ki)="([^"]+)"/g, (_m, a, k) => `data-${a}="${slug}:${k}"`);
     return actions.savePage({ slug, title: title || slug, html, published: true });
   },
+  messages: async () => db('messages?select=*&order=created_at.desc&limit=200'),
+  msgRead: async ({ id }) => db(id ? `messages?id=eq.${+id}` : 'messages?read=eq.false', { method: 'PATCH', body: { read: true } }),
+  msgDelete: async ({ id }) => db(`messages?id=eq.${+id}`, { method: 'DELETE' }),
+  async pulse({ since }) {
+    const s = since || new Date(Date.now() - 864e5).toISOString();
+    const m = await db('messages?select=id,kind,name,body&read=eq.false&order=created_at.desc&limit=50').catch(() => []);
+    const pays = await db(`payments?select=id,amount,name,status&created_at=gt.${enc(s)}&order=created_at.desc&limit=5`).catch(() => []);
+    return { unread: m.length, latest: m.slice(0, 3), pays };
+  },
+  listMedia: async () => mediaList(),
+  deleteMedia: async ({ name }) => mediaDelete(name),
   getPage: async ({ slug }) => (await db(`pages?slug=eq.${enc(slug)}&select=*`))[0] || null,
   async savePage({ slug, title, html, published = true }) {
     slug = String(slug).toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/^-+|-+$/g, '');

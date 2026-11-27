@@ -1,3 +1,4 @@
+import { db, dbReady } from './_db.js';
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -12,6 +13,7 @@ export default async function handler(req, res) {
   const studentEmail = String(d.email || d.to_email || '').trim();
   const fullName = String(d.name || `${d.prenon || ''} ${d.nom || ''}`).trim() || 'Etidyan';
   const warnings = [];
+  try { if (dbReady()) await db('messages', { method: 'POST', body: { kind: 'enskripsyon', name: fullName, email: studentEmail, phone: String(d.telephone || ''), subject: String(d.kou || d.cours || ''), body: `Nouvo enskripsyon: ${d.kou || d.cours || ''} ${d.prix || ''} ${d.detail || ''}`.trim(), data: d } }); } catch (e) {}
 
   const adminHtml = tableHtml('Nouvo Enskripsyon Kovax Academy', {
     Non: fullName, Email: studentEmail, Telefon: d.telephone, Kou: d.kou || d.cours,
