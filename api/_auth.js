@@ -10,9 +10,9 @@ export function checkLogin(email, password) {
   const adminEmail = (process.env.ADMIN_EMAIL || 'kovaxacademy@gmail.com').toLowerCase();
   return same(String(email || '').toLowerCase().trim(), adminEmail) && same(password || '', pw);
 }
-export function makeToken() { const p = b64(JSON.stringify({ exp: Date.now() + 12 * 3600e3 })); return `${p}.${sig(p)}`; }
-export function verifyToken(h = '') {
+export function makeToken(ttl = 12 * 3600e3, t) { const p = b64(JSON.stringify({ exp: Date.now() + ttl, t, n: crypto.randomBytes(8).toString('hex') })); return `${p}.${sig(p)}`; }
+export function verifyToken(h = '', typ) {
   const t = String(h).replace(/^Bearer\s+/i, ''); const [p, s] = t.split('.');
   if (!p || !s || !secret() || !same(s, sig(p))) return false;
-  try { return JSON.parse(Buffer.from(p, 'base64url').toString()).exp > Date.now(); } catch { return false; }
+  try { const o = JSON.parse(Buffer.from(p, 'base64url').toString()); return o.exp > Date.now() && o.t === typ; } catch { return false; }
 }
