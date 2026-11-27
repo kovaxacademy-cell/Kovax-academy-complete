@@ -1,5 +1,11 @@
 // Ti kliyan Supabase (REST) — pa bezwen okenn pakè npm.
-const url = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
+const url = () => {                 // aksepte nenpot fòm: https://xxx.supabase.co, .../rest/v1/, oswa lyen dashboard la
+  let u = (process.env.SUPABASE_URL || '').trim().replace(/^["']|["']$/g, '');
+  if (!u) return '';
+  const d = u.match(/supabase\.com\/dashboard\/project\/([a-z0-9]+)/i); if (d) return `https://${d[1]}.supabase.co`;
+  if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
+  try { return new URL(u).origin; } catch { return u.replace(/\/+$/, ''); }
+};
 const key = () => process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 export const dbReady = () => !!(url() && key());
 
