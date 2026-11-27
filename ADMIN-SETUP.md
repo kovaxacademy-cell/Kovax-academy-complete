@@ -1,3 +1,4 @@
+[ADMIN-SETUP.md](https://github.com/user-attachments/files/35489867/ADMIN-SETUP.md)
 [ADMIN-SETUP.md](https://github.com/user-attachments/files/35489344/ADMIN-SETUP.md)
 # KOVAX ACADEMY — DEPLOYMENT / ADMIN SETUP
 
@@ -35,3 +36,9 @@ Konekte ak `ADMIN_EMAIL` ak `ADMIN_PASSWORD`.
 - Vizitè yo parèt sèlman apre `analytics.js` ak `/api/site` ap mache epi moun vizite sit la.
 - Tablo peman aktyèl la resevwa done nan paj retou a. Li pa verifye tranzaksyon PayPal dirèkteman sou sèvè a; pa konsidere revni dashboard la kòm kontablite final jiskaske webhook/server-side PayPal verification ajoute.
 - Editè tèks/imatj la depann de eleman ki gen `data-k` / `data-ki`. Nan ZIP orijinal la, paj Akèy la gen tag sa yo; paj Market la pa gen yo. Donk Market la poko gen editè kontni konplè nan vèsyon sa a.
+
+## 7) Face ID / Touch ID (nouvo)
+Konekte ak modpas la, ale nan onglè **Sekirite** epi klike "Aktive sou aparèy sa a". Fè l sou menm domèn ou itilize pou admin lan (si domèn nan chanje, re-aktive l). Modpas la toujou mache kòm sekou.
+
+## 8) SUPABASE_URL
+Kounye a kòd la netwaye URL la otomatikman (aksepte tou `.../rest/v1/`). Men pi bon fòm nan se: `https://xxxx.supabase.co`.
