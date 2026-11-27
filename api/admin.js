@@ -1,4 +1,5 @@
 import { db, dbReady, uploadImage } from './_db.js';
+import crypto from 'node:crypto';
 import { checkLogin, makeToken, verifyToken } from './_auth.js';
 
 const PAGES = ['index', 'paiement', 'enskripsyon', 'formulaire', 'merci', 'merci-peman', 'market', '404'];
@@ -74,6 +75,39 @@ const actions = {
   }
 };
 
+
+// ---- Face ID / Touch ID (WebAuthn / passkey) ----
+const hostOf = (req) => String(req.headers['x-forwarded-host'] || req.headers.host || '').split(',')[0].trim();
+const getKeys = async () => (await db('settings?key=eq._passkeys&select=value'))[0]?.value || [];
+const putKeys = (list) => db('settings?on_conflict=key', { method: 'POST', prefer: 'resolution=merge-duplicates', body: { key: '_passkeys', value: list, updated_at: new Date().toISOString() } });
+function clientCheck(req, b64, type) {
+  const raw = Buffer.from(b64, 'base64url'), c = JSON.parse(raw.toString());
+  if (c.type !== type) throw new Error('Rekèt Face ID pa valid.');
+  if (c.origin !== `https://${hostOf(req)}`) throw new Error('Domèn pa matche (Face ID mare ak domèn kote ou anrejistre l la).');
+  if (!verifyToken(Buffer.from(c.challenge, 'base64url').toString(), 'c')) throw new Error('Defi ekspire. Eseye ankò.');
+  return raw;
+}
+const pk = {
+  async passkeyOptions() { return { challenge: makeToken(120e3, 'c'), ids: (await getKeys()).map(k => k.id) }; },
+  async passkeyRegister(b, req) {
+    clientCheck(req, b.clientDataJSON, 'webauthn.create');
+    crypto.createPublicKey({ key: Buffer.from(b.pub, 'base64'), format: 'der', type: 'spki' });   // verifye kle a valid
+    const list = (await getKeys()).filter(k => k.id !== b.id).concat({ id: b.id, pub: b.pub, at: new Date().toISOString() });
+    await putKeys(list); return { count: list.length };
+  },
+  async passkeyReset() { await putKeys([]); return { count: 0 }; },
+  async passkeyLogin(b, req) {
+    const k = (await getKeys()).find(x => x.id === b.id); if (!k) throw new Error('Face ID sa a pa anrejistre.');
+    const cd = clientCheck(req, b.clientDataJSON, 'webauthn.get'), ad = Buffer.from(b.authenticatorData, 'base64url');
+    const rp = crypto.createHash('sha256').update(hostOf(req).split(':')[0]).digest();
+    if (!ad.subarray(0, 32).equals(rp) || !(ad[32] & 1)) throw new Error('Verifikasyon echwe.');
+    const data = Buffer.concat([ad, crypto.createHash('sha256').update(cd).digest()]);
+    const key = crypto.createPublicKey({ key: Buffer.from(k.pub, 'base64'), format: 'der', type: 'spki' });
+    if (!crypto.verify('sha256', data, key, Buffer.from(b.signature, 'base64url'))) throw new Error('Siyati Face ID pa bon.');
+    return { token: makeToken() };
+  }
+};
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST sèlman' });
@@ -84,9 +118,13 @@ export default async function handler(req, res) {
       if (!checkLogin(b.email, b.password)) { await new Promise(r => setTimeout(r, 900)); return res.status(401).json({ error: 'Email oswa modpas pa bon.' }); }
       return res.status(200).json({ token: makeToken() });
     }
+    if (b.action === 'passkeyOptions' || b.action === 'passkeyLogin') {
+      if (!dbReady()) return res.status(500).json({ error: 'Supabase pa konfigire.' });
+      try { return res.status(200).json({ data: await pk[b.action](b, req) }); } catch (e) { return res.status(400).json({ error: e.message }); }
+    }
     if (!verifyToken(req.headers.authorization)) return res.status(401).json({ error: 'Sesyon fini. Konekte ankò.' });
     if (!dbReady() && b.action !== 'health') return res.status(500).json({ error: 'Supabase pa konfigire (SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY).' });
-    const fn = actions[b.action]; if (!fn) return res.status(400).json({ error: 'Aksyon enkoni.' });
+    const fn = actions[b.action] || (b.action === 'passkeyRegister' || b.action === 'passkeyReset' ? (x, r) => pk[b.action](x, r) : null); if (!fn) return res.status(400).json({ error: 'Aksyon enkoni.' });
     return res.status(200).json({ data: await fn(b, req) });
   } catch (e) { return res.status(500).json({ error: e.message }); }
 }
