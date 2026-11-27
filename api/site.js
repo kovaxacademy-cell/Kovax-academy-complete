@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate=60');
       if (!dbReady()) return res.status(200).json({ settings: {}, content: {} });
       const [s, c] = await Promise.all([db('settings?select=key,value'), db('content?select=key,value')]);
-      return res.status(200).json({ settings: Object.fromEntries(s.map(x => [x.key, x.value])), content: Object.fromEntries(c.map(x => [x.key, x.value])) });
+      return res.status(200).json({ settings: Object.fromEntries(s.filter(x => !x.key.startsWith('_')).map(x => [x.key, x.value])), content: Object.fromEntries(c.map(x => [x.key, x.value])) });
     }
     if (a === 'page') {
       const rows = await db(`pages?slug=eq.${encodeURIComponent(cut(req.query.slug, 60))}&published=eq.true&select=title,html`);
