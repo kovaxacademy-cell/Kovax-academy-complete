@@ -2,50 +2,54 @@
 <html lang="ht"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>Kovax Admin</title>
 <style>
-:root{--bg:#06091A;--card:#0E1530;--line:rgba(255,255,255,.09);--tx:#EEF2FF;--mut:#93a0c8;--cy:#29ABE2;--ok:#22c55e;--er:#ef4444;--wa:#f59e0b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,sans-serif}
+:root{--bg:#070B1C;--card:#0F1630;--card2:#141C3B;--line:rgba(255,255,255,.08);--tx:#F1F4FF;--mut:#8D9AC4;--cy:#29ABE2;--ok:#22c55e;--er:#ef4444;--wa:#f59e0b;--r:16px}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:radial-gradient(1200px 500px at 70% -10%,rgba(41,171,226,.10),transparent),var(--bg);color:var(--tx);font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.005em}
 a{color:var(--cy)}button,input,textarea,select{font:inherit;color:var(--tx)}
-input,textarea,select{width:100%;background:#0a1028;border:1px solid var(--line);border-radius:10px;padding:10px}
+input,textarea,select{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:11px 13px;transition:.15s}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--cy);box-shadow:0 0 0 3px rgba(41,171,226,.18)}select option{background:#0F1630}
 textarea{min-height:70px;resize:vertical}
-.btn{background:var(--cy);color:#04101a;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}
-.btn.g{background:transparent;color:var(--tx);border:1px solid var(--line)}.btn.r{background:var(--er);color:#fff}.btn:disabled{opacity:.5}
-#login{max-width:360px;margin:12vh auto;padding:24px;background:var(--card);border-radius:16px;border:1px solid var(--line)}
-#login input{margin:6px 0 12px}
-#app{display:none;min-height:100vh}.side{position:fixed;inset:0 auto 0 0;width:200px;background:var(--card);border-right:1px solid var(--line);padding:16px 10px;overflow:auto}
-.side h3{margin:0 8px 14px;color:var(--cy)}.side button{display:block;width:100%;text-align:left;background:none;border:0;padding:10px;border-radius:8px;cursor:pointer;color:var(--mut)}
-.side button.on,.side button:hover{background:rgba(41,171,226,.14);color:var(--tx)}
-main{margin-left:200px;padding:22px;max-width:1100px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
-.kpi b{display:block;font-size:26px}.kpi span{color:var(--mut);font-size:13px}
-table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600}
-.bars{display:flex;align-items:flex-end;gap:3px;height:120px}.bars i{flex:1;background:var(--cy);min-height:2px;border-radius:3px 3px 0 0;opacity:.85}.bars i.m{background:var(--ok)}
-.tag{padding:2px 8px;border-radius:99px;font-size:12px}.paid,.okk{background:rgba(34,197,94,.18);color:#6ee7a1}.pending,.warn{background:rgba(245,158,11,.18);color:#fbbf24}.failed,.bad{background:rgba(239,68,68,.2);color:#fca5a5}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f{margin-bottom:12px}.f label{display:block;color:var(--mut);font-size:13px;margin-bottom:4px}
-.item{border-bottom:1px solid var(--line);padding:10px 0}.item small{color:var(--mut);display:block;margin-bottom:4px}.item img{max-height:70px;border-radius:8px;display:block;margin:4px 0}
-#toast{position:fixed;bottom:18px;right:18px;background:var(--card);border:1px solid var(--cy);padding:12px 16px;border-radius:12px;display:none;z-index:9}
-.top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.top h2{margin:0 auto 0 0}
-@media(max-width:760px){.side{position:static;width:auto;display:flex;overflow:auto;padding:8px}.side h3{display:none}.side button{white-space:nowrap}main{margin:0;padding:14px}.row{grid-template-columns:1fr}}
+.btn{background:linear-gradient(135deg,#34b9f0,#1f8fc7);color:#04121c;border:0;border-radius:12px;padding:10px 18px;font-weight:700;cursor:pointer;transition:.15s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.btn.g{background:rgba(255,255,255,.05);color:var(--tx);border:1px solid var(--line)}.btn.r{background:var(--er);color:#fff}.btn:disabled{opacity:.5}
+#login{display:none;max-width:380px;margin:11vh auto;padding:30px;background:var(--card);border-radius:24px;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.lg{text-align:center;margin-bottom:18px}.lg h2{margin:10px 0 2px;font-size:22px}.lg p{margin:0;color:var(--mut);font-size:14px}#login label{font-size:13px;color:var(--mut)}#login input{margin:6px 0 14px}
+#app{display:none;min-height:100vh}.side{position:fixed;inset:0 auto 0 0;width:224px;background:rgba(15,22,48,.85);backdrop-filter:blur(14px);border-right:1px solid var(--line);padding:20px 12px;overflow:auto}
+.side h3{margin:0 10px 18px;font-size:18px;color:var(--tx)}.side button{display:block;width:100%;text-align:left;background:none;border:0;padding:11px 12px;margin-bottom:2px;border-radius:12px;cursor:pointer;color:var(--mut);transition:.15s}
+.side button:hover{background:rgba(255,255,255,.05);color:var(--tx)}.side button.on{background:rgba(41,171,226,.16);color:#fff;box-shadow:inset 3px 0 0 var(--cy)}
+main{margin-left:224px;padding:30px;max-width:1180px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:14px}
+.kpi{position:relative;overflow:hidden}.kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cy)}.kpi b{display:block;font-size:30px;line-height:1.15;font-weight:750}.kpi span{color:var(--mut);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600;font-size:13px}tr:last-child td{border-bottom:0}
+.bars{display:flex;align-items:flex-end;gap:4px;height:130px;margin-top:8px}.bars i{flex:1;background:linear-gradient(to top,rgba(41,171,226,.35),var(--cy));min-height:3px;border-radius:5px 5px 0 0}.bars i.m{background:linear-gradient(to top,rgba(34,197,94,.3),var(--ok))}
+.tag{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600}.paid,.okk{background:rgba(34,197,94,.16);color:#6ee7a1}.pending,.warn{background:rgba(245,158,11,.16);color:#fbbf24}.failed,.bad{background:rgba(239,68,68,.18);color:#fca5a5}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.f{margin-bottom:14px}.f label{display:block;color:var(--mut);font-size:13px;margin-bottom:5px}
+.item{border-bottom:1px solid var(--line);padding:12px 0}.item small{color:var(--mut);display:block;margin-bottom:5px}.item img{max-height:80px;border-radius:10px;display:block;margin:6px 0}
+.themes{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.th{cursor:pointer;border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:10px 12px;display:flex;gap:10px;align-items:center}.th:hover{border-color:var(--cy)}.th span{display:flex}.th span i{width:18px;height:18px;border-radius:50%;margin-left:-5px;border:2px solid var(--card2)}
+#toast{position:fixed;bottom:20px;right:20px;background:var(--card2);border:1px solid var(--cy);padding:13px 18px;border-radius:14px;display:none;z-index:9;box-shadow:0 14px 40px rgba(0,0,0,.4)}
+.top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.top h2{margin:0 auto 0 0;font-size:24px}
+@media(max-width:760px){.side{position:static;width:auto;display:flex;overflow:auto;padding:8px;gap:4px;border-right:0;border-bottom:1px solid var(--line)}.side h3{display:none}.side button{white-space:nowrap;width:auto}.side button.on{box-shadow:none}main{margin:0;padding:16px}.row{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
-<div id="login"><h2 style="margin-top:0">Kovax Admin</h2>
+<div id="login"><div class="lg"><img src="/favicon.svg" width="48" height="48" alt=""><h2>Kovax Admin</h2><p>Konekte pou jere sit la</p></div>
 <label>Email</label><input id="em" type="email" value="kovaxacademy@gmail.com" autocomplete="username">
 <label>Modpas</label><input id="pw" type="password" autocomplete="current-password" onkeydown="event.key==='Enter'&&login()">
-<button class="btn" style="width:100%" onclick="login()">Konekte</button><p id="lerr" style="color:var(--er);margin:10px 0 0"></p></div>
+<button class="btn" style="width:100%" onclick="login()">Konekte</button>
+<button class="btn g" id="fid" style="width:100%;margin-top:10px;display:none" onclick="faceLogin()">🔓 Face ID / Touch ID</button><p id="lerr" style="color:var(--er);margin:12px 0 0;font-size:14px"></p></div>
 <div id="app"><nav class="side"><h3>⚡ Kovax Admin</h3>
 <button data-t="dash">📊 Dashboard</button><button data-t="pay">💳 Pèman</button><button data-t="text">✏️ Tèks</button><button data-t="img">🖼️ Imaj</button>
-<button data-t="price">💵 Pri</button><button data-t="color">🎨 Koulè</button><button data-t="pages">📄 Paj yo</button><button data-t="err">⚠️ Erè & Sante</button>
+<button data-t="price">💵 Pri</button><button data-t="color">🎨 Koulè</button><button data-t="pages">📄 Paj yo</button><button data-t="sec">🔐 Sekirite</button><button data-t="err">⚠️ Erè & Sante</button>
 <button onclick="logout()">🚪 Soti</button></nav><main id="main"></main></div><div id="toast"></div>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let TOKEN=localStorage.getItem('kovax_admin_token'),ALL=null,cache={};
 function toast(m,bad){const t=$('#toast');t.textContent=m;t.style.borderColor=bad?'var(--er)':'var(--cy)';t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',3200)}
 async function api(action,p={}){const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+(TOKEN||'')},body:JSON.stringify({action,...p})});
- const j=await r.json().catch(()=>({error:'Repons envalid'}));if(r.status===401&&action!=='login'){logout(true)}if(!r.ok)throw new Error(j.error||'Erè');return j.data??j}
+ const j=await r.json().catch(()=>({error:'Repons envalid'}));if(r.status===401&&action!=='login'&&!action.startsWith('passkey')){logout(true)}if(!r.ok)throw new Error(j.error||'Erè');return j.data??j}
 async function login(){try{const j=await api('login',{email:$('#em').value,password:$('#pw').value});TOKEN=j.token;localStorage.setItem('kovax_admin_token',TOKEN);start()}catch(e){$('#lerr').textContent=e.message}}
 function logout(exp){localStorage.removeItem('kovax_admin_token');TOKEN=null;$('#app').style.display='none';$('#login').style.display='block';if(exp)$('#lerr').textContent='Sesyon fini.'}
 async function start(){$('#login').style.display='none';$('#app').style.display='block';try{ALL=await api('getAll')}catch(e){toast(e.message,1)}show(location.hash.slice(1)||'dash')}
 document.querySelectorAll('.side [data-t]').forEach(b=>b.onclick=()=>show(b.dataset.t));
-function show(t){location.hash=t;document.querySelectorAll('.side [data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('#main').innerHTML='<p>Ap chaje…</p>';(V[t]||V.dash)().catch(e=>$('#main').innerHTML=`<div class="card"><b style="color:var(--er)">Erè:</b> ${esc(e.message)}<br><small>Si se Supabase, verifye ou egzekite supabase/schema.sql epi mete variyab yo sou Vercel.</small></div>`)}
+function show(t){location.hash=t;document.querySelectorAll('.side [data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('#main').innerHTML='<p>Ap chaje…</p>';(V[t]||V.dash)().catch(e=>$('#main').innerHTML=`<div class="card"><b style="color:var(--er)">Erè:</b> ${esc(e.message)}<br><br><small>${hint(e.message)}</small></div>`)}
 const money=n=>'$'+(+n||0).toFixed(2);
 const DEF={price_informatique:200,fee_informatique:5,tax_informatique_usa:2.99,price_anglais:50,fee_anglais:5,tax_anglais_usa:2.99,price_subscription:50};
 const COLORS={bg:['Background',"#050712"],navy:['Navy','#06091A'],blue:['Ble','#1A3FAA'],cyan:['Cyan (koulè prensipal)','#29ABE2'],purple:['Mòv','#7B2D8B'],white:['Tèks prensipal','#FFFFFF']};
@@ -69,7 +73,7 @@ async price(){const S=ALL.settings,v=k=>S[k]??DEF[k];const F=(k,l)=>`<div class=
  $('#main').innerHTML=`<div class="top"><h2>Pri</h2><button class="btn" onclick="saveSet()">Sove</button></div><div class="row"><div class="card"><b>Enfòmatik (4 mwa)</b>${F('price_informatique','Pri kou ($)')}${F('fee_informatique','Frè enskripsyon ($)')}${F('tax_informatique_usa','Tax USA ($)')}</div>
  <div class="card"><b>Anglè</b>${F('price_anglais','Pri kou ($)')}${F('fee_anglais','Frè enskripsyon ($)')}${F('tax_anglais_usa','Tax USA ($)')}${F('price_subscription','Abònman USA /mwa ($)')}</div></div>
  <p style="color:var(--mut);font-size:13px">Sa a chanje total la, rezime a ak montan PayPal chaje a sou paj <b>paiement</b>. Tèks piblisitè ki gen pri ekri (ex: “$200” sou paj akèy la) modifye nan onglè <b>Tèks</b>. Abònman PayPal la (plan P-…) gen pri pa li nan kont PayPal ou.</p>`},
-async color(){const S=ALL.settings;$('#main').innerHTML=`<div class="top"><h2>Koulè</h2><button class="btn" onclick="saveSet()">Sove</button><button class="btn g" onclick="resetColors()">Reyinisyalize</button></div><div class="card"><div class="grid">${Object.entries(COLORS).map(([k,[l,d]])=>{const c=S['color_'+k]||d;return `<div class="f"><label>${l}</label><input type="color" data-s="color_${k}" value="${c}" style="height:44px;padding:4px"></div>`}).join('')}</div></div><p style="color:var(--mut);font-size:13px">Koulè yo aplike sou tout paj yo (varyab CSS). Kèk dekorasyon ki gen koulè ekri dirèk nan kòd la pa chanje.</p>`},
+async color(){const S=ALL.settings;$('#main').innerHTML=`<div class="top"><h2>Koulè</h2><button class="btn" onclick="saveSet()">Sove</button><button class="btn g" onclick="resetColors()">Reyinisyalize</button></div><div class="themes">${Object.keys(THEMES).map(n=>`<div class="th" onclick="applyTheme('${n}')"><span>${Object.values(THEMES[n]).slice(1,5).map(c=>`<i style="background:${c}"></i>`).join('')}</span>${n}</div>`).join('')}</div><div class="card"><div class="grid">${Object.entries(COLORS).map(([k,[l,d]])=>{const c=S['color_'+k]||d;return `<div class="f"><label>${l}</label><input type="color" data-s="color_${k}" value="${c}" style="height:44px;padding:4px"></div>`}).join('')}</div></div><p style="color:var(--mut);font-size:13px">Koulè yo aplike sou tout paj yo (varyab CSS). Kèk dekorasyon ki gen koulè ekri dirèk nan kòd la pa chanje.</p>`},
 async pages(){ALL=await api('getAll');const L=ALL.pages;$('#main').innerHTML=`<div class="top"><h2>Paj yo</h2><button class="btn" onclick="editPage()">+ Nouvo paj</button></div>
  <div class="card"><b>Paj ki egziste</b><p style="color:var(--mut);margin:4px 0">Modifye tèks yo nan onglè Tèks / Imaj.</p>${ALL.staticPages.map(p=>`<a href="/${p==='index'?'':p}" target="_blank" style="margin-right:12px">/${p==='index'?'':p}</a>`).join('')}</div>
  <div class="card"><b>Paj ou kreye</b><table>${L.map(p=>`<tr><td><a href="/p/${p.slug}" target="_blank">/p/${esc(p.slug)}</a><br><small>${esc(p.title)}</small></td><td>${p.published?'<span class="tag okk">piblik</span>':'<span class="tag warn">bouyon</span>'}</td><td style="text-align:right"><button class="btn g" onclick="editPage('${esc(p.slug)}')">Modifye</button> <button class="btn r" onclick="delPage('${esc(p.slug)}')">Efase</button></td></tr>`).join('')||'<tr><td>Pa gen paj ankò.</td></tr>'}</table></div>`},
@@ -97,5 +101,18 @@ async function editPage(slug){const p=slug?await api('getPage',{slug}):{slug:'',
  <div class="f"><label>HTML</label><textarea id="pg_html" style="min-height:380px;font-family:monospace;font-size:13px">${esc(p.html)}</textarea></div><label><input type="checkbox" id="pg_pub" ${p.published?'checked':''} style="width:auto"> Piblik</label></div>`}
 async function savePg(){try{const r=await api('savePage',{slug:$('#pg_slug').value,title:$('#pg_title').value,html:$('#pg_html').value,published:$('#pg_pub').checked});toast('✅ Paj sove: '+r.url);show('pages')}catch(e){toast(e.message,1)}}
 async function delPage(s){if(confirm('Efase /p/'+s+' ?')){await api('deletePage',{slug:s});show('pages')}}
-if(TOKEN)start();
+
+const THEMES={'Kovax':{bg:'#050712',navy:'#06091A',blue:'#1A3FAA',cyan:'#29ABE2',purple:'#7B2D8B',white:'#FFFFFF'},'Or & Nwa':{bg:'#0b0906',navy:'#14100a',blue:'#7a5a14',cyan:'#e6b422',purple:'#8a3b12',white:'#fff8e7'},'Emerod':{bg:'#04100c',navy:'#07180f',blue:'#0f6b4a',cyan:'#2fd59a',purple:'#1d5c7a',white:'#f2fff9'},'Woz':{bg:'#12060b',navy:'#1b0a12',blue:'#8c1f4f',cyan:'#ff5c93',purple:'#6b2a9e',white:'#fff5f8'}};
+function applyTheme(n){Object.entries(THEMES[n]).forEach(([k,v])=>{const i=document.querySelector(`[data-s="color_${k}"]`);if(i)i.value=v});toast('Tèm '+n+' chwazi. Klike Sove pou aplike l sou sit la.')}
+const hint=m=>/PGRST125|Invalid path/.test(m)?'SUPABASE_URL pa bon. Mete sèlman https://xxxx.supabase.co sou Vercel (san /rest/v1), epi Redeploy.':/42P01|PGRST205|does not exist/.test(m)?'Tab yo pa egziste. Egzekite schema.sql nan Supabase SQL Editor.':/Invalid API key|JWT|Supabase 40[13]/.test(m)?'Kle SUPABASE_SERVICE_ROLE_KEY pa bon. Itilize kle service_role la.':'Verifye varyab Vercel yo ak schema.sql nan Supabase, epi Redeploy.';
+const b64u=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''),ub64=s=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0)),enc=s=>new TextEncoder().encode(s);
+if(window.PublicKeyCredential)$('#fid').style.display='block';
+async function faceLogin(){try{const o=await api('passkeyOptions');if(!o.ids.length)throw new Error('Poko gen Face ID. Konekte ak modpas la, epi aktive l nan Sekirite.');
+ const a=await navigator.credentials.get({publicKey:{challenge:enc(o.challenge),rpId:location.hostname,allowCredentials:o.ids.map(id=>({type:'public-key',id:ub64(id)})),userVerification:'required',timeout:60000}}),r=a.response;
+ const j=await api('passkeyLogin',{id:a.id,clientDataJSON:b64u(r.clientDataJSON),authenticatorData:b64u(r.authenticatorData),signature:b64u(r.signature)});TOKEN=j.token;localStorage.setItem('kovax_admin_token',TOKEN);start()}catch(e){$('#lerr').textContent=e.message}}
+async function faceSetup(){try{const o=await api('passkeyOptions');const c=await navigator.credentials.create({publicKey:{challenge:enc(o.challenge),rp:{name:'Kovax Admin',id:location.hostname},user:{id:enc('kovax-admin'),name:'admin',displayName:'Kovax Admin'},pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required',residentKey:'preferred'},timeout:60000}}),r=c.response;
+ await api('passkeyRegister',{id:c.id,clientDataJSON:b64u(r.clientDataJSON),pub:btoa(String.fromCharCode(...new Uint8Array(r.getPublicKey())))});toast('✅ Face ID / Touch ID aktive sou aparèy sa a');show('sec')}catch(e){toast(e.message,1)}}
+async function faceReset(){if(confirm('Retire tout Face ID / Touch ID anrejistre yo?')){await api('passkeyReset');toast('Retire');show('sec')}}
+V.sec=async()=>{const n=((ALL.settings||{})._passkeys||[]).length;$('#main').innerHTML=`<div class="top"><h2>Sekirite</h2></div><div class="card"><b>Face ID / Touch ID</b><p style="color:var(--mut)">Aktive l sou chak aparèy ou itilize (Mac, iPhone, Android). Apre sa ou ka konekte san tape modpas. Modpas la toujou mache kòm sekou. Fè sa sou menm domèn ou itilize pou admin lan.</p><p>${n?`<span class="tag okk">${n} aparèy anrejistre</span>`:'<span class="tag warn">Poko aktive</span>'}</p><button class="btn" onclick="faceSetup()">🔐 Aktive sou aparèy sa a</button> ${n?'<button class="btn g" onclick="faceReset()">Retire tout</button>':''}</div>`};
+if(TOKEN)start();else $('#login').style.display='block';
 </script></body></html>
