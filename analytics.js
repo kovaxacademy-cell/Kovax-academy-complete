@@ -43,6 +43,8 @@
     if (K && K.informatiquePrice !== undefined) {
       var map = { price_informatique: 'informatiquePrice', fee_informatique: 'informatiqueFee', tax_informatique_usa: 'informatiqueTaxUSA', price_anglais: 'anglaisBase', fee_anglais: 'anglaisFee', tax_anglais_usa: 'anglaisTaxUSA', price_subscription: 'subscriptionMonthly' };
       Object.keys(map).forEach(function (k) { var n = parseFloat(S[k]); if (!isNaN(n)) K[map[k]] = n; });
+      var kp = (new URLSearchParams(location.search).get('kou') || '').toLowerCase(), cc = (S.courses || []).filter(function (c) { return c.active !== false && c.id === kp; })[0];
+      if (cc) { K.informatiquePrice = parseFloat(cc.price) || 0; K.informatiqueFee = parseFloat(cc.fee) || 0; K.informatiqueTaxUSA = parseFloat(cc.tax) || 0; K.kouName = cc.name; }
       try { if (typeof window.updateSummary === 'function') window.updateSummary(); } catch (e) {}
     }
     document.dispatchEvent(new CustomEvent('kovax:ready', { detail: d }));

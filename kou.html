@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="ht"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kou nou yo — Kovax Academy</title><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>:root{--navy:#06091A;--blue:#1A3FAA;--cyan:#29ABE2;--purple:#7B2D8B;--white:#fff;--bg:#050712}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{display:flex;align-items:center;gap:12px;padding:18px 24px;max-width:1100px;margin:auto}header img{width:40px;height:40px;border-radius:10px}header a{color:#fff;text-decoration:none;font-weight:700}header nav{margin-left:auto}header nav a{font-weight:500;color:#aab6d8}
+h1{text-align:center;font-size:clamp(28px,5vw,44px);margin:30px 16px 6px}.sub{text-align:center;color:#93a0c8;margin:0 16px 34px}
+.g{max-width:1100px;margin:auto;padding:0 20px 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.c{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}.c img{width:100%;height:170px;object-fit:cover}.c .ph{height:170px;display:grid;place-items:center;font-size:44px;background:linear-gradient(135deg,var(--blue),var(--purple))}
+.c div{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}.c h3{margin:0;font-size:20px}.c p{margin:0;color:#aab6d8;font-size:14px;flex:1}.pr{font-size:30px;font-weight:800}.pr small{font-size:13px;font-weight:500;color:#93a0c8}
+.c a{background:var(--cyan);color:#04121c;text-align:center;padding:12px;border-radius:12px;font-weight:700;text-decoration:none}</style></head>
+<body><header><img src="apple-touch-icon.png" alt="Kovax"><a href="/">Kovax Academy</a><nav><a href="/enskripsyon">Enskripsyon</a></nav></header>
+<h1>Kou nou yo</h1><p class="sub">Chwazi kou ou vle a epi enskri an kèk minit.</p><div class="g" id="g"></div>
+<script>
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+fetch('/api/site?a=settings').then(function(r){return r.json()}).catch(function(){return{settings:{}}}).then(function(d){var S=d.settings||{},n=function(k,v){var x=parseFloat(S[k]);return isNaN(x)?v:x};
+var L=[{id:'informatique',name:'Enfòmatik',desc:'Kou konplè 4 mwa pou aprann teknoloji.',price:n('price_informatique',200),fee:n('fee_informatique',5),emoji:'💻'},{id:'anglais',name:'Anglè',desc:'Aprann pale ak ekri Anglè avèk konfyans.',price:n('price_anglais',50),fee:n('fee_anglais',5),emoji:'🇺🇸'}];
+(S.courses||[]).forEach(function(c){if(c.active!==false)L.push(c)});
+document.getElementById('g').innerHTML=L.map(function(c){return '<div class="c">'+(c.image?'<img src="'+esc(c.image)+'" alt="">':'<div class="ph" style="padding:0">'+(c.emoji||'🎓')+'</div>')+'<div><h3>'+esc(c.name)+'</h3><p>'+esc(c.desc)+'</p><span class="pr">$'+(+c.price||0)+' <small>+ $'+(+c.fee||0)+' frè</small></span><a href="formulaire.html?kou='+encodeURIComponent(c.id)+'">Enskri</a></div></div>'}).join('')});
+</script><script defer src="/analytics.js"></script></body></html>

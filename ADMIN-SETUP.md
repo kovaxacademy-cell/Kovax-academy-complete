@@ -41,3 +41,7 @@ Konekte ak modpas la, ale nan onglè **Sekirite** epi klike "Aktive sou aparèy 
 
 ## 8) SUPABASE_URL
 Kounye a kòd la netwaye URL la otomatikman (aksepte tou `.../rest/v1/`). Men pi bon fòm nan se: `https://xxxx.supabase.co`.
+
+## 9) Mesaj ak Kou (nouvo)
+Re-egzekite `schema.sql` nan Supabase SQL Editor (li pa efase anyen) pou kreye tab `messages`. Apre sa, enskripsyon ak mesaj chat yo parèt nan onglè **Mesaj** epi ou resevwa notifikasyon.
+Kou ou ajoute nan **Kou ak Pri** parèt sou `/kou`.

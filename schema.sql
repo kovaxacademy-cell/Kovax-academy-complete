@@ -26,3 +26,10 @@ alter table errors   enable row level security;
 
 -- Bucket piblik pou imaj admin lan upload
 insert into storage.buckets (id, name, public) values ('site-media','site-media', true) on conflict (id) do nothing;
+
+-- Mesaj (fòmilè + chat) pou admin lan
+create table if not exists messages (
+  id bigserial primary key, created_at timestamptz default now(),
+  kind text, name text, email text, phone text, subject text, body text, data jsonb, read boolean default false);
+create index if not exists messages_created_idx on messages(created_at desc);
+alter table messages enable row level security;
