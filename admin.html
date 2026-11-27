@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ht"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Kovax Admin</title>
+<style>
+:root{--bg:#06091A;--card:#0E1530;--line:rgba(255,255,255,.09);--tx:#EEF2FF;--mut:#93a0c8;--cy:#29ABE2;--ok:#22c55e;--er:#ef4444;--wa:#f59e0b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,sans-serif}
+a{color:var(--cy)}button,input,textarea,select{font:inherit;color:var(--tx)}
+input,textarea,select{width:100%;background:#0a1028;border:1px solid var(--line);border-radius:10px;padding:10px}
+textarea{min-height:70px;resize:vertical}
+.btn{background:var(--cy);color:#04101a;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}
+.btn.g{background:transparent;color:var(--tx);border:1px solid var(--line)}.btn.r{background:var(--er);color:#fff}.btn:disabled{opacity:.5}
+#login{max-width:360px;margin:12vh auto;padding:24px;background:var(--card);border-radius:16px;border:1px solid var(--line)}
+#login input{margin:6px 0 12px}
+#app{display:none;min-height:100vh}.side{position:fixed;inset:0 auto 0 0;width:200px;background:var(--card);border-right:1px solid var(--line);padding:16px 10px;overflow:auto}
+.side h3{margin:0 8px 14px;color:var(--cy)}.side button{display:block;width:100%;text-align:left;background:none;border:0;padding:10px;border-radius:8px;cursor:pointer;color:var(--mut)}
+.side button.on,.side button:hover{background:rgba(41,171,226,.14);color:var(--tx)}
+main{margin-left:200px;padding:22px;max-width:1100px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.kpi b{display:block;font-size:26px}.kpi span{color:var(--mut);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600}
+.bars{display:flex;align-items:flex-end;gap:3px;height:120px}.bars i{flex:1;background:var(--cy);min-height:2px;border-radius:3px 3px 0 0;opacity:.85}.bars i.m{background:var(--ok)}
+.tag{padding:2px 8px;border-radius:99px;font-size:12px}.paid,.okk{background:rgba(34,197,94,.18);color:#6ee7a1}.pending,.warn{background:rgba(245,158,11,.18);color:#fbbf24}.failed,.bad{background:rgba(239,68,68,.2);color:#fca5a5}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f{margin-bottom:12px}.f label{display:block;color:var(--mut);font-size:13px;margin-bottom:4px}
+.item{border-bottom:1px solid var(--line);padding:10px 0}.item small{color:var(--mut);display:block;margin-bottom:4px}.item img{max-height:70px;border-radius:8px;display:block;margin:4px 0}
+#toast{position:fixed;bottom:18px;right:18px;background:var(--card);border:1px solid var(--cy);padding:12px 16px;border-radius:12px;display:none;z-index:9}
+.top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.top h2{margin:0 auto 0 0}
+@media(max-width:760px){.side{position:static;width:auto;display:flex;overflow:auto;padding:8px}.side h3{display:none}.side button{white-space:nowrap}main{margin:0;padding:14px}.row{grid-template-columns:1fr}}
+</style></head><body>
+<div id="login"><h2 style="margin-top:0">Kovax Admin</h2>
+<label>Email</label><input id="em" type="email" value="kovaxacademy@gmail.com" autocomplete="username">
+<label>Modpas</label><input id="pw" type="password" autocomplete="current-password" onkeydown="event.key==='Enter'&&login()">
+<button class="btn" style="width:100%" onclick="login()">Konekte</button><p id="lerr" style="color:var(--er);margin:10px 0 0"></p></div>
+<div id="app"><nav class="side"><h3>⚡ Kovax Admin</h3>
+<button data-t="dash">📊 Dashboard</button><button data-t="pay">💳 Pèman</button><button data-t="text">✏️ Tèks</button><button data-t="img">🖼️ Imaj</button>
+<button data-t="price">💵 Pri</button><button data-t="color">🎨 Koulè</button><button data-t="pages">📄 Paj yo</button><button data-t="err">⚠️ Erè & Sante</button>
+<button onclick="logout()">🚪 Soti</button></nav><main id="main"></main></div><div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let TOKEN=localStorage.getItem('kovax_admin_token'),ALL=null,cache={};
+function toast(m,bad){const t=$('#toast');t.textContent=m;t.style.borderColor=bad?'var(--er)':'var(--cy)';t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',3200)}
+async function api(action,p={}){const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+(TOKEN||'')},body:JSON.stringify({action,...p})});
+ const j=await r.json().catch(()=>({error:'Repons envalid'}));if(r.status===401&&action!=='login'){logout(true)}if(!r.ok)throw new Error(j.error||'Erè');return j.data??j}
+async function login(){try{const j=await api('login',{email:$('#em').value,password:$('#pw').value});TOKEN=j.token;localStorage.setItem('kovax_admin_token',TOKEN);start()}catch(e){$('#lerr').textContent=e.message}}
+function logout(exp){localStorage.removeItem('kovax_admin_token');TOKEN=null;$('#app').style.display='none';$('#login').style.display='block';if(exp)$('#lerr').textContent='Sesyon fini.'}
+async function start(){$('#login').style.display='none';$('#app').style.display='block';try{ALL=await api('getAll')}catch(e){toast(e.message,1)}show(location.hash.slice(1)||'dash')}
+document.querySelectorAll('.side [data-t]').forEach(b=>b.onclick=()=>show(b.dataset.t));
+function show(t){location.hash=t;document.querySelectorAll('.side [data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('#main').innerHTML='<p>Ap chaje…</p>';(V[t]||V.dash)().catch(e=>$('#main').innerHTML=`<div class="card"><b style="color:var(--er)">Erè:</b> ${esc(e.message)}<br><small>Si se Supabase, verifye ou egzekite supabase/schema.sql epi mete variyab yo sou Vercel.</small></div>`)}
+const money=n=>'$'+(+n||0).toFixed(2);
+const DEF={price_informatique:200,fee_informatique:5,tax_informatique_usa:2.99,price_anglais:50,fee_anglais:5,tax_anglais_usa:2.99,price_subscription:50};
+const COLORS={bg:['Background',"#050712"],navy:['Navy','#06091A'],blue:['Ble','#1A3FAA'],cyan:['Cyan (koulè prensipal)','#29ABE2'],purple:['Mòv','#7B2D8B'],white:['Tèks prensipal','#FFFFFF']};
+const PAGE_NAMES={index:'Akèy (index)',paiement:'Paiement',enskripsyon:'Enskripsyon',formulaire:'Fòmilè',merci:'Merci (market)',['merci-peman']:'Merci pèman',market:'Market','404':'Paj 404'};
+const V={
+async dash(){const days=+(window._days||30);const s=await api('stats',{days});const mx=Math.max(1,...s.series.map(x=>x.views)),mm=Math.max(1,...s.series.map(x=>x.money));
+ const list=a=>a.length?a.map(([k,v])=>`<tr><td>${esc(k)}</td><td style="text-align:right">${v}</td></tr>`).join(''):'<tr><td>Poko gen done</td></tr>';
+ $('#main').innerHTML=`<div class="top"><h2>Dashboard</h2><select style="width:auto" onchange="window._days=this.value;show('dash')">${[7,30,90].map(d=>`<option ${d==days?'selected':''} value="${d}">${d} jou</option>`).join('')}</select></div>
+ <div class="grid">${[['Vizitè jodi a',s.todayVisitors],['Paj vizite jodi a',s.todayViews],[`Vizitè inik (${days}j)`,s.visitors],[`Paj vizite (${days}j)`,s.views],['💰 Kòb antre',money(s.revenue)],['Pèman peye',s.paid],['An atant (Zelle)',s.pending],['Erè (24h)',s.errors24h]].map(([a,b])=>`<div class="card kpi"><b>${b}</b><span>${a}</span></div>`).join('')}</div>
+ <div class="card"><b>Vizit pa jou</b><div class="bars">${s.series.map(x=>`<i title="${x.d}: ${x.views} vizit, ${x.visitors} moun"style="height:${x.views/mx*100}%"></i>`).join('')}</div>
+ <b style="display:block;margin-top:14px">Kòb pa jou</b><div class="bars">${s.series.map(x=>`<i class="m" title="${x.d}: ${money(x.money)}" style="height:${x.money/mm*100}%"></i>`).join('')}</div></div>
+ <div class="row"><div class="card"><b>Paj ki plis vizite</b><table>${list(s.topPages)}</table></div><div class="card"><b>Peyi</b><table>${list(s.topCountries)}</table></div>
+ <div class="card"><b>Aparèy</b><table>${list(s.devices)}</table></div><div class="card"><b>Sous (referrer)</b><table>${list(s.referrers)}</table></div></div>`},
+async pay(){const f=window._pf||'';const rows=await api('payments',{status:f});
+ $('#main').innerHTML=`<div class="top"><h2>Pèman</h2><select style="width:auto" onchange="window._pf=this.value;show('pay')">${[['','Tout'],['paid','Peye'],['pending','An atant'],['failed','Echwe']].map(([v,l])=>`<option value="${v}" ${v==f?'selected':''}>${l}</option>`).join('')}</select><button class="btn g" onclick="addPay()">+ Ajoute manyèlman</button></div>
+ <div class="card" style="overflow:auto"><table><tr><th>Dat</th><th>Non / Email</th><th>Kou</th><th>Metòd</th><th>Montan</th><th>Referans</th><th>Estati</th></tr>${rows.map(r=>`<tr><td>${new Date(r.created_at).toLocaleString()}</td><td>${esc(r.name)}<br><small>${esc(r.email)}</small></td><td>${esc(r.course)}</td><td>${esc(r.method)}</td><td>${money(r.amount)}</td><td><small>${esc(r.ref||'—')}</small></td>
+ <td><select style="width:auto" onchange="setPay(${r.id},this.value)">${['paid','pending','failed'].map(s=>`<option ${s==r.status?'selected':''}>${s}</option>`).join('')}</select></td></tr>`).join('')||'<tr><td colspan=7>Pa gen pèman ankò.</td></tr>'}</table></div>
+ <p style="color:var(--mut);font-size:13px">Pèman PayPal anrejistre otomatikman lè kliyan an rive sou paj “merci-peman”. Zelle antre kòm “pending” — verifye nan aplikasyon bank ou, epi chanje l an “paid”. Konfime toujou nan kont PayPal ou tou.</p>`},
+async text(){await ed('text')},async img(){await ed('img')},
+async price(){const S=ALL.settings,v=k=>S[k]??DEF[k];const F=(k,l)=>`<div class="f"><label>${l}</label><input data-s="${k}" type="number" step="0.01" value="${v(k)}"></div>`;
+ $('#main').innerHTML=`<div class="top"><h2>Pri</h2><button class="btn" onclick="saveSet()">Sove</button></div><div class="row"><div class="card"><b>Enfòmatik (4 mwa)</b>${F('price_informatique','Pri kou ($)')}${F('fee_informatique','Frè enskripsyon ($)')}${F('tax_informatique_usa','Tax USA ($)')}</div>
+ <div class="card"><b>Anglè</b>${F('price_anglais','Pri kou ($)')}${F('fee_anglais','Frè enskripsyon ($)')}${F('tax_anglais_usa','Tax USA ($)')}${F('price_subscription','Abònman USA /mwa ($)')}</div></div>
+ <p style="color:var(--mut);font-size:13px">Sa a chanje total la, rezime a ak montan PayPal chaje a sou paj <b>paiement</b>. Tèks piblisitè ki gen pri ekri (ex: “$200” sou paj akèy la) modifye nan onglè <b>Tèks</b>. Abònman PayPal la (plan P-…) gen pri pa li nan kont PayPal ou.</p>`},
+async color(){const S=ALL.settings;$('#main').innerHTML=`<div class="top"><h2>Koulè</h2><button class="btn" onclick="saveSet()">Sove</button><button class="btn g" onclick="resetColors()">Reyinisyalize</button></div><div class="card"><div class="grid">${Object.entries(COLORS).map(([k,[l,d]])=>{const c=S['color_'+k]||d;return `<div class="f"><label>${l}</label><input type="color" data-s="color_${k}" value="${c}" style="height:44px;padding:4px"></div>`}).join('')}</div></div><p style="color:var(--mut);font-size:13px">Koulè yo aplike sou tout paj yo (varyab CSS). Kèk dekorasyon ki gen koulè ekri dirèk nan kòd la pa chanje.</p>`},
+async pages(){ALL=await api('getAll');const L=ALL.pages;$('#main').innerHTML=`<div class="top"><h2>Paj yo</h2><button class="btn" onclick="editPage()">+ Nouvo paj</button></div>
+ <div class="card"><b>Paj ki egziste</b><p style="color:var(--mut);margin:4px 0">Modifye tèks yo nan onglè Tèks / Imaj.</p>${ALL.staticPages.map(p=>`<a href="/${p==='index'?'':p}" target="_blank" style="margin-right:12px">/${p==='index'?'':p}</a>`).join('')}</div>
+ <div class="card"><b>Paj ou kreye</b><table>${L.map(p=>`<tr><td><a href="/p/${p.slug}" target="_blank">/p/${esc(p.slug)}</a><br><small>${esc(p.title)}</small></td><td>${p.published?'<span class="tag okk">piblik</span>':'<span class="tag warn">bouyon</span>'}</td><td style="text-align:right"><button class="btn g" onclick="editPage('${esc(p.slug)}')">Modifye</button> <button class="btn r" onclick="delPage('${esc(p.slug)}')">Efase</button></td></tr>`).join('')||'<tr><td>Pa gen paj ankò.</td></tr>'}</table></div>`},
+async err(){const [e,h]=await Promise.all([api('errors',{}),api('health')]);const bad=h.checks.filter(c=>!c.ok);
+ $('#main').innerHTML=`<div class="top"><h2>Erè & Sante</h2><button class="btn g" onclick="show('err')">Verifye ankò</button></div>
+ <div class="card"><b>${bad.some(c=>c.level==='erè')?'⚠️ Gen pwoblèm nan paramèt/paj yo':'✅ Tout bagay mache'}</b> <small style="color:var(--mut)">(${new Date(h.at).toLocaleTimeString()})</small><table>${h.checks.map(c=>`<tr><td>${c.ok?'<span class="tag okk">OK</span>':`<span class="tag ${c.level==='erè'?'bad':'warn'}">${c.level}</span>`}</td><td>${esc(c.name)}</td><td><small>${esc(c.detail)}</small></td></tr>`).join('')}</table></div>
+ <div class="card"><div class="top"><b style="margin-right:auto">Erè vizitè yo rankontre (${e.length})</b>${e.length?'<button class="btn g" onclick="resErr()">Make tout rezoud</button>':''}</div><div style="overflow:auto"><table>${e.map(x=>`<tr><td>${new Date(x.created_at).toLocaleString()}</td><td><span class="tag ${x.kind==='payment'?'bad':'warn'}">${esc(x.kind)}</span></td><td>${esc(x.page)}</td><td>${esc(x.message)}</td><td><button class="btn g" onclick="resErr(${x.id})">✓</button></td></tr>`).join('')||'<tr><td>Okenn erè 🎉</td></tr>'}</table></div></div>`}};
+async function ed(kind){const pages=ALL.staticPages;const sel=window._ep||pages[0];window._kind=kind;
+ $('#main').innerHTML=`<div class="top"><h2>${kind==='text'?'Tèks':'Imaj'}</h2><select style="width:auto" onchange="window._ep=this.value;show('${kind}')">${pages.map(p=>`<option value="${p}" ${p===sel?'selected':''}>${PAGE_NAMES[p]||p}</option>`).join('')}</select><button class="btn" onclick="saveContent()">Sove chanjman yo</button></div><p style="color:var(--mut);margin:0 0 8px">Chanje yon tèks epi klike “Sove”. Vide yon chan pou retounen tèks orijinal la.</p><div class="card" id="list">Ap chaje paj la…</div>`;
+ if(!cache[sel]){const html=await (await fetch('/'+(sel==='index'?'':sel),{cache:'no-store'})).text();cache[sel]=new DOMParser().parseFromString(html,'text/html')}
+ const doc=cache[sel],C=ALL.content;let h='';
+ if(kind==='text')doc.querySelectorAll('[data-k]').forEach(el=>{const k=el.dataset.k,orig=el.textContent.trim();h+=`<div class="item"><small>${k}</small><textarea rows="${orig.length>90?3:1}" data-key="${k}" data-orig="${esc(orig)}" placeholder="${esc(orig)}">${esc(C[k]??'')}</textarea></div>`});
+ else doc.querySelectorAll('[data-ki]').forEach(el=>{const k=el.dataset.ki,cur=C[k]||el.getAttribute('src');h+=`<div class="item"><small>${k}</small><img src="${esc(cur)}" id="p_${k.replace(':','_')}"><input type="file" accept="image/*" onchange="upImg('${k}',this)"><input data-key="${k}" placeholder="…oswa kole yon URL imaj" value="${esc(C[k]??'')}" style="margin-top:6px"></div>`});
+ $('#list').innerHTML=h||'Pa gen elemen modifyab nan paj sa a.'}
+async function saveContent(){const items={};document.querySelectorAll('#list [data-key]').forEach(i=>{const k=i.dataset.key,v=i.value.trim(),old=ALL.content[k]??'';if(v!==old)items[k]=v});
+ if(!Object.keys(items).length)return toast('Pa gen chanjman.');await api('saveContent',{items});Object.entries(items).forEach(([k,v])=>v?ALL.content[k]=v:delete ALL.content[k]);toast('✅ Sove! (sit la mete ajou nan ~20 segonn)')}
+function upImg(k,inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=async()=>{try{toast('Ap upload…');const j=await api('uploadImage',{filename:f.name,data:r.result,type:f.type});const t=document.querySelector(`[data-key="${k}"]`);t.value=j.url;$('#p_'+k.replace(':','_')).src=j.url;toast('Imaj upload. Klike “Sove”.')}catch(e){toast(e.message,1)}};r.readAsDataURL(f)}
+async function saveSet(){const s={};document.querySelectorAll('[data-s]').forEach(i=>{s[i.dataset.s]=i.type==='number'?parseFloat(i.value):i.value});await api('saveSettings',{settings:s});Object.assign(ALL.settings,s);toast('✅ Sove!')}
+async function resetColors(){const s={};Object.keys(COLORS).forEach(k=>s['color_'+k]='');await api('saveSettings',{settings:s});Object.keys(s).forEach(k=>delete ALL.settings[k]);toast('Koulè orijinal retounen');show('color')}
+async function setPay(id,status){await api('paymentStatus',{id,status});toast('Mete ajou')}
+async function addPay(){const name=prompt('Non kliyan:');if(!name)return;const amount=prompt('Montan ($):');if(!amount)return;const email=prompt('Email (opsyonèl):')||'';await api('addPayment',{name,amount,email,method:'zelle',status:'paid'});show('pay')}
+async function resErr(id){await api('resolveErrors',{id});show('err')}
+async function editPage(slug){const p=slug?await api('getPage',{slug}):{slug:'',title:'',html:'<!DOCTYPE html>\n<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nouvo paj</title></head>\n<body style="background:#06091A;color:#fff;font-family:sans-serif;padding:40px">\n<h1>Tit paj la</h1>\n<p>Kontni ou isit la.</p>\n</body></html>',published:true};
+ $('#main').innerHTML=`<div class="top"><h2>${slug?'Modifye paj':'Nouvo paj'}</h2><button class="btn" onclick="savePg()">Sove</button><button class="btn g" onclick="show('pages')">Anile</button></div><div class="card"><div class="row"><div class="f"><label>Slug (adrès: /p/slug)</label><input id="pg_slug" value="${esc(p.slug)}" ${slug?'readonly':''} placeholder="ex: promosyon"></div><div class="f"><label>Tit</label><input id="pg_title" value="${esc(p.title)}"></div></div>
+ <div class="f"><label>HTML</label><textarea id="pg_html" style="min-height:380px;font-family:monospace;font-size:13px">${esc(p.html)}</textarea></div><label><input type="checkbox" id="pg_pub" ${p.published?'checked':''} style="width:auto"> Piblik</label></div>`}
+async function savePg(){try{const r=await api('savePage',{slug:$('#pg_slug').value,title:$('#pg_title').value,html:$('#pg_html').value,published:$('#pg_pub').checked});toast('✅ Paj sove: '+r.url);show('pages')}catch(e){toast(e.message,1)}}
+async function delPage(s){if(confirm('Efase /p/'+s+' ?')){await api('deletePage',{slug:s});show('pages')}}
+if(TOKEN)start();
+</script></body></html>
