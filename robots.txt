@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /merci
 Disallow: /merci-peman
+Disallow: /admin
 
 Sitemap: https://kovax-academy.vercel.app/sitemap.xml
