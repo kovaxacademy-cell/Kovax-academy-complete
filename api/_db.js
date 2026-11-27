@@ -35,3 +35,9 @@ export async function uploadImage(name, buffer, contentType) {
   if (!r.ok) throw new Error('Upload echwe: ' + (await r.text()).slice(0, 200));
   return `${url()}/storage/v1/object/public/site-media/${name}`;
 }
+
+export async function signedUpload(name) {       // navigatè a voye fichye a dirèk bay Supabase (jis 50MB)
+  const r = await fetch(`${url()}/storage/v1/object/upload/sign/site-media/${name}`, { method: 'POST', headers: { apikey: key(), Authorization: `Bearer ${key()}`, 'Content-Type': 'application/json', 'x-upsert': 'true' }, body: '{}' });
+  const j = await r.json().catch(() => ({})); if (!r.ok || !j.url) throw new Error('Pa ka prepare upload: ' + (j.message || r.status));
+  return { uploadUrl: `${url()}/storage/v1${j.url}`, publicUrl: `${url()}/storage/v1/object/public/site-media/${name}` };
+}

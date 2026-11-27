@@ -1,4 +1,4 @@
-import { db, dbReady, uploadImage } from './_db.js';
+import { db, dbReady, uploadImage, signedUpload } from './_db.js';
 import crypto from 'node:crypto';
 import { checkLogin, makeToken, verifyToken } from './_auth.js';
 
@@ -51,6 +51,18 @@ const actions = {
     if (buf.length > 3.5 * 1024 * 1024) throw new Error('Imaj twò gwo (max 3.5MB).');
     const ext = (filename.split('.').pop() || 'png').toLowerCase().replace(/[^a-z0-9]/g, '');
     return { url: await uploadImage(`${Date.now()}.${ext}`, buf, type || 'image/png') };
+  },
+  async signUpload({ filename, type }) {
+    const ext = (String(filename).split('.').pop() || 'mp4').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!/^(mp4|webm|mov|m4v|mp3|wav|ogg|m4a)$/.test(ext)) throw new Error('Fòma pa aksepte (mp4, webm, mov, mp3, wav, ogg).');
+    return signedUpload(`${Date.now()}.${ext}`);
+  },
+  async clonePage({ from, slug, title }, req) {         // kopye yon paj sit la kòm nouvo paj ak pwòp tèks pa li
+    if (!PAGES.includes(from)) throw new Error('Paj orijinal la pa valid.');
+    slug = String(slug).toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/^-+|-+$/g, '');
+    const r = await fetch(`https://${req.headers.host}/${from === 'index' ? '' : from}`); if (!r.ok) throw new Error('Pa ka li paj la (HTTP ' + r.status + ').');
+    const html = (await r.text()).replace(/data-(k|ki)="([^"]+)"/g, (_m, a, k) => `data-${a}="${slug}:${k}"`);
+    return actions.savePage({ slug, title: title || slug, html, published: true });
   },
   getPage: async ({ slug }) => (await db(`pages?slug=eq.${enc(slug)}&select=*`))[0] || null,
   async savePage({ slug, title, html, published = true }) {
